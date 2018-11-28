@@ -8,7 +8,14 @@
         <a id="HeaderFormSubmitButton" value="Logout">Logout<i class="material-icons">power_settings_new</i></a>
     </li>
     <li>
-        <a>Settings<i class="material-icons">settings</i></a>
+        <a data-position="bottom"
+           
+            asp-area="Identity"
+            asp-page="/Account/Manage/Index"
+        >
+            Settings
+            <i class="material-icons">settings</i>
+        </a>
     </li>
 </ul>
 

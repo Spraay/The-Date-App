@@ -26,16 +26,17 @@
             $('.fixed-action-btn').floatingActionButton();
         });
 
-        //$(document).ready(function() {
-        //    $('select').material_select();
-        //});
-
         $(document).ready(function () {
             $('.tooltipped').tooltip();
         });
 
         $(document).ready(function () {
             $('select').formSelect();
+        });
+
+        $(document).ready(function () {
+            $('.datepicker').datepicker();
+
         });
 
     }); // end of document ready

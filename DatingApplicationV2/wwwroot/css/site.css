@@ -7,11 +7,5 @@ body {
 }
 
 main {
-    margin-top: 10px;
-    margin-bottom: 10px;
     flex: 1 0 auto;
-}
-
-.my-wrapper, html, main, body {
-    height: 100%;
 }
