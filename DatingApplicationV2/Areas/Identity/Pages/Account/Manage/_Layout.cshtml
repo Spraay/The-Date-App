@@ -1,17 +1,18 @@
-﻿@{ 
-    Layout = "../../Pages/Shared/_Layout.cshtml";
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Manage your account</h2>
-
-<div>
-    <h4>Change your account settings</h4>
-    <hr />
+<div class="grey darken-3 z-depth-3" style="padding: 1vw; margin-top: -10px;">
+    <div class="center">
+        <p class="white-text" style="font-size: 3vw;">Manage your account <i style="vertical-align: bottom; font-size: 4vw !important;" class="inline-icon material-icons">edit</i></p>
+    </div>
+</div><br />
+<div class="container">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col s3">
             <partial name="_ManageNav" />
         </div>
-        <div class="col-md-9">
+        <div class="col s9">
             @RenderBody()
         </div>
     </div>

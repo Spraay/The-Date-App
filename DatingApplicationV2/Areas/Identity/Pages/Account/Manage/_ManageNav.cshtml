@@ -1,14 +1,18 @@
 ﻿@inject SignInManager<ApplicationUser> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+    var rv = ViewContext.RouteData.Values;
+    string page = $"{rv["page"]}".ToLowerInvariant();
 }
-<ul class="nav nav-pills nav-stacked">
-    <li class="@ManageNavPages.IndexNavClass(ViewContext)"><a asp-page="./Index">Profile</a></li>
-    <li class="@ManageNavPages.ChangePasswordNavClass(ViewContext)"><a id="change-password" asp-page="./ChangePassword">Password</a></li>
+
+<div class="collection">
+    <a class="@(page == "/account/manage/index" ?  "collection-item active" : "collection-item")" asp-page="./Index">Profile</a>
+    @*<a class="collection-item active" asp-page="./Index">Profile</a>*@
+    <a class="@(page == "/account/manage/changepassword" ?  "collection-item active" : "collection-item")" id="change-password" asp-page="./ChangePassword">Password</a>
     @if (hasExternalLogins)
     {
-        <li class="@ManageNavPages.ExternalLoginsNavClass(ViewContext)"><a id="external-login" asp-page="./ExternalLogins">External logins</a></li>
+        <a is-active-route class="collection-item" id="external-login" asp-page="./ExternalLogins">External logins</a>
     }
-    <li class="@ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)"><a asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
-    <li class="@ManageNavPages.PersonalDataNavClass(ViewContext)"><a asp-page="./PersonalData">Personal data</a></li>
-</ul>
+    <a class="@(page == "/account/manage/twofactorauthentication" ?  "collection-item active" : "collection-item")" asp-page="./TwoFactorAuthentication">Two-factor authentication</a>
+    <a class="@(page == "/account/manage/personaldata" ?  "collection-item active" : "collection-item")" asp-page="./PersonalData">Personal data</a>
+</div>
