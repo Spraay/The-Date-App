@@ -1,6 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity;
-@using System.Security.Claims;
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -14,66 +12,12 @@
 </head>
 <body>
     <header>
-        <div class="navbar-fixed ">
-            <nav>
-                <div class="nav-wrapper">
-                    <a asp-controller="Home" asp-action="Index" class="brand-logo center" style="font-size: 3vw">
-                        <i class="material-icons left" style="font-size: 3vw; margin-top:1px;">
-                            favorite_border
-                        </i>
-                        The Date
-                        <i class="material-icons right" style="font-size: 3vw; margin-top:1px;">
-                            favorite
-                        </i>
-                    </a>
-                    <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                    <ul class="left hide-on-med-and-down">
-                        <li class="tooltipped" data-position="bottom" data-tooltip="Explore">
-                            <a asp-controller="Explore" asp-action="Index">
-                                <i class="left material-icons">search</i> 
-                            </a>
-                        </li>
-                    </ul>
-                    <ul id="nav-mobile" class="right hide-on-med-and-down inline">
-                        @await Html.PartialAsync("_LoginPartial")
-                    </ul>
-                </div>
-            </nav>
-        </div>
-        @await Html.PartialAsync("_MobileNavBar")
+        @await Html.PartialAsync("Navbar/_NavBar")
+        @await Html.PartialAsync("Navbar/_MobileNavBar")
     </header>
-
     <main>
         @RenderBody()
     </main>
-    <footer class="page-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col l6 s12">
-                    <h5 class="white-text">Footer Content</h5>
-                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-                </div>
-                <div class="col l4 offset-l2 s12">
-                    <h5 class="white-text">Links</h5>
-                    <ul>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
-                        <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                © 2014 Copyright Text
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-        </div>
-    </footer>
-
-   
-
-    
+    @await  Html.PartialAsync("_Footer")
 </body>
 </html>

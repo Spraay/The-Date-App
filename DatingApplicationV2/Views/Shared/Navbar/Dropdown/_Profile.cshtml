@@ -1,0 +1,17 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject IUserService _userService
+<!-- Dropdown Structure -->
+<ul id='profileDropdown' class='dropdown-content'>
+    <li>Manage</li>
+    <li>My Profile</li>
+</ul>
+
+<li class="avatar">
+    <a class="left tooltipped" data-position="bottom" data-tooltip="Profile" asp-area="Identity" asp-page="/Account/Manage/Index">
+        <img src="~/images/NoProfileImage.png" alt="" class="circle left" style="height: 40px; margin-top: 10px; margin-right: 5px;">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            @_userService.CurrentUser.FirstName
+        }
+    </a>
+</li>

@@ -1,0 +1,19 @@
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject IUserService _userService
+@inject IFriendService _friendService
+<!-- Dropdown Structure -->
+<ul id='userSettingsDropdown' class='dropdown-content' data-constrainWidth="false">
+    <li class="divider" tabindex="-1"></li>
+    <li>
+        <a id="HeaderFormSubmitButton" value="Logout">Logout<i class="material-icons">power_settings_new</i></a>
+    </li>
+    <li>
+        <a>Settings<i class="material-icons">settings</i></a>
+    </li>
+</ul>
+
+<li data-constrainWidth="false">
+    <a class='dropdown-trigger tooltipped' data-position="left" data-tooltip="Settings" href='#' data-target='userSettingsDropdown'>
+        <i class="material-icons">settings</i>
+    </a>
+</li>
