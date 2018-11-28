@@ -94,55 +94,55 @@ namespace DAO.Data
                 }
             }
 
-            //// Adding users
-            //if ( !await userManager.Users.AnyAsync() )
-            //{
-            //    foreach(var u in defaultUsers)
-            //    {
-            //        var result = await userManager.CreateAsync(u);
-            //        if (result.Succeeded)
-            //        {
-            //            await userManager.AddPasswordAsync(u, defaultPassword);
-            //            await userManager.AddToRoleAsync(u, defaultRoles.ElementAtOrDefault(0).Name );
-            //            await userManager.AddToRoleAsync(u, defaultRoles.ElementAtOrDefault(1).Name );
-            //        }
-            //    }
-            //}
+            // Adding users
+            if (!await userManager.Users.AnyAsync())
+            {
+                foreach (var u in defaultUsers)
+                {
+                    var result = await userManager.CreateAsync(u);
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddPasswordAsync(u, defaultPassword);
+                        await userManager.AddToRoleAsync(u, defaultRoles.ElementAtOrDefault(0).Name);
+                        await userManager.AddToRoleAsync(u, defaultRoles.ElementAtOrDefault(1).Name);
+                    }
+                }
+            }
 
-            //// Adding friendships
-            //if ( !await context.Friendships.AnyAsync() && context.Users.Count() > 1 )
-            //{
-            //    var user1 = await context.Users.SingleOrDefaultAsync(_ => _.Id == defaultUsers.ElementAtOrDefault(0).Id );
-            //    var user2 = await context.Users.SingleOrDefaultAsync(_ => _.Id == defaultUsers.ElementAtOrDefault(1).Id );
+            // Adding friendships
+            if (!await context.Friendships.AnyAsync() && context.Users.Count() > 1)
+            {
+                var user1 = await context.Users.SingleOrDefaultAsync(_ => _.Id == defaultUsers.ElementAtOrDefault(0).Id);
+                var user2 = await context.Users.SingleOrDefaultAsync(_ => _.Id == defaultUsers.ElementAtOrDefault(1).Id);
 
-            //    var friendship = new Friendship()
-            //    {
-            //        Sender = user1,
-            //        Friend = user2,
-            //        Status = Status.Accepted
-            //    };
-            //    await context.Friendships.AddAsync(friendship);
+                var friendship = new Friendship()
+                {
+                    Sender = user1,
+                    Friend = user2,
+                    Status = Status.Accepted
+                };
+                await context.Friendships.AddAsync(friendship);
 
-            //    var conversation = new Conversation()
-            //    {
-            //        ConversationUsers = new List<ConversationUser>()
-            //        {
-            //            new ConversationUser(){ User = user1 },
-            //            new ConversationUser(){ User = user2 }
-            //        },
-                    
-            //    };
-            //    await context.Conversations.AddAsync(conversation);
+                var conversation = new Conversation()
+                {
+                    ConversationUsers = new List<ConversationUser>()
+                    {
+                        new ConversationUser(){ User = user1 },
+                        new ConversationUser(){ User = user2 }
+                    },
+
+                };
+                await context.Conversations.AddAsync(conversation);
 
                 //var messages = new List<Message>()
                 //{
                 //    new Message(){ Sender = user1, Content = "Hi im Krystian, how are you?", Conversation = conversation },
-                //    new Message(){ Sender = user2, Content = "Hi Krystian. Im fine, thanks", Conversation = conversation } 
+                //    new Message(){ Sender = user2, Content = "Hi Krystian. Im fine, thanks", Conversation = conversation }
                 //};
                 //await context.Messages.AddRangeAsync(messages);
-            //}
+            }
 
-            
+
             await context.SaveChangesAsync();
         }
     }
