@@ -1,0 +1,79 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<br />
+<br />
+<div class="container">
+    <div id="login-page" class="row">
+        <div class="z-depth-4 card-panel">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post" class="login-form" id="logInForm">
+                <div class="row">
+                    <div class="input-field col s12 center">
+                        <h1 class="center login-form-text">
+                            @ViewData["Title"]
+                        <i class="material-icons medium" style="position: relative; bottom: -10px;"></i>
+                    </h1>
+                </div>
+            </div>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div class="row pink lighten-4" style="border: red 2px solid;">
+                    <div asp-validation-summary="All" class=" col s12 red-text "></div>
+                </div>
+            }
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">mail</i>
+                    <input asp-for="Input.Email" />
+                    <label asp-for="Input.Email"></label>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">tag_faces</i>
+                    <input asp-for="Input.UserName" />
+                    <label asp-for="Input.UserName"></label>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">vpn_key</i>
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">vpn_key</i>
+                    <label asp-for="Input.ConfirmPassword"></label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6 m6 l6">
+                    <p class="margin medium-small">
+                        <a asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]">You already have account?</a>
+                    </p>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                    <p class="margin right-align medium-small"><a asp-action="ForgotPassword">Forgot your password?</a></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button class="btn btn-large cyan waves-effect waves-light right" type="submit">
+                        Register
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

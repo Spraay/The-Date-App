@@ -1,0 +1,73 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+
+<div class="container">
+    <br />
+    <br />
+    <div id="login-page" class="row">
+        <div class="z-depth-4 card-panel">
+            <form method="post" class="login-form" id="logInForm">
+                <h2>@ViewData["Title"]</h2>
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="row pink lighten-4" style="border: red 2px solid;">
+                        <div asp-validation-summary="All" class=" col s12 red-text "></div>
+                    </div>
+                }
+                <div class="row margin">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">person</i>
+                        <input asp-for="Input.UserNameOrLogin" />
+                        <label asp-for="Input.UserNameOrLogin"></label>
+                        <span asp-validation-for="Input.UserNameOrLogin" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row margin">
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">vpn_key</i>
+                        <label asp-for="Input.Password"></label>
+                        <input asp-for="Input.Password" class="form-control" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l12  login-text">
+                        <label asp-for="Input.RememberMe">
+                            <input asp-for="Input.RememberMe" type="checkbox" />
+                            <span>@Html.DisplayNameFor(m => m.Input.RememberMe)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s6 m6 l6">
+                        <p class="margin medium-small">
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        </p>
+                    </div>
+                    <div class="input-field col s6 m6 l6">
+                        <p class="margin right-align medium-small">
+                            <a asp-page="./ForgotPassword">Forgot your password?</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <button class="btn btn-large cyan waves-effect waves-light right" type="submit" name="action">
+                            Log In
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+                
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

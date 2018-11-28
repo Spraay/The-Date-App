@@ -1,0 +1,184 @@
+﻿@model Validators.ApplicationUserViewModel
+@using Microsoft.AspNetCore.Identity
+@using DatingApplicationV2.Areas.Identity
+@using Enties
+@using Services
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<br />
+<br />
+<script>
+    M.AutoInit();
+</script>
+<div class="container">
+    <div class="row">
+        <div class="col s12 m12 12">
+            <div class="card-panel">
+                <h4 class="header2">Profile Edit</h4>
+                <div class="row">
+                    <form asp-action="Edit" id="Form">
+                        <div class="row">
+                            <div asp-validation-summary="ModelOnly" class="red-text"></div>
+                            <input type="hidden" asp-for="Id" />
+                            <input type="hidden" asp-for="Email" />
+                            <input type="hidden" asp-for="UserName" />
+                            <input type="hidden" asp-for="PasswordHash" />
+                            <div class="input-field col s12">
+                                <i class="mdi-action-account-circle prefix"></i>
+                                <input asp-for="FirstName" />
+                                <label asp-for="FirstName"></label>
+                                <span asp-validation-for="FirstName" class="red-text"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="mdi-action-account-circle prefix"></i>
+                                <input asp-for="LastName" />
+                                <label asp-for="LastName"></label>
+                                <span asp-validation-for="LastName" class="red-text"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="mdi-action-account-circle prefix"></i>
+                                <input asp-for="Description" />
+                                <label asp-for="Description"></label>
+                                <span asp-validation-for="Description" class="red-text"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="mdi-action-account-circle prefix"></i><label asp-for="Weight"></label><br />
+                                <p class="range-field"><input type="range" id="weightRange" min="40" max="250" asp-for="Weight" /></p>
+                                <span asp-validation-for="Weight" class="red-text"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="mdi-action-account-circle prefix"></i><label asp-for="Height"></label><br />
+                                <p class="range-field"><input type="range" id="weightRange" min="100" max="250" asp-for="Height" /></p>
+                                <span asp-validation-for="Height" class="red-text"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <i class="mdi-action-account-circle prefix"></i><label asp-for="BirthDate"></label><br />
+                                <p class="range-field"><input type="text" class="datepicker" asp-for="BirthDate" /></p>
+                                <span asp-validation-for="BirthDate" class="red-text"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <div class="card darken-1">
+                                    <div class="card-content">
+                                        <span class="card-title">Interest List</span>
+                                        <table>
+                                            <div class="row col s12">
+                                                @{
+                                                    int cnt = 0;
+                                                    List<DatingApplicationV2.Models.AssignedInterestData> interests = ViewBag.Interests;
+
+                                                    foreach (var interest in interests)
+                                                    {
+                                                        if (cnt++ % 3 == 0)
+                                                        {
+                                                        @:</div><div class="row col s12">
+                                                        }
+                                                        @:<div class="col s4">
+                                                            <label class="">
+                                                                <input type="checkbox"
+                                                                       name="selectedInterests"
+                                                                       value="@interest.InterestID"
+                                                                       @(Html.Raw(interest.Assigned ? "checked='checked'" : "")) />
+                                                                <span> @interest.InterestName</span>
+                                                            </label>
+                                                        @:</div>
+                                                    }
+                                                @:</div>
+                                                }
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <div class="card darken-1">
+                                        <div class="card-content">
+                                            <span class="card-title">Gender & Eyes</span>
+                                            <table>
+                                                <div class="col s12">
+                                                    <div class="col s6">
+                                                        <p><label style="font-size: 20px;">Gender</label></p>
+                                                        @{
+                                                            foreach (var x in Enum.GetValues(typeof(Gender)).OfType<Gender>())
+                                                            {
+                                                                <div class="row">
+                                                                    <label>
+                                                                        <input value="@x" name="selectedGender" type="radio"
+                                                                               @(Html.Raw(x == Model.Gender ? "checked='checked'" : "")) />
+                                                                        <span>@x</span>
+                                                                    </label>
+                                                                </div>
+                                                            }
+                                                        }
+                                                    </div>
+                                                    <div class="col s6">
+                                                        <p><label style="font-size: 20px;">Eyes</label></p>
+                                                        @{
+                                                            foreach (var x in Enum.GetValues(typeof(Eyes)).OfType<Eyes>())
+                                                            {
+                                                                <div class="row">
+                                                                    <label>
+                                                                        <input value="@x" name="selectedEyes" type="radio"
+                                                                               @(Html.Raw(x == Model.Eyes ? "checked='checked'" : "")) />
+                                                                        <span>@x</span>
+                                                                    </label>
+                                                                </div>
+                                                            }
+                                                        }
+                                                    </div>
+                                                    <br /><br /><br /><br />
+                                                </div>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                $(document).ready(function () {
+                                    // Select - Single
+                                    $('select').material_select();
+                                });
+                            </script>
+                            <div class="row">
+                                <p class="center-align">
+                                    <a id="FormSubmitButton" value="Save" style="position: relative; bottom: -105px;" class="btn btn-floating btn-large waves-effect blue pulse">
+                                        <i class="material-icons">done</i>
+                                    </a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <a asp-action="Index">Back to List</a>
+
+        </div>
+    </div>
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+
+    <script>
+        $(document).ready(function () {
+            $('select').material_select();
+        });
+    </script>

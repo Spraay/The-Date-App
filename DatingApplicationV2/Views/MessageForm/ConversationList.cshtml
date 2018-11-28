@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Enties.Conversation>
+@inject IUserService _userService
+
+<div class="container">
+    <div class="row">
+        <h1>Conversation List</h1>
+    </div>
+    <ul class="collection">
+        @foreach (var item in Model)
+        {
+
+        <li class="collection-item avatar">
+            <img src="~/images/NoProfileImage.png" alt="" class="circle">
+            <a class="secondary-content" asp-controller="MessageFormController" asp-action="GetCoversationMessages" asp-route-id="@item.ID">Go to Chat</a>
+            <div class="row">
+                <div class="col s12">
+                    @if (item.ConversationUsers.Count() < 3)
+                    {
+                        <text>Conversation with: @_userService.Get(item.ConversationUsers.SingleOrDefault(_ => _.UserID != _userService.CurrentUserId).UserID).FirstName</text>
+                    }
+                    else
+                    {
+
+                    }
+                </div>
+              
+            </div>
+            <div class="row">
+                <div class="col s10 left">
+                     item.Messages.LastOrDefault().Content
+                </div>
+                <div class="col s2 right">
+                    item.Messages.LastOrDefault().Created
+                </div>
+            </div>
+
+
+        </li>
+        }
+
+    </ul>
+</div>
+
+
+
+
+
+
+

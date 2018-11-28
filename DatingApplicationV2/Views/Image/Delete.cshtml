@@ -1,0 +1,33 @@
+﻿@model Enties.Image
+
+@{
+    ViewData["Title"] = "Delete";
+}
+<div class="row grey darken-4 z-depth-2" style="height: 200px">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <h1 class="header materialize-red-text pulsate"><i class="material-icons left large">delete</i>Photo Delete</h1>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container">
+    
+    <div class="center">
+        <h5 class="orange-text">Are you sure you want to delete this photo?</h5>
+        <img class="" style="width: 450px;" src="~/images/userimages/@Model.Src" class="z-depth-1" />
+
+
+        <form id="Form" asp-action="Delete">
+            <input type="hidden" asp-for="ID" />
+
+            <a asp-action="Index" class="btn btn-floating btn-large waves-effect blue pulse">
+                <i class="material-icons">replay</i>
+            </a>
+            <a id="FormSubmitButton" value="Delete" class="btn btn-floating btn-large waves-effect red pulse">
+                <i class="material-icons">delete_forever</i>
+            </a>
+        </form>
+    </div>
+</div>
+<br /><br />

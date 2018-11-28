@@ -1,0 +1,45 @@
+﻿@model Enties.Interest
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col s12 m12 12">
+            <div class="card-panel">
+                <h4 class="header2">Interest Edit</h4>
+                <div class="row">
+                    <form asp-action="Edit" id="Form">
+                        <div class="row">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="ID" />
+                            <div class="input-field col s12">
+                                <i class="mdi-action-account-circle prefix"></i>
+                                <input asp-for="Name" />
+                                <label asp-for="Name"></label>
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <a id="FormSubmitButton" value="Save" class="btn btn-floating btn-large waves-effect blue">
+                            <i class="material-icons">done</i>
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

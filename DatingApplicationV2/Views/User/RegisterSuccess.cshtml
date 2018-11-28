@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Register Success";
+}
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+<div class="container center">
+    <h2>@ViewData["Title"]</h2>
+    <p class="col s12 center-align">
+        Check your inbox to confirm your mail!
+    </p>
+    <i class="material-icons green-text" style="font-size:200px">
+        sentiment_satisfied
+    </i>
+    @if (ViewBag.ReturnUrl != null)
+    {
+        <br /><a class="" href="@ViewBag.ReturnUrl">Go Back</a>
+    }
+</div>
