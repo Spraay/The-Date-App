@@ -20,6 +20,8 @@ namespace Enties
         public Gender Gender { get; set; }
         public Eyes Eyes { get; set; }
         public string Description { get; set; }
+        //public string City { get; set; }
+        //public string Country { get; set; }
 
         public virtual List<InterestApplicationUser> InterestsApplicationUser { get; set; }
         public virtual List<Image> Gallery { get; set; }

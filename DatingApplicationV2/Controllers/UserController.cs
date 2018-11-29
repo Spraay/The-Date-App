@@ -21,14 +21,19 @@ namespace DatingApplication.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IInterestService _interestService;
         private readonly IMapper _mapper;
+        private readonly IFriendService _friendService;
+        private readonly IImageService _imageService;
 
-        public UserController(IUserService userService, UserManager<ApplicationUser> userManager, IInterestService interestService, IMapper mapper)
+        public UserController(IUserService userService, UserManager<ApplicationUser> userManager, IInterestService interestService, IMapper mapper, IFriendService friendService, IImageService imageService)
         {
             _userService = userService;
             _userManager = userManager;
             _interestService = interestService;
             _mapper = mapper;
+            _friendService = friendService;
+            _imageService = imageService;
         }
+
 
 
 
@@ -37,7 +42,20 @@ namespace DatingApplication.Controllers
         [Authorize(Roles = "User")]
         public ActionResult Index()
         {
-            return RedirectToAction(nameof(Details), new { id = _userManager.GetUserId(User) });
+            if (_userService.IsFilled(_userService.CurrentUserId))
+                return RedirectToAction(nameof(Profile), new { userID = _userService.CurrentUserId });
+            ViewBag.FillProfile = true;
+            return RedirectToAction(nameof(Edit));
+        }
+
+
+        public ActionResult Profile(Guid userID)
+        {
+            ViewBag.FriendsCount = _friendService.Count;
+            ViewBag.Friends = _friendService.GetFriendships(userID);
+            ViewBag.Photos = _imageService.GetUserImages(userID);
+            ViewBag.Interests = _interestService.GetList();
+            return View(_userService.CurrentUser);
         }
 
         // GET: Default/Details/5
