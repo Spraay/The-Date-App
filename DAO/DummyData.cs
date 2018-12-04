@@ -141,8 +141,26 @@ namespace DAO.Data
                 //};
                 //await context.Messages.AddRangeAsync(messages);
             }
-
-
+            if (!await context.Interests.AnyAsync())
+            {
+                var defaultInterests = new List<Interest>()
+                {
+                    new Interest { Name = "Sport" },
+                    new Interest { Name = "Motorization" },
+                    new Interest { Name = "Video Games" },
+                    new Interest { Name = "Photography" },
+                    new Interest { Name = "Music" },
+                    new Interest { Name = "Singing" },
+                    new Interest { Name = "Cooking" },
+                    new Interest { Name = "Movies" },
+                    new Interest { Name = "Theater" },
+                    new Interest { Name = "Art" },
+                    new Interest { Name = "Astronmy" },
+                    new Interest { Name = "Science" },
+                };
+                await context.Interests.AddRangeAsync(defaultInterests);
+                await context.SaveChangesAsync();
+            }
             await context.SaveChangesAsync();
         }
     }

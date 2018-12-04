@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/DatingApplicationV2/wwwroot/images/scoped_dir7804_21563
+/DatingApplicationV2/wwwroot/images/scoped_dir7804_24730
+/DatingApplicationV2/wwwroot/images/Creative_Cloud_Set-Up.exe
+/DatingApplicationV2/wwwroot/images/Illustrator_Set-Up.exe
