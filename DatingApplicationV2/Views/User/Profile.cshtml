@@ -12,17 +12,53 @@
         <div id="profile-page" class="section">
             <!-- profile-page-header -->
             <div id="profile-page-header" class="card" style="overflow: hidden;">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" src="../../images/gallary/23.png" alt="user background">
+                <div class="card-image waves-effect waves-block waves-light" style="height: 250px; z-index: 0;">
+                    <img class="activator" src="~/images/NoProfileBackground.png" alt="user background">
                 </div>
-                <figure class="card-profile-image">
-                    <img src="../../images/avatar/avatar-7.png" alt="profile image" class="circle z-depth-2 responsive-img activator gradient-45deg-light-blue-cyan gradient-shadow">
-                </figure>
                 <div class="card-content">
-                    <div class="row pt-2">
-                        <div class="col s12 m3 offset-m2">
+                    <div style="position: relative; height: 70px; top: -44px;">
+                        <div class="fixed-action-btn click-to-toggle direction-top direction-left" style="position: absolute; right: 24px;">
+                            <a class="btn-floating btn-large red">
+                                <i class="material-icons">menu</i>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a class="btn-floating green" style="opacity: 0; transform: scale(0.4) translateY(0px) translateX(40px);">
+                                        <i class="material-icons">chat</i>
+                                    </a>
+                                </li>
+                                <li>
+                                    @if (Model.Id != _userService.CurrentUserId)
+                                    {
+                                        <a class="btn-floating red" style="opacity: 0; transform: scale(0.4) translateY(0px) translateX(40px);"
+                                            asp-controller="Friendships" asp-action="Delete" asp-route-user1ID="@Model.Id" asp-route-user2ID="@_userService.CurrentUserId">
+                                            <i class="material-icons">delete_forever</i>
+                                        </a>
+                                        <a class="btn-floating blue" style="opacity: 0; transform: scale(0.4) translateY(0px) translateX(40px);"
+                                           asp-controller="Friendships" asp-action="Invite" asp-route-friendID="@Model.Id">
+                                            <i class="material-icons">group_add</i>
+                                        </a>
+                                    }
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="row" style="margin-top: -200px;">
+                        <div class="card-profile-image col s12 m3 " style="width: 170px; position: relative; top: 30px;">
+                            <img src="~/images/NoProfileImage.png" alt="profile image" class="circle z-depth-2 responsive-img">
+                        </div>
+                        <div class="col s12 m12 center-align">
+                            
+                        </div>
+                        <div class="col s12 m3 offset-m3">
                             <h4 class="card-title grey-text text-darken-4">@Model.FirstName @Model.LastName</h4>
-                            <p class="medium-small grey-text">Project Manager</p>
+                            <p class="medium-small grey-text">
+                                Roles: @foreach (var r in ViewBag.Roles)
+                                {
+                                    <text>@r </text>;
+                                }
+                            </p>
                         </div>
                         <div class="col s12 m2 center-align">
                             <h4 class="card-title grey-text text-darken-4">@ViewBag.FriendsCount</h4>
@@ -36,15 +72,15 @@
                             <h4 class="card-title grey-text text-darken-4">1234</h4>
                             <p class="medium-small grey-text">Comments</p>
                         </div>
-                        @if(User.Identity.IsAuthenticated &&  Model.Id != _userService.CurrentUserId ){
-                        <div class="col s12 m1 right-align">
-                            <a class="btn-floating waves-effect waves-light rec accent-2 right"
-                               asp-href="">
-                                <i class="material-icons">group_add</i>
-                            </a>
-                        </div>
+                        @if (User.Identity.IsAuthenticated && Model.Id != _userService.CurrentUserId)
+                        {
+                            <div class="col s12 m1 right-align">
+                                <a class="btn-floating waves-effect waves-light rec accent-2 right"
+                                   asp-href="">
+                                    <i class="material-icons">group_add</i>
+                                </a>
+                            </div>
                         }
-
                     </div>
                 </div>
             </div>
@@ -95,18 +131,18 @@
                     <ul id="profile-page-about-feed" class="collection z-depth-1">
                         <li class="collection-item avatar">
                             <img src="../../images/avatar/avatar-2.png" alt="" class="circle deep-orange accent-2">
-                            <span class="title">Project Title</span>
+                            <span class="title">TO DO</span>
                             <p>
-                                Task assigned to new changes.
+                                To do to do to do to do to do
                                 <br>
                                 <span class="ultra-small">Second Line</span>
                             </p>
                         </li>
                         <li class="collection-item avatar">
                             <i class="material-icons circle teal accent-4">folder</i>
-                            <span class="title">New Project</span>
+                            <span class="title">TO DO</span>
                             <p>
-                                First Line of Project Work
+                                To do to do to do to do to do
                                 <br>
                                 <span class="ultra-small">Second Line</span>
                             </p>
@@ -116,11 +152,11 @@
                         </li>
                         <li class="collection-item avatar">
                             <i class="material-icons circle cyan">assessment</i>
-                            <span class="title">New Payment</span>
+                            <span class="title">TO DO</span>
                             <p>
-                                Last UK Project Payment
+                                To do to do to do to do to do
                                 <br>
-                                <span class="ultra-small">$ 3,684.00</span>
+                                <span class="ultra-small">Second Line</span>
                             </p>
                             <a href="#!" class="secondary-content">
                                 <i class="material-icons">attach_money</i>
@@ -128,9 +164,9 @@
                         </li>
                         <li class="collection-item avatar">
                             <i class="material-icons circle red accent-2">play_arrow</i>
-                            <span class="title">Latest News</span>
+                            <span class="title">TO DO</span>
                             <p>
-                                company management news
+                                To do to do to do to do to do
                                 <br>
                                 <span class="ultra-small">Second Line</span>
                             </p>
@@ -156,7 +192,7 @@
                                         <li class="indicator"></li>
                                     </ul>
                                 </div>
-                                <div class="card-content blue lighten-5">
+                                <div class="card-content blue-grey lighten-2 z-depth-2">
                                     <div id="photoList" style="display: none;" class="active">
                                         @if (ViewBag.Photos != null )
                                         {
@@ -310,13 +346,12 @@
                                                                         <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">
                                                                             @if (User.Identity.Name == item.Friend.UserName)
                                                                             {
-                                                                                <text> @item.Sender.FirstName @item.Sender.LastName </text>
+                                                                                <text>@item.Friend.FirstName @item.Friend.LastName </text>
                                                                             }
                                                                             else
                                                                             {
-                                                                                <text>@item.Friend.FirstName @item.Friend.LastName </text>
+                                                                                <text>@item.Sender.FirstName @item.Sender.LastName </text>
                                                                             }
-
                                                                         </span>
                                                                     </div>
                                                                     <div class="card-action grey">
@@ -326,13 +361,13 @@
                                                                             </a>
                                                                             @if (User.Identity.Name == item.Friend.UserName)
                                                                             {
-                                                                                <a class="btn-floating blue" asp-controller="User" asp-action="Details" asp-route-id="@item.SenderId">
+                                                                                <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-userID="@item.SenderId">
                                                                                     <i class="material-icons">info</i>
                                                                                 </a>
                                                                             }
                                                                             else
                                                                             {
-                                                                                <a class="btn-floating blue" asp-controller="User" asp-action="Details" asp-route-id="@item.FriendId">
+                                                                                <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-userID="@item.FriendId">
                                                                                     <i class="material-icons">info</i>
                                                                                 </a>
                                                                             }

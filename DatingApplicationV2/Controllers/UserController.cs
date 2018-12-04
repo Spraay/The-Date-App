@@ -49,13 +49,15 @@ namespace DatingApplication.Controllers
         }
 
 
-        public ActionResult Profile(Guid userID)
+        public async Task<ActionResult> Profile(Guid userID)
         {
+            var user = await _userService.GetAsync(userID);
+            ViewBag.Roles = await _userManager.GetRolesAsync(user);
             ViewBag.FriendsCount = _friendService.Count;
             ViewBag.Friends = _friendService.GetFriendships(userID);
             ViewBag.Photos = _imageService.GetUserImages(userID);
             ViewBag.Interests = _interestService.GetList();
-            return View(_userService.CurrentUser);
+            return View(_userService.Get(userID));
         }
 
         // GET: Default/Details/5
