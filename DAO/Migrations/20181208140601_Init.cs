@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAO.Migrations
 {
-    public partial class _1 : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -313,18 +313,11 @@ namespace DAO.Migrations
                 {
                     ID = table.Column<Guid>(nullable: false),
                     ImageID = table.Column<Guid>(nullable: false),
-                    UserWhoLikedId = table.Column<Guid>(nullable: true),
-                    ApplicationUserId = table.Column<Guid>(nullable: true)
+                    UserWhoLikedID = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ImagesLikes", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_ImagesLikes_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_ImagesLikes", x => new { x.UserWhoLikedID, x.ImageID });
                     table.ForeignKey(
                         name: "FK_ImagesLikes_Images_ImageID",
                         column: x => x.ImageID,
@@ -332,8 +325,8 @@ namespace DAO.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ImagesLikes_AspNetUsers_UserWhoLikedId",
-                        column: x => x.UserWhoLikedId,
+                        name: "FK_ImagesLikes_AspNetUsers_UserWhoLikedID",
+                        column: x => x.UserWhoLikedID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -394,19 +387,9 @@ namespace DAO.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ImagesLikes_ApplicationUserId",
-                table: "ImagesLikes",
-                column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_ImagesLikes_ImageID",
                 table: "ImagesLikes",
                 column: "ImageID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ImagesLikes_UserWhoLikedId",
-                table: "ImagesLikes",
-                column: "UserWhoLikedId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InterestApplicationUser_ApplicationUserID",

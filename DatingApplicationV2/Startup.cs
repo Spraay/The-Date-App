@@ -16,7 +16,6 @@ using Enties;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Services;
 using AutoMapper;
-using Microsoft.AspNetCore.SignalR;
 
 namespace DatingApplicationV2
 {
@@ -49,6 +48,7 @@ namespace DatingApplicationV2
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IInterestService, InterestService>();
             services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<IImageLikeService, ImageLikeService>();
             services.AddScoped<IFriendService, FriendService>();
             services.AddScoped<IConversationService, ConversationService>();
 

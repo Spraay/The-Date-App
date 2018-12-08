@@ -81,6 +81,9 @@ namespace DAO.Data
                 .HasForeignKey(_ => _.ConversationID);
 
             modelBuilder.Entity<ImageLike>()
+                .HasKey(_ => new { _.UserWhoLikedID, _.ImageID });
+
+            modelBuilder.Entity<ImageLike>()
                 .HasOne(_ => _.Image)
                 .WithMany(__ => __.Likes)
                 .HasForeignKey(_ => _.ImageID);

@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Message\**" />
+    <Content Remove="Views\Message\**" />
+    <EmbeddedResource Remove="Views\Message\**" />
+    <None Remove="Views\Message\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.4.0" />
@@ -24,7 +31,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
-    <Folder Include="Views\Message\" />
+    <Folder Include="wwwroot\images\userimages\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181208114202_2")]
-    partial class _2
+    [Migration("20181208140601_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -178,18 +178,15 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("Enties.ImageLike", b =>
                 {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("UserWhoLikedID");
 
                     b.Property<Guid>("ImageID");
 
-                    b.Property<Guid>("UserWhoLikedID");
+                    b.Property<Guid>("ID");
 
-                    b.HasKey("ID");
+                    b.HasKey("UserWhoLikedID", "ImageID");
 
                     b.HasIndex("ImageID");
-
-                    b.HasIndex("UserWhoLikedID");
 
                     b.ToTable("ImagesLikes");
                 });

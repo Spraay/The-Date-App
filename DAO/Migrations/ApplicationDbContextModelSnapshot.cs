@@ -176,18 +176,15 @@ namespace DAO.Migrations
 
             modelBuilder.Entity("Enties.ImageLike", b =>
                 {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("UserWhoLikedID");
 
                     b.Property<Guid>("ImageID");
 
-                    b.Property<Guid>("UserWhoLikedID");
+                    b.Property<Guid>("ID");
 
-                    b.HasKey("ID");
+                    b.HasKey("UserWhoLikedID", "ImageID");
 
                     b.HasIndex("ImageID");
-
-                    b.HasIndex("UserWhoLikedID");
 
                     b.ToTable("ImagesLikes");
                 });
