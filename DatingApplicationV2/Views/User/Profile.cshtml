@@ -72,15 +72,7 @@
                             <h4 class="card-title grey-text text-darken-4">1234</h4>
                             <p class="medium-small grey-text">Comments</p>
                         </div>
-                        @if (User.Identity.IsAuthenticated && Model.Id != _userService.CurrentUserId)
-                        {
-                            <div class="col s12 m1 right-align">
-                                <a class="btn-floating waves-effect waves-light rec accent-2 right"
-                                   asp-href="">
-                                    <i class="material-icons">group_add</i>
-                                </a>
-                            </div>
-                        }
+                        
                     </div>
                 </div>
             </div>
@@ -183,7 +175,7 @@
                     <!-- profile-page-wall-share -->
                     <div class="row">
                         <div class="col s12">
-                            <div class="card blue">
+                            <div class="card deep-purple darken-1">
                                 <div class="card-tabs">
                                     <ul class="tabs tabs-fixed-width tabs-transparent">
                                         <li class="tab"><a href="#photoList" class=""><i class="material-icons" style="margin-top: 10px;">insert_photo</i> Photos</a></li>
@@ -192,115 +184,62 @@
                                         <li class="indicator"></li>
                                     </ul>
                                 </div>
-                                <div class="card-content blue-grey lighten-2 z-depth-2">
+                                <div class="card-content deep-purple lighten-2 z-depth-2">
                                     <div id="photoList" style="display: none;" class="active">
-                                        @if (ViewBag.Photos != null )
+                                        @if (ViewBag.Photos != null)
+                                           
                                         {
-                                            <br /><br /><br />
-                                            <div class="container">
-                                                <div class="row grey z-depth-2">
-                                                    <h1 class="col s12 white-text">
-                                                        <b>
-                                                            Upss... <i class="material-icons large left">
-                                                                sentiment_very_dissatisfied
-                                                            </i>
-                                                        </b>
-                                                    </h1>
-                                                    <h1 class="col s12 white-text center">
-                                                        <b>
-                                                            <i class="material-icons large pulse">
-                                                                person_add_disabled
-                                                            </i>
-                                                        </b>
-                                                    </h1>
-                                                    <h4 class="center white-text">Your gallery seems to be empty!</h4>
-                                                    <h5 class="center white-text">Do you want to add photos? Click the green, plus button</h5>
-
-                                                    <br /><br /><br />
-                                                </div>
-                                                <div class="row">
-                                                    <p class="center-align">
-
-                                                        <a asp-action="Create" style="position: relative; bottom: 45px;" class="btn btn-floating btn-large waves-effect green pulse">
-                                                            <i class="material-icons">add</i>
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                                <div class=" col s12">
-                                                    <h4 class="center"></h4>
-                                                </div>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="parallax-container" style="height: 300px">
-                                                <div class="section no-pad-bot">
-                                                    <div class="container">
-                                                        <h1 class="header white-text text-darken-1">User Gallery</h1>
-                                                        <div class="row col blue darken-1">
-                                                            <h5 class=" center col s12 white-text">
-                                                                In the list below you can see your photos!
-                                                            </h5>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="parallax"><img src="~/images/photographer.jpg" alt="Unsplashed background img 1" style="opacity: 1; transform: translate3d(-50%, 168.122px, 0px);"></div>
-                                            </div>
-                                            <div class="row">
+                                            <div class="valign-wrapper my-wrapper row">
                                                 <div class="col s12">
-                                                    <div class="fixed-action-btn direction-top" style="top: 100px; right: 40px;">
-                                                        <a asp-action="Create" class="btn-floating btn-large green waves-effect waves-light pulse">
-                                                            <i class="material-icons">add</i>
-                                                        </a>
-                                                    </div>
+                                                    <div class="col s12 center"><i class="material-icons orange-text" style="font-size: 150px;">sentiment_dissatisfied</i></div>
+                                                    <h1 class="orange-text center">No images added</h1>
                                                 </div>
                                             </div>
-                                            <div class="container">
+                                        }
+                                            
+                                        <div class="container">
+                                            @foreach (Image item in ViewBag.Photos)
+                                            {
 
-                                                @foreach (Image item in ViewBag.Photos)
-                                                {
-
-                                                    <div class="card">
-                                                        <div class="card-image waves-effect waves-block waves-light">
-                                                            <img class="activator" src="~/images/userimages/@Html.DisplayFor(modelItem => item.Src)" />
-                                                            <div class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">
-                                                                <span class="left">@Html.DisplayFor(modelItem => item.Title)</span>
-                                                                @if (item.UserID == Guid.Parse(UserManager.GetUserId(User)))
-                                                                {
-                                                                    <span class="right">
-                                                                        <a asp-action="Delete" asp-route-id="@item.ID" class="btn red waves-effect waves-light">
-                                                                            <i class="material-icons">delete_forever</i>
-                                                                        </a>
-                                                                        <a asp-action="Edit" asp-route-id="@item.ID" class="btn blue waves-effect waves-light">
-                                                                            <i class="material-icons">edit</i>
-                                                                        </a>
-                                                                    </span>
-                                                                }
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-content">
-                                                            <p>@Html.DisplayFor(modelItem => item.Description)</p>
-                                                            <hr />
-                                                            <p>
-                                                                <span class="left"> 12 Likes</span>
-                                                                <span class="right"> 4 Comments</span>
-                                                            </p>
-                                                        </div>
-                                                        <div class="card-action">
-                                                            <a class="btn-floating grey" asp-route-id="@item.ID">
-                                                                <i class="material-icons left">thumb_up</i>
-                                                                Like it!
-                                                            </a>
-                                                        </div>
-                                                        <div class="card-reveal">
-                                                            <span class="card-title grey-text text-darken-4 activator">Comments<i class="material-icons right">close</i></span>
-                                                            <p></p>
+                                                <div class="card">
+                                                    <div class="card-image waves-effect waves-block waves-light">
+                                                        <img class="activator" src="~/images/userimages/@Html.DisplayFor(modelItem => item.Src)" />
+                                                        <div class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">
+                                                            <span class="left">@Html.DisplayFor(modelItem => item.Title)</span>
+                                                            @if (item.UserID == Guid.Parse(UserManager.GetUserId(User)))
+                                                            {
+                                                                <span class="right">
+                                                                    <a asp-action="Delete" asp-route-id="@item.ID" class="btn red waves-effect waves-light">
+                                                                        <i class="material-icons">delete_forever</i>
+                                                                    </a>
+                                                                    <a asp-action="Edit" asp-route-id="@item.ID" class="btn blue waves-effect waves-light">
+                                                                        <i class="material-icons">edit</i>
+                                                                    </a>
+                                                                </span>
+                                                            }
                                                         </div>
                                                     </div>
-                                                }
-                                            </div>
-                                        }
-
+                                                    <div class="card-content">
+                                                        <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                                                        <hr />
+                                                        <p>
+                                                            <span class="left"> 12 Likes</span>
+                                                            <span class="right"> 4 Comments</span>
+                                                        </p>
+                                                    </div>
+                                                    <div class="card-action">
+                                                        <a class="btn-floating grey" asp-route-id="@item.ID">
+                                                            <i class="material-icons left">thumb_up</i>
+                                                            Like it!
+                                                        </a>
+                                                    </div>
+                                                    <div class="card-reveal">
+                                                        <span class="card-title grey-text text-darken-4 activator">Comments<i class="material-icons right">close</i></span>
+                                                        <p></p>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
                                     </div>
 
                                     <div id="friendsList" class="" style="display: block;">
@@ -310,86 +249,78 @@
                                                     List<Friendship> x = ViewBag.Friends;
                                                     @if (x.Count() < 1)
                                                     {
-                                                        @if (User.Identity.IsAuthenticated && Model.Id == _userService.CurrentUserId)
-                                                        {
-                                                            <text>
-                                                                <div class="valign-wrapper my-wrapper row">
-                                                                    <div class="col s12">
-                                                                        <div class="col s12 center"><i class="material-icons orange-text" style="font-size: 150px;">sentiment_dissatisfied</i></div>
-                                                                        <h1 class="orange-text center"> Your friend list seems to be empty. Try add some friends <a asp-controller="Explore" asp-action="Index">here</a></h1>
-                                                                    </div>
-                                                                </div>
-                                                            </text>
-                                                        }
-                                                        else
-                                                        {
-                                                            <text>
-                                                                <div class="valign-wrapper my-wrapper row">
-                                                                    <div class="col s12">
-                                                                        <div class="col s12 center"><i class="material-icons orange-text" style="font-size: 150px;">sentiment_dissatisfied</i></div>
-                                                                        <h1 class="orange-text center">This user has not added any friends yet <a asp-controller="Explore" asp-action="Index">here</a></h1>
-                                                                    </div>
-                                                                </div>
-                                                            </text>
-                                                        }
-
+                                                        <div class="valign-wrapper my-wrapper row">
+                                                            <div class="col s12">
+                                                                <div class="col s12 center"><i class="material-icons orange-text" style="font-size: 150px;">sentiment_dissatisfied</i></div>
+                                                                <h1 class="orange-text center">No friends added</h1>
+                                                            </div>
+                                                        </div>
                                                     }
-                                                    else
+                                                   
+                                                    @foreach (var item in ViewBag.Friends)
                                                     {
-                                                        @foreach (var item in ViewBag.Friends)
-                                                        {
-                                                            <div class="col m4">
-                                                                <div class="card">
-                                                                    <div class="card-image">
-                                                                        @*<img src="~/images/NoProfileImage.png" style="width: 400px; height: 350px;">*@
-                                                                        <img src="http://www.ilikewallpaper.net/ipad-wallpapers/download/2268/Square-Pattern-ipad-wallpaper-ilikewallpaper_com.jpg">
-                                                                        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">
-                                                                            @if (User.Identity.Name == item.Friend.UserName)
-                                                                            {
-                                                                                <text>@item.Friend.FirstName @item.Friend.LastName </text>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                <text>@item.Sender.FirstName @item.Sender.LastName </text>
-                                                                            }
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="card-action grey">
-                                                                        <div class="center">
-                                                                            <a class="btn-floating red" asp-action="Delete" asp-route-user1ID="@item.FriendId" asp-route-user2ID="@item.SenderId">
-                                                                                <i class="material-icons">delete</i>
+                                                        <div class="col m4">
+                                                            <div class="card">
+                                                                <div class="card-image">
+                                                                    @*<img src="~/images/NoProfileImage.png" style="width: 400px; height: 350px;">*@
+                                                                    <img src="http://www.ilikewallpaper.net/ipad-wallpapers/download/2268/Square-Pattern-ipad-wallpaper-ilikewallpaper_com.jpg">
+                                                                    <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">
+                                                                        @if (User.Identity.Name == item.Friend.UserName)
+                                                                        {
+                                                                            <text>@item.Friend.FirstName @item.Friend.LastName </text>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <text>@item.Sender.FirstName @item.Sender.LastName </text>
+                                                                        }
+                                                                    </span>
+                                                                </div>
+                                                                <div class="card-action grey">
+                                                                    <div class="center">
+                                                                        <a class="btn-floating red" asp-action="Delete" asp-route-user1ID="@item.FriendId" asp-route-user2ID="@item.SenderId">
+                                                                            <i class="material-icons">delete</i>
+                                                                        </a>
+                                                                        @if (User.Identity.Name == item.Friend.UserName)
+                                                                        {
+                                                                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-userID="@item.SenderId">
+                                                                                <i class="material-icons">info</i>
                                                                             </a>
-                                                                            @if (User.Identity.Name == item.Friend.UserName)
-                                                                            {
-                                                                                <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-userID="@item.SenderId">
-                                                                                    <i class="material-icons">info</i>
-                                                                                </a>
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-userID="@item.FriendId">
-                                                                                    <i class="material-icons">info</i>
-                                                                                </a>
-                                                                            }
-                                                                        </div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-userID="@item.FriendId">
+                                                                                <i class="material-icons">info</i>
+                                                                            </a>
+                                                                        }
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        }
+                                                        </div>
                                                     }
+
                                                 }
                                             </div>
                                         </div>
                                     </div>
                                     <div id="interestsList" class="" style="display: none;">
-                                        <div class="collection">
-
-
-                                            @foreach (var interest in Model.InterestsApplicationUser.Select(_ => _.Interest.Name))
-                                            {
-                                                <a href = "#!" class="collection-item">@interest</a>
-                                            }
-                                        </div>
+                                        @if (!Model.InterestsApplicationUser.Any())
+                                        {
+                                            <div class="valign-wrapper my-wrapper row">
+                                                <div class="col s12">
+                                                    <div class="col s12 center"><i class="material-icons orange-text" style="font-size: 150px;">sentiment_dissatisfied</i></div>
+                                                    <h1 class="orange-text center">No interests added</h1>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="collection">
+                                                @foreach (var interest in Model.InterestsApplicationUser.Select(_ => _.Interest.Name))
+                                                {
+                                                    <a href="#!" class="collection-item">@interest</a>
+                                                }
+                                            </div>
+                                        }
                                     </div>
                                 </div>
                             </div>

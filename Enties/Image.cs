@@ -16,6 +16,8 @@ namespace Enties
         public string Title { get; set; }
         public ApplicationUser User { get; set; }
         public DateTime CreatedDate { get; } = DateTime.UtcNow;
+
+        public List<ImageLike> Likes {get; set;}
         
     }
 }

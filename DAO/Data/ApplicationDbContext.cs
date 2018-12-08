@@ -14,10 +14,9 @@ namespace DAO.Data
 
         public DbSet<Interest> Interests { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<ImageLike> ImagesLikes { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
-
         public DbSet<Message> Messages { get; set; }
-
         public DbSet<Conversation> Conversations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -81,8 +80,16 @@ namespace DAO.Data
                 .WithMany(__ => __.Messages)
                 .HasForeignKey(_ => _.ConversationID);
 
-        }
+            modelBuilder.Entity<ImageLike>()
+                .HasOne(_ => _.Image)
+                .WithMany(__ => __.Likes)
+                .HasForeignKey(_ => _.ImageID);
 
+            modelBuilder.Entity<ImageLike>()
+                .HasOne(_ => _.WhoLiked)
+                .WithMany(__ => __.ImagesLikes)
+                .HasForeignKey(_ => _.WhoLikedID);
+        }
     }
     
 }
