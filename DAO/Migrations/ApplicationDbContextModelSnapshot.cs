@@ -181,13 +181,13 @@ namespace DAO.Migrations
 
                     b.Property<Guid>("ImageID");
 
-                    b.Property<Guid>("WhoLikedID");
+                    b.Property<Guid>("UserWhoLikedID");
 
                     b.HasKey("ID");
 
                     b.HasIndex("ImageID");
 
-                    b.HasIndex("WhoLikedID");
+                    b.HasIndex("UserWhoLikedID");
 
                     b.ToTable("ImagesLikes");
                 });
@@ -365,10 +365,10 @@ namespace DAO.Migrations
                         .HasForeignKey("ImageID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Enties.ApplicationUser", "WhoLiked")
+                    b.HasOne("Enties.ApplicationUser", "UserWhoLiked")
                         .WithMany("ImagesLikes")
-                        .HasForeignKey("WhoLikedID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserWhoLikedID")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Enties.InterestApplicationUser", b =>

@@ -11,7 +11,6 @@ namespace DAO.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
-
         public DbSet<Interest> Interests { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<ImageLike> ImagesLikes { get; set; }
@@ -22,6 +21,8 @@ namespace DAO.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+           
 
             modelBuilder.Entity<InterestApplicationUser>()
                 .HasKey(_ => new { _.InterestId, _.ApplicationUserID });
@@ -61,7 +62,6 @@ namespace DAO.Data
                 .WithMany(_ => _.SentMessages)
                 .HasForeignKey(_ => _.SenderId);
 
-
             modelBuilder.Entity<ConversationUser>()
                 .HasKey(_ => new { _.ConversationID, _.UserID });
 
@@ -86,10 +86,10 @@ namespace DAO.Data
                 .HasForeignKey(_ => _.ImageID);
 
             modelBuilder.Entity<ImageLike>()
-                .HasOne(_ => _.WhoLiked)
+                .HasOne(_ => _.UserWhoLiked)
                 .WithMany(__ => __.ImagesLikes)
-                .HasForeignKey(_ => _.WhoLikedID);
+                .HasForeignKey(_ => _.UserWhoLikedID)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
-    
 }

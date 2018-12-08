@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAO.Migrations
 {
-    public partial class Init : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -307,6 +307,38 @@ namespace DAO.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ImagesLikes",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(nullable: false),
+                    ImageID = table.Column<Guid>(nullable: false),
+                    UserWhoLikedId = table.Column<Guid>(nullable: true),
+                    ApplicationUserId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImagesLikes", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_ImagesLikes_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ImagesLikes_Images_ImageID",
+                        column: x => x.ImageID,
+                        principalTable: "Images",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ImagesLikes_AspNetUsers_UserWhoLikedId",
+                        column: x => x.UserWhoLikedId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -362,6 +394,21 @@ namespace DAO.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ImagesLikes_ApplicationUserId",
+                table: "ImagesLikes",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ImagesLikes_ImageID",
+                table: "ImagesLikes",
+                column: "ImageID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ImagesLikes_UserWhoLikedId",
+                table: "ImagesLikes",
+                column: "UserWhoLikedId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_InterestApplicationUser_ApplicationUserID",
                 table: "InterestApplicationUser",
                 column: "ApplicationUserID");
@@ -401,7 +448,7 @@ namespace DAO.Migrations
                 name: "Friendships");
 
             migrationBuilder.DropTable(
-                name: "Images");
+                name: "ImagesLikes");
 
             migrationBuilder.DropTable(
                 name: "InterestApplicationUser");
@@ -411,6 +458,9 @@ namespace DAO.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "Interests");

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181127152011_Init")]
-    partial class Init
+    [Migration("20181208114101_1")]
+    partial class _1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -174,6 +174,28 @@ namespace DAO.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("Enties.ImageLike", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("ApplicationUserId");
+
+                    b.Property<Guid>("ImageID");
+
+                    b.Property<Guid?>("UserWhoLikedId");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("ImageID");
+
+                    b.HasIndex("UserWhoLikedId");
+
+                    b.ToTable("ImagesLikes");
                 });
 
             modelBuilder.Entity("Enties.Interest", b =>
@@ -340,6 +362,23 @@ namespace DAO.Migrations
                         .WithMany("Gallery")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Enties.ImageLike", b =>
+                {
+                    b.HasOne("Enties.ApplicationUser")
+                        .WithMany("ImagesLikes")
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("Enties.Image", "Image")
+                        .WithMany("Likes")
+                        .HasForeignKey("ImageID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Enties.ApplicationUser", "UserWhoLiked")
+                        .WithMany()
+                        .HasForeignKey("UserWhoLikedId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Enties.InterestApplicationUser", b =>

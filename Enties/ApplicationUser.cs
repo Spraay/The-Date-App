@@ -22,5 +22,6 @@ namespace Enties
         public List<Message> SentMessages { get; set; }
         public List<ConversationUser> Conversations { get; set; }
         public List<ImageLike> ImagesLikes { get; set; }
+        //public List<ImageLike> ImagesLikes { get; set; }
     }
 }

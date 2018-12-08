@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
 namespace Enties
 {
     public class ImageLike
@@ -6,8 +9,7 @@ namespace Enties
         public Guid ID { get; set; }
         public Image Image { get; set; }
         public Guid ImageID { get; set; }
-        public ApplicationUser WhoLiked { get; set; }
-        public Guid WhoLikedID { get; set; }
-        public DateTime CreatedDate { get; } = DateTime.UtcNow;
+        public ApplicationUser UserWhoLiked { get; set; }
+        public Guid UserWhoLikedID { get; set; }
     }
 }
