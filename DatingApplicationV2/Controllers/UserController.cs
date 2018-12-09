@@ -44,7 +44,6 @@ namespace DatingApplication.Controllers
         {
             if (_userService.IsFilled(_userService.CurrentUserId))
                 return RedirectToAction(nameof(Profile), new { userID = _userService.CurrentUserId });
-            ViewBag.FillProfile = true;
             return RedirectToAction(nameof(Edit));
         }
 
@@ -86,6 +85,10 @@ namespace DatingApplication.Controllers
             var user = _userService.Get(Guid.Parse(_userManager.GetUserId(User)));
             PopulateAssignedInterestData(user);
             var viewModel = _mapper.Map<ApplicationUser, ApplicationUserViewModel>(user);
+            if (_userService.IsFilled(user.Id))
+                ViewBag.isFilled = true;
+            else
+                ViewBag.isFilled = false;
             return View(viewModel);
         }
 
