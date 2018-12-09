@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAO.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -308,28 +308,53 @@ namespace DAO.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ImagesLikes",
+                name: "ImagesComments",
                 columns: table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
-                    ImageID = table.Column<Guid>(nullable: false),
-                    UserWhoLikedID = table.Column<Guid>(nullable: false)
+                    CreatorID = table.Column<Guid>(nullable: false),
+                    CommentedItemID = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ImagesLikes", x => new { x.UserWhoLikedID, x.ImageID });
+                    table.PrimaryKey("PK_ImagesComments", x => new { x.CreatorID, x.CommentedItemID });
                     table.ForeignKey(
-                        name: "FK_ImagesLikes_Images_ImageID",
-                        column: x => x.ImageID,
+                        name: "FK_ImagesComments_Images_CommentedItemID",
+                        column: x => x.CommentedItemID,
                         principalTable: "Images",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ImagesLikes_AspNetUsers_UserWhoLikedID",
-                        column: x => x.UserWhoLikedID,
+                        name: "FK_ImagesComments_AspNetUsers_CreatorID",
+                        column: x => x.CreatorID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ImagesLikes",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(nullable: false),
+                    CreatorID = table.Column<Guid>(nullable: false),
+                    LikedItemID = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImagesLikes", x => new { x.CreatorID, x.LikedItemID });
+                    table.ForeignKey(
+                        name: "FK_ImagesLikes_AspNetUsers_CreatorID",
+                        column: x => x.CreatorID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ImagesLikes_Images_LikedItemID",
+                        column: x => x.LikedItemID,
+                        principalTable: "Images",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -387,9 +412,14 @@ namespace DAO.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ImagesLikes_ImageID",
+                name: "IX_ImagesComments_CommentedItemID",
+                table: "ImagesComments",
+                column: "CommentedItemID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ImagesLikes_LikedItemID",
                 table: "ImagesLikes",
-                column: "ImageID");
+                column: "LikedItemID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_InterestApplicationUser_ApplicationUserID",
@@ -429,6 +459,9 @@ namespace DAO.Migrations
 
             migrationBuilder.DropTable(
                 name: "Friendships");
+
+            migrationBuilder.DropTable(
+                name: "ImagesComments");
 
             migrationBuilder.DropTable(
                 name: "ImagesLikes");

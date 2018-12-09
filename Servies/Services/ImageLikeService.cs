@@ -18,19 +18,19 @@ namespace Services
 
         public void ToggleImageLike(Guid imageID, Guid userID)
         {
-            if ( IsImageLiked(imageID, userID) )
+            if (IsImageLiked(imageID, userID))
             {
-                var likeToDel = _context.ImagesLikes.SingleOrDefault(_ => _.ImageID == imageID && _.UserWhoLikedID == userID);
+                var likeToDel = _context.ImagesLikes.SingleOrDefault(_ => _.LikedItemID == imageID && _.CreatorID == userID);
                 _context.ImagesLikes.Remove(likeToDel);
-                
+
             }
             else
             {
                 _context.ImagesLikes.Add(
                     new ImageLike()
                     {
-                        ImageID = imageID,
-                        UserWhoLikedID = userID
+                        LikedItemID = imageID,
+                        CreatorID = userID
                     }
                 );
             }
@@ -39,12 +39,12 @@ namespace Services
 
         public bool IsImageLiked(Guid imageID, Guid userID)
         {
-            return _context.ImagesLikes.Any(_ => _.ImageID == imageID && _.UserWhoLikedID == userID);
+            return _context.ImagesLikes.Any(_ => _.LikedItemID == imageID && _.CreatorID == userID);
         }
 
         public int CountImageLikes(Guid imageID)
         {
-            return _context.ImagesLikes.Count(_ => _.ImageID == imageID);
+            return _context.ImagesLikes.Count(_ => _.LikedItemID == imageID);
         }
     }
 }

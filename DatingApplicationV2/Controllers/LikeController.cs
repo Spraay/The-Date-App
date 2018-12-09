@@ -28,6 +28,5 @@ namespace DatingApplicationV2.Controllers
             ViewBag.returnURL = returnURL + "?userID=" + _userService.CurrentUserId.ToString();
             return View(_imageService.Get(id));
         }
-
     }
 }

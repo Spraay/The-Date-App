@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181208140601_Init")]
-    partial class Init
+    [Migration("20181209100144_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -176,17 +176,32 @@ namespace DAO.Migrations
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("Enties.ImageLike", b =>
+            modelBuilder.Entity("Enties.ImageComment", b =>
                 {
-                    b.Property<Guid>("UserWhoLikedID");
+                    b.Property<Guid>("CreatorID");
 
-                    b.Property<Guid>("ImageID");
+                    b.Property<Guid>("CommentedItemID");
 
                     b.Property<Guid>("ID");
 
-                    b.HasKey("UserWhoLikedID", "ImageID");
+                    b.HasKey("CreatorID", "CommentedItemID");
 
-                    b.HasIndex("ImageID");
+                    b.HasIndex("CommentedItemID");
+
+                    b.ToTable("ImagesComments");
+                });
+
+            modelBuilder.Entity("Enties.ImageLike", b =>
+                {
+                    b.Property<Guid>("CreatorID");
+
+                    b.Property<Guid>("LikedItemID");
+
+                    b.Property<Guid>("ID");
+
+                    b.HasKey("CreatorID", "LikedItemID");
+
+                    b.HasIndex("LikedItemID");
 
                     b.ToTable("ImagesLikes");
                 });
@@ -357,17 +372,30 @@ namespace DAO.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Enties.ImageLike", b =>
+            modelBuilder.Entity("Enties.ImageComment", b =>
                 {
-                    b.HasOne("Enties.Image", "Image")
-                        .WithMany("Likes")
-                        .HasForeignKey("ImageID")
+                    b.HasOne("Enties.Image", "CommentedItem")
+                        .WithMany("Comments")
+                        .HasForeignKey("CommentedItemID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Enties.ApplicationUser", "UserWhoLiked")
-                        .WithMany("ImagesLikes")
-                        .HasForeignKey("UserWhoLikedID")
+                    b.HasOne("Enties.ApplicationUser", "Creator")
+                        .WithMany("ImagesComments")
+                        .HasForeignKey("CreatorID")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("Enties.ImageLike", b =>
+                {
+                    b.HasOne("Enties.ApplicationUser", "Creator")
+                        .WithMany("ImagesLikes")
+                        .HasForeignKey("CreatorID")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Enties.Image", "LikedItem")
+                        .WithMany("Likes")
+                        .HasForeignKey("LikedItemID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Enties.InterestApplicationUser", b =>

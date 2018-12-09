@@ -14,6 +14,7 @@ namespace DAO.Data
         public DbSet<Interest> Interests { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<ImageLike> ImagesLikes { get; set; }
+        public DbSet<ImageComment> ImagesComments { get; set; }
         public DbSet<Friendship> Friendships { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
@@ -21,8 +22,6 @@ namespace DAO.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-           
 
             modelBuilder.Entity<InterestApplicationUser>()
                 .HasKey(_ => new { _.InterestId, _.ApplicationUserID });
@@ -81,17 +80,31 @@ namespace DAO.Data
                 .HasForeignKey(_ => _.ConversationID);
 
             modelBuilder.Entity<ImageLike>()
-                .HasKey(_ => new { _.UserWhoLikedID, _.ImageID });
+                .HasKey(_ => new { _.CreatorID, _.LikedItemID });
 
             modelBuilder.Entity<ImageLike>()
-                .HasOne(_ => _.Image)
+                .HasOne(_ => _.LikedItem)
                 .WithMany(__ => __.Likes)
-                .HasForeignKey(_ => _.ImageID);
+                .HasForeignKey(_ => _.LikedItemID);
 
             modelBuilder.Entity<ImageLike>()
-                .HasOne(_ => _.UserWhoLiked)
+                .HasOne(_ => _.Creator)
                 .WithMany(__ => __.ImagesLikes)
-                .HasForeignKey(_ => _.UserWhoLikedID)
+                .HasForeignKey(_ => _.CreatorID)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ImageComment>()
+                .HasKey(_ => new { _.CreatorID, _.CommentedItemID });
+
+            modelBuilder.Entity<ImageComment>()
+                .HasOne(_ => _.CommentedItem)
+                .WithMany(__ => __.Comments)
+                .HasForeignKey(_ => _.CommentedItemID);
+
+            modelBuilder.Entity<ImageComment>()
+                .HasOne(_ => _.Creator)
+                .WithMany(__ => __.ImagesComments)
+                .HasForeignKey(_ => _.CreatorID)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
