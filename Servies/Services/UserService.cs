@@ -14,7 +14,7 @@ using Validators;
 
 namespace Services
 {
-    public class UserService : IUserService
+    public partial class UserService : IUserService
     {
         private readonly IInterestService _interestService;
         private readonly ApplicationDbContext _context;
@@ -29,11 +29,6 @@ namespace Services
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
-        }
-
-        public ApplicationUser CurrentUser
-        {
-            get { return Get(CurrentUserId); }
         }
 
         public Guid CurrentUserId
@@ -51,13 +46,6 @@ namespace Services
             return _context.Users
                 .Include(_=>_.InterestsApplicationUser)
                 .SingleOrDefault(_ => _.Id == id);   
-        }
-
-        public async Task<ApplicationUser> GetAsync(Guid id)
-        {
-            return await _context.Users
-                .Include(_ => _.InterestsApplicationUser)
-                .SingleOrDefaultAsync(_ => _.Id == id);
         }
 
         public void Create(ApplicationUser user)
@@ -107,41 +95,11 @@ namespace Services
             });
             _context.SaveChanges();
         }
-        public string GetEmail(Guid applicationUserId)
-        {
-            return _context.Users
-                .Where(p => p.Id == applicationUserId)
-                .Select(p => p.Email).FirstOrDefault();
-        }
-        public string GetFirstName(Guid applicationUserId)
-        {
-            return _context.Users
-                 .Where(p => p.Id == applicationUserId)
-                 .Select(p => p.FirstName).FirstOrDefault();
-        }
-        public string GetLastName(Guid applicationUserId)
-        {
-            return _context.Users
-                 .Where(p => p.Id == applicationUserId)
-                 .Select(p => p.LastName).FirstOrDefault();
-        }
+        
         public bool IsFilled(ApplicationUser user)
         {
             if (user != null)
             {
-                //try
-                //{
-                //    var destination = _mapper.Map<ApplicationUser, ApplicationUserViewModel>(user);
-                //    var vc = new System.ComponentModel.DataAnnotations.ValidationContext(destination);
-                //    Validator.ValidateObject(destination, vc, true);
-                //}
-                //catch (ValidationException e)
-                //{
-                //    return false;
-                //}
-                //if (user.FirstName != String.Empty && user.LastName != String.Empty && user.BirthDate != null && user.Height != 0 && user.Weight != 0)
-                //    return true;
-
                 List<ValidationResult> validationResults = new List<ValidationResult>();
                 var destination = _mapper.Map<ApplicationUser, ApplicationUserViewModel>(user);
                 var vc = new System.ComponentModel.DataAnnotations.ValidationContext(destination);
@@ -161,12 +119,7 @@ namespace Services
                 .Where(p => p.Id == applicationuserid)
                 .Any(p => IsFilled(p));
         }
-        public async Task<bool> IsFilledAsync(Guid applicationUserId)
-        {
-            return await _context.Users
-                     .Where(p => p.Id == applicationUserId)
-                     .AnyAsync(_ => IsFilled(_));
-        }
+        
         public void UpdateInterests(string[] selectedInterests, Guid id)
         {
             var user = Get(id);
@@ -227,14 +180,29 @@ namespace Services
         public bool UserExists(Guid userID)
         {
             return _context.Users.Any(_ => _.Id == userID);
-        }
+        } 
+    }
 
+    //TASK PART
+    public partial class UserService : IUserService
+    {
+        public async Task<ApplicationUser> GetAsync(Guid id)
+        {
+            return await _context.Users
+                .Include(_ => _.InterestsApplicationUser)
+                .SingleOrDefaultAsync(_ => _.Id == id);
+        }
         public Task<List<ApplicationUser>> GetListAsync()
         {
             return _context.Users
             .Include(_ => _.InterestsApplicationUser)
-            .ToListAsync();  
+            .ToListAsync();
         }
-
+        public async Task<bool> IsFilledAsync(Guid applicationUserId)
+        {
+            return await _context.Users
+                     .Where(p => p.Id == applicationUserId)
+                     .AnyAsync(_ => IsFilled(_));
+        }
     }
 }

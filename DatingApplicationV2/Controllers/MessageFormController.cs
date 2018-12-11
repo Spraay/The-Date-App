@@ -46,7 +46,7 @@ namespace DatingApplicationV2.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("ID, Content, ConversationID")] Message message)
         {
-            message.Sender = _userService.CurrentUser;
+            message.Sender = _userService.Get(_userService.CurrentUserId);
             message.SenderId = _userService.CurrentUserId;
             //message.ConversationID = _
             if (ModelState.IsValid)
