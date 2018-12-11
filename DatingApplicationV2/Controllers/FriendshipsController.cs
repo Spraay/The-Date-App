@@ -49,7 +49,7 @@ namespace DatingApplicationV2.Controllers
         public async Task<IActionResult> Add(Guid id, string returnURL = null)
         {
             var friendship = await _friendshipService.GetAsync(_userService.CurrentUserId, id);
-            var friend = _userService.Get(id);
+            var friend = await _userService.GetAsync(id);
             ViewBag.ReturnURL = returnURL;
             if ( friendship==null)
             {
