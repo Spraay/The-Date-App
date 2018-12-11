@@ -16,7 +16,7 @@ namespace DAO.Data
                               RoleManager<ApplicationRole> roleManager)
         {
             context.Database.EnsureCreated();
-
+            var contextOLD = context;
             var defaultRoles = new List<ApplicationRole>()
             {
                 new ApplicationRole() { Name="Admin",   Description = "This is the administrator role" },
@@ -159,9 +159,9 @@ namespace DAO.Data
                     new Interest { Name = "Science" },
                 };
                 await context.Interests.AddRangeAsync(defaultInterests);
-                await context.SaveChangesAsync();
             }
-            await context.SaveChangesAsync();
+            if(contextOLD != context)
+                await context.SaveChangesAsync();
         }
     }
 }
