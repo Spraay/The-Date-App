@@ -4,6 +4,7 @@
 @inject IUserService _userService
 @{
     ViewData["Title"] = "Profile";
+    var userFriends = (List<ApplicationUser>) ViewBag.Friends;
 }
 <link rel="stylesheet" href="~/css/profile.css" />
 <section id="content">
@@ -61,7 +62,7 @@
                             </p>
                         </div>
                         <div class="col s12 m2 center-align">
-                            <h4 class="card-title grey-text text-darken-4">@ViewBag.FriendsCount</h4>
+                            <h4 class="card-title grey-text text-darken-4">@userFriends.Count()</h4>
                             <p class="medium-small grey-text">Friends</p>
                         </div>
                         <div class="col s12 m2 center-align">
@@ -123,7 +124,7 @@
                     <div class="card red accent-2">
                         <div class="card-content white-text center-align">
                             <p class="card-title">
-                                <i class="material-icons">group_add</i> @ViewBag.FriendsCount
+                                <i class="material-icons">group_add</i>@userFriends.Count()
                             </p>
                             <p>Followers</p>
                         </div>
@@ -256,8 +257,7 @@
                                         <div class="container">
                                             <div class="row">
                                                 @{
-                                                    List<ApplicationUser> x = ViewBag.Friends;
-                                                    @if (!x.Any())
+                                                    @if (!userFriends.Any())
                                                     {
                                                         <div class="valign-wrapper my-wrapper row">
                                                             <div class="col s12">
@@ -267,7 +267,7 @@
                                                         </div>
                                                     }
                                                    
-                                                    @foreach (var item in x)
+                                                    @foreach (var item in userFriends)
                                                     {
                                                         <div class="col m4">
                                                             <div class="card">

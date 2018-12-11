@@ -11,7 +11,7 @@
         <img src="~/images/NoProfileImage.png" alt="" class="circle left" style="height: 40px; margin-top: 10px; margin-right: 5px;">
         @if (SignInManager.IsSignedIn(User))
         {
-            @_userService.CurrentUser.FirstName
+            @_userService.Get(_userService.CurrentUserId).FirstName;
         }
     </a>
 </li>

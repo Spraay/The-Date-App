@@ -159,6 +159,7 @@ namespace DAO.Data
                     new Interest { Name = "Science" },
                 };
                 await context.Interests.AddRangeAsync(defaultInterests);
+                await context.SaveChangesAsync();
             }
             if(contextOLD != context)
                 await context.SaveChangesAsync();
