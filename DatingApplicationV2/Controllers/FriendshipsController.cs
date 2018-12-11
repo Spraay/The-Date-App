@@ -26,57 +26,55 @@ namespace DatingApplicationV2.Controllers
             _friendshipService = friendshipService;
         }
 
-
-        // GET: Friendships
         public IActionResult Index()
         {
-            return RedirectToAction(nameof(UserFriends), new { userID = _userService.CurrentUserId});
+            return RedirectToAction(nameof(UserFriends), new { id = _userService.CurrentUserId});
         }
 
-        public IActionResult UserFriends(Guid userID)
+        public async Task<IActionResult> UserFriends(Guid id)
         {
-            return View(_friendshipService.GetFriendships(userID));
+            return View( await _friendshipService.GetUserFriendsAsync(id) );
         }
 
-        public IActionResult InvitationsSent()
+        public async Task<IActionResult> InvitationsSent()
         {
-            return View(_friendshipService.GetInvitationsSent(_userService.CurrentUserId));
+            return View(await _friendshipService.GetInvitationsSentAsync(_userService.CurrentUserId));
         }
 
-        public IActionResult InvitationsReceived()
+        public async Task<IActionResult> InvitationsReceived()
         {
-            return View(_friendshipService.GetInvitationsReceived(_userService.CurrentUserId));
+            return View(await _friendshipService.GetInvitationsReceivedAsync(_userService.CurrentUserId));
         }
 
-        public IActionResult Invite(Guid friendID)
+        public async Task<IActionResult> Add(Guid id, string returnURL = null)
         {
-            var friendship = _friendshipService.GetUsersFriendsip(_userService.CurrentUserId, friendID);
-            var friend = _userService.Get(friendID);
+            var friendship = await _friendshipService.GetAsync(_userService.CurrentUserId, id);
+            var friend = _userService.Get(id);
+            ViewBag.ReturnURL = returnURL;
             if ( friendship==null)
             {
                 return View(friend);
             }
-            if( friendship.FriendId == friendID && friendship.Status != Status.Accepted)
+            if( friendship.FriendId == id && friendship.Status != Status.Accepted)
             {
                 return RedirectToAction(nameof(NotAcceptJet), friend);  
             }
-            if (friendship.SenderId == friendID && friendship.Status != Status.Accepted)
+            if (friendship.SenderId == id && friendship.Status != Status.Accepted)
             {
                 return View(friend);
             }
-            if ( _friendshipService.AreFriends(_userService.CurrentUserId, friendID))
+            if ( _friendshipService.AreFriends(_userService.CurrentUserId, id))
             {
                 return RedirectToAction(nameof(AlreadyFriends), friend);
             }
             return AlreadyInvited(friend);
-
         }
 
-        [HttpPost, ActionName("Invite")]
+        [HttpPost, ActionName("Add")]
         [ValidateAntiForgeryToken]
-        public IActionResult InviteConfirmed(Guid Id)
+        public IActionResult AddConfirmed(Guid id)
         {
-            _friendshipService.InviteFriend(Id);
+            _friendshipService.AddFriend(_userService.CurrentUserId, id);
             return RedirectToAction(nameof(InvitationsSent));
         }
         public IActionResult AlreadyInvited(ApplicationUser user)
@@ -92,22 +90,22 @@ namespace DatingApplicationV2.Controllers
             return View(user);
         }
 
-        public IActionResult Delete(Guid user1ID, Guid user2ID)
+        public async Task<IActionResult> Delete(Guid id, string returnURL = null)
         {
-            var friendship = _friendshipService.GetUsersFriendsip(user1ID, user2ID);
+            var friendship = await _friendshipService.GetAsync(id, _userService.CurrentUserId);
             if (friendship == null)
-                return NotFound();
-            ViewBag.Friend = friendship.Friend;
+                return RedirectToAction("ItemNotFound", "ErrorController", new { exception = "asdasdasd" } );
+            ViewBag.ReturnURL = returnURL;
             return View(friendship);
         }
 
-        
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(Guid SenderId, Guid FriendId)
+        public async Task<IActionResult> DeleteConfirmed(Guid id, string returnURL = null)
         {
-            _friendshipService.Remove(SenderId, FriendId);
-            return RedirectToAction(nameof(Index));
+            await _friendshipService.DeleteFriendAsync(id, _userService.CurrentUserId);
+            ViewBag.ReturnURL = returnURL;
+            return View();
         }
     }
 }

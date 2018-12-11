@@ -313,7 +313,8 @@ namespace DAO.Migrations
                 {
                     ID = table.Column<Guid>(nullable: false),
                     CreatorID = table.Column<Guid>(nullable: false),
-                    CommentedItemID = table.Column<Guid>(nullable: false)
+                    CommentedItemID = table.Column<Guid>(nullable: false),
+                    Content = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

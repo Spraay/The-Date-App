@@ -104,7 +104,17 @@
                                 <div class="col s5">
                                     <i class="material-icons left">cake</i> Birth date
                                 </div>
-                                <div class="col s7 right-align">@Model.BirthDate.ToString().Remove(Model.BirthDate.ToString().Length - 9)</div>
+                                <div class="col s7 right-align">
+                                    @if (_userService.IsFilled(Model.Id))
+                                    {
+                                        @Model.BirthDate.ToString().Remove(Model.BirthDate.ToString().Length - 9)
+                                    }
+                                    else
+                                    {
+
+                                        <text>Not set yet</text>
+                                    }
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -246,8 +256,8 @@
                                         <div class="container">
                                             <div class="row">
                                                 @{
-                                                    List<Friendship> x = ViewBag.Friends;
-                                                    @if (x.Count() < 1)
+                                                    List<ApplicationUser> x = ViewBag.Friends;
+                                                    @if (!x.Any())
                                                     {
                                                         <div class="valign-wrapper my-wrapper row">
                                                             <div class="col s12">
@@ -257,7 +267,7 @@
                                                         </div>
                                                     }
                                                    
-                                                    @foreach (var item in ViewBag.Friends)
+                                                    @foreach (var item in x)
                                                     {
                                                         <div class="col m4">
                                                             <div class="card">
@@ -265,39 +275,22 @@
                                                                     @*<img src="~/images/NoProfileImage.png" style="width: 400px; height: 350px;">*@
                                                                     <img src="http://www.ilikewallpaper.net/ipad-wallpapers/download/2268/Square-Pattern-ipad-wallpaper-ilikewallpaper_com.jpg">
                                                                     <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">
-                                                                        @if (User.Identity.Name == item.Friend.UserName)
-                                                                        {
-                                                                            <text>@item.Friend.FirstName @item.Friend.LastName </text>
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <text>@item.Sender.FirstName @item.Sender.LastName </text>
-                                                                        }
+                                                                        @item.FirstName @item.LastName
                                                                     </span>
                                                                 </div>
                                                                 <div class="card-action grey">
                                                                     <div class="center">
-                                                                        <a class="btn-floating red" asp-action="Delete" asp-route-user1ID="@item.FriendId" asp-route-user2ID="@item.SenderId">
+                                                                        <a class="btn-floating red" asp-controller="Friendships" asp-action="Delete" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                                                             <i class="material-icons">delete</i>
                                                                         </a>
-                                                                        @if (User.Identity.Name == item.Friend.UserName)
-                                                                        {
-                                                                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-userID="@item.SenderId">
-                                                                                <i class="material-icons">info</i>
-                                                                            </a>
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-userID="@item.FriendId">
-                                                                                <i class="material-icons">info</i>
-                                                                            </a>
-                                                                        }
+                                                                        <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-id="@item.Id">
+                                                                            <i class="material-icons">info</i>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     }
-
                                                 }
                                             </div>
                                         </div>

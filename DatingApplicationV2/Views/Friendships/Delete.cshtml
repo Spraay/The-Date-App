@@ -29,10 +29,10 @@
                 </div>
                 <div class="card-action grey">
                     <div class="center">
-                        <form id="Form" asp-action="Delete">
+                        <form id="Form" asp-action="Delete" asp-route-returnURL="@ViewBag.ReturnURL" >
                             <input type="hidden" asp-for="SenderId" />
                             <input type="hidden" asp-for="FriendId" />
-                            <a asp-action="Index" class="btn btn-floating btn-large waves-effect blue pulse">
+                            <a href="@ViewBag.ReturnURL" class="btn btn-floating btn-large waves-effect blue pulse">
                                 <i class="material-icons">replay</i>
                             </a>
                             <a id="FormSubmitButton" value="Delete" class="btn btn-floating btn-large waves-effect red pulse">

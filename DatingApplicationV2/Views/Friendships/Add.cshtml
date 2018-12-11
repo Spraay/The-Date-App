@@ -6,7 +6,7 @@
 
 <div class="grey darken-3 z-depth-3" style="padding: 1vw; margin-top: -10px;">
     <div class="center">
-        <i style="vertical-align: bottom; font-size: 6vw !important;" class="inline-icon material-icons blue-text">add</i></p>
+        <i style="vertical-align: bottom; font-size: 6vw !important;" class="inline-icon material-icons blue-text">add</i>
         <h5 class="orange-text">Are you sure you want to add the person below to your friends?</h5>
     </div>
 </div>
@@ -20,12 +20,12 @@
                 </div>
                 <div class="card-action grey">
                     <div class="center">
-                        <form asp-action="Invite" id="Form">
+                        <form asp-action="Add" id="Form">
                             <input type="hidden" asp-for="Id" />
                             <a id="FormSubmitButton" value="Invite" class="btn btn-floating btn-large waves-effect green pulse">
                                 <i class="material-icons">check</i>
                             </a>
-                            <a asp-controller="Explore" asp-action="Index" class="btn btn-floating btn-large waves-effect blue pulse">
+                            <a href="@ViewBag.ReturnURL" class="btn btn-floating btn-large waves-effect blue pulse">
                                 <i class="material-icons">replay</i>
                             </a>
                         </form>

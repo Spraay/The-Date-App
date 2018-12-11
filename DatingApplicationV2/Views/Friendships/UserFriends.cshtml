@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<Enties.Friendship>
+﻿@model IEnumerable<Enties.ApplicationUser>
 
 @{
     ViewData["Title"] = "User Friends";
@@ -7,11 +6,11 @@
 
 @if (Model.Any())
 {
-<div class="grey darken-3 z-depth-3" style="padding: 1vw; margin-top: -10px;">
-    <div class="center">
-        <p class="white-text" style="font-size: 3vw;">Friends<i style="vertical-align: bottom; font-size: 4vw !important;" class="inline-icon material-icons">group</i></p>
+    <div class="grey darken-3 z-depth-3" style="padding: 1vw; margin-top: -10px;">
+        <div class="center">
+            <p class="white-text" style="font-size: 3vw;">Friends<i style="vertical-align: bottom; font-size: 4vw !important;" class="inline-icon material-icons">group</i></p>
+        </div>
     </div>
-</div>
 }
 else
 {
@@ -22,6 +21,7 @@ else
         </div>
     </div>
 }
+
 <div class="container">
     <div class="row">
         @foreach (var item in Model)
@@ -32,34 +32,17 @@ else
                         @*<img src="~/images/NoProfileImage.png" style="width: 400px; height: 350px;">*@
                         <img src="http://www.ilikewallpaper.net/ipad-wallpapers/download/2268/Square-Pattern-ipad-wallpaper-ilikewallpaper_com.jpg">
                         <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">
-                            @if (User.Identity.Name == item.Friend.UserName)
-                            {
-                                <text> @Html.DisplayFor(m => item.Sender.FirstName)  @Html.DisplayFor(m => item.Sender.LastName)</text>
-                            }
-                            else
-                            {
-                                <text>@Html.DisplayFor(m => item.Friend.FirstName)  @Html.DisplayFor(m => item.Friend.LastName)</text>
-                            }
-
+                            @Html.DisplayFor(m => item.FirstName)  @Html.DisplayFor(m => item.LastName)
                         </span>
                     </div>
                     <div class="card-action grey">
                         <div class="center">
-                            <a class="btn-floating red" asp-action="Delete" asp-route-user1ID="@item.FriendId" asp-route-user2ID="@item.SenderId">
+                            <a class="btn-floating red" asp-controller="Friendships" asp-action="Delete" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <i class="material-icons">delete</i>
                             </a>
-                            @if (User.Identity.Name == item.Friend.UserName)
-                            {
-                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-id="@item.SenderId">
+                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-id="@item.Id">
                                 <i class="material-icons">info</i>
                             </a>
-                            }
-                            else
-                            {
-                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-id="@item.FriendId">
-                                <i class="material-icons">info</i>
-                            </a>
-                            }
                         </div>
                     </div>
                 </div>
@@ -67,10 +50,3 @@ else
         }
     </div>
 </div>
-
-
-
-
-
-
-

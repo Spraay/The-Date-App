@@ -5,26 +5,26 @@ using Enties;
 
 namespace Services
 {
-    public interface IFriendService
+    public partial interface IFriendService
     {
-        int Count { get; }
-        bool AreFriends(Guid user1ID, Guid user2ID);
-        Task<bool> AreFriendsAsync(Guid user1ID, Guid user2ID);
+        Friendship Get(Guid id1, Guid id2);
+        bool AreFriends(Guid id1, Guid id2);
+        List <ApplicationUser> GetUserFriends(Guid id);
+        List <Friendship> GetInvitationsSent(Guid id);
+        List <Friendship> GetInvitationsReceived(Guid id);
+        void AddFriend(Guid id1, Guid id2);
+        void DeleteFriend(Guid id1, Guid id2);
+    }
 
-        List<Friendship> GetFriendships(Guid userID);
-        Task<List<Friendship>> GetFriendshipsAsync(Guid userID);
-        void InviteFriend(Guid friendID);
-        void InviteFriendAsync(Guid friendID);
-
-        Friendship GetUsersFriendsip(Guid user1ID, Guid user2ID);
-        Task<Friendship> GetUsersFriendsipAsync(Guid user1ID, Guid user2ID);
-
-        void AcceptInvite(Guid friendID);
-        void AcceptInviteAsync(Guid friendID);
-        List<Friendship> GetInvitationsSent(Guid userID);
-        List<Friendship> GetInvitationsReceived(Guid userID);
-        void Remove(Guid user1ID, Guid user2ID);
-
-        
+    //TASK PART
+    public partial interface IFriendService 
+    {
+        Task<Friendship> GetAsync(Guid id1, Guid id2);
+        Task <bool> AreFriendsAsync(Guid id1, Guid id2);
+        Task <List<ApplicationUser>> GetUserFriendsAsync(Guid id);
+        Task <List<Friendship>> GetInvitationsSentAsync(Guid id);
+        Task <List<Friendship>> GetInvitationsReceivedAsync(Guid id);
+        Task AddFriendAsync(Guid id1, Guid id2);
+        Task DeleteFriendAsync(Guid id1, Guid id2);
     }
 }

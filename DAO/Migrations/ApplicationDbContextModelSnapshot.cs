@@ -180,6 +180,8 @@ namespace DAO.Migrations
 
                     b.Property<Guid>("CommentedItemID");
 
+                    b.Property<string>("Content");
+
                     b.Property<Guid>("ID");
 
                     b.HasKey("CreatorID", "CommentedItemID");

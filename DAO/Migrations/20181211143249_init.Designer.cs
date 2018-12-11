@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAO.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181209100144_init")]
+    [Migration("20181211143249_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -181,6 +181,8 @@ namespace DAO.Migrations
                     b.Property<Guid>("CreatorID");
 
                     b.Property<Guid>("CommentedItemID");
+
+                    b.Property<string>("Content");
 
                     b.Property<Guid>("ID");
 

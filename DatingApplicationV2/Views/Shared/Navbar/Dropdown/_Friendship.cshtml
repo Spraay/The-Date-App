@@ -5,7 +5,7 @@
     <li>
         <a asp-controller="Friendships" asp-action="Index">My Friends
             <i class="material-icons">group</i>
-            <span class="badge">@_friendService.Count</span>
+            <span class="badge">@_friendService.GetUserFriends(_userService.CurrentUserId).Count()</span>
         </a>
     </li>
     <li class="divider" tabindex="-1"></li>

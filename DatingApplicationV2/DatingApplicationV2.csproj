@@ -57,7 +57,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\Friendships\Invite.cshtml">
+    <Content Update="Views\Friendships\Add.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Shared\Navbar\Dropdown\_Settings.cshtml">

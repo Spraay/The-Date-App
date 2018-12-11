@@ -9,176 +9,223 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public class FriendService : IFriendService
+    public partial class FriendService : IFriendService
     {
         private readonly ApplicationDbContext _context;
-        private readonly IUserService _userService;
-
-        public FriendService(ApplicationDbContext context, IUserService userService)
+        public FriendService(ApplicationDbContext context)
         {
             _context = context;
-            _userService = userService;
         }
 
-        public int Count
+        public Friendship Get(Guid id1, Guid id2)
         {
-            get
-            {
-                return GetFriendships(_userService.CurrentUserId).Count();
-            }
-        }
-
-        public bool AreFriends(Guid user1ID, Guid user2ID)
-        {
-            var asd =  _context.Friendships.Any(_ => _.FriendId == user1ID && _.SenderId == user2ID);
-            var asc =  _context.Friendships.Any(_ => _.FriendId == user2ID && _.SenderId == user1ID);
-            if (asd || asc)
-                return true;
-            return false;
-            //return _context.Friendships.Any(_ => _.FriendId == user1ID && _.SenderId == user2ID) ? true : _context.Friendships.Any(_ => _.SenderId == user1ID && _.FriendId == user2ID);
-        }
-
-        public async Task<bool> AreFriendsAsync(Guid user1ID, Guid user2ID)
-        {
-            var asd = await _context.Friendships.AnyAsync(_ => _.FriendId == user1ID && _.SenderId == user2ID);
-            var asc = await _context.Friendships.AnyAsync(_ => _.FriendId == user2ID && _.SenderId == user1ID);
-            if (asd || asc)
-                return true;
-            return false;
-            //return await _context.Friendships.AnyAsync(_ => _.FriendId == user1ID && _.SenderId == user2ID) ? true : await _context.Friendships.AnyAsync(_ => _.SenderId == user1ID && _.FriendId == user2ID);
-        }
-
-        public List<Friendship> GetFriendships(Guid userID)
-        {
-            return _context.Friendships
-               .Include(f => f.Friend)
-               .Include(f => f.Sender)
-               .Where(c => c.FriendId == userID || c.SenderId == userID)
-               .Where(c => c.Status == Status.Accepted).ToList();
-        }
-
-        public async Task<List<Friendship>> GetFriendshipsAsync(Guid userID)
-        {
-            return await _context.Friendships
+            var friendship = _context.Friendships
                 .Include(f => f.Friend)
                 .Include(f => f.Sender)
-                .Where(c => c.FriendId == userID || c.SenderId == userID )
-                .Where(c=>c.Status == Status.Accepted).ToListAsync();
+                .SingleOrDefault(_ => _.FriendId == id1 && _.SenderId == id2);
+            if (friendship == null)
+            {
+                _context.Friendships
+                    .Include(f => f.Friend)
+                    .Include(f => f.Sender)
+                    .SingleOrDefault(_ => _.FriendId == id2 && _.SenderId == id1);
+            }
+            return friendship;
         }
 
-        public List<Friendship> GetInvitationsSent(Guid userID)
+        public void AddFriend(Guid id1, Guid id2)
+        {
+            _context.Friendships.Add(new Friendship()
+            {
+                SenderId = id1,
+                FriendId = id2
+            });
+            _context.SaveChanges();
+        }
+
+        public bool AreFriends(Guid id1, Guid id2)
+        {
+            if (_context.Friendships.Any(_ => _.FriendId == id1 && _.SenderId == id2))
+                return true;
+            return _context.Friendships.Any(_ => _.FriendId == id2 && _.SenderId == id1);
+        }
+
+        public void DeleteFriend(Guid id1, Guid id2)
+        {
+            _context.Friendships.Remove(Get(id1,id2));
+            _context.SaveChanges();
+        }
+        public List<Friendship> GetInvitationsReceived(Guid id)
         {
             return _context.Friendships
                .Include(f => f.Friend)
                .Include(f => f.Sender)
-               .Where(c => c.SenderId == userID)
+               .Where(c => c.FriendId == id)
                .Where(c => c.Status != Status.Accepted).ToList();
         }
 
-        public Friendship GetUsersFriendsip(Guid user1ID, Guid user2ID)
+        public List<Friendship> GetInvitationsSent(Guid id)
         {
-            var result = _context.Friendships
+            return _context.Friendships
+               .Include(f => f.Friend)
+               .Include(f => f.Sender)
+               .Where(c => c.SenderId == id)
+               .Where(c => c.Status != Status.Accepted).ToList();
+        }
+
+        public List<ApplicationUser> GetUserFriends(Guid userID)
+        {
+            var x = _context.Friendships
+                .Where(_ => _.SenderId == userID && _.Status == Status.Accepted)
+                .Include(f => f.Friend)
+                .Select(_ => _.Friend).ToList();
+
+            var y = _context.Friendships
+                .Where(_ => _.FriendId == userID && _.Status == Status.Accepted)
+                .Include(f => f.Sender)
+                .Select(_ => _.Sender).ToList();
+
+            x.AddRange(y);
+            return x;
+        }
+
+    }
+
+    //TASK PART
+    public partial class FriendService : IFriendService
+    {
+        public async Task<Friendship> GetAsync(Guid id1, Guid id2)
+        {
+            var friendship = await _context.Friendships
                 .Include(f => f.Friend)
                 .Include(f => f.Sender)
-                .SingleOrDefault(_ => _.FriendId == user1ID && _.SenderId == user2ID);
-            if (result == null)
+                .SingleOrDefaultAsync(_ => _.FriendId == id1 && _.SenderId == id2);
+                
+            if (friendship == null)
             {
-                return _context.Friendships
+                return await _context.Friendships
                     .Include(f => f.Friend)
                     .Include(f => f.Sender)
-                    .SingleOrDefault(_ => _.FriendId == user2ID && _.SenderId == user1ID);
+                    .SingleOrDefaultAsync(_ => _.FriendId == id2 && _.SenderId == id1);
             }
-            return result;
+            return friendship;
         }
 
-        public async Task<Friendship> GetUsersFriendsipAsync(Guid user1ID, Guid user2ID)
+        public async Task AddFriendAsync(Guid id1, Guid id2)
         {
-            var result = await _context.Friendships.SingleOrDefaultAsync(_ => _.FriendId == user1ID && _.SenderId == user2ID);
-            if (result == null)
+            await _context.Friendships.AddAsync(new Friendship()
             {
-                return await _context.Friendships.SingleOrDefaultAsync(_ => _.FriendId == user2ID && _.SenderId == user1ID);
-            }
-            return result;
+                SenderId = id1,
+                FriendId = id2
+            });
+            await _context.SaveChangesAsync();
         }
 
-
-        public void AcceptInvite(Guid friendID)
+        public async Task<bool> AreFriendsAsync(Guid id1, Guid id2)
         {
-            var currentUserId = _userService.CurrentUserId;
-            var friendship = GetUsersFriendsip(currentUserId, friendID);
-            if( friendship !=null && friendship.SenderId==friendID)
-            {
-                friendship.Status = Status.Accepted;
-                _context.Friendships.Update(friendship);
-                _context.SaveChanges();
-            }
+            if ( await _context.Friendships.AnyAsync(_ => _.FriendId == id1 && _.SenderId == id2))
+                return true;
+            return await _context.Friendships.AnyAsync(_ => _.FriendId == id2 && _.SenderId == id1);
         }
 
-        public async void AcceptInviteAsync(Guid friendID)
+        public async Task DeleteFriendAsync(Guid id1, Guid id2)
         {
-            var currentUserId = _userService.CurrentUserId;
-            var friendship = await GetUsersFriendsipAsync(currentUserId, friendID);
-            if (friendship != null && friendship.SenderId == friendID)
-            {
-                friendship.Status = Status.Accepted;
-                _context.Friendships.Update(friendship);
-                await _context.SaveChangesAsync();
-            }
+            var friendship = await GetAsync(id1, id2);
+            _context.Friendships.Remove(friendship);
+            await _context.SaveChangesAsync();
         }
 
-        public void InviteFriend(Guid friendID)
+        public async Task<List<Friendship>> GetInvitationsReceivedAsync(Guid id)
         {
-            var currentUserId = _userService.CurrentUserId;
-            if ( !AreFriends(currentUserId, friendID) )
-            {
-                var friendship = new Friendship()
-                {
-                    Sender = _userService.CurrentUser,
-                    Friend = _userService.Get(friendID),
-                    SenderId = _userService.CurrentUserId,
-                    FriendId = friendID
-                };
-                _context.Friendships.Add(friendship);
-                _context.SaveChanges();
-            }
-            AcceptInvite(friendID);
+            return await _context.Friendships
+              .Include(f => f.Friend)
+              .Include(f => f.Sender)
+              .Where(c => c.FriendId == id)
+              .Where(c => c.Status != Status.Accepted).ToListAsync();
         }
 
-        public async void InviteFriendAsync(Guid friendID)
+        public async Task<List<Friendship>> GetInvitationsSentAsync(Guid id)
         {
-            var currentUserId = _userService.CurrentUserId;
-            if (!await AreFriendsAsync(currentUserId, friendID))
-            {
-                var friendship = new Friendship()
-                {
-                    Sender = _userService.CurrentUser,
-                    Friend = await _userService.GetAsync(friendID)
-                };
-                await _context.Friendships.AddAsync(friendship);
-                await _context.SaveChangesAsync();
-            }
-            AcceptInviteAsync(friendID);
+            return await _context.Friendships
+               .Include(f => f.Friend)
+               .Include(f => f.Sender)
+               .Where(c => c.SenderId == id)
+               .Where(c => c.Status != Status.Accepted).ToListAsync();
         }
 
-        public void Remove(Guid user1ID, Guid user2ID)
+        public async Task<List<ApplicationUser>> GetUserFriendsAsync(Guid id)
         {
-            var frienship = GetUsersFriendsip(user1ID, user2ID);
-            if (frienship != null)
-            {
-                _context.Friendships.Remove(frienship);
-                _context.SaveChanges();
-            } 
-        }
-
-        public List<Friendship> GetInvitationsReceived(Guid userID)
-        {
-            
-            return _context.Friendships
+            var x = await _context.Friendships
+                .Where(_ => _.SenderId == id && _.Status == Status.Accepted)
                 .Include(f => f.Friend)
+                .Select(_ => _.Friend)
+                .ToListAsync();
+
+            var y = await _context.Friendships
+                .Where(_ => _.FriendId == id && _.Status == Status.Accepted)
                 .Include(f => f.Sender)
-                .Where(c => c.FriendId == userID)
-                .Where(c => c.Status != Status.Accepted).ToList();
-            
+                .Select(_ => _.Sender)
+                .ToListAsync();
+
+            x.AddRange(y);
+            return x;
         }
     }
 }
+//public void AcceptInvite(Guid friendID)
+//{
+//    var currentUserId = _userService.CurrentUserId;
+//    var friendship = GetUsersFriendsip(currentUserId, friendID);
+//    if( friendship !=null && friendship.SenderId==friendID)
+//    {
+//        friendship.Status = Status.Accepted;
+//        _context.Friendships.Update(friendship);
+//        _context.SaveChanges();
+//    }
+//}
+
+//public async void AcceptInviteAsync(Guid friendID)
+//{
+//    var currentUserId = _userService.CurrentUserId;
+//    var friendship = await GetUsersFriendsipAsync(currentUserId, friendID);
+//    if (friendship != null && friendship.SenderId == friendID)
+//    {
+//        friendship.Status = Status.Accepted;
+//        _context.Friendships.Update(friendship);
+//        await _context.SaveChangesAsync();
+//    }
+//}
+
+//public void InviteFriend(Guid friendID)
+//{
+//    var currentUserId = _userService.CurrentUserId;
+//    if ( !AreFriends(currentUserId, friendID) )
+//    {
+//        var friendship = new Friendship()
+//        {
+//            Sender = _userService.CurrentUser,
+//            Friend = _userService.Get(friendID),
+//            SenderId = _userService.CurrentUserId,
+//            FriendId = friendID
+//        };
+//        _context.Friendships.Add(friendship);
+//        _context.SaveChanges();
+//    }
+//    AcceptInvite(friendID);
+//}
+
+//public async void InviteFriendAsync(Guid friendID)
+//{
+//    var currentUserId = _userService.CurrentUserId;
+//    if (!await AreFriendsAsync(currentUserId, friendID))
+//    {
+//        var friendship = new Friendship()
+//        {
+//            Sender = _userService.CurrentUser,
+//            Friend = await _userService.GetAsync(friendID)
+//        };
+//        await _context.Friendships.AddAsync(friendship);
+//        await _context.SaveChangesAsync();
+//    }
+//    AcceptInviteAsync(friendID);
+//}
