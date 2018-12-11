@@ -34,13 +34,13 @@ else
                     </div>
                     <div class="card-action grey">
                         <div class="center">
-                            <a class="btn-floating green" asp-action="Invite" asp-route-friendID="@item.SenderId">
+                            <a class="btn-floating green" asp-controller="Friendship" asp-action="Add" asp-route-id="@item.SenderId">
                                 <i class="material-icons">check</i>
                             </a>
-                            <a class="btn-floating red" asp-action="Delete" asp-route-user1ID="@item.FriendId" asp-route-user2ID="@item.SenderId">
+                            <a class="btn-floating red" asp-controller="Friendship" asp-action="Delete" asp-route-user1ID="@item.FriendId" asp-route-user2ID="@item.SenderId">
                                 <i class="material-icons">delete</i>
                             </a>
-                            <a class="btn-floating blue" asp-controller="User" asp-action="Details" asp-route-id="@item.FriendId">
+                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-id="@item.FriendId">
                                 <i class="material-icons">info</i>
                             </a>
                         </div>
