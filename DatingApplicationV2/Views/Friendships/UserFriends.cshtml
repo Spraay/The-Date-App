@@ -50,13 +50,13 @@ else
                             </a>
                             @if (User.Identity.Name == item.Friend.UserName)
                             {
-                            <a class="btn-floating blue" asp-controller="User" asp-action="Details" asp-route-id="@item.SenderId">
+                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-id="@item.SenderId">
                                 <i class="material-icons">info</i>
                             </a>
                             }
                             else
                             {
-                            <a class="btn-floating blue" asp-controller="User" asp-action="Details" asp-route-id="@item.FriendId">
+                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-id="@item.FriendId">
                                 <i class="material-icons">info</i>
                             </a>
                             }

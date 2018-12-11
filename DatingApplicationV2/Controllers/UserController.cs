@@ -43,20 +43,20 @@ namespace DatingApplication.Controllers
         public ActionResult Index()
         {
             if (_userService.IsFilled(_userService.CurrentUserId))
-                return RedirectToAction(nameof(Profile), new { userID = _userService.CurrentUserId });
+                return RedirectToAction(nameof(Profile), new { id = _userService.CurrentUserId });
             return RedirectToAction(nameof(Edit));
         }
 
 
-        public async Task<ActionResult> Profile(Guid userID)
+        public async Task<ActionResult> Profile(Guid id)
         {
-            var user = await _userService.GetAsync(userID);
+            var user = await _userService.GetAsync(id);
             ViewBag.Roles = await _userManager.GetRolesAsync(user);
             ViewBag.FriendsCount = _friendService.Count;
-            ViewBag.Friends = _friendService.GetFriendships(userID);
-            ViewBag.Photos = _imageService.GetUserImages(userID);
+            ViewBag.Friends = _friendService.GetFriendships(id);
+            ViewBag.Photos = _imageService.GetUserImages(id);
             ViewBag.Interests = _interestService.GetList();
-            return View(_userService.Get(userID));
+            return View(_userService.Get(id));
         }
 
         // GET: Default/Details/5
@@ -153,9 +153,9 @@ namespace DatingApplication.Controllers
             }
         }
 
-        public ActionResult RegisterSuccess(string returnUrl = null)
+        public ActionResult RegisterSuccess(string returnURL = null)
         {
-            ViewBag.ReturnUrl = returnUrl;
+            ViewBag.ReturnUrl = returnURL;
             return View();
         }
 

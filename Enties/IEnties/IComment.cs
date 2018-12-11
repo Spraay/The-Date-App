@@ -12,5 +12,6 @@ namespace Enties.IEnties
         ItemType CommentedItem { get; set; }
         Guid CommentedItemID { get; set; }
         DateTime Created { get; }
+        string Content { get; set; }
     }
 }

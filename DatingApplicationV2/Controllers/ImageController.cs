@@ -82,9 +82,8 @@ namespace DatingApplicationV2.Controllers
                         ModelState.AddModelError(string.Empty, GetAllowedExtensionsMsg());
                         return RedirectToAction(nameof(Create));
                     }
-                    
-                    Guid currentUser;
-                    Guid.TryParse(_userManager.GetUserId(User), out currentUser );
+
+                    Guid.TryParse(_userManager.GetUserId(User), out Guid currentUser);
                     var uploads = Path.Combine(_appEnvironment.WebRootPath, "images\\userimages");
                     var fileName = currentUser + Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
                     using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))

@@ -13,5 +13,6 @@ namespace Enties
         public Image CommentedItem { get; set; }
         public Guid CommentedItemID { get; set; }
         public DateTime Created { get; } = DateTime.Now;
+        public string Content { get; set; }
     }
 }

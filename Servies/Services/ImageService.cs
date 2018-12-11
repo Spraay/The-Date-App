@@ -1,10 +1,11 @@
 ﻿
 using DAO.Data;
 using Enties;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace Services
 {
@@ -54,14 +55,35 @@ namespace Services
             return _context.Images.SingleOrDefault(_ => _.ID == id);
         }
 
+        public async Task<Image> GetAsync(Guid id)
+        {
+            return await _context.Images.SingleOrDefaultAsync(_ => _.ID == id);
+        }
+
         public List<Image> GetUserImages(Guid userID)
         {
             return _context.Images.Where(_ => _.UserID == userID).ToList();
         }
 
+        public bool IsExists(Guid id)
+        {
+            return _context.Images.Any(_ => _.ID == id);
+        }
+
+        public async Task<bool> IsExistsAsync(Guid id)
+        {
+            return await _context.Images.AnyAsync(_ => _.ID == id);
+        }
+
         public bool IsOwner(Guid id, Guid userID)
         {
             return Get(id).UserID == userID ? true : false;
+        }
+
+        public async Task<bool> IsOwnerAsync(Guid id, Guid userID)
+        {
+            var result = await GetAsync(id);
+            return result.UserID == userID ? true : false;
         }
     }
 }

@@ -8,20 +8,20 @@ using Services;
 
 namespace DatingApplicationV2.Controllers
 {
-    public class LikeController : Controller
+    public class ImageLikeController : Controller
     {
         private readonly IUserService _userService;
         private readonly IImageService _imageService;
         private readonly IImageLikeService _imageLikeService;
 
-        public LikeController(IUserService userService, IImageService imageService, IImageLikeService imageLikeService)
+        public ImageLikeController(IUserService userService, IImageService imageService, IImageLikeService imageLikeService)
         {
             _userService = userService;
             _imageService = imageService;
             _imageLikeService = imageLikeService;
         }
 
-        public ActionResult ToggleImageLike(Guid id, string returnURL = null)
+        public ActionResult ToggleLike(Guid id, string returnURL = null)
         {
             _imageLikeService.ToggleImageLike(id, _userService.CurrentUserId);
             ViewBag.isLiked = _imageLikeService.IsImageLiked(id, _userService.CurrentUserId);

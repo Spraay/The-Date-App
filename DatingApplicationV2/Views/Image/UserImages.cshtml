@@ -102,7 +102,7 @@ else
                     </p>
                 </div>
                 <div class="card-action">
-                    <a class="btn-floating grey" asp-controller="Like" asp-action="ToggleImageLike" asp-route-id="@item.ID" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                    <a class="btn-floating grey" asp-controller="ImageLike" asp-action="ToggleLike" asp-route-id="@item.ID" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                         <i class="material-icons left @(_imageLikeService.IsImageLiked(item.ID, _userService.CurrentUserId) ? "blue" : "")">thumb_up</i>
                     </a>
                 </div>
