@@ -8,8 +8,8 @@
         <h1>Users List</h1>
     </div>
     <ul class="collection">
-        @foreach (var item in Model) {
-        
+        @foreach (var item in Model)
+        {
         <li class="collection-item avatar">
             <img src="~/images/NoProfileImage.png" alt="" class="circle">
             <p>
@@ -18,13 +18,5 @@
             <a class="secondary-content" asp-controller="Friendships" asp-action="Add" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">Invite</a>
         </li>
         }
-
     </ul>
 </div>
-            
-            
-                
-           
-       
-}
-

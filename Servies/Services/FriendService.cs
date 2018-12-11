@@ -35,12 +35,25 @@ namespace Services
 
         public void AddFriend(Guid id1, Guid id2)
         {
-            _context.Friendships.Add(new Friendship()
+            if (AreFriends(id1, id2))
             {
-                SenderId = id1,
-                FriendId = id2
-            });
-            _context.SaveChanges();
+                var friendship = Get(id1, id2);
+                if(friendship.FriendId == id1)
+                {
+                    friendship.Status = Status.Accepted;
+                    _context.Update(friendship);
+                    _context.SaveChanges();
+                }
+            }
+            else
+            {
+                _context.Friendships.Add(new Friendship()
+                {
+                    SenderId = id1,
+                    FriendId = id2
+                });
+                _context.SaveChanges();
+            }  
         }
 
         public bool AreFriends(Guid id1, Guid id2)

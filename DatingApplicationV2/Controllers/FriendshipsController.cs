@@ -57,7 +57,7 @@ namespace DatingApplicationV2.Controllers
             }
             if( friendship.FriendId == id && friendship.Status != Status.Accepted)
             {
-                return RedirectToAction(nameof(NotAcceptJet), friend);  
+                return RedirectToAction(nameof(NotAcceptJet), new { id, returnURL });  
             }
             if (friendship.SenderId == id && friendship.Status != Status.Accepted)
             {
@@ -65,29 +65,32 @@ namespace DatingApplicationV2.Controllers
             }
             if ( _friendshipService.AreFriends(_userService.CurrentUserId, id))
             {
-                return RedirectToAction(nameof(AlreadyFriends), friend);
+                return RedirectToAction(nameof(AlreadyFriends), new { id, returnURL });
             }
             return AlreadyInvited(friend);
         }
 
         [HttpPost, ActionName("Add")]
         [ValidateAntiForgeryToken]
-        public IActionResult AddConfirmed(Guid id)
+        public IActionResult AddConfirmed(Guid id, string returnURL = null)
         {
             _friendshipService.AddFriend(_userService.CurrentUserId, id);
-            return RedirectToAction(nameof(InvitationsSent));
+            return Redirect(returnURL);
         }
-        public IActionResult AlreadyInvited(ApplicationUser user)
+        public IActionResult AlreadyInvited(ApplicationUser user, string returnURL = null)
         {
+            ViewBag.ReturnURL = returnURL;
             return View(user);
         }
-        public IActionResult AlreadyFriends(ApplicationUser user)
+        public async Task<IActionResult> AlreadyFriends(Guid id, string returnURL = null)
         {
-            return View(user);
+            ViewBag.ReturnURL = returnURL;
+            return View(await _userService.GetAsync(id) );
         }
-        public IActionResult NotAcceptJet(ApplicationUser user)
+        public async Task<IActionResult> NotAcceptJet(Guid id, string returnURL = null)
         {
-            return View(user);
+            ViewBag.ReturnURL = returnURL;
+            return View(await _userService.GetAsync(id));
         }
 
         public async Task<IActionResult> Delete(Guid id, string returnURL = null)

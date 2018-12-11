@@ -20,7 +20,7 @@
                 </div>
                 <div class="card-action grey">
                     <div class="center">
-                        <form asp-action="Add" id="Form">
+                        <form asp-action="Add" id="Form" asp-route-returnURL ="@ViewBag.ReturnURL">
                             <input type="hidden" asp-for="Id" />
                             <a id="FormSubmitButton" value="Invite" class="btn btn-floating btn-large waves-effect green pulse">
                                 <i class="material-icons">check</i>
