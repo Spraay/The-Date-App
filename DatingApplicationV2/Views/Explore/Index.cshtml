@@ -15,7 +15,7 @@
             <p>
                 @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
             </p>
-            <a class="secondary-content" asp-controller="Friendships" asp-action="Invite" asp-route-friendID="@item.Id">Invite</a> 
+            <a class="secondary-content" asp-controller="Friendships" asp-action="Add" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">Invite</a>
         </li>
         }
 
