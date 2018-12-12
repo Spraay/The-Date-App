@@ -23,8 +23,15 @@ namespace DatingApplication.Controllers
         private readonly IMapper _mapper;
         private readonly IFriendService _friendService;
         private readonly IImageService _imageService;
+        private readonly IImageLikeService _imageLikeService;
 
-        public UserController(IUserService userService, UserManager<ApplicationUser> userManager, IInterestService interestService, IMapper mapper, IFriendService friendService, IImageService imageService)
+        public UserController(IUserService userService,
+            UserManager<ApplicationUser> userManager,
+            IInterestService interestService,
+            IMapper mapper,
+            IFriendService friendService,
+            IImageService imageService,
+            IImageLikeService imageLikeService)
         {
             _userService = userService;
             _userManager = userManager;
@@ -32,7 +39,10 @@ namespace DatingApplication.Controllers
             _mapper = mapper;
             _friendService = friendService;
             _imageService = imageService;
+            _imageLikeService = imageLikeService;
         }
+
+
 
 
 
@@ -55,6 +65,7 @@ namespace DatingApplication.Controllers
             ViewBag.Friends = await _friendService.GetUserFriendsAsync(id);
             ViewBag.Photos = _imageService.GetUserImages(id);
             ViewBag.Interests = _interestService.GetList();
+            ViewBag.PhotsLikes = await _imageLikeService.CountUserImageLikes();
             return View(_userService.Get(id));
         }
 

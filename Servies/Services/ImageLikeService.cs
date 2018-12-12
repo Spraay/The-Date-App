@@ -1,13 +1,15 @@
 ﻿using DAO.Data;
 using Enties;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Services
 {
-    public class ImageLikeService : IImageLikeService
+    public partial class ImageLikeService : IImageLikeService
     {
         private readonly ApplicationDbContext _context;
 
@@ -42,9 +44,29 @@ namespace Services
             return _context.ImagesLikes.Any(_ => _.LikedItemID == imageID && _.CreatorID == userID);
         }
 
-        public int CountImageLikes(Guid imageID)
+        public int CountImageLikes(Guid id)
         {
-            return _context.ImagesLikes.Count(_ => _.LikedItemID == imageID);
+            return _context.ImagesLikes.Count(_ => _.LikedItemID == id);
+        }
+
+        public int CountUserImageLikes(Guid id)
+        {
+            var userImagesIds =  _context.Images.Where(_ => _.UserID == id).Select(_ => _.ID).ToList();
+            return  _context.ImagesLikes.Where(_ => userImagesIds.Contains(_.ID)).Count();
+        }
+
+    }
+    //TASK PART
+    public partial class ImageLikeService : IImageLikeService
+    {
+        public async Task<int> CountImageLikesAsync(Guid id)
+        {
+            return await _context.ImagesLikes.CountAsync(_ => _.LikedItemID == id);
+        }
+        public async Task<int> CountUserImageLikesAsync(Guid id)
+        {
+            var userImagesIds = await _context.Images.Where(_ => _.UserID == id).Select(_ => _.ID).ToListAsync();
+            return await _context.ImagesLikes.Where(_ => userImagesIds.Contains(_.ID)).CountAsync();
         }
     }
 }
