@@ -7,10 +7,10 @@ namespace Services
 {
     public partial interface IImageService
     {
-        void Add(string fileName, Guid currentUser, string title, string description);
+        void Create(string fileName, Guid currentUser, string title, string description);
         void Delete(string src);
-        List<Image> GetUserImages(Guid userID);
         Image Get(Guid id);
+        List<Image> GetList(Guid userID);
         bool IsOwner(Guid id, Guid userID);
         bool IsExists(Guid id);
         void SetProfilePhoto(Guid currentUserId, Guid id);
@@ -20,9 +20,10 @@ namespace Services
     //TASK PART
     public partial interface IImageService
     {
-        Task AddAsync(string fileName, Guid currentUser, string title, string description);
+        Task CreateAsync(string fileName, Guid currentUser, string title, string description);
         Task DeleteAsync(string src);
         Task<Image> GetAsync(Guid id);
+        Task<List<Image>> GetListAsync(Guid userID);
         Task<bool> IsOwnerAsync(Guid id, Guid userID);
         Task<bool> IsExistsAsync(Guid id);
         Task SetProfilePhotoAsync(Guid currentUserId, Guid id);
