@@ -1,6 +1,4 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
-for details on configuring this project to bundle and minify static web assets. */
-body {
+﻿body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
@@ -8,61 +6,6 @@ body {
     background-repeat: repeat;
     background-size: 10px 10px;
 }
-
 main {
     flex: 1 0 auto;
-    
-}
-
-.structure {
-    background: url("/images/structure.png");
-    background-repeat: repeat;
-    background-size: 20px 20px;
-}
-
-.hover-white > li:hover {
-    color: white;
-}
-.hover-blue > li:hover {
-    color: dodgerblue;
-}
-
-/* ~~ ASPECT RATIO ~~ */
-
-.aspct-rtio > img {
-    min-width: 100%;
-    height: auto;
-}
-
-.aspct-rtio-box {
-    position: relative;
-    width: 100%; /* desired width */
-}
-
-.aspct-rtio-box:before {
-    content: "";
-    display: block;
-    padding-top: 100%; /* initial ratio of 1:1*/
-}
-.aspct-rtio-content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    padding: 5%;
-}
-
-/* Other ratios */
-.aspct-rtio2_1:before {
-    padding-top: 50%;
-}
-.aspct-rtio1_2:before {
-    padding-top: 200%;
-}
-.aspct-rtio4_3:before {
-    padding-top: 75%;
-}
-.aspct-rtio16_9:before{
-    padding-top: 56.25%;
 }
