@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DAO.Migrations
 {
-    public partial class init : Migration
+    public partial class initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,7 +50,8 @@ namespace DAO.Migrations
                     BirthDate = table.Column<DateTime>(nullable: false),
                     Gender = table.Column<int>(nullable: false),
                     Eyes = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true)
+                    Description = table.Column<string>(nullable: true),
+                    ProfileImageSrc = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

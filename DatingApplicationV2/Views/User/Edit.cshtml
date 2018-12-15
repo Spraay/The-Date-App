@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col s12">
             <div class="card z-depth-3 grey lighten-3">
-                <form asp-action="Edit" id="Form" class="card-content">
+                <form asp-action="Edit" id="Form" asp-route-returnURL="@ViewBag.ReturnURL" class="card-content">
                     <div asp-validation-summary="ModelOnly" class="red-text"></div>
                     <input type="hidden" asp-for="Id" />
                     <input type="hidden" asp-for="Email" />

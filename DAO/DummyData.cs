@@ -32,12 +32,17 @@ namespace DAO.Data
                     FirstName = "Krystian",
                     LastName = "Rytel",
                     PhoneNumber = "6902341234",
+                    Eyes = Eyes.Brown,
+                    Gender = Gender.Male,
+                    Weight = 75,
+                    Height = 180,
+                    BirthDate = DateTime.Parse("24.07.1996"),
                     EmailConfirmed = true
                 },
                 new ApplicationUser
                 {
                     UserName = "user",
-                    Email = "user@user.com",
+                    Email = "bobbaker@gmail.com",
                     FirstName = "Bob",
                     LastName = "Barker",
                     PhoneNumber = "7788951456",
@@ -47,37 +52,57 @@ namespace DAO.Data
                 new ApplicationUser
                 {
                     UserName = "user2",
-                    Email = "m@m.m",
-                    FirstName = "Mike",
-                    LastName = "Myers",
+                    Email = "gigihadid@gmail.com",
+                    FirstName = "Gigi",
+                    LastName = "Hadid",
                     PhoneNumber = "6572136821",
+                    Eyes = Eyes.Blue,
+                    Gender = Gender.Male,
+                    Weight = 57,
+                    Height = 179,
+                    BirthDate = DateTime.Parse("23.04.1995"),
                     EmailConfirmed = true
                 },
                 new ApplicationUser
                 {
                     UserName = "user3",
-                    Email = "d@d.d",
-                    FirstName = "Donald",
-                    LastName = "Duck",
+                    Email = "arianagrande@gmail.com",
+                    FirstName = "Ariana",
+                    LastName = "Grande",
                     PhoneNumber = "6041234567",
+                    Eyes = Eyes.Brown,
+                    Gender = Gender.Male,
+                    Weight = 47,
+                    Height = 155,
+                    BirthDate = DateTime.Parse("26.06.1993"),
                     EmailConfirmed = true
                 },
                 new ApplicationUser
                 {
                     UserName = "user4",
-                    Email = "d@ddd.d",
-                    FirstName = "Osama",
-                    LastName = "Binladen",
+                    Email = "emiliaclarke@gmail.com",
+                    FirstName = "Emilia",
+                    LastName = "Clarke",
                     PhoneNumber = "6041234167",
+                    Eyes = Eyes.Brown,
+                    Gender = Gender.Male,
+                    Weight = 52,
+                    Height = 160,
+                    BirthDate = DateTime.Parse("23.10.1983"),
                     EmailConfirmed = true
                 },
                 new ApplicationUser
                 {
                     UserName = "user5",
-                    Email = "d@dddddd.d",
-                    FirstName = "Johny",
-                    LastName = "Dep",
-                    PhoneNumber = "6241234167",
+                    Email = "jeniferlawerance@gmail.com",
+                    FirstName = "Emilia",
+                    LastName = "Clarke",
+                    PhoneNumber = "6041234167",
+                    Eyes = Eyes.Blue,
+                    Gender = Gender.Male,
+                    Weight = 52,
+                    Height = 175,
+                    BirthDate = DateTime.Parse("23.10.1983"),
                     EmailConfirmed = true
                 }
             };

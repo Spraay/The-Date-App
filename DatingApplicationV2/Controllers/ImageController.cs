@@ -51,14 +51,14 @@ namespace DatingApplicationV2.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction(nameof(UserImages), new { userID = _userManager.GetUserId(User)});
+            return RedirectToAction(nameof(UserImages), new { id = _userManager.GetUserId(User)});
            
         }
         // GET: Image
         // user gallery
-        public ActionResult UserImages(Guid userID)
+        public ActionResult UserImages(Guid id)
         {
-            return View(_imageService.GetUserImages(userID));
+            return View(_imageService.GetUserImages(id));
         }
 
         // GET: Image/Create
@@ -121,6 +121,17 @@ namespace DatingApplicationV2.Controllers
             }
             _imageService.Delete(img.Src);
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult SetProfilePhoto(Guid id, string returnURL = null)
+        {
+            _imageService.SetProfilePhoto(_userService.CurrentUserId, id);
+            return View(_imageService.Get(id));
+        }
+        public IActionResult SetProfileBackgroundPhoto(Guid id, string returnURL = null)
+        {
+            _imageService.SetProfileBackgroundPhoto(_userService.CurrentUserId, id);
+            return View(_imageService.Get(id));
         }
     }
 }

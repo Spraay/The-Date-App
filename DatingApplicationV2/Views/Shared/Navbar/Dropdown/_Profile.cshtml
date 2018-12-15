@@ -8,7 +8,7 @@
 
 <li class="avatar">
     <a class="left tooltipped" data-position="bottom" data-tooltip="Profile" asp-controller="User" asp-action="Index">
-        <img src="~/images/NoProfileImage.png" alt="" class="circle left" style="height: 40px; margin-top: 10px; margin-right: 5px;">
+        <img src="~/images/userimages/@_userService.Get(_userService.CurrentUserId).ProfileImageSrc" alt="" class="circle left" style="height: 44px; width: 44px; margin-top: 10px; margin-right: 5px;">
         @if (SignInManager.IsSignedIn(User))
         {
             @_userService.Get(_userService.CurrentUserId).FirstName;

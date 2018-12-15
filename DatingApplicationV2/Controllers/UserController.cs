@@ -61,11 +61,15 @@ namespace DatingApplication.Controllers
         public async Task<ActionResult> Profile(Guid id)
         {
             var user = await _userService.GetAsync(id);
-            ViewBag.Roles = await _userManager.GetRolesAsync(user);
-            ViewBag.Friends = await _friendService.GetUserFriendsAsync(id);
-            ViewBag.Photos = _imageService.GetUserImages(id);
-            ViewBag.Interests = _interestService.GetList();
-            ViewBag.PhotsLikes = await _imageLikeService.CountUserImageLikes();
+            ViewBag.Roles                   = await _userManager.GetRolesAsync(user);
+            ViewBag.Photos                  = _imageService.GetUserImages(id);
+            ViewBag.Friends                 = await _friendService.GetUserFriendsAsync(id);
+            ViewBag.Interests               = _interestService.GetList();
+            ViewBag.ProfileImg              = user.ProfileImageSrc;
+            ViewBag.PhotosLikes             = await _imageLikeService.CountImageLikesAsync(id);
+            ViewBag.CurrentUserId           = _userService.CurrentUserId;
+            ViewBag.IsModelUserFilled       = await _userService.IsFilledAsync(id);
+            ViewBag.ProfileBackgroundImg    = user.BackgroundImageSrc;
             return View(_userService.Get(id));
         }
 
@@ -90,7 +94,7 @@ namespace DatingApplication.Controllers
 
         // GET: Default/Edit
         [Authorize(Roles = "User")]
-        public ActionResult Edit()
+        public ActionResult Edit(string returnURL = null)
         {
             var user = _userService.Get(Guid.Parse(_userManager.GetUserId(User)));
             PopulateAssignedInterestData(user);
@@ -99,6 +103,7 @@ namespace DatingApplication.Controllers
                 ViewBag.isFilled = true;
             else
                 ViewBag.isFilled = false;
+            ViewBag.ReturnURL = returnURL;
             return View(viewModel);
         }
 
@@ -123,18 +128,21 @@ namespace DatingApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "User")]
-        public ActionResult Edit(ApplicationUser user, string[] selectedInterests, string selectedGender, string selectedEyes)
+        public ActionResult Edit(ApplicationUser user, string[] selectedInterests, string selectedGender, string selectedEyes, string returnURL = null)
         {
             try
             {
                 _userService.Update(user, selectedInterests, selectedGender, selectedEyes);
-                return RedirectToAction(nameof(Index));
+                if(returnURL == null)
+                    return RedirectToAction(nameof(Index));
+                return Redirect(returnURL);
             }
             catch
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
             PopulateAssignedInterestData(user);
+            ViewBag.ReturnURL = returnURL;
             return View(user);
         }
 

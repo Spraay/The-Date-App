@@ -9,7 +9,6 @@ namespace Services
     {
         Guid CurrentUserId { get; }
         ApplicationUser Get(Guid id);
-        
         void Update(ApplicationUser user);
         void Delete(Guid id);
         List<ApplicationUser> GetList();

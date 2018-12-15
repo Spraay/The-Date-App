@@ -28,8 +28,7 @@ else
             <div class="col m4">
                 <div class="card">
                     <div class="card-image">
-                        @*<img src="~/images/NoProfileImage.png" style="width: 400px; height: 350px;">*@
-                        <img src="http://www.ilikewallpaper.net/ipad-wallpapers/download/2268/Square-Pattern-ipad-wallpaper-ilikewallpaper_com.jpg">
+                        <img src="~/images/userimages/@item.Sender.ProfileImageSrc" style="width: 400px; height: 350px;">
                         <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">@Html.DisplayFor(m => item.Sender.FirstName) @Html.DisplayFor(m => item.Sender.LastName)</span>
                     </div>
                     <div class="card-action grey">

@@ -23,5 +23,7 @@ namespace Enties
         public List<ConversationUser> Conversations { get; set; }
         public List<ImageLike> ImagesLikes { get; set; }
         public List<ImageComment> ImagesComments { get; set; }
+        public string ProfileImageSrc { get; set; } = "NoProfileImage.png";
+        public string BackgroundImageSrc { get; set; } = "NoProfileBackground.png";
     }
 }

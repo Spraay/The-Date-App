@@ -41,6 +41,8 @@ namespace Services
             }
         }
 
+       
+
         public ApplicationUser Get(Guid id)
         {
             return _context.Users

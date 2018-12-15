@@ -11,7 +11,7 @@
         @foreach (var item in Model)
         {
         <li class="collection-item avatar">
-            <img src="~/images/NoProfileImage.png" alt="" class="circle">
+            <img src="~/images/userimages/@item.ProfileImageSrc" alt="" class="circle">
             <p>
                 @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
             </p>

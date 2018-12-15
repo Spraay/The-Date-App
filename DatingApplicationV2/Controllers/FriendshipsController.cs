@@ -97,9 +97,9 @@ namespace DatingApplicationV2.Controllers
         {
             var friendship = await _friendshipService.GetAsync(id, _userService.CurrentUserId);
             if (friendship == null)
-                return RedirectToAction("ItemNotFound", "ErrorController", new { exception = "asdasdasd" } );
+                return RedirectToAction("ItemNotFound", "ErrorController", new { exception = "TO DO" } );
             ViewBag.ReturnURL = returnURL;
-            return View(friendship);
+            return View(await _userService.GetAsync(id));
         }
 
         [HttpPost, ActionName("Delete")]
@@ -108,7 +108,12 @@ namespace DatingApplicationV2.Controllers
         {
             await _friendshipService.DeleteFriendAsync(id, _userService.CurrentUserId);
             ViewBag.ReturnURL = returnURL;
-            return View();
+            return RedirectToAction(nameof(DeleteSuccess), new { id, returnURL } );
+        }
+        public async Task<IActionResult> DeleteSuccess(Guid id, string returnURL = null)
+        {
+            ViewBag.ReturnURL = returnURL;
+            return View(await _userService.GetAsync(id));
         }
     }
 }
