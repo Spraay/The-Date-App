@@ -70,7 +70,7 @@ namespace DatingApplicationV2.Controllers
             return AlreadyInvited(friend);
         }
 
-        [HttpPost, ActionName("Add")]
+        [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
         public IActionResult AddConfirmed(Guid id, string returnURL = null)
         {

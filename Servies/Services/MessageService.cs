@@ -41,10 +41,10 @@ namespace Services
         //            User2 = _userService.Get(ReceiverID),
         //            User2Id = ReceiverID
         //        };
-        //        _context.Conversations.Add(conversation);
+        //        _context.Conversations.Create(conversation);
         //        message.Conversation = conversation;
         //    }
-        //    _context.Messages.Add(message);
+        //    _context.Messages.Create(message);
         //    _context.SaveChanges();
         //}
     }

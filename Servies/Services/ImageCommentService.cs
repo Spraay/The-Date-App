@@ -18,7 +18,7 @@ namespace Services
             _context = context;
         }
 
-        public void AddComment(Guid imageID, Guid userID, string content)
+        public void Create(Guid imageID, Guid userID, string content)
         {
             _context.ImagesComments.Add(new ImageComment()
             {
@@ -37,14 +37,14 @@ namespace Services
             await _context.SaveChangesAsync();
         }
 
-        public void RemoveComment(Guid commentID)
+        public void Delete(Guid commentID)
         {
             var comment = _context.ImagesComments.SingleOrDefault(_ => _.ID == commentID);
 ;            _context.ImagesComments.Remove(comment);
             _context.SaveChanges();
         }
 
-        public void EditComment(Guid commentID, string content)
+        public void Edit(Guid commentID, string content)
         {
             var comment = _context.ImagesComments.SingleOrDefault(_ => _.ID == commentID);
             comment.Content = content;
@@ -52,7 +52,7 @@ namespace Services
             _context.SaveChanges();
         }
 
-        public int CountImageComments(Guid imageID)
+        public int Count(Guid imageID)
         {
             return _context.ImagesComments.Where(_ => _.CommentedItemID == imageID).Count();
         }
@@ -62,7 +62,7 @@ namespace Services
             return await _context.ImagesComments.Where(_ => _.CommentedItemID == imageID).CountAsync();
         }
 
-        public bool IsAnyComments(Guid imageID)
+        public bool IsAny(Guid imageID)
         {
             return _context.ImagesComments.Where(_ => _.CommentedItemID == imageID).Any();
         }

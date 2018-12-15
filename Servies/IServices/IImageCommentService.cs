@@ -4,14 +4,25 @@ using System.Threading.Tasks;
 
 namespace Services
 {
-    public interface IImageCommentService
+    public partial interface IImageCommentService
     {
-        void AddComment(Guid imageID, Guid userID, string content);
-        Task AddCommentAsync(Guid imageID, Guid userID, string content);
-        int CountImageComments(Guid imageID);
-        void EditComment(Guid commentID, string content);
-        bool IsAnyComments(Guid imageID);
-        void RemoveComment(Guid commentID);
-        Task<ImageComment> GetAsync(Guid id);
+        void Create(Guid imageID, Guid userID, string content);
+        void Edit(Guid commentID, string content);
+        void Delete(Guid commentID);
+        int Count(Guid imageID);
+        bool IsAny(Guid imageID);
+    }
+
+    //TASK PARTIAL
+    public partial interface IImageCommentService
+    {
+        void CreateAsync(Guid imageID, Guid userID, string content);
+        void EditAsync(Guid commentID, string content);
+        void DeleteAsync(Guid commentID);
+        int CountAsync(Guid imageID);
+        bool IsAnyAsync(Guid imageID);
     }
 }
+
+
+   

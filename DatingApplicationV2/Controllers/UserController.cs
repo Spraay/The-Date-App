@@ -161,7 +161,7 @@ namespace DatingApplication.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                // TODO: Create delete logic here
 
                 return RedirectToAction(nameof(Index));
             }

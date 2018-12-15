@@ -88,7 +88,7 @@ namespace DatingApplicationV2.Controllers
 
         //        if (ModelState.IsValid)
         //        {
-        //            _imageCommentService.EditComment();
+        //            _imageCommentService.Edit();
         //            return RedirectToAction(nameof(Index));
         //        }
         //        ViewData["CommentedItemID"] = new SelectList(_context.Images, "ID", "ID", imageComment.CommentedItemID);

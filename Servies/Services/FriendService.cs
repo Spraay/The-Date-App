@@ -221,7 +221,7 @@ namespace Services
 //            SenderId = _userService.CurrentUserId,
 //            FriendId = friendID
 //        };
-//        _context.Friendships.Add(friendship);
+//        _context.Friendships.Create(friendship);
 //        _context.SaveChanges();
 //    }
 //    AcceptInvite(friendID);
