@@ -60,6 +60,9 @@
     <Content Update="Views\Friendships\Add.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Shared\Navbar\_Explore.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Shared\Navbar\Dropdown\_Settings.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
