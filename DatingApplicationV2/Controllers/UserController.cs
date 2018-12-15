@@ -62,7 +62,7 @@ namespace DatingApplication.Controllers
         {
             var user = await _userService.GetAsync(id);
             ViewBag.Roles                   = await _userManager.GetRolesAsync(user);
-            ViewBag.Photos                  = _imageService.GetUserImages(id);
+            ViewBag.Photos                  = _imageService.GetList(id);
             ViewBag.Friends                 = await _friendService.GetUserFriendsAsync(id);
             ViewBag.Interests               = _interestService.GetList();
             ViewBag.ProfileImg              = user.ProfileImageSrc;

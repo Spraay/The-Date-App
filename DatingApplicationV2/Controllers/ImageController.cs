@@ -58,7 +58,7 @@ namespace DatingApplicationV2.Controllers
         // user gallery
         public ActionResult UserImages(Guid id)
         {
-            return View(_imageService.GetUserImages(id));
+            return View(_imageService.GetList(id));
         }
 
         // GET: Image/Create
@@ -89,7 +89,7 @@ namespace DatingApplicationV2.Controllers
                     using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
                     {
                         await file.CopyToAsync(fileStream);
-                        _imageService.Add(fileName, currentUser, image.Title, image.Description);
+                        _imageService.Create(fileName, currentUser, image.Title, image.Description);
                     }
                 }
                 return RedirectToAction(nameof(Index));
