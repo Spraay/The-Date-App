@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DAO.Data;
-using Enties;
+using Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +12,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Validators;
 
-namespace Services
+namespace Service
 {
     public partial class UserService : IUserService
     {

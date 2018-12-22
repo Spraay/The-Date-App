@@ -10,14 +10,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Enties\Enties.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Enties\Entity.csproj" />
   </ItemGroup>
 
 </Project>

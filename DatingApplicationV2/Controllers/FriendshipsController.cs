@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DAO.Data;
-using Enties;
+using Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Services;
+using Service;
 
 namespace DatingApplicationV2.Controllers
 {

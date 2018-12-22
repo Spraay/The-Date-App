@@ -4,7 +4,7 @@ using System.Net.Mail;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace Services
+namespace Service
 {
     // This class is used by the application to send email for account confirmation and password reset.
     // For more details see https://go.microsoft.com/fwlink/?LinkID=532713

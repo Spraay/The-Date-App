@@ -12,9 +12,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using DAO.Data;
-using Enties;
+using Entity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Services;
+using Service;
 using AutoMapper;
 
 namespace DatingApplicationV2

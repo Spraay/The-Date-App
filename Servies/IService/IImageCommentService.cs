@@ -1,9 +1,9 @@
-﻿using Enties;
+﻿using Entity;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Services
+namespace Service
 {
     public partial interface IImageCommentService
     {

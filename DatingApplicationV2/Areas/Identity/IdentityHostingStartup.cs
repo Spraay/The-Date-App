@@ -1,6 +1,6 @@
 ﻿using System;
 using DAO.Data;
-using Enties;
+using Entity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;

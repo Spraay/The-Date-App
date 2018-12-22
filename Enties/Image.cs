@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-namespace Enties
+namespace Entity
 {
     public class Image
     {

@@ -1,5 +1,5 @@
 ﻿using AutoMapper.Configuration;
-using Enties;
+using Entity;
 using System;
 using System.ComponentModel.DataAnnotations;
 

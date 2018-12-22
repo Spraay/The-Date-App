@@ -1,9 +1,9 @@
-﻿using Enties.IEnties;
+﻿using Entity.IEnties;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Enties
+namespace Entity
 {
     public class ImageLike : ILike<Image>
     {

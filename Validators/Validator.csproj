@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAO\DAO.csproj" />
-    <ProjectReference Include="..\Enties\Enties.csproj" />
+    <ProjectReference Include="..\Enties\Entity.csproj" />
   </ItemGroup>
 
   <ItemGroup>

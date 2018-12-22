@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Enties;
+using Entity;
 
-namespace Services
+namespace Service
 {
     public partial interface IFriendService
     {

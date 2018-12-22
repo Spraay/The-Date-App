@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Services;
+using Service;
 using DAO.Data;
-using Enties;
+using Entity;
 using System;
 
 namespace DatingApplicationV2.Controllers

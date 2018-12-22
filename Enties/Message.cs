@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Enties
+namespace Entity
 {
     public class Message
     {

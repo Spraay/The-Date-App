@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Enties;
+using Entity;
 
-namespace Services
+namespace Service
 {
     public interface IConversationService
     {

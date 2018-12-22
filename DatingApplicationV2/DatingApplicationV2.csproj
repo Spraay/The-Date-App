@@ -23,10 +23,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAO\DAO.csproj" />
-    <ProjectReference Include="..\Enties\Enties.csproj" />
+    <ProjectReference Include="..\Enties\Entity.csproj" />
     <ProjectReference Include="..\Pagination\Pagination.csproj" />
-    <ProjectReference Include="..\Servies\Services.csproj" />
-    <ProjectReference Include="..\Validators\Validators.csproj" />
+    <ProjectReference Include="..\Servies\Service.csproj" />
+    <ProjectReference Include="..\Validators\Validator.csproj" />
   </ItemGroup>
 
   <ItemGroup>

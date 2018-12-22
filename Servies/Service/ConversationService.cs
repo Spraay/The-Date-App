@@ -1,12 +1,12 @@
 ﻿using DAO.Data;
-using Enties;
+using Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Services
+namespace Service
 {
     public class ConversationService : IConversationService
     {

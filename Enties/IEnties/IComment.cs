@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Enties.IEnties
+namespace Entity.IEnties
 {
     public interface IComment<ItemType>
     {
