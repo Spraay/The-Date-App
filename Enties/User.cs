@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 namespace Enties
 {
-    public class ApplicationUser : IdentityUser<Guid>
+    public class User : IdentityUser<Guid>
     {
-        public ApplicationUser() : base() { }
+        public User() : base() { }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Height { get; set; }
@@ -15,7 +15,7 @@ namespace Enties
         public Gender Gender { get; set; }
         public Eyes Eyes { get; set; }
         public string Description { get; set; }
-        public List<InterestApplicationUser> InterestsApplicationUser { get; set; }
+        public List<InterestUser> InterestsApplicationUser { get; set; }
         public List<Image> Gallery { get; set; }
         public List<Friendship> InvitationsSent { get; set; }
         public List<Friendship> InvitationsReceived { get; set; }

@@ -18,11 +18,11 @@ namespace Services
     {
         private readonly IInterestService _interestService;
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
 
-        public UserService(IInterestService interestService, ApplicationDbContext context, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor, IMapper mapper)
+        public UserService(IInterestService interestService, ApplicationDbContext context, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor, IMapper mapper)
         {
             _interestService = interestService;
             _context = context;
@@ -43,19 +43,19 @@ namespace Services
 
        
 
-        public ApplicationUser Get(Guid id)
+        public User Get(Guid id)
         {
             return _context.Users
                 .Include(_=>_.InterestsApplicationUser)
                 .SingleOrDefault(_ => _.Id == id);   
         }
 
-        public void Create(ApplicationUser user)
+        public void Create(User user)
         {
             _context.Users.Add(user);
             _context.SaveChanges();
         }
-        public void Update(ApplicationUser user)
+        public void Update(User user)
         {
             var userToUpdate = Get(user.Id);
             userToUpdate.BirthDate = user.BirthDate;
@@ -85,10 +85,10 @@ namespace Services
         {
             AddInterest(Get(userId), interestId);
         }
-        public void AddInterest(ApplicationUser user, Guid interestId)
+        public void AddInterest(User user, Guid interestId)
         {
             var interest = _interestService.Get(interestId);
-            user.InterestsApplicationUser.Add(new InterestApplicationUser
+            user.InterestsApplicationUser.Add(new InterestUser
             {
                 ApplicationUser = user,
                 ApplicationUserID = user.Id,
@@ -98,12 +98,12 @@ namespace Services
             _context.SaveChanges();
         }
         
-        public bool IsFilled(ApplicationUser user)
+        public bool IsFilled(User user)
         {
             if (user != null)
             {
                 List<ValidationResult> validationResults = new List<ValidationResult>();
-                var destination = _mapper.Map<ApplicationUser, ApplicationUserViewModel>(user);
+                var destination = _mapper.Map<User, ApplicationUserViewModel>(user);
                 var vc = new System.ComponentModel.DataAnnotations.ValidationContext(destination);
                 Validator.TryValidateObject(destination, vc, validationResults, true);
                 if (validationResults.Count > 0)
@@ -127,7 +127,7 @@ namespace Services
             var user = Get(id);
             if (selectedInterests == null)
             {
-                user.InterestsApplicationUser = new List<InterestApplicationUser>();
+                user.InterestsApplicationUser = new List<InterestUser>();
                 return;
             }
 
@@ -141,7 +141,7 @@ namespace Services
                 {
                     if (!userInterests.Contains(interest.ID))
                     {
-                        user.InterestsApplicationUser.Add(new InterestApplicationUser()
+                        user.InterestsApplicationUser.Add(new InterestUser()
                         {
                             Interest = allInterests.SingleOrDefault(_ => _.ID == interest.ID),
                             ApplicationUser = user,
@@ -162,12 +162,12 @@ namespace Services
             _context.SaveChanges();
         }
 
-        public List<ApplicationUser> GetList()
+        public List<User> GetList()
         {
             return _context.Users.ToList();
         }
 
-        public void Update(ApplicationUser user, string[] selectedInterests, string selectedGender, string selectedEyes)
+        public void Update(User user, string[] selectedInterests, string selectedGender, string selectedEyes)
         {
             if (!Enum.TryParse(selectedEyes, out Eyes eyesValue))
                 eyesValue = Eyes.None;
@@ -188,13 +188,13 @@ namespace Services
     //TASK PART
     public partial class UserService : IUserService
     {
-        public async Task<ApplicationUser> GetAsync(Guid id)
+        public async Task<User> GetAsync(Guid id)
         {
             return await _context.Users
                 .Include(_ => _.InterestsApplicationUser)
                 .SingleOrDefaultAsync(_ => _.Id == id);
         }
-        public Task<List<ApplicationUser>> GetListAsync()
+        public Task<List<User>> GetListAsync()
         {
             return _context.Users
             .Include(_ => _.InterestsApplicationUser)

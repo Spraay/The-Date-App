@@ -77,7 +77,7 @@ namespace DatingApplicationV2.Controllers
             _friendshipService.AddFriend(_userService.CurrentUserId, id);
             return Redirect(returnURL);
         }
-        public IActionResult AlreadyInvited(ApplicationUser user, string returnURL = null)
+        public IActionResult AlreadyInvited(User user, string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
             return View(user);

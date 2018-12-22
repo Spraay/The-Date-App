@@ -17,7 +17,7 @@ namespace DatingApplicationV2.Controllers
     {
         private readonly IUserService _userService;
         private readonly IImageService _imageService;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IHostingEnvironment _appEnvironment;
 
         private readonly string[] allowedExtensions = {
@@ -41,7 +41,7 @@ namespace DatingApplicationV2.Controllers
             return errorMsg;
         }
 
-        public ImageController(IUserService userService, IImageService imageService, UserManager<ApplicationUser> userManager, IHostingEnvironment appEnvironment)
+        public ImageController(IUserService userService, IImageService imageService, UserManager<User> userManager, IHostingEnvironment appEnvironment)
         {
             _userService = userService;
             _imageService = imageService;

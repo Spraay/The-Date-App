@@ -46,7 +46,7 @@ namespace Validators
         [StringLength(250)]
         public string Description { get; set; }
 
-        public virtual List<InterestApplicationUser> InterestsApplicationUser { get; set; }
+        public virtual List<InterestUser> InterestsApplicationUser { get; set; }
         public virtual List<Image> Gallery { get; set; }
         
 
@@ -54,7 +54,7 @@ namespace Validators
         {
             public ApplicationUser_To_ApplicationUserViewModel()
             {
-                CreateMap<ApplicationUser, ApplicationUserViewModel>();
+                CreateMap<User, ApplicationUserViewModel>();
             }
         }
     }

@@ -61,8 +61,8 @@ namespace DatingApplicationV2
         public void Configure(IApplicationBuilder app,
           IHostingEnvironment env,
           ApplicationDbContext context,
-          RoleManager<ApplicationRole> roleManager,
-          UserManager<ApplicationUser> userManager
+          RoleManager<Role> roleManager,
+          UserManager<User> userManager
         )
         {
             if (env.IsDevelopment())

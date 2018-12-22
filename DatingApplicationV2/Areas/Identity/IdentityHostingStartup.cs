@@ -16,7 +16,7 @@ namespace DatingApplicationV2.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+                services.AddIdentity<User, Role>(options =>
                 {
                     options.Stores.MaxLengthForKeys = 128;
                     options.User.RequireUniqueEmail = true;

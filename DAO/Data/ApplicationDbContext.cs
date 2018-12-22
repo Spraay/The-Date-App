@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DAO.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid>
+    public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options) { }
@@ -23,15 +23,15 @@ namespace DAO.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<InterestApplicationUser>()
+            modelBuilder.Entity<InterestUser>()
                 .HasKey(_ => new { _.InterestId, _.ApplicationUserID });
 
-            modelBuilder.Entity<InterestApplicationUser>()
+            modelBuilder.Entity<InterestUser>()
                 .HasOne(_ => _.Interest)
                 .WithMany(__ => __.InterestApplicationUsers)
                 .HasForeignKey(_ => _.InterestId);
 
-            modelBuilder.Entity<InterestApplicationUser>()
+            modelBuilder.Entity<InterestUser>()
                 .HasOne(_ => _.ApplicationUser)
                 .WithMany(__ => __.InterestsApplicationUser)
                 .HasForeignKey(_ => _.ApplicationUserID);

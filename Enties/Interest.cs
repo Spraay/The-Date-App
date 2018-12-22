@@ -6,6 +6,6 @@ namespace Enties
     {
         public Guid ID { get; set; }
         public string Name { get; set; }
-        public List<InterestApplicationUser> InterestApplicationUsers { get; set; }
+        public List<InterestUser> InterestApplicationUsers { get; set; }
     }
 }

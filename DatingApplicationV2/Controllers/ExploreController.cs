@@ -15,9 +15,9 @@ namespace DatingApplicationV2.Controllers
     {
 
         private readonly IUserService _userService;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<User> _userManager;
 
-        public ExploreController(IUserService userService, UserManager<ApplicationUser> userManager)
+        public ExploreController(IUserService userService, UserManager<User> userManager)
         {
             _userService = userService;
             _userManager = userManager;

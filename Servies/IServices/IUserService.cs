@@ -8,20 +8,20 @@ namespace Services
     public partial interface IUserService
     {
         Guid CurrentUserId { get; }
-        ApplicationUser Get(Guid id);
-        void Update(ApplicationUser user);
+        User Get(Guid id);
+        void Update(User user);
         void Delete(Guid id);
-        List<ApplicationUser> GetList();
+        List<User> GetList();
         List<Interest> GetInterests(Guid id);
         void UpdateInterests(string[] selectedInterests, Guid id);
         bool IsFilled(Guid id);
-        void Update(ApplicationUser user, string[] selectedInterests, string selectedGender, string selectedEyes);
+        void Update(User user, string[] selectedInterests, string selectedGender, string selectedEyes);
         bool UserExists(Guid userID);
     }
     public partial interface IUserService
     {
         Task<bool> IsFilledAsync(Guid id);
-        Task<ApplicationUser> GetAsync(Guid id);
-        Task<List<ApplicationUser>> GetListAsync();
+        Task<User> GetAsync(Guid id);
+        Task<List<User>> GetListAsync();
     }
 }

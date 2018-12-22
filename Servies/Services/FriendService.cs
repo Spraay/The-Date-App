@@ -86,7 +86,7 @@ namespace Services
                .Where(c => c.Status != Status.Accepted).ToList();
         }
 
-        public List<ApplicationUser> GetUserFriends(Guid userID)
+        public List<User> GetUserFriends(Guid userID)
         {
             var x = _context.Friendships
                 .Where(_ => _.SenderId == userID && _.Status == Status.Accepted)
@@ -166,7 +166,7 @@ namespace Services
                .Where(c => c.Status != Status.Accepted).ToListAsync();
         }
 
-        public async Task<List<ApplicationUser>> GetUserFriendsAsync(Guid id)
+        public async Task<List<User>> GetUserFriendsAsync(Guid id)
         {
             var x = await _context.Friendships
                 .Where(_ => _.SenderId == id && _.Status == Status.Accepted)

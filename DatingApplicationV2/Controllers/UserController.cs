@@ -18,7 +18,7 @@ namespace DatingApplication.Controllers
     public class UserController : Controller
     {
         private readonly IUserService _userService;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IInterestService _interestService;
         private readonly IMapper _mapper;
         private readonly IFriendService _friendService;
@@ -26,7 +26,7 @@ namespace DatingApplication.Controllers
         private readonly IImageLikeService _imageLikeService;
 
         public UserController(IUserService userService,
-            UserManager<ApplicationUser> userManager,
+            UserManager<User> userManager,
             IInterestService interestService,
             IMapper mapper,
             IFriendService friendService,
@@ -80,7 +80,7 @@ namespace DatingApplication.Controllers
             var user = _userService.Get(id);
             PopulateAssignedInterestData(user);
             user = _userService.Get(user.Id);
-            var viewModel = _mapper.Map<ApplicationUser, ApplicationUserViewModel>(user);
+            var viewModel = _mapper.Map<User, ApplicationUserViewModel>(user);
             try
             {
                 _userService.IsFilled(user.Id);
@@ -98,7 +98,7 @@ namespace DatingApplication.Controllers
         {
             var user = _userService.Get(Guid.Parse(_userManager.GetUserId(User)));
             PopulateAssignedInterestData(user);
-            var viewModel = _mapper.Map<ApplicationUser, ApplicationUserViewModel>(user);
+            var viewModel = _mapper.Map<User, ApplicationUserViewModel>(user);
             if (_userService.IsFilled(user.Id))
                 ViewBag.isFilled = true;
             else
@@ -107,7 +107,7 @@ namespace DatingApplication.Controllers
             return View(viewModel);
         }
 
-        private void PopulateAssignedInterestData(ApplicationUser user)
+        private void PopulateAssignedInterestData(User user)
         {
             var allInterests = _interestService.GetList();
             var applicationUserInterests = new HashSet<Guid>(_userService.GetInterests(user.Id).Select(_=>_.ID));
@@ -128,7 +128,7 @@ namespace DatingApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "User")]
-        public ActionResult Edit(ApplicationUser user, string[] selectedInterests, string selectedGender, string selectedEyes, string returnURL = null)
+        public ActionResult Edit(User user, string[] selectedInterests, string selectedGender, string selectedEyes, string returnURL = null)
         {
             try
             {

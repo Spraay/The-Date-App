@@ -2,11 +2,11 @@
 using System;
 namespace Enties
 {
-    public class ApplicationRole : IdentityRole<Guid>
+    public class Role : IdentityRole<Guid>
     {
-        public ApplicationRole() : base() { }
-        public ApplicationRole(string roleName) : base(roleName) { }
-        public ApplicationRole(string roleName, string description,
+        public Role() : base() { }
+        public Role(string roleName) : base(roleName) { }
+        public Role(string roleName, string description,
             DateTime createdDate)
             : base(roleName)
         {

@@ -12,20 +12,20 @@ namespace DAO.Data
     {
       
         public static async Task Initialize(ApplicationDbContext context,
-                              UserManager<ApplicationUser> userManager,
-                              RoleManager<ApplicationRole> roleManager)
+                              UserManager<User> userManager,
+                              RoleManager<Role> roleManager)
         {
             context.Database.EnsureCreated();
             var contextOLD = context;
-            var defaultRoles = new List<ApplicationRole>()
+            var defaultRoles = new List<Role>()
             {
-                new ApplicationRole() { Name="Admin",   Description = "This is the administrator role" },
-                new ApplicationRole() { Name="User",    Description = "This is the user role" }
+                new Role() { Name="Admin",   Description = "This is the administrator role" },
+                new Role() { Name="User",    Description = "This is the user role" }
             };
 
-            var defaultUsers = new List<ApplicationUser>()
+            var defaultUsers = new List<User>()
             {
-                new ApplicationUser
+                new User
                 {
                     UserName = "admin",
                     Email = "kubarytel@gmail.com",
@@ -39,7 +39,7 @@ namespace DAO.Data
                     BirthDate = DateTime.Parse("24.07.1996"),
                     EmailConfirmed = true
                 },
-                new ApplicationUser
+                new User
                 {
                     UserName = "user",
                     Email = "bobbaker@gmail.com",
@@ -49,7 +49,7 @@ namespace DAO.Data
                     EmailConfirmed = true,
 
                 },
-                new ApplicationUser
+                new User
                 {
                     UserName = "user2",
                     Email = "gigihadid@gmail.com",
@@ -63,7 +63,7 @@ namespace DAO.Data
                     BirthDate = DateTime.Parse("23.04.1995"),
                     EmailConfirmed = true
                 },
-                new ApplicationUser
+                new User
                 {
                     UserName = "user3",
                     Email = "arianagrande@gmail.com",
@@ -77,7 +77,7 @@ namespace DAO.Data
                     BirthDate = DateTime.Parse("26.06.1993"),
                     EmailConfirmed = true
                 },
-                new ApplicationUser
+                new User
                 {
                     UserName = "user4",
                     Email = "emiliaclarke@gmail.com",
@@ -91,7 +91,7 @@ namespace DAO.Data
                     BirthDate = DateTime.Parse("23.10.1983"),
                     EmailConfirmed = true
                 },
-                new ApplicationUser
+                new User
                 {
                     UserName = "user5",
                     Email = "jeniferlawerance@gmail.com",

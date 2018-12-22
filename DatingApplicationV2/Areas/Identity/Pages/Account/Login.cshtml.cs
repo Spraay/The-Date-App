@@ -16,12 +16,12 @@ namespace DatingApplicationV2.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly UserManager<ApplicationUser> _userMenager;
+        private readonly SignInManager<User> _signInManager;
+        private readonly UserManager<User> _userMenager;
         private readonly ILogger<LoginModel> _logger;
         
 
-        public LoginModel(SignInManager<ApplicationUser> signInManager, ILogger<LoginModel> logger, UserManager<ApplicationUser> userMenager)
+        public LoginModel(SignInManager<User> signInManager, ILogger<LoginModel> logger, UserManager<User> userMenager)
         {
             _userMenager = userMenager;
             _signInManager = signInManager;

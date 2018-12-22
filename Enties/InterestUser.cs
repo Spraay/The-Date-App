@@ -1,11 +1,11 @@
 ﻿using System;
 namespace Enties
 {
-    public class InterestApplicationUser
+    public class InterestUser
     {
         public Guid InterestId { get; set; }
         public Interest Interest { get; set; }
         public Guid ApplicationUserID { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }      
+        public User ApplicationUser { get; set; }      
     }
 }

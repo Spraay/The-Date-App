@@ -7,7 +7,7 @@ namespace Enties.IEnties
     public interface ILike<ItemType>
     {
         Guid ID { get; set; }
-        ApplicationUser Creator { get; set; }
+        User Creator { get; set; }
         Guid CreatorID { get; set; }
         ItemType LikedItem { get; set; }
         Guid LikedItemID { get; set; }

@@ -24,10 +24,10 @@ namespace Validators
         public DateTime CreatedDate { get; } = DateTime.UtcNow;
         [Required]
         [Display(Name = "Author")]
-        public ApplicationUser Author { get; set; }
+        public User Author { get; set; }
         [Required]
         [Display(Name = "Recipient")]
-        public ApplicationUser Recipient { get; set; }
+        public User Recipient { get; set; }
 
         //public class Message_To_MessageViewModel : MapperConfigurationExpression
         //{
