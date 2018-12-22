@@ -137,24 +137,24 @@ namespace Service
 
             foreach (var interest in allInterests)
             {
-                if (selectedInterestsHS.Contains(interest.ID.ToString()))
+                if (selectedInterestsHS.Contains(interest.Id.ToString()))
                 {
-                    if (!userInterests.Contains(interest.ID))
+                    if (!userInterests.Contains(interest.Id))
                     {
                         user.InterestsApplicationUser.Add(new InterestUser()
                         {
-                            Interest = allInterests.SingleOrDefault(_ => _.ID == interest.ID),
+                            Interest = allInterests.SingleOrDefault(_ => _.Id == interest.Id),
                             ApplicationUser = user,
-                            InterestId = allInterests.SingleOrDefault(_ => _.Name == interest.Name).ID,
+                            InterestId = allInterests.SingleOrDefault(_ => _.Name == interest.Name).Id,
                             ApplicationUserID = user.Id
                         });
                     }
                 }
                 else
                 {
-                    if (userInterests.Contains(interest.ID))
+                    if (userInterests.Contains(interest.Id))
                     {
-                        user.InterestsApplicationUser.Remove(user.InterestsApplicationUser.SingleOrDefault(_ => _.InterestId == interest.ID));
+                        user.InterestsApplicationUser.Remove(user.InterestsApplicationUser.SingleOrDefault(_ => _.InterestId == interest.Id));
                     }
                 }
             }

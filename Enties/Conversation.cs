@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 namespace Entity
 {
-    public class Conversation
+    public class Conversation : IEntity
     {
-        public Guid ID { get; set; }
-        public string Name { get; set; }
+        public Guid Id { get; set; }
         public DateTime CreatedDate { get; } = DateTime.UtcNow;
+
+        public string Name { get; set; }
         public List<ConversationUser> ConversationUsers { get; set; }
         public List<Message> Messages { get; set; }
     }

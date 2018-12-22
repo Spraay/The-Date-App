@@ -50,10 +50,10 @@ namespace DatingApplicationV2.Controllers
             var img = await _imageService.GetAsync(imageComment.CommentedItemID);
             if (ModelState.IsValid)
             {
-                await _imageCommentService.CreateAsync(imageComment.ID, _userService.CurrentUserId, imageComment.Content);
+                await _imageCommentService.CreateAsync(imageComment.Id, _userService.CurrentUserId, imageComment.Content);
                 return RedirectToAction(nameof(ImageController) ,nameof(ImageController.UserImages), new { userID = img.UserID });
             }
-            ViewData["CommentedItemID"] = img.ID;
+            ViewData["CommentedItemID"] = img.Id;
             ViewData["CreatorID"] = _userService.CurrentUserId;
             return View(imageComment);
         }

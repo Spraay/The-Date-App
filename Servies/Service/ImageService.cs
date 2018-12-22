@@ -21,7 +21,7 @@ namespace Service
         {
             return _context.Images
                 .Include(_ => _.Likes)
-                .SingleOrDefault(_ => _.ID == id);
+                .SingleOrDefault(_ => _.Id == id);
         }
 
         public List<Image> GetList(Guid userID)
@@ -50,7 +50,7 @@ namespace Service
 
         public bool IsExists(Guid id)
         {
-            return _context.Images.Any(_ => _.ID == id);
+            return _context.Images.Any(_ => _.Id == id);
         }
 
         public bool IsOwner(Guid id, Guid userID)
@@ -60,7 +60,7 @@ namespace Service
 
         public void SetProfilePhoto(Guid currentUserId, Guid id)
         {
-            if (_context.Images.Any(_ => _.ID == id))
+            if (_context.Images.Any(_ => _.Id == id))
             {
                 var user = _context.Users.SingleOrDefault(_ => _.Id == currentUserId);
                 user.ProfileImageSrc = Get(id).Src;
@@ -69,7 +69,7 @@ namespace Service
         }
         public void SetProfileBackgroundPhoto(Guid currentUserId, Guid id)
         {
-            if (_context.Images.Any(_ => _.ID == id))
+            if (_context.Images.Any(_ => _.Id == id))
             {
                 var user = _context.Users.SingleOrDefault(_ => _.Id == currentUserId);
                 user.BackgroundImageSrc = Get(id).Src;
@@ -85,7 +85,7 @@ namespace Service
         {
             return await _context.Images
                 .Include(_ => _.Likes)
-                .SingleOrDefaultAsync(_ => _.ID == id);
+                .SingleOrDefaultAsync(_ => _.Id == id);
         }
 
         public async Task<List<Image>> GetListAsync(Guid userID)
@@ -116,7 +116,7 @@ namespace Service
 
         public async Task<bool> IsExistsAsync(Guid id)
         {
-            return await _context.Images.AnyAsync(_ => _.ID == id);
+            return await _context.Images.AnyAsync(_ => _.Id == id);
         }
 
         public async Task<bool> IsOwnerAsync(Guid id, Guid userID)
@@ -127,7 +127,7 @@ namespace Service
 
         public async Task SetProfilePhotoAsync(Guid currentUserId, Guid id)
         {
-            if (await _context.Images.AnyAsync(_ => _.ID == id))
+            if (await _context.Images.AnyAsync(_ => _.Id == id))
             {
                 var user = await _context.Users.SingleOrDefaultAsync(_ => _.Id == currentUserId);
                 var img = await GetAsync(id);
@@ -138,7 +138,7 @@ namespace Service
 
         public async Task SetProfileBackgroundPhotoAsync(Guid currentUserId, Guid id)
         {
-            if (await _context.Images.AnyAsync(_ => _.ID == id))
+            if (await _context.Images.AnyAsync(_ => _.Id == id))
             {
                 var user = await _context.Users.SingleOrDefaultAsync(_ => _.Id == currentUserId);
                 var img = await GetAsync(id);

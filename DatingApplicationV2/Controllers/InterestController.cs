@@ -70,14 +70,14 @@ namespace DatingApplicationV2.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Guid id, [Bind("ID,Name")] Interest interest)
         {
-            if (id != interest.ID)
+            if (id != interest.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                _interestService.Update(interest.ID, interest.Name);
+                _interestService.Update(interest.Id, interest.Name);
                 return RedirectToAction(nameof(Index));
             }
             return View(interest);
@@ -112,7 +112,7 @@ namespace DatingApplicationV2.Controllers
 
         private bool InterestExists(Guid id)
         {
-            return _interestService.GetList().Any(e => e.ID == id);
+            return _interestService.GetList().Any(e => e.Id == id);
         }
     }
 }

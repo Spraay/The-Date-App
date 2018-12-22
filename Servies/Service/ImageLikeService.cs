@@ -51,8 +51,8 @@ namespace Service
 
         public int CountUserImageLikes(Guid id)
         {
-            var userImagesIds =  _context.Images.Where(_ => _.UserID == id).Select(_ => _.ID).ToList();
-            return  _context.ImagesLikes.Where(_ => userImagesIds.Contains(_.ID)).Count();
+            var userImagesIds =  _context.Images.Where(_ => _.UserID == id).Select(_ => _.Id).ToList();
+            return  _context.ImagesLikes.Where(_ => userImagesIds.Contains(_.Id)).Count();
         }
 
     }
@@ -65,8 +65,8 @@ namespace Service
         }
         public async Task<int> CountUserImageLikesAsync(Guid id)
         {
-            var userImagesIds = await _context.Images.Where(_ => _.UserID == id).Select(_ => _.ID).ToListAsync();
-            return await _context.ImagesLikes.Where(_ => userImagesIds.Contains(_.ID)).CountAsync();
+            var userImagesIds = await _context.Images.Where(_ => _.UserID == id).Select(_ => _.Id).ToListAsync();
+            return await _context.ImagesLikes.Where(_ => userImagesIds.Contains(_.Id)).CountAsync();
         }
     }
 }

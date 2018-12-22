@@ -30,22 +30,22 @@ namespace Service
                 return _context.Conversations
                     //.Include(_ => _.Messages)
                     .Include(_ => _.ConversationUsers)
-                    .SingleOrDefault(_ => _.ID == id);
+                    .SingleOrDefault(_ => _.Id == id);
             }
             if (isConversationUsersIncluded)
             {
                 return _context.Conversations
                     .Include(_ => _.ConversationUsers)
-                    .SingleOrDefault(_ => _.ID == id);
+                    .SingleOrDefault(_ => _.Id == id);
             }
             if (isMessagesIncluded)
             {
                 return _context.Conversations
                     //.Include(_ => _.Messages)
-                    .SingleOrDefault(_ => _.ID == id);
+                    .SingleOrDefault(_ => _.Id == id);
             }
             return _context.Conversations
-                    .SingleOrDefault(_ => _.ID == id);
+                    .SingleOrDefault(_ => _.Id == id);
         }
 
         public List<Conversation> GetUserConversations(

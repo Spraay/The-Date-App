@@ -18,7 +18,7 @@ namespace Service
 
         public ImageComment Get(Guid id)
         {
-            return _context.ImagesComments.SingleOrDefault(_=>_.ID == id);
+            return _context.ImagesComments.SingleOrDefault(_=>_.Id == id);
         }
 
         public List<ImageComment> GetList(Guid imageID)
@@ -38,14 +38,14 @@ namespace Service
 
         public void Delete(Guid commentID)
         {
-            var comment = _context.ImagesComments.SingleOrDefault(_ => _.ID == commentID);
+            var comment = _context.ImagesComments.SingleOrDefault(_ => _.Id == commentID);
 ;           _context.ImagesComments.Remove(comment);
             _context.SaveChanges();
         }
 
         public void Edit(Guid commentID, string content)
         {
-            var comment = _context.ImagesComments.SingleOrDefault(_ => _.ID == commentID);
+            var comment = _context.ImagesComments.SingleOrDefault(_ => _.Id == commentID);
             comment.Content = content;
             _context.ImagesComments.Update(comment);
             _context.SaveChanges();
@@ -67,7 +67,7 @@ namespace Service
     {
         public async Task<ImageComment> GetAsync(Guid id)
         {
-            return await _context.ImagesComments.SingleOrDefaultAsync(_ => _.ID == id);
+            return await _context.ImagesComments.SingleOrDefaultAsync(_ => _.Id == id);
         }
 
         public async Task<List<ImageComment>> GetListAsync(Guid imageID)
@@ -87,7 +87,7 @@ namespace Service
 
         public async Task EditAsync(Guid commentID, string content)
         {
-            var comment = await _context.ImagesComments.SingleOrDefaultAsync(_ => _.ID == commentID);
+            var comment = await _context.ImagesComments.SingleOrDefaultAsync(_ => _.Id == commentID);
             comment.Content = content;
             _context.ImagesComments.Update(comment);
             await _context.SaveChangesAsync();
@@ -95,7 +95,7 @@ namespace Service
 
         public async Task DeleteAsync(Guid commentID)
         {
-            var comment = await _context.ImagesComments.SingleOrDefaultAsync(_ => _.ID == commentID);
+            var comment = await _context.ImagesComments.SingleOrDefaultAsync(_ => _.Id == commentID);
             _context.ImagesComments.Remove(comment);
             await _context.SaveChangesAsync();
         }

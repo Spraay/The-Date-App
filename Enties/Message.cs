@@ -1,12 +1,13 @@
 ﻿using System;
 namespace Entity
 {
-    public class Message
+    public class Message : IEntity
     {
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
+        public DateTime CreatedDate { get; }
         public Guid SenderId { get; set; }
         public User Sender { get; set; }
-        public DateTime Created { get; } = DateTime.Now;
+        
         public string Content { get; set; }
         public Guid ConversationID { get; set; }
         public Conversation Conversation { get; set; }

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 namespace Entity
 {
-    public class Interest
+    public class Interest : IEntity
     {
-        public Guid ID { get; set; }
+        public Guid Id { get; set; }
+        public DateTime CreatedDate { get; }
         public string Name { get; set; }
         public List<InterestUser> InterestApplicationUsers { get; set; }
+        
     }
 }

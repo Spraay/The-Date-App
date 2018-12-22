@@ -110,15 +110,15 @@ namespace DatingApplication.Controllers
         private void PopulateAssignedInterestData(User user)
         {
             var allInterests = _interestService.GetList();
-            var applicationUserInterests = new HashSet<Guid>(_userService.GetInterests(user.Id).Select(_=>_.ID));
+            var applicationUserInterests = new HashSet<Guid>(_userService.GetInterests(user.Id).Select(_=>_.Id));
             var viewModel = new List<AssignedInterestData>();
             foreach (var interest in allInterests)
             {
                 viewModel.Add(new AssignedInterestData
                 {
-                    InterestID = interest.ID,
+                    InterestID = interest.Id,
                     InterestName = interest.Name,
-                    Assigned = applicationUserInterests.Contains(interest.ID)
+                    Assigned = applicationUserInterests.Contains(interest.Id)
                 });
             }
             ViewBag.Interests = viewModel;
