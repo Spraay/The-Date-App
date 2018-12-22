@@ -1,4 +1,4 @@
-﻿@model Enties.ImageComment
+﻿@model Entity.ImageComment
 
 @{
     ViewData["Title"] = "Details";
@@ -11,10 +11,10 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ID)
+            @Html.DisplayNameFor(model => model.Id)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ID)
+            @Html.DisplayFor(model => model.Id)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Creator)
@@ -26,7 +26,7 @@
             @Html.DisplayNameFor(model => model.CommentedItem)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CommentedItem.ID)
+            @Html.DisplayFor(model => model.CommentedItem.Id)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Content)

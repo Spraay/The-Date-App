@@ -1,9 +1,9 @@
-﻿@model IEnumerable<Enties.Image>
+﻿@model IEnumerable<Entity.Image>
 @using Microsoft.AspNetCore.Identity
 @using DatingApplicationV2.Areas.Identity
-@using Enties
-@using Services
-@inject UserManager<ApplicationUser> _userManager
+@using Entity
+@using Service.IService
+@inject UserManager<User> _userManager
 @inject IImageLikeService _imageLikeService
 @inject IUserService _userService
 @{
@@ -82,7 +82,7 @@ else
                         <div class="container">
                             <span class="left">@Html.DisplayFor(modelItem => item.Title)</span>
                         </div>
-                        @if (item.UserID == Guid.Parse(_userManager.GetUserId(User)))
+                        @if (item.UserId == Guid.Parse(_userManager.GetUserId(User)))
                         {
                         <span class="right">
 
@@ -90,21 +90,24 @@ else
                                data-position="top"
                                data-tooltip="Delete Photo"
                                asp-action="Delete"
-                               asp-route-id="@item.ID">
+                               asp-route-id="@item.Id"
+                               asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <i class="material-icons">delete_forever</i>
                             </a>
                             <a class="btn btn-large blue waves-effect waves-light tooltipped"
                                data-position="top"
                                data-tooltip="Edit Photo"
                                asp-action="Edit"
-                               asp-route-id="@item.ID">
+                               asp-route-id="@item.Id"
+                               asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <i class="material-icons">edit</i>
                             </a>
                             <a class="btn btn-large green waves-effect waves-light tooltipped"
                                data-position="top"
                                data-tooltip="Set As Profile Photo"
                                asp-action="SetProfilePhoto"
-                               asp-route-id="@item.ID">
+                               asp-route-id="@item.Id"
+                               asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <i class="material-icons">face</i>
                             </a>
                         </span>
@@ -116,7 +119,7 @@ else
                     <hr />
                     <ul class="collapsible">
                         <li>
-                            <div class="collapsible-header"><a class="btn-flat"> @_imageLikeService.CountImageLikes(item.ID) Likes</a></div>
+                            <div class="collapsible-header"><a class="btn-flat"> @_imageLikeService.CountImageLikes(item.Id) Likes</a></div>
                             <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                         </li>
                         <li>

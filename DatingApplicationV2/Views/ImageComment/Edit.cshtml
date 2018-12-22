@@ -1,4 +1,4 @@
-﻿@model Enties.ImageComment
+﻿@model Entity.ImageComment
 
 @{
     ViewData["Title"] = "Edit";
@@ -13,12 +13,12 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ID" class="control-label"></label>
-                <input asp-for="ID" class="form-control" />
-                <span asp-validation-for="ID" class="text-danger"></span>
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="CreatorID" />
-            <input type="hidden" asp-for="CommentedItemID" />
+            <input type="hidden" asp-for="CreatorId" />
+            <input type="hidden" asp-for="CommentedItemId" />
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
                 <input asp-for="Content" class="form-control" />

@@ -1,7 +1,9 @@
 ﻿using DAO;
+using DAO.Data;
 using Entity;
 using Microsoft.EntityFrameworkCore;
 using Service.IService;
+using Service.IService.IService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace Service.Service
 {
-    public class ConversationService : Service<Conversation, Guid, ChatDbContext>, IConversationService
+    public class ConversationService : Service<Conversation, Guid, ApplicationDbContext>, IConversationService
     {
-        private readonly ChatDbContext _context;
-        public ConversationService(ChatDbContext context) : base(context)
+        private readonly ApplicationDbContext _context;
+        public ConversationService(ApplicationDbContext context) : base(context)
         {
             _context = context;
         }
@@ -21,7 +23,7 @@ namespace Service.Service
         public async Task<ICollection<Conversation>> GetUserConversations(Guid id)
         {
             return await _context.Conversations
-                .Where(_ => _.Users.Select(__ => __.UserID).Contains(id)).ToListAsync();
+                .Where(_ => _.Users.Select(__ => __.UserId).Contains(id)).ToListAsync();
         }
     }
 }

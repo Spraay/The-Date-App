@@ -1,4 +1,4 @@
-﻿@model Enties.ApplicationUser
+﻿@model Entity.User
 
 @{
     ViewData["Title"] = "Add Friend";
@@ -15,7 +15,7 @@
         <div class="col s4 offset-l4">
             <div class="card">
                 <div class="card-image">
-                    <img src="~/images/userimages/@Model.ProfileImageSrc" style="width: 400px; height: 350px;">
+                    <img src="~/images/userimages/@Model.ProfileImageSrc">
                     <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</span>
                 </div>
                 <div class="card-action grey">

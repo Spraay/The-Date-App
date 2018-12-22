@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Entity;
-using Service;
+using Service.IService;
 using DatingApplicationV2.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

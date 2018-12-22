@@ -4,6 +4,7 @@ using Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Service.IService;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +13,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Validators;
 
-namespace Service
+namespace Service.Service
 {
     public partial class UserService : IUserService
     {
@@ -90,8 +91,8 @@ namespace Service
             var interest = _interestService.Get(interestId);
             user.InterestsApplicationUser.Add(new InterestUser
             {
-                ApplicationUser = user,
-                ApplicationUserID = user.Id,
+                User = user,
+                UserId = user.Id,
                 Interest = interest,
                 InterestId = interestId
             });
@@ -144,9 +145,9 @@ namespace Service
                         user.InterestsApplicationUser.Add(new InterestUser()
                         {
                             Interest = allInterests.SingleOrDefault(_ => _.Id == interest.Id),
-                            ApplicationUser = user,
+                            User = user,
                             InterestId = allInterests.SingleOrDefault(_ => _.Name == interest.Name).Id,
-                            ApplicationUserID = user.Id
+                            UserId = user.Id
                         });
                     }
                 }

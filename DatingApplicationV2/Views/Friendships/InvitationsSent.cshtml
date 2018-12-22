@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Enties.Friendship>
+﻿@model IEnumerable<Entity.Friendship>
 
 @{
     ViewData["Title"] = "Invitations";
@@ -34,7 +34,7 @@ else
                     </div>
                     <div class="card-action grey">
                         <div class="center">
-                            <a class="btn-floating red" asp-action="Delete" asp-route-user1ID="@item.FriendId" asp-route-user2ID="@item.SenderId">
+                            <a class="btn-floating red" asp-action="Delete" asp-route-id="@item.FriendId">
                                 <i class="material-icons">delete</i>
                             </a>
                             <a class="btn-floating blue" asp-controller="User" asp-action="Details" asp-route-id="@item.FriendId">

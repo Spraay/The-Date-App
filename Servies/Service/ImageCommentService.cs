@@ -1,12 +1,13 @@
 ﻿using DAO.Data;
 using Entity;
 using Microsoft.EntityFrameworkCore;
+using Service.IService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Service
+namespace Service.Service
 {
     public partial class ImageCommentService : IImageCommentService
     {
@@ -23,15 +24,15 @@ namespace Service
 
         public List<ImageComment> GetList(Guid imageID)
         {
-            return _context.ImagesComments.Where(_ => _.CommentedItemID == imageID).ToList();
+            return _context.ImagesComments.Where(_ => _.CommentedItemId == imageID).ToList();
         }
 
-        public void Create(Guid imageID, Guid userID, string content)
+        public void Create(Guid imageId, Guid userId, string content)
         {
             _context.ImagesComments.Add(new ImageComment()
             {
-                CreatorID = userID,
-                CommentedItemID = imageID
+                CreatorId = userId,
+                CommentedItemId = imageId
             });
             _context.SaveChanges();
         }
@@ -53,12 +54,12 @@ namespace Service
 
         public int Count(Guid imageID)
         {
-            return _context.ImagesComments.Where(_ => _.CommentedItemID == imageID).Count();
+            return _context.ImagesComments.Where(_ => _.CommentedItemId == imageID).Count();
         }
 
         public bool IsAny(Guid imageID)
         {
-            return _context.ImagesComments.Where(_ => _.CommentedItemID == imageID).Any();
+            return _context.ImagesComments.Where(_ => _.CommentedItemId == imageID).Any();
         }
     }
 
@@ -72,15 +73,15 @@ namespace Service
 
         public async Task<List<ImageComment>> GetListAsync(Guid imageID)
         {
-            return await _context.ImagesComments.Where(_ => _.CommentedItemID == imageID).ToListAsync();
+            return await _context.ImagesComments.Where(_ => _.CommentedItemId == imageID).ToListAsync();
         }
 
         public async Task CreateAsync(Guid imageID, Guid userID, string content)
         {
             await _context.ImagesComments.AddAsync(new ImageComment()
             {
-                CreatorID = userID,
-                CommentedItemID = imageID
+                CreatorId = userID,
+                CommentedItemId = imageID
             });
             await _context.SaveChangesAsync();
         }
@@ -101,12 +102,12 @@ namespace Service
         }
         public async Task<int> CountAsync(Guid imageID)
         {
-            return await _context.ImagesComments.Where(_ => _.CommentedItemID == imageID).CountAsync();
+            return await _context.ImagesComments.Where(_ => _.CommentedItemId == imageID).CountAsync();
         }
 
         public async Task<bool> IsAnyAsync(Guid imageID)
         {
-            return await _context.ImagesComments.Where(_ => _.CommentedItemID == imageID).AnyAsync();
+            return await _context.ImagesComments.Where(_ => _.CommentedItemId == imageID).AnyAsync();
         }
     }
 }

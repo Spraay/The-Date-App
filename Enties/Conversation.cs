@@ -8,7 +8,7 @@ namespace Entity
         public DateTime CreatedDate { get; } = DateTime.UtcNow;
 
         public string Name { get; set; }
-        public List<ConversationUser> ConversationUsers { get; set; }
+        public List<ConversationUser> Users { get; set; }
         public List<Message> Messages { get; set; }
     }
 }

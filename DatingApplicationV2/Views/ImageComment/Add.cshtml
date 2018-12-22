@@ -1,4 +1,4 @@
-﻿@model Enties.ImageComment
+﻿@model Entity.ImageComment
 
 @{
     ViewData["Title"] = "Add Image Comment";
@@ -12,9 +12,9 @@
                 <h4 class="header2">Interest Create</h4>
                 <div class="row">
                     <form asp-action="Create" asp-route-returnURL="@ViewBag.ReturnURL" id="Form">
-                        <input type="hidden" asp-for="ID" />
-                        <input type="hidden" asp-for="CommentedItemID" />
-                        <input type="hidden" asp-for="CreatorID" />
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="CommentedItemId" />
+                        <input type="hidden" asp-for="CreatorId" />
                         <div class="row">
                            
                             <div class="input-field col s12">

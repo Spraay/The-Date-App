@@ -14,7 +14,7 @@ namespace Entity
         public DateTime RegisterDate { get; } = DateTime.Now;
         public Gender Gender { get; set; }
         public Eyes Eyes { get; set; }
-        public Hair Hair { get; set }
+        public Hair Hair { get; set; }
         public string Description { get; set; }
         public ICollection<InterestUser> InterestsApplicationUser { get; set; }
         public ICollection<Image> Gallery { get; set; }

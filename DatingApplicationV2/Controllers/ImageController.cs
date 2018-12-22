@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Entity;
-using Service;
+using Service.IService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -125,11 +125,13 @@ namespace DatingApplicationV2.Controllers
 
         public IActionResult SetProfilePhoto(Guid id, string returnURL = null)
         {
+            ViewBag.ReturnURL = returnURL;
             _imageService.SetProfilePhoto(_userService.CurrentUserId, id);
             return View(_imageService.Get(id));
         }
         public IActionResult SetProfileBackgroundPhoto(Guid id, string returnURL = null)
         {
+            ViewBag.ReturnURL = returnURL;
             _imageService.SetProfileBackgroundPhoto(_userService.CurrentUserId, id);
             return View(_imageService.Get(id));
         }

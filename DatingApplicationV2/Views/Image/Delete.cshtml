@@ -1,4 +1,4 @@
-﻿@model Enties.Image
+﻿@model Entity.Image
 
 @{
     ViewData["Title"] = "Delete";
@@ -15,11 +15,11 @@
     
     <div class="center">
         <h5 class="orange-text">Are you sure you want to delete this photo?</h5>
-        <img class="" style="width: 450px;" src="~/images/userimages/@Model.Src" class="z-depth-1" />
+        <img style="width: 450px;" src="~/images/userimages/@Model.Src" class="z-depth-1" />
 
 
         <form id="Form" asp-action="Delete">
-            <input type="hidden" asp-for="ID" />
+            <input type="hidden" asp-for="Id" />
 
             <a asp-action="Index" class="btn btn-floating btn-large waves-effect blue pulse">
                 <i class="material-icons">replay</i>

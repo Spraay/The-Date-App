@@ -14,8 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using DAO.Data;
 using Entity;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Service;
+using Service.IService;
 using AutoMapper;
+using Service.Service;
 
 namespace DatingApplicationV2
 {
@@ -50,7 +51,7 @@ namespace DatingApplicationV2
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IImageLikeService, ImageLikeService>();
             services.AddScoped<IFriendService, FriendService>();
-            services.AddScoped<IConversationService, ConversationService>();
+           
 
             services.AddAutoMapper();
 

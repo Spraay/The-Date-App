@@ -7,8 +7,8 @@ namespace Entity.IEnties
     public interface ILike<ItemType>
     {
         User Creator { get; set; }
-        Guid CreatorID { get; set; }
+        Guid CreatorId { get; set; }
         ItemType LikedItem { get; set; }
-        Guid LikedItemID { get; set; }
+        Guid LikedItemId { get; set; }
     }
 }

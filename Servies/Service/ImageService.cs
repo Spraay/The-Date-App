@@ -5,8 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Service.IService;
 
-namespace Service
+namespace Service.Service
 {
     public partial class ImageService : IImageService
     {
@@ -26,7 +27,7 @@ namespace Service
 
         public List<Image> GetList(Guid userID)
         {
-            return _context.Images.Where(_ => _.UserID == userID).ToList();
+            return _context.Images.Where(_ => _.UserId == userID).ToList();
         }
 
         public void Create(string src, Guid userID, string title, string desc)
@@ -34,7 +35,7 @@ namespace Service
             _context.Images.Add(new Image()
             {
                 Src = src,
-                UserID = userID,
+                UserId = userID,
                 Title = title,
                 Description = desc,
             });
@@ -55,7 +56,7 @@ namespace Service
 
         public bool IsOwner(Guid id, Guid userID)
         {
-            return Get(id).UserID == userID ? true : false;
+            return Get(id).UserId == userID ? true : false;
         }
 
         public void SetProfilePhoto(Guid currentUserId, Guid id)
@@ -92,7 +93,7 @@ namespace Service
         {
             return await _context.Images
                 .Include(_ => _.Likes)
-                .Where(_ => _.UserID == userID).ToListAsync();
+                .Where(_ => _.UserId == userID).ToListAsync();
         }
 
         public async Task CreateAsync(string src, Guid userID, string title, string desc)
@@ -100,7 +101,7 @@ namespace Service
             await _context.Images.AddAsync(new Image()
             {
                 Src = src,
-                UserID = userID,
+                UserId = userID,
                 Title = title,
                 Description = desc,
             });
@@ -122,7 +123,7 @@ namespace Service
         public async Task<bool> IsOwnerAsync(Guid id, Guid userID)
         {
             var result = await GetAsync(id);
-            return result.UserID == userID ? true : false;
+            return result.UserId == userID ? true : false;
         }
 
         public async Task SetProfilePhotoAsync(Guid currentUserId, Guid id)

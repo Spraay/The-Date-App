@@ -1,10 +1,10 @@
 ﻿@model Validators.ApplicationUserViewModel
 @using Microsoft.AspNetCore.Identity
 @using DatingApplicationV2.Areas.Identity
-@using Enties
-@using Services
+@using Entity
+@using Service.IService
 @inject IUserService _userService
-@inject UserManager<ApplicationUser> UserManager
+@inject UserManager<User> UserManager
 @{
     ViewData["Title"] = "Index";
 }

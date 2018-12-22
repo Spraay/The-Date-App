@@ -7,7 +7,7 @@ namespace Entity
         public Guid Id { get; set; }
         public DateTime CreatedDate { get; }
         public string Name { get; set; }
-        public ICollection<InterestUser> InterestApplicationUsers { get; set; }
+        public ICollection<InterestUser> Users { get; set; }
         
     }
 }

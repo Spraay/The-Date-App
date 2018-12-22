@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Entity;
 
-namespace Service
+namespace Service.IService
 {
     public partial interface IFriendService
     {

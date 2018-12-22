@@ -150,7 +150,7 @@ namespace DAO.Data
 
                 var conversation = new Conversation()
                 {
-                    ConversationUsers = new List<ConversationUser>()
+                    Users = new List<ConversationUser>()
                     {
                         new ConversationUser(){ User = user1 },
                         new ConversationUser(){ User = user2 }

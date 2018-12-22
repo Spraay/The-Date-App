@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Enties.Friendship>
+﻿@model IEnumerable<Entity.Friendship>
 
 @{
     ViewData["Title"] = "Invitations";
@@ -28,7 +28,7 @@ else
             <div class="col m4">
                 <div class="card">
                     <div class="card-image">
-                        <img src="~/images/userimages/@item.Sender.ProfileImageSrc" style="width: 400px; height: 350px;">
+                        <img src="~/images/userimages/@item.Sender.ProfileImageSrc">
                         <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">@Html.DisplayFor(m => item.Sender.FirstName) @Html.DisplayFor(m => item.Sender.LastName)</span>
                     </div>
                     <div class="card-action grey">
@@ -36,10 +36,10 @@ else
                             <a class="btn-floating green" asp-controller="Friendships" asp-action="Add" asp-route-id="@item.SenderId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <i class="material-icons">check</i>
                             </a>
-                            <a class="btn-floating red" asp-controller="Friendships" asp-action="Delete" asp-route-user1ID="@item.FriendId" asp-route-user2ID="@item.SenderId">
+                            <a class="btn-floating red" asp-controller="Friendships" asp-action="Delete" asp-route-id="@item.SenderId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <i class="material-icons">delete</i>
                             </a>
-                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-id="@item.FriendId">
+                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-id="@item.SenderId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <i class="material-icons">info</i>
                             </a>
                         </div>

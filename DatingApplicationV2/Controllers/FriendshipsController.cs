@@ -9,7 +9,7 @@ using DAO.Data;
 using Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Service;
+using Service.IService;
 
 namespace DatingApplicationV2.Controllers
 {
@@ -70,7 +70,7 @@ namespace DatingApplicationV2.Controllers
             return AlreadyInvited(friend);
         }
 
-        [HttpPost, ActionName("Create")]
+        [HttpPost, ActionName("Add")]
         [ValidateAntiForgeryToken]
         public IActionResult AddConfirmed(Guid id, string returnURL = null)
         {

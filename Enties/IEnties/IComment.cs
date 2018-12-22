@@ -7,9 +7,9 @@ namespace Entity.IEnties
     public interface IComment<ItemType>
     {
         User Creator { get; set; }
-        Guid CreatorID { get; set; }
+        Guid CreatorId { get; set; }
         ItemType CommentedItem { get; set; }
-        Guid CommentedItemID { get; set; }
+        Guid CommentedItemId { get; set; }
         string Content { get; set; }
     }
 }

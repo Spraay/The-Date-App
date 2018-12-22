@@ -1,4 +1,4 @@
-﻿@model Enties.ApplicationUser
+﻿@model Entity.User
 
 @{
     ViewData["Title"] = "Delete";
@@ -14,14 +14,14 @@
         <div class="col s4 offset-l4">
             <div class="card">
                 <div class="card-image">
-                    <img src="~/images/userimages/@Html.DisplayFor(m=>Model.ProfileImageSrc)" style="width: 400px; height: 350px;">
+                    <img src="~/images/userimages/@Html.DisplayFor(m=>Model.ProfileImageSrc)">
                     <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">
-                            @Html.DisplayFor(m => Model.FirstName)  @Html.DisplayFor(m => Model.LastName)
+                        @Html.DisplayFor(m => Model.FirstName)  @Html.DisplayFor(m => Model.LastName)
                     </span>
                 </div>
                 <div class="card-action grey">
                     <div class="center">
-                        <form id="Form" asp-action="Delete" asp-route-returnURL="@ViewBag.ReturnURL" >
+                        <form id="Form" asp-action="Delete" asp-route-returnURL="@ViewBag.ReturnURL">
                             <a href="@ViewBag.ReturnURL" class="btn btn-floating btn-large waves-effect blue pulse">
                                 <i class="material-icons">replay</i>
                             </a>

@@ -11,9 +11,9 @@ namespace Entity
         public DateTime CreatedDate { get; } = DateTime.Now;
 
         public User Creator { get; set; }
-        public Guid CreatorID { get; set; }
+        public Guid CreatorId { get; set; }
         public Image LikedItem { get; set; }
-        public Guid LikedItemID { get; set; }
+        public Guid LikedItemId { get; set; }
         
     }
 }

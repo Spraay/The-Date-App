@@ -1,11 +1,12 @@
-﻿@model Enties.ApplicationUser
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
+﻿@model Entity.User
+@using Entity;
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @{
     ViewData["Title"] = "Profile";
     var currentUserId = ViewBag.CurrentUserId;
     var userImages = (List<Image>) ViewBag.Photos;
-    var userFriends = (List<ApplicationUser>) ViewBag.Friends;
+    var userFriends = (List<User>) ViewBag.Friends;
     var totalUserLikes = ViewBag.PhotosLikes;
     var profileImgSrc = ViewBag.ProfileImg;
     var profileBacgroundImgSrc = ViewBag.ProfileBackgroundImg;
@@ -247,10 +248,10 @@
                                                     <div class="card-action">
                                                         <ul class="inline">
                                                             <li class="left">
-                                                                <a asp-controller="Image" asp-action="UserImages" asp-route-id="@item.UserID" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)" class="blue-text center-align"><b>Likes @Html.DisplayFor(modelItem => item.Likes)</b></a>
+                                                                <a asp-controller="Image" asp-action="UserImages" asp-route-id="@item.UserId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)" class="blue-text center-align"><b>Likes @Html.DisplayFor(modelItem => item.Likes)</b></a>
                                                             </li>
                                                             <li class="right">
-                                                                <a asp-controller="Image" asp-action="UserImages" asp-route-id="@item.UserID" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)" class="blue-text center-align"><b>Comments @Html.DisplayFor(modelItem => item.Comments)</b></a>
+                                                                <a asp-controller="Image" asp-action="UserImages" asp-route-id="@item.UserId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)" class="blue-text center-align"><b>Comments @Html.DisplayFor(modelItem => item.Comments)</b></a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -325,5 +326,4 @@
         </div>
     </div>
 </section>
-
 

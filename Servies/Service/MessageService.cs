@@ -1,7 +1,8 @@
 ﻿using DAO;
+using DAO.Data;
 using Entity;
 using Microsoft.EntityFrameworkCore;
-using Service.IService;
+using Service.IService.IService;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,10 +12,10 @@ using System.Threading.Tasks;
 
 namespace Service.Service
 {
-    public class MessageService : Service<Message, Guid, ChatDbContext>, IMessageService
+    public class MessageService : Service<Message, Guid, ApplicationDbContext>, IMessageService
     {
-        private readonly ChatDbContext _context;
-        public MessageService(ChatDbContext context) : base(context)
+        private readonly ApplicationDbContext _context;
+        public MessageService(ApplicationDbContext context) : base(context)
         {
             _context = context;
         }

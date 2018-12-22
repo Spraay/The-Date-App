@@ -1,4 +1,4 @@
-﻿@model Enties.Interest
+﻿@model Entity.Interest
 
 @{
     ViewData["Title"] = "Edit";
@@ -15,7 +15,7 @@
                     <form asp-action="Edit" id="Form">
                         <div class="row">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                            <input type="hidden" asp-for="ID" />
+                            <input type="hidden" asp-for="Id" />
                             <div class="input-field col s12">
                                 <i class="mdi-action-account-circle prefix"></i>
                                 <input asp-for="Name" />

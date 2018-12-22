@@ -6,7 +6,7 @@ using Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Service;
+using Service.IService;
 
 namespace DatingApplicationV2.Controllers
 {

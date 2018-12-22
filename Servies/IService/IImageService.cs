@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Service
+namespace Service.IService
 {
     public partial interface IImageService
     {

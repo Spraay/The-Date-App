@@ -9,7 +9,7 @@ namespace Entity
         public User Sender { get; set; }
         
         public string Content { get; set; }
-        public Guid ConversationID { get; set; }
+        public Guid ConversationId { get; set; }
         public Conversation Conversation { get; set; }
     }
 }

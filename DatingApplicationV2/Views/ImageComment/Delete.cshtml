@@ -1,4 +1,4 @@
-﻿@model Enties.ImageComment
+﻿@model Entity.ImageComment
 
 @{
     ViewData["Title"] = "Delete";
@@ -12,10 +12,10 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ID)
+            @Html.DisplayNameFor(model => model.Id)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.ID)
+            @Html.DisplayFor(model => model.Id)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Creator)
@@ -27,7 +27,7 @@
             @Html.DisplayNameFor(model => model.CommentedItem)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.CommentedItem.ID)
+            @Html.DisplayFor(model => model.CommentedItem.Id)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Content)
@@ -38,8 +38,8 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="CreatorID" />
-        <input type="hidden" asp-for="CommentedItemID" />
+        <input type="hidden" asp-for="CreatorId" />
+        <input type="hidden" asp-for="CommentedItemId" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
         <a asp-action="Index">Back to List</a>
     </form>

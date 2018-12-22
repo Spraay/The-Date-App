@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Entity;
-using Service;
+using Service.IService;
 
 namespace DatingApplicationV2.Controllers
 {
@@ -37,7 +37,7 @@ namespace DatingApplicationV2.Controllers
             if (!isImgExists)
                 RedirectToAction(nameof(ImageNotExists), new { id, returnURL });
             ViewBag.ReturnURL = returnURL;
-            return View(new ImageComment() { CommentedItemID = id, CreatorID = _userService.CurrentUserId });
+            return View(new ImageComment() { CommentedItemId = id, CreatorId = _userService.CurrentUserId });
         }
 
         // POST: ImageComments/Create
@@ -47,11 +47,11 @@ namespace DatingApplicationV2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add([Bind("ID,CreatorID,CommentedItemID,Content")] ImageComment imageComment, string returnURL = null)
         {
-            var img = await _imageService.GetAsync(imageComment.CommentedItemID);
+            var img = await _imageService.GetAsync(imageComment.CommentedItemId);
             if (ModelState.IsValid)
             {
                 await _imageCommentService.CreateAsync(imageComment.Id, _userService.CurrentUserId, imageComment.Content);
-                return RedirectToAction(nameof(ImageController) ,nameof(ImageController.UserImages), new { userID = img.UserID });
+                return RedirectToAction(nameof(ImageController) ,nameof(ImageController.UserImages), new { userID = img.UserId });
             }
             ViewData["CommentedItemID"] = img.Id;
             ViewData["CreatorID"] = _userService.CurrentUserId;
@@ -62,8 +62,8 @@ namespace DatingApplicationV2.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var imageComment = await _imageCommentService.GetAsync(id);
-            ViewData["CommentedItemID"] = imageComment.CommentedItemID;
-            ViewData["CreatorID"] = imageComment.CreatorID;
+            ViewData["CommentedItemID"] = imageComment.CommentedItemId;
+            ViewData["CreatorID"] = imageComment.CreatorId;
             return View(imageComment);
         }
 

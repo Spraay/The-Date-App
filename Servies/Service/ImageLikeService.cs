@@ -2,12 +2,12 @@
 using Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
+using Service.IService;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service
+namespace Service.Service
 {
     public partial class ImageLikeService : IImageLikeService
     {
@@ -22,7 +22,7 @@ namespace Service
         {
             if (IsImageLiked(imageID, userID))
             {
-                var likeToDel = _context.ImagesLikes.SingleOrDefault(_ => _.LikedItemID == imageID && _.CreatorID == userID);
+                var likeToDel = _context.ImagesLikes.SingleOrDefault(_ => _.LikedItemId == imageID && _.CreatorId == userID);
                 _context.ImagesLikes.Remove(likeToDel);
 
             }
@@ -31,8 +31,8 @@ namespace Service
                 _context.ImagesLikes.Add(
                     new ImageLike()
                     {
-                        LikedItemID = imageID,
-                        CreatorID = userID
+                        LikedItemId = imageID,
+                        CreatorId = userID
                     }
                 );
             }
@@ -41,17 +41,17 @@ namespace Service
 
         public bool IsImageLiked(Guid imageID, Guid userID)
         {
-            return _context.ImagesLikes.Any(_ => _.LikedItemID == imageID && _.CreatorID == userID);
+            return _context.ImagesLikes.Any(_ => _.LikedItemId == imageID && _.CreatorId == userID);
         }
 
         public int CountImageLikes(Guid id)
         {
-            return _context.ImagesLikes.Count(_ => _.LikedItemID == id);
+            return _context.ImagesLikes.Count(_ => _.LikedItemId == id);
         }
 
         public int CountUserImageLikes(Guid id)
         {
-            var userImagesIds =  _context.Images.Where(_ => _.UserID == id).Select(_ => _.Id).ToList();
+            var userImagesIds =  _context.Images.Where(_ => _.UserId == id).Select(_ => _.Id).ToList();
             return  _context.ImagesLikes.Where(_ => userImagesIds.Contains(_.Id)).Count();
         }
 
@@ -61,11 +61,11 @@ namespace Service
     {
         public async Task<int> CountImageLikesAsync(Guid id)
         {
-            return await _context.ImagesLikes.CountAsync(_ => _.LikedItemID == id);
+            return await _context.ImagesLikes.CountAsync(_ => _.LikedItemId == id);
         }
         public async Task<int> CountUserImageLikesAsync(Guid id)
         {
-            var userImagesIds = await _context.Images.Where(_ => _.UserID == id).Select(_ => _.Id).ToListAsync();
+            var userImagesIds = await _context.Images.Where(_ => _.UserId == id).Select(_ => _.Id).ToListAsync();
             return await _context.ImagesLikes.Where(_ => userImagesIds.Contains(_.Id)).CountAsync();
         }
     }

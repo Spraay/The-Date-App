@@ -24,22 +24,22 @@ namespace DAO.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<InterestUser>()
-                .HasKey(_ => new { _.InterestId, _.ApplicationUserID });
+                .HasKey(_ => new { _.InterestId, _.UserId });
 
             modelBuilder.Entity<InterestUser>()
                 .HasOne(_ => _.Interest)
-                .WithMany(__ => __.InterestApplicationUsers)
+                .WithMany(__ => __.Users)
                 .HasForeignKey(_ => _.InterestId);
 
             modelBuilder.Entity<InterestUser>()
-                .HasOne(_ => _.ApplicationUser)
+                .HasOne(_ => _.User)
                 .WithMany(__ => __.InterestsApplicationUser)
-                .HasForeignKey(_ => _.ApplicationUserID);
+                .HasForeignKey(_ => _.UserId);
 
             modelBuilder.Entity<Image>()
                 .HasOne(_ => _.User)
                 .WithMany(__ => __.Gallery)
-                .HasForeignKey(_ => _.UserID);
+                .HasForeignKey(_ => _.UserId);
 
             modelBuilder.Entity<Friendship>()
                 .HasKey(_ => new { _.SenderId, _.FriendId });
@@ -62,49 +62,49 @@ namespace DAO.Data
                 .HasForeignKey(_ => _.SenderId);
 
             modelBuilder.Entity<ConversationUser>()
-                .HasKey(_ => new { _.ConversationID, _.UserID });
+                .HasKey(_ => new { _.ConversationId, _.UserId });
 
             modelBuilder.Entity<ConversationUser>()
                 .HasOne(_ => _.User)
                 .WithMany(__ => __.Conversations)
-                .HasForeignKey(_ => _.UserID);
+                .HasForeignKey(_ => _.UserId);
 
             modelBuilder.Entity<ConversationUser>()
                 .HasOne(_ => _.Conversation)
-                .WithMany(__ => __.ConversationUsers)
-                .HasForeignKey(_ => _.ConversationID);
+                .WithMany(__ => __.Users)
+                .HasForeignKey(_ => _.ConversationId);
 
             modelBuilder.Entity<Message>()
                 .HasOne(_ => _.Conversation)
                 .WithMany(__ => __.Messages)
-                .HasForeignKey(_ => _.ConversationID);
+                .HasForeignKey(_ => _.ConversationId);
 
             modelBuilder.Entity<ImageLike>()
-                .HasKey(_ => new { _.CreatorID, _.LikedItemID });
+                .HasKey(_ => new { _.CreatorId, _.LikedItemId });
 
             modelBuilder.Entity<ImageLike>()
                 .HasOne(_ => _.LikedItem)
                 .WithMany(__ => __.Likes)
-                .HasForeignKey(_ => _.LikedItemID);
+                .HasForeignKey(_ => _.LikedItemId);
 
             modelBuilder.Entity<ImageLike>()
                 .HasOne(_ => _.Creator)
                 .WithMany(__ => __.ImagesLikes)
-                .HasForeignKey(_ => _.CreatorID)
+                .HasForeignKey(_ => _.CreatorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<ImageComment>()
-                .HasKey(_ => new { _.CreatorID, _.CommentedItemID });
+                .HasKey(_ => new { _.CreatorId, _.CommentedItemId });
 
             modelBuilder.Entity<ImageComment>()
                 .HasOne(_ => _.CommentedItem)
                 .WithMany(__ => __.Comments)
-                .HasForeignKey(_ => _.CommentedItemID);
+                .HasForeignKey(_ => _.CommentedItemId);
 
             modelBuilder.Entity<ImageComment>()
                 .HasOne(_ => _.Creator)
                 .WithMany(__ => __.ImagesComments)
-                .HasForeignKey(_ => _.CreatorID)
+                .HasForeignKey(_ => _.CreatorId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Service
+namespace Service.IService
 {
     public partial interface IImageLikeService
     {
