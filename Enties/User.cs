@@ -14,15 +14,16 @@ namespace Entity
         public DateTime RegisterDate { get; } = DateTime.Now;
         public Gender Gender { get; set; }
         public Eyes Eyes { get; set; }
+        public Hair Hair { get; set }
         public string Description { get; set; }
-        public List<InterestUser> InterestsApplicationUser { get; set; }
-        public List<Image> Gallery { get; set; }
-        public List<Friendship> InvitationsSent { get; set; }
-        public List<Friendship> InvitationsReceived { get; set; }
-        public List<Message> SentMessages { get; set; }
-        public List<ConversationUser> Conversations { get; set; }
-        public List<ImageLike> ImagesLikes { get; set; }
-        public List<ImageComment> ImagesComments { get; set; }
+        public ICollection<InterestUser> InterestsApplicationUser { get; set; }
+        public ICollection<Image> Gallery { get; set; }
+        public ICollection<Friendship> InvitationsSent { get; set; }
+        public ICollection<Friendship> InvitationsReceived { get; set; }
+        public ICollection<Message> SentMessages { get; set; }
+        public ICollection<ConversationUser> Conversations { get; set; }
+        public ICollection<ImageLike> ImagesLikes { get; set; }
+        public ICollection<ImageComment> ImagesComments { get; set; }
         public string ProfileImageSrc { get; set; } = "NoProfileImage.png";
         public string BackgroundImageSrc { get; set; } = "NoProfileBackground.png";
     }

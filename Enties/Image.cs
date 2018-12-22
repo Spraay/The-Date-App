@@ -13,7 +13,7 @@ namespace Entity
         public string Title { get; set; }
         public User User { get; set; }
        
-        public List<ImageLike> Likes { get; set; }
-        public List<ImageComment> Comments { get; set; }
+        public ICollection<ImageLike> Likes { get; set; }
+        public ICollection<ImageComment> Comments { get; set; }
     }
 }

@@ -8,6 +8,12 @@
     {
         None, Brown, Green, Blue, Gray
     }
+    public enum Hair
+    {
+        Blonde,
+        Red,
+        Brunet,
+    }
     public enum Status
     {
         Pending,

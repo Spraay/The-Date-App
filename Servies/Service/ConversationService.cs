@@ -1,85 +1,27 @@
-﻿using DAO.Data;
+﻿using DAO;
 using Entity;
 using Microsoft.EntityFrameworkCore;
+using Service.IService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Service
+namespace Service.Service
 {
-    public class ConversationService : IConversationService
+    public class ConversationService : Service<Conversation, Guid, ChatDbContext>, IConversationService
     {
-
-        private readonly ApplicationDbContext _context;
-        //private readonly IUserService _userService;
-
-        public ConversationService(ApplicationDbContext context)
+        private readonly ChatDbContext _context;
+        public ConversationService(ChatDbContext context) : base(context)
         {
             _context = context;
         }
 
-        public Conversation GetConversation(
-            Guid id,
-            bool isMessagesIncluded = false,
-            bool isConversationUsersIncluded = false
-            )
+        public async Task<ICollection<Conversation>> GetUserConversations(Guid id)
         {
-            if (isMessagesIncluded && isConversationUsersIncluded)
-            {
-                return _context.Conversations
-                    //.Include(_ => _.Messages)
-                    .Include(_ => _.ConversationUsers)
-                    .SingleOrDefault(_ => _.Id == id);
-            }
-            if (isConversationUsersIncluded)
-            {
-                return _context.Conversations
-                    .Include(_ => _.ConversationUsers)
-                    .SingleOrDefault(_ => _.Id == id);
-            }
-            if (isMessagesIncluded)
-            {
-                return _context.Conversations
-                    //.Include(_ => _.Messages)
-                    .SingleOrDefault(_ => _.Id == id);
-            }
-            return _context.Conversations
-                    .SingleOrDefault(_ => _.Id == id);
-        }
-
-        public List<Conversation> GetUserConversations(
-            Guid userID,
-            bool isMessagesIncluded = false,
-            bool isConversationUsersIncluded = false)
-        {
-            if (isMessagesIncluded && isConversationUsersIncluded)
-            {
-                return _context.Conversations
-                    //.Include(_ => _.Messages)
-                    .Include(_ => _.ConversationUsers)
-                    .Where(_ => _.ConversationUsers.Any(__ => __.UserID == userID)).ToList(); 
-            }
-            if (isConversationUsersIncluded)
-            {
-           
-                return _context.Conversations
-                    .Include(_ => _.ConversationUsers)
-                    .Where(_ => _.ConversationUsers.Any(__ => __.UserID == userID)).ToList();
-            }
-            if (isMessagesIncluded)
-            {
-                return _context.Conversations
-                    //.Include(_ => _.Messages)
-                    .Where(_ => _.ConversationUsers.Any(__ => __.UserID == userID)).ToList();
-            }
-            return _context.Conversations.Where(_ => _.ConversationUsers.Any(__ => __.UserID == userID)).ToList();
-        }
-
-        public void SendMessage(Message message)
-        {
-            _context.Messages.Add(message);
-            _context.SaveChanges();
+            return await _context.Conversations
+                .Where(_ => _.Users.Select(__ => __.UserID).Contains(id)).ToListAsync();
         }
     }
 }
