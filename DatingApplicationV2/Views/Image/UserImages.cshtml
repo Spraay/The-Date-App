@@ -119,7 +119,9 @@ else
                     <hr />
                     <ul class="collapsible">
                         <li>
-                            <div class="collapsible-header"><a class="btn-flat"> @_imageLikeService.CountImageLikes(item.Id) Likes</a></div>
+                            <div class="collapsible-header"><a class="btn-flat">
+                            <script src="~/Scripts/Service/"></script>    
+                                @_imageLikeService.CountImageLikes(item.Id) Likes</a></div>
                             <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                         </li>
                         <li>

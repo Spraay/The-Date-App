@@ -1,6 +1,5 @@
 function sayHello() {
     var compiler = document.getElementById("compiler").value;
     var framework = document.getElementById("framework").value;
-    return "Hello from " + compiler + " and " + framework + "!";
+    return "Hello fromasdasd " + compiler + " and " + framework + "!";
 }
-//# sourceMappingURL=app.js.map
