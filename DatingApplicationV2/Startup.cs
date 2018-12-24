@@ -78,7 +78,10 @@ namespace DatingApplicationV2
             }
 
             app.UseHttpsRedirection();
+
+            app.UseDefaultFiles();
             app.UseStaticFiles();
+
             app.UseCookiePolicy();
 
             app.UseAuthentication();
