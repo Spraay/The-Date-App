@@ -7,14 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Scripts\Model\**" />
     <Compile Remove="Views\Message\**" />
+    <Content Remove="Scripts\Model\**" />
     <Content Remove="Views\Message\**" />
+    <EmbeddedResource Remove="Scripts\Model\**" />
     <EmbeddedResource Remove="Views\Message\**" />
+    <None Remove="Scripts\Model\**" />
     <None Remove="Views\Message\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Scripts\app.ts" />
+    <None Remove="Scripts\Service\InterestService.ts" />
+    <None Remove="Scripts\Service\IService.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,6 +70,8 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app.ts" />
+    <TypeScriptCompile Include="Scripts\Service\InterestService.ts" />
+    <TypeScriptCompile Include="Scripts\Service\IService.ts" />
   </ItemGroup>
 
   <ItemGroup>

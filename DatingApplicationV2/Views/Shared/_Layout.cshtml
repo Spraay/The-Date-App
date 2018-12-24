@@ -10,6 +10,7 @@
     
 </head>
 <body class="">
+
     <header style="z-index: 9999">
         @await Html.PartialAsync("Navbar/_NavBar")
         @await Html.PartialAsync("Navbar/_MobileNavBar")
@@ -18,6 +19,11 @@
         @RenderBody()
     </main>
     @await Html.PartialAsync("_Footer")
+    <div id="message"></div>
+    <div>
+        Compiler: <input id="compiler" value="TypeScript" onkeyup="document.getElementById('message').innerText = sayHello()" /><br />
+        Framework: <input id="framework" value="ASP.NET" onkeyup="document.getElementById('message').innerText = sayHello()" />
+    </div>
     @RenderSection("Scripts", required: false)
     @await Html.PartialAsync("_Scripts")
 </body>
