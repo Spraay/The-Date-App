@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Service.IService;
-using DAO.Data;
-using Entity;
 using System;
+using App.Model;
+using App.Service.Abstract;
+using App.Model.Abstract;
 
 namespace DatingApplicationV2.Controllers
 {
@@ -12,26 +12,27 @@ namespace DatingApplicationV2.Controllers
     public class InterestController : Controller
     {
         
-        private readonly IInterestService _interestService;
+        private readonly IInterestRepository _interestRepository;
 
-        public InterestController(
-            IInterestService interest)
+        public InterestController(IInterestRepository interestRepository)
         {
-            _interestService = interest;
+            _interestRepository = interestRepository;
         }
 
-       
+
+
+
         // GET: Interests
         public IActionResult Index()
         {
-            if (_interestService.Any()) return View(_interestService.GetList());
+            if (_interestRepository.Count()>0) return View(_interestRepository.GetAll());
             return NotFound();
         }
         
         // GET: Interests/Details/5
         public IActionResult Details(Guid? id)
         {
-            if (id.HasValue) return View(_interestService.Get(id.Value) );
+            if (id.HasValue) return View(_interestRepository.GetSingle(_=>_.Id == id.Value) );
             return NotFound();
         }
 
@@ -50,7 +51,7 @@ namespace DatingApplicationV2.Controllers
         {
             if (ModelState.IsValid)
             {
-                _interestService.Add(interest.Name);
+                _interestRepository.Add(interest);
                 return RedirectToAction(nameof(Index));
             }
             return View(interest);
@@ -59,7 +60,7 @@ namespace DatingApplicationV2.Controllers
         // GET: Interests/Edit/5
         public IActionResult Edit(Guid? id)
         {
-            if (id.HasValue) return View(_interestService.Get(id.Value) );
+            if (id.HasValue) return View(_interestRepository.GetSingle(_ => _.Id == id.Value));
             return null;
         }
 
@@ -77,7 +78,7 @@ namespace DatingApplicationV2.Controllers
 
             if (ModelState.IsValid)
             {
-                _interestService.Update(interest.Id, interest.Name);
+                _interestRepository.Update(interest);
                 return RedirectToAction(nameof(Index));
             }
             return View(interest);
@@ -91,7 +92,7 @@ namespace DatingApplicationV2.Controllers
                 return NotFound();
             }
 
-            var interest = _interestService.Get(id.Value);
+            var interest = _interestRepository.GetSingle(_ => _.Id == id.Value);
 
             if (interest == null)
             {
@@ -106,13 +107,13 @@ namespace DatingApplicationV2.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(Guid id)
         {
-            _interestService.Delete(id);
+            _interestRepository.DeleteWhere(_=>_.Id == id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool InterestExists(Guid id)
         {
-            return _interestService.GetList().Any(e => e.Id == id);
+            return _interestRepository.GetAll().Any(e => e.Id == id);
         }
     }
 }

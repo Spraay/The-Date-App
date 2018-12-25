@@ -1,14 +1,14 @@
-﻿using DAO;
+﻿using App;
 using Microsoft.EntityFrameworkCore;
-using Service.IService.IService;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Service.IService;
+using App.Service.Abstract;
 
-namespace Service.Service
+namespace App.Service
 {
 
     public abstract partial class Service<TEntity, TIDKey, TDbContext> : IService<TEntity, TIDKey, TDbContext> where TEntity : class where TDbContext : DbContext 

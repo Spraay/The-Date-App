@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Entity;
-using Service.IService;
+using App;
+using App.Abstract;
 using DatingApplicationV2.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +12,9 @@ using System.IO;
 using AutoMapper;
 using Validators;
 using System.Threading.Tasks;
+using App.Model;
+using App.Service.Abstract;
+using App.Model.Abstract;
 
 namespace DatingApplication.Controllers
 {
@@ -19,34 +22,22 @@ namespace DatingApplication.Controllers
     {
         private readonly IUserService _userService;
         private readonly UserManager<User> _userManager;
-        private readonly IInterestService _interestService;
+        private readonly IInterestRepository _interestRepository;
         private readonly IMapper _mapper;
         private readonly IFriendService _friendService;
         private readonly IImageService _imageService;
         private readonly IImageLikeService _imageLikeService;
 
-        public UserController(IUserService userService,
-            UserManager<User> userManager,
-            IInterestService interestService,
-            IMapper mapper,
-            IFriendService friendService,
-            IImageService imageService,
-            IImageLikeService imageLikeService)
+        public UserController(IUserService userService, UserManager<User> userManager, IInterestRepository interestRepository, IMapper mapper, IFriendService friendService, IImageService imageService, IImageLikeService imageLikeService)
         {
             _userService = userService;
             _userManager = userManager;
-            _interestService = interestService;
+            _interestRepository = interestRepository;
             _mapper = mapper;
             _friendService = friendService;
             _imageService = imageService;
             _imageLikeService = imageLikeService;
         }
-
-
-
-
-
-
 
         // GET: Default
         [Authorize(Roles = "User")]
@@ -64,7 +55,7 @@ namespace DatingApplication.Controllers
             ViewBag.Roles                   = await _userManager.GetRolesAsync(user);
             ViewBag.Photos                  = _imageService.GetList(id);
             ViewBag.Friends                 = await _friendService.GetUserFriendsAsync(id);
-            ViewBag.Interests               = _interestService.GetList();
+            ViewBag.Interests               = _interestRepository.GetUserInterests(id);
             ViewBag.ProfileImg              = user.ProfileImageSrc;
             ViewBag.PhotosLikes             = await _imageLikeService.CountImageLikesAsync(id);
             ViewBag.CurrentUserId           = _userService.CurrentUserId;
@@ -109,7 +100,7 @@ namespace DatingApplication.Controllers
 
         private void PopulateAssignedInterestData(User user)
         {
-            var allInterests = _interestService.GetList();
+            var allInterests = _interestRepository.GetAll();
             var applicationUserInterests = new HashSet<Guid>(_userService.GetInterests(user.Id).Select(_=>_.Id));
             var viewModel = new List<AssignedInterestData>();
             foreach (var interest in allInterests)

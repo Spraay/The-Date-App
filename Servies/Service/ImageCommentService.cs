@@ -1,13 +1,15 @@
-﻿using DAO.Data;
-using Entity;
+﻿using App.DAO;
+using App;
 using Microsoft.EntityFrameworkCore;
-using Service.IService;
+using App.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Service.Abstract;
+using App.Model;
 
-namespace Service.Service
+namespace App.Service
 {
     public partial class ImageCommentService : IImageCommentService
     {

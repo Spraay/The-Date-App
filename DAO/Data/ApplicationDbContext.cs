@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Entity;
+using App;
+using App.Model;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace DAO.Data
+namespace App.DAO
 {
     public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
     {

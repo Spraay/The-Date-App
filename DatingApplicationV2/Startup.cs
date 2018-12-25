@@ -11,12 +11,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using DAO.Data;
-using Entity;
+using App.DAO;
+using App.Model;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Service.IService;
+using App.Service.Abstract;
 using AutoMapper;
-using Service.Service;
+using App.Service;
+using App.Model.Abstract;
+using App.Repository;
 
 namespace DatingApplicationV2
 {
@@ -47,7 +49,7 @@ namespace DatingApplicationV2
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IInterestService, InterestService>();
+            services.AddScoped<IInterestRepository, InterestRepository>();
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IImageLikeService, ImageLikeService>();
             services.AddScoped<IFriendService, FriendService>();

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Entity;
-using Service.IService;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Pagination;
 using Validators;
+using App.Service.Abstract;
+using App.Model;
+using App.Model.Abstract;
 
 namespace DatingApplication.Controllers
 {
@@ -19,13 +18,13 @@ namespace DatingApplication.Controllers
     public class AdminController : Controller
     {
         private readonly IUserService _userService;
-        private readonly IInterestService _interestService;
+        private readonly IInterestRepository _interestRepository;
         private readonly IMapper _mapper;
 
-        public AdminController(IUserService userService, IInterestService interestService, IMapper mapper)
+        public AdminController(IUserService userService, IInterestRepository interestRepository, IMapper mapper)
         {
             _userService = userService;
-            _interestService = interestService;
+            _interestRepository = interestRepository;
             _mapper = mapper;
         }
 

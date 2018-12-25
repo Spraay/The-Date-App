@@ -119,9 +119,11 @@ else
                     <hr />
                     <ul class="collapsible">
                         <li>
-                            <div class="collapsible-header"><a class="btn-flat">
-                            <script src="~/Scripts/Service/"></script>    
-                                @_imageLikeService.CountImageLikes(item.Id) Likes</a></div>
+                            <div class="collapsible-header"><a class="btn-flat" id="lc" onload="document.getElementById('lc').innerText = 'Likes by api '+ GetImageLikes('@item.Id')">
+                                <script src="~/../Scripts/Service/ImageLikeService.js">
+                                    alert(GetImageLikes(@item.Id));
+                                </script>    
+                                @_imageLikeService.CountImageLikes(item.Id)Likes By mvc</a></div>
                             <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
                         </li>
                         <li>
@@ -131,6 +133,7 @@ else
                     </ul>
                 </div>
             </div>
+            <a asp-controller="ImageLike" asp-action="ToggleLike" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">Like</a>
         }
     </div>
 }

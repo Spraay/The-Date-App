@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using DAO.Data;
-using Entity;
+using App.DAO;
+using App;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Service.IService;
+using App.Abstract;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,20 +12,23 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Validators;
+using App.Model;
+using App.Service.Abstract;
+using App.Model.Abstract;
 
-namespace Service.Service
+namespace App.Service
 {
     public partial class UserService : IUserService
     {
-        private readonly IInterestService _interestService;
+        private readonly IInterestRepository _interestRepository;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
 
-        public UserService(IInterestService interestService, ApplicationDbContext context, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor, IMapper mapper)
+        public UserService(IInterestRepository interestRepository, ApplicationDbContext context, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor, IMapper mapper)
         {
-            _interestService = interestService;
+            _interestRepository = interestRepository;
             _context = context;
             _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
@@ -88,7 +91,7 @@ namespace Service.Service
         }
         public void AddInterest(User user, Guid interestId)
         {
-            var interest = _interestService.Get(interestId);
+            var interest = _interestRepository.GetSingle(_=>_.Id==interestId);
             user.InterestsApplicationUser.Add(new InterestUser
             {
                 User = user,
@@ -134,7 +137,7 @@ namespace Service.Service
 
             var selectedInterestsHS = new HashSet<string>(selectedInterests);
             var userInterests = new HashSet<Guid>(user.InterestsApplicationUser.Select(_ => _.InterestId));
-            var allInterests = _interestService.GetList();
+            var allInterests = _interestRepository.GetAll();
 
             foreach (var interest in allInterests)
             {

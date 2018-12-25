@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Entity;
+using App;
+using App.Model;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;

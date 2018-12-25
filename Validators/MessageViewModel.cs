@@ -1,7 +1,8 @@
 ﻿using AutoMapper.Configuration;
-using Entity;
+using App;
 using System;
 using System.ComponentModel.DataAnnotations;
+using App.Model;
 
 namespace Validators
 {
