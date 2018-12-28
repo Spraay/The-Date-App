@@ -13,7 +13,7 @@ namespace App.Service.Abstract
         void Update(User user);
         void Delete(Guid id);
         List<User> GetList();
-        List<Interest> GetInterests(Guid id);
+       
         void UpdateInterests(string[] selectedInterests, Guid id);
         bool IsFilled(Guid id);
         void Update(User user, string[] selectedInterests, string selectedGender, string selectedEyes);

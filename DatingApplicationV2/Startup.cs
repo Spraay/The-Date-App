@@ -19,6 +19,7 @@ using AutoMapper;
 using App.Service;
 using App.Model.Abstract;
 using App.Repository;
+using App.Abstract;
 
 namespace DatingApplicationV2
 {
@@ -47,9 +48,11 @@ namespace DatingApplicationV2
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            services.AddScoped<IInterestRepository, InterestRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IInterestRepository, InterestRepository>();
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IImageLikeService, ImageLikeService>();
             services.AddScoped<IFriendService, FriendService>();

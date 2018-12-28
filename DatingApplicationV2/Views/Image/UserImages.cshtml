@@ -1,14 +1,13 @@
-﻿@model IEnumerable<Entity.Image>
-@using Microsoft.AspNetCore.Identity
-@using DatingApplicationV2.Areas.Identity
-@using Entity
-@using Service.IService
+﻿@model IEnumerable<Image>
+@using App.Service.Abstract
 @inject UserManager<User> _userManager
 @inject IImageLikeService _imageLikeService
 @inject IUserService _userService
+
 @{
     ViewData["Title"] = "UserImages";
 }
+
 @if (Model.Count() == 0)
 {
     <br /><br /><br />

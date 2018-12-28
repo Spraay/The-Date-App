@@ -1,17 +1,18 @@
-﻿@model Entity.User
-@using Entity;
+﻿@model User
+
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @{
     ViewData["Title"] = "Profile";
     var currentUserId = ViewBag.CurrentUserId;
-    var userImages = (List<Image>) ViewBag.Photos;
+    var userImages = Model.Gallery;
     var userFriends = (List<User>) ViewBag.Friends;
     var totalUserLikes = ViewBag.PhotosLikes;
     var profileImgSrc = ViewBag.ProfileImg;
     var profileBacgroundImgSrc = ViewBag.ProfileBackgroundImg;
     var userRoles = ViewBag.Roles;
     var isModeUserFilled = ViewBag.IsModelUserFilled;
+    var userInterests = (IEnumerable<Interest>) ViewBag.Interests;
 }
 
 <section id="content">
@@ -298,7 +299,7 @@
 
                                     </div>
                                     <div id="interestsList" class="" style="display: none;">
-                                        @if (!Model.InterestsApplicationUser.Any())
+                                        @if (!userInterests.Any())
                                         {
                                             <div class="valign-wrapper my-wrapper row">
                                                 <div class="col s12">
@@ -310,9 +311,9 @@
                                         else
                                         {
                                             <div class="collection">
-                                                @foreach (var interest in Model.InterestsApplicationUser.Select(_ => _.Interest.Name))
+                                                @foreach (var interest in userInterests)
                                                 {
-                                                    <a href="#!" class="collection-item">@interest</a>
+                                                    <a href="#!" class="collection-item">@interest.Name</a>
                                                 }
                                             </div>
                                         }

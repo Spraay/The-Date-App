@@ -81,26 +81,7 @@ namespace App.Service
         {
             _context.Users.Remove(Get(id));
         }
-        public List<Interest> GetInterests(Guid id)
-        {
-            return Get(id).InterestsApplicationUser.Select(_ => _.Interest).ToList();
-        }
-        public void AddInterest(Guid userId, Guid interestId)
-        {
-            AddInterest(Get(userId), interestId);
-        }
-        public void AddInterest(User user, Guid interestId)
-        {
-            var interest = _interestRepository.GetSingle(_=>_.Id==interestId);
-            user.InterestsApplicationUser.Add(new InterestUser
-            {
-                User = user,
-                UserId = user.Id,
-                Interest = interest,
-                InterestId = interestId
-            });
-            _context.SaveChanges();
-        }
+
         
         public bool IsFilled(User user)
         {

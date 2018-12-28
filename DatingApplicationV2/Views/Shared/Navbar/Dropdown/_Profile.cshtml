@@ -1,7 +1,8 @@
-﻿@inject SignInManager<User> SignInManager
+﻿@using App.Service.Abstract
+@inject SignInManager<User> SignInManager
 @inject IUserService _userService
 
-@{ 
+@{
     var userName = _userService.Get(_userService.CurrentUserId).FirstName;
 }
 <!-- Dropdown Structure -->

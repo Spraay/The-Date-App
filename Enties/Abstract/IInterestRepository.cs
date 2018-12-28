@@ -10,5 +10,6 @@ namespace App.Model.Abstract
         IEnumerable<Interest> GetUserInterests(Guid id);
         void AddUserInterest(Guid id, Guid interest);
         void DeleteUserInterest(Guid id, Guid interest);
+        void UpdateUserInterest(Guid id, Guid[] interests);
     }
 }

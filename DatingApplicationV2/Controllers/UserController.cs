@@ -20,16 +20,20 @@ namespace DatingApplication.Controllers
 {
     public class UserController : Controller
     {
+        private readonly IUserRepository _userRepository;
+        private readonly IInterestRepository _interestRepository;
+
         private readonly IUserService _userService;
         private readonly UserManager<User> _userManager;
-        private readonly IInterestRepository _interestRepository;
+        
         private readonly IMapper _mapper;
         private readonly IFriendService _friendService;
         private readonly IImageService _imageService;
         private readonly IImageLikeService _imageLikeService;
 
-        public UserController(IUserService userService, UserManager<User> userManager, IInterestRepository interestRepository, IMapper mapper, IFriendService friendService, IImageService imageService, IImageLikeService imageLikeService)
+        public UserController(IUserRepository userRepository, IUserService userService, UserManager<User> userManager, IInterestRepository interestRepository, IMapper mapper, IFriendService friendService, IImageService imageService, IImageLikeService imageLikeService)
         {
+            _userRepository = userRepository;
             _userService = userService;
             _userManager = userManager;
             _interestRepository = interestRepository;
@@ -52,8 +56,9 @@ namespace DatingApplication.Controllers
         public async Task<ActionResult> Profile(Guid id)
         {
             var user = await _userService.GetAsync(id);
+            var user2 = _userRepository.GetSingle(_ => _.Id == id, _ => _.Gallery, _=>_.InterestsApplicationUser );
             ViewBag.Roles                   = await _userManager.GetRolesAsync(user);
-            ViewBag.Photos                  = _imageService.GetList(id);
+            //ViewBag.Photos                  = _imageService.GetList(id);
             ViewBag.Friends                 = await _friendService.GetUserFriendsAsync(id);
             ViewBag.Interests               = _interestRepository.GetUserInterests(id);
             ViewBag.ProfileImg              = user.ProfileImageSrc;
@@ -61,7 +66,7 @@ namespace DatingApplication.Controllers
             ViewBag.CurrentUserId           = _userService.CurrentUserId;
             ViewBag.IsModelUserFilled       = await _userService.IsFilledAsync(id);
             ViewBag.ProfileBackgroundImg    = user.BackgroundImageSrc;
-            return View(_userService.Get(id));
+            return View(user2);
         }
 
         // GET: Default/Details/5
@@ -101,7 +106,7 @@ namespace DatingApplication.Controllers
         private void PopulateAssignedInterestData(User user)
         {
             var allInterests = _interestRepository.GetAll();
-            var applicationUserInterests = new HashSet<Guid>(_userService.GetInterests(user.Id).Select(_=>_.Id));
+            var applicationUserInterests = new HashSet<Guid>(_interestRepository.GetUserInterests(user.Id).Select(_=>_.Id));
             var viewModel = new List<AssignedInterestData>();
             foreach (var interest in allInterests)
             {
@@ -124,7 +129,13 @@ namespace DatingApplication.Controllers
             try
             {
                 _userService.Update(user, selectedInterests, selectedGender, selectedEyes);
-                if(returnURL == null)
+                //TODO
+                //user.Gender = selectedGender;
+                //user.Eyes = selectedEyes;
+                //user.Hair = selectedHair;
+                //_userRepository.Update(user);
+                //_interestRepository.UpdateUserInterest(user.Id, selectedInterests);
+                if (returnURL == null)
                     return RedirectToAction(nameof(Index));
                 return Redirect(returnURL);
             }
