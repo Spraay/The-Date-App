@@ -52,11 +52,19 @@ namespace Validators
         public virtual List<Image> Gallery { get; set; }
         
 
-        public class ApplicationUser_To_ApplicationUserViewModel : MapperConfigurationExpression
+        public class User_To_ApplicationUserViewModel : MapperConfigurationExpression
         {
-            public ApplicationUser_To_ApplicationUserViewModel()
+            public User_To_ApplicationUserViewModel()
             {
                 CreateMap<User, ApplicationUserViewModel>();
+            }
+        }
+
+        public class ApplicationUserViewModel_To_User : MapperConfigurationExpression
+        {
+            public ApplicationUserViewModel_To_User()
+            {
+                CreateMap<ApplicationUserViewModel, User>();
             }
         }
     }
