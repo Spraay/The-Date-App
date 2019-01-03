@@ -7,6 +7,7 @@ namespace App.Model
     public class User : IdentityUser<Guid>, IEntityBase
     {
         public User() : base() { }
+        public ICollection<UserRole> Roles { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Height { get; set; }
@@ -17,7 +18,8 @@ namespace App.Model
         public Eyes Eyes { get; set; }
         public Hair Hair { get; set; }
         public string Description { get; set; }
-        public ICollection<InterestUser> InterestsApplicationUser { get; set; }
+        
+        public ICollection<InterestUser> Interests { get; set; }
         public IEnumerable<Image> Gallery { get; set; }
         public IEnumerable<Friendship> InvitationsSent { get; set; }
         public IEnumerable<Friendship> InvitationsReceived { get; set; }

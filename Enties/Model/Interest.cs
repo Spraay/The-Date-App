@@ -8,6 +8,6 @@ namespace App.Model
         public Guid Id { get; set; }
         public DateTime CreatedDate { get; }
         public string Name { get; set; }
-        public ICollection<InterestUser> Users { get; set; }
+        public ICollection<InterestUser> UsersInteresting { get; set; }
     }
 }
