@@ -3,7 +3,7 @@
 @inject IUserService _userService
 
 @{
-    var userName = _userService.Get(_userService.CurrentUserId).FirstName;
+    var user = await _userService.GetSingleAsync(_userService.CurrentUserId);
 }
 <!-- Dropdown Structure -->
 <ul id='profileDropdown' class='dropdown-content'>
@@ -13,10 +13,10 @@
 
 <li class="avatar">
     <a class="left tooltipped" data-position="bottom" data-tooltip="Profile" asp-controller="User" asp-action="Index">
-        <img src="~/images/userimages/@_userService.Get(_userService.CurrentUserId).ProfileImageSrc" alt="" class="circle left" style="height: 44px; width: 44px; margin-top: 10px; margin-right: 5px;">
+        <img src="~/images/userimages/@user.ProfileImageSrc" alt="" class="circle left" style="height: 44px; width: 44px; margin-top: 10px; margin-right: 5px;">
         @if (SignInManager.IsSignedIn(User))
         {
-            @(userName == null ? "Your Profile" : @userName);
+            @(user.FirstName == null ? "Your Profile" : user.FirstName);
         }
     </a>
 </li>

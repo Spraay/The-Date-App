@@ -62,6 +62,12 @@
                                 <p class="col s10">@Html.DisplayFor(model => model.Eyes)</p>
                             </div>
                         </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <b class="col s2"> @Html.DisplayNameFor(model => model.Hair)</b>
+                                <p class="col s10">@Html.DisplayFor(model => model.Hair)</p>
+                            </div>
+                        </li>
                         <li class="collection-item grey lighten-1">
                             <div class="row">
                                 <b class="col s2"> @Html.DisplayNameFor(model => model.Gender)</b>
@@ -100,7 +106,7 @@
                             <div class="collapsible-body collection-item">
                                 <div class="row">
                                     <ul>
-                                        @foreach (var x in Model.InterestsApplicationUser.Select(_ => _.Interest.Name))
+                                        @foreach (var x in Model.Interests.Select(_ => _.Interest.Name))
                                         {
                                             <li>@x</li>
                                         }
