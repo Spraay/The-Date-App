@@ -46,7 +46,12 @@ namespace App.DAO
                     FirstName = "Bob",
                     LastName = "Barker",
                     PhoneNumber = "7788951456",
-                    EmailConfirmed = true,
+                    Eyes = Eyes.Brown,
+                    Gender = Gender.Male,
+                    Weight = 94,
+                    Height = 180,
+                    BirthDate = DateTime.Parse("22.01.1989"),
+                    EmailConfirmed = true
 
                 },
                 new User
@@ -95,14 +100,14 @@ namespace App.DAO
                 {
                     UserName = "user5",
                     Email = "jeniferlawerance@gmail.com",
-                    FirstName = "Emilia",
-                    LastName = "Clarke",
-                    PhoneNumber = "6041234167",
+                    FirstName = "Jenifer",
+                    LastName = "Lawerance",
+                    PhoneNumber = "6041114167",
                     Eyes = Eyes.Blue,
                     Gender = Gender.Male,
-                    Weight = 52,
+                    Weight = 63,
                     Height = 175,
-                    BirthDate = DateTime.Parse("23.10.1983"),
+                    BirthDate = DateTime.Parse("15.08.1990"),
                     EmailConfirmed = true
                 }
             };
