@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Text;
 using App;
 using App.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.DAO
 {
-    public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
+   
+    public class ApplicationDbContext
+    : IdentityDbContext<User, Role, Guid, IdentityUserClaim<Guid>, UserRole, IdentityUserLogin<Guid>,IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         public DbSet<Interest> Interests { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<ImageLike> ImagesLikes { get; set; }
@@ -24,17 +26,32 @@ namespace App.DAO
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<UserRole>(userRole =>
+            {
+                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+
+                userRole.HasOne(ur => ur.Role)
+                    .WithMany(r => r.UsersInRole)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
+
+                userRole.HasOne(ur => ur.User)
+                    .WithMany(r => r.Roles)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+            });
+
             modelBuilder.Entity<InterestUser>()
                 .HasKey(_ => new { _.InterestId, _.UserId });
 
             modelBuilder.Entity<InterestUser>()
                 .HasOne(_ => _.Interest)
-                .WithMany(__ => __.Users)
+                .WithMany(__ => __.UsersInteresting)
                 .HasForeignKey(_ => _.InterestId);
 
             modelBuilder.Entity<InterestUser>()
                 .HasOne(_ => _.User)
-                .WithMany(__ => __.InterestsApplicationUser)
+                .WithMany(__ => __.Interests)
                 .HasForeignKey(_ => _.UserId);
 
             modelBuilder.Entity<Image>()
