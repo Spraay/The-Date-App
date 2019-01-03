@@ -1,4 +1,5 @@
 ﻿using App;
+using App.Abstract;
 using App.Model;
 using System;
 using System.Collections.Generic;
@@ -6,23 +7,16 @@ using System.Threading.Tasks;
 
 namespace App.Service.Abstract
 {
-    public partial interface IUserService
+    public partial interface IUserService : IUserRepository
     {
         Guid CurrentUserId { get; }
-        User Get(Guid id);
-        void Update(User user);
-        void Delete(Guid id);
-        List<User> GetList();
-       
-        void UpdateInterests(string[] selectedInterests, Guid id);
         bool IsFilled(Guid id);
-        void Update(User user, string[] selectedInterests, string selectedGender, string selectedEyes);
-        bool UserExists(Guid userID);
+        void UpdateEyes(string eyes);
+        void UpdateGender(string gender);
     }
-    public partial interface IUserService
+
+    public partial interface IUserService : IUserRepository
     {
         Task<bool> IsFilledAsync(Guid id);
-        Task<User> GetAsync(Guid id);
-        Task<List<User>> GetListAsync();
     }
 }

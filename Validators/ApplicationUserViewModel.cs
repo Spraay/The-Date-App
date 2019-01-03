@@ -36,18 +36,19 @@ namespace Validators
 
         [DataType(DataType.Date)]
         [Display(Name = "Register Date")]
-        public DateTime RegisterDate { get; } = DateTime.Now;
+        public DateTime CreatedDate { get; } = DateTime.UtcNow;
 
 
         public Gender Gender { get; set; }
 
         public Eyes Eyes { get; set; }
+        public Hair Hair { get; set; }
 
         [Display(Name = "Descryption")]
         [StringLength(250)]
         public string Description { get; set; }
 
-        public virtual List<InterestUser> InterestsApplicationUser { get; set; }
+        public virtual List<InterestUser> Interests { get; set; }
         public virtual List<Image> Gallery { get; set; }
         
 

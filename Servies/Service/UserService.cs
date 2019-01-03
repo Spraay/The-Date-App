@@ -15,22 +15,19 @@ using Validators;
 using App.Model;
 using App.Service.Abstract;
 using App.Model.Abstract;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using App.Repository;
 
 namespace App.Service
 {
-    public partial class UserService : IUserService
+    public partial class UserService : UserRepository, IUserService
     {
-        private readonly IInterestRepository _interestRepository;
-        private readonly ApplicationDbContext _context;
-        private readonly UserManager<User> _userManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
 
-        public UserService(IInterestRepository interestRepository, ApplicationDbContext context, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor, IMapper mapper)
+        public UserService(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor, IMapper mapper) : base(context)
         {
-            _interestRepository = interestRepository;
-            _context = context;
-            _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
         }
@@ -41,155 +38,97 @@ namespace App.Service
             {
                 if (_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
                     return Guid.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value);
-                return Guid.Empty;  
+                return Guid.Empty;
             }
         }
 
-       
-
-        public User Get(Guid id)
+        public bool IsFilled(Guid id)
         {
-            return _context.Users
-                .Include(_=>_.InterestsApplicationUser)
-                .SingleOrDefault(_ => _.Id == id);   
-        }
-
-        public void Create(User user)
-        {
-            _context.Users.Add(user);
-            _context.SaveChanges();
-        }
-        public void Update(User user)
-        {
-            var userToUpdate = Get(user.Id);
-            userToUpdate.BirthDate = user.BirthDate;
-            userToUpdate.Description = user.Description;
-            userToUpdate.Email = user.Email;
-            userToUpdate.FirstName = user.FirstName;
-            userToUpdate.LastName = user.LastName;
-            userToUpdate.InterestsApplicationUser = user.InterestsApplicationUser;
-            userToUpdate.Height = user.Height;
-            userToUpdate.Weight = user.Weight;
-            userToUpdate.Gender = user.Gender;
-            userToUpdate.Eyes = user.Eyes;
-            userToUpdate.Gallery = user.Gallery;
-
-            _context.Users.Update(userToUpdate);
-            _context.SaveChanges();
-        }
-        public void Delete(Guid id)
-        {
-            _context.Users.Remove(Get(id));
-        }
-
-        
-        public bool IsFilled(User user)
-        {
-            if (user != null)
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+            var destination = _mapper.Map<User, ApplicationUserViewModel>(GetSingle(id));
+            var vc = new System.ComponentModel.DataAnnotations.ValidationContext(destination);
+            Validator.TryValidateObject(destination, vc, validationResults, true);
+            if (validationResults.Count > 0)
             {
-                List<ValidationResult> validationResults = new List<ValidationResult>();
-                var destination = _mapper.Map<User, ApplicationUserViewModel>(user);
-                var vc = new System.ComponentModel.DataAnnotations.ValidationContext(destination);
-                Validator.TryValidateObject(destination, vc, validationResults, true);
-                if (validationResults.Count > 0)
-                {
-                    //throw new Exception(validationResults.Select(_ => $"{_.MemberNames}: {_.ErrorMessage}").Aggregate((e, f) => $"{e},  {f}"));
-                    return false;
-                }
-                return true;
+                //throw new Exception(validationResults.Select(_ => $"{_.MemberNames}: {_.ErrorMessage}").Aggregate((e, f) => $"{e},  {f}"));
+                return false;
             }
-            return false;
+            return true;
         }
-        public bool IsFilled(Guid applicationuserid)
-        {
-            return _context.Users
-                .Where(p => p.Id == applicationuserid)
-                .Any(p => IsFilled(p));
-        }
-        
-        public void UpdateInterests(string[] selectedInterests, Guid id)
-        {
-            var user = Get(id);
-            if (selectedInterests == null)
-            {
-                user.InterestsApplicationUser = new List<InterestUser>();
-                return;
-            }
 
-            var selectedInterestsHS = new HashSet<string>(selectedInterests);
-            var userInterests = new HashSet<Guid>(user.InterestsApplicationUser.Select(_ => _.InterestId));
-            var allInterests = _interestRepository.GetAll();
-
-            foreach (var interest in allInterests)
-            {
-                if (selectedInterestsHS.Contains(interest.Id.ToString()))
-                {
-                    if (!userInterests.Contains(interest.Id))
-                    {
-                        user.InterestsApplicationUser.Add(new InterestUser()
-                        {
-                            Interest = allInterests.SingleOrDefault(_ => _.Id == interest.Id),
-                            User = user,
-                            InterestId = allInterests.SingleOrDefault(_ => _.Name == interest.Name).Id,
-                            UserId = user.Id
-                        });
-                    }
-                }
-                else
-                {
-                    if (userInterests.Contains(interest.Id))
-                    {
-                        user.InterestsApplicationUser.Remove(user.InterestsApplicationUser.SingleOrDefault(_ => _.InterestId == interest.Id));
-                    }
-                }
-            }
+        public void UpdateGender(string selectedGender)
+        {
+            var user = GetSingle(CurrentUserId);
+            Enum.TryParse(selectedGender, out Gender gender);
+            user.Gender = gender;
             Update(user);
-            _context.SaveChanges();
         }
 
-        public List<User> GetList()
+        public void UpdateEyes(string selectedEyes)
         {
-            return _context.Users.ToList();
-        }
-
-        public void Update(User user, string[] selectedInterests, string selectedGender, string selectedEyes)
-        {
-            if (!Enum.TryParse(selectedEyes, out Eyes eyesValue))
-                eyesValue = Eyes.None;
-            if (!Enum.TryParse(selectedGender, out Gender genderValue))
-                genderValue = Gender.None;
-            user.Gender = genderValue;
-            user.Eyes = eyesValue;
+            var user = GetSingle(CurrentUserId);
+            Enum.TryParse(selectedEyes, out Eyes eyes);
+            user.Eyes = eyes;
             Update(user);
-            UpdateInterests(selectedInterests, user.Id);
         }
 
-        public bool UserExists(Guid userID)
-        {
-            return _context.Users.Any(_ => _.Id == userID);
-        } 
+
+        //public void UpdateInterests(string[] selectedInterests, Guid id)
+        //{
+        //    var user = Get(id);
+        //    if (selectedInterests == null)
+        //    {
+        //        user.InterestsApplicationUser = new List<InterestUser>();
+        //        return;
+        //    }
+
+        //    var selectedInterestsHS = new HashSet<string>(selectedInterests);
+        //    var userInterests = new HashSet<Guid>(user.InterestsApplicationUser.Select(_ => _.InterestId));
+        //    var allInterests = _interestRepository.GetAll();
+
+        //    foreach (var interest in allInterests)
+        //    {
+        //        if (selectedInterestsHS.Contains(interest.Id.ToString()))
+        //        {
+        //            if (!userInterests.Contains(interest.Id))
+        //            {
+        //                user.InterestsApplicationUser.Add(new InterestUser()
+        //                {
+        //                    Interest = allInterests.SingleOrDefault(_ => _.Id == interest.Id),
+        //                    User = user,
+        //                    InterestId = allInterests.SingleOrDefault(_ => _.Name == interest.Name).Id,
+        //                    UserId = user.Id
+        //                });
+        //            }
+        //        }
+        //        else
+        //        {
+        //            if (userInterests.Contains(interest.Id))
+        //            {
+        //                user.InterestsApplicationUser.Remove(user.InterestsApplicationUser.SingleOrDefault(_ => _.InterestId == interest.Id));
+        //            }
+        //        }
+        //    }
+        //    Update(user);
+        //    _context.SaveChanges();
+        //}
     }
 
     //TASK PART
     public partial class UserService : IUserService
     {
-        public async Task<User> GetAsync(Guid id)
+        public async Task<bool> IsFilledAsync(Guid id)
         {
-            return await _context.Users
-                .Include(_ => _.InterestsApplicationUser)
-                .SingleOrDefaultAsync(_ => _.Id == id);
-        }
-        public Task<List<User>> GetListAsync()
-        {
-            return _context.Users
-            .Include(_ => _.InterestsApplicationUser)
-            .ToListAsync();
-        }
-        public async Task<bool> IsFilledAsync(Guid applicationUserId)
-        {
-            return await _context.Users
-                     .Where(p => p.Id == applicationUserId)
-                     .AnyAsync(_ => IsFilled(_));
-        }
+            List<ValidationResult> validationResults = new List<ValidationResult>();
+            var destination = _mapper.Map<User, ApplicationUserViewModel>(await GetSingleAsync(id));
+            var vc = new System.ComponentModel.DataAnnotations.ValidationContext(destination);
+            Validator.TryValidateObject(destination, vc, validationResults, true);
+            if (validationResults.Count > 0)
+            {
+                //throw new Exception(validationResults.Select(_ => $"{_.MemberNames}: {_.ErrorMessage}").Aggregate((e, f) => $"{e},  {f}"));
+                return false;
+            }
+            return true;
+        }  
     }
 }

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\App.Repository\App.Repository.csproj" />
     <ProjectReference Include="..\DAO\App.DAO.csproj" />
     <ProjectReference Include="..\Enties\App.Model.csproj" />
     <ProjectReference Include="..\Validators\App.Validator.csproj" />
