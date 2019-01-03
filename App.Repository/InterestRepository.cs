@@ -16,21 +16,21 @@ namespace App.Repository
 
         public void AddUserInterest(Guid id, Guid interestId)
         {
-            var interest = GetSingle(_ => _.Id == id, _ => _.Users);
+            var interest = GetSingle(_ => _.Id == id, _ => _.UsersInteresting);
             if (!GetUserInterests(id).Contains(interest))
             {
-                interest.Users.Add(new InterestUser() { UserId = id, InterestId = interestId });
+                interest.UsersInteresting.Add(new InterestUser() { UserId = id, InterestId = interestId });
                 Commit();
             }
         }
 
         public void DeleteUserInterest(Guid id, Guid interest)
         {
-            var Interest = GetSingle(_ => _.Id == id, _ => _.Users);
-            var InterestUser = Interest.Users.SingleOrDefault(_ => _.UserId == id);
+            var Interest = GetSingle(_ => _.Id == id, _ => _.UsersInteresting);
+            var InterestUser = Interest.UsersInteresting.SingleOrDefault(_ => _.UserId == id);
             if (InterestUser != null)
             {
-                Interest.Users.Remove(InterestUser);
+                Interest.UsersInteresting.Remove(InterestUser);
                 Commit();
             }
         }
@@ -60,7 +60,7 @@ namespace App.Repository
 
         public IEnumerable<Interest> GetUserInterests(Guid id)
         {
-            return FindBy(_=>_.Users.Any(__=>__.UserId==id));
+            return FindBy(_=>_.UsersInteresting.Any(__=>__.UserId==id));
         }
     }
 }

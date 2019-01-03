@@ -3,6 +3,9 @@ using App.Abstract;
 using App.DAO;
 using App.Model;
 using App.Repository;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace App.Repository
 {

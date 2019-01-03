@@ -102,19 +102,24 @@ namespace App.Repository
     public partial class EntityBaseRepository<T> : IEntityBaseRepository<T>
             where T : class, IEntityBase, new()
     {
-        public async Task<IAsyncEnumerable<T>> AllIncludingAsync(params Expression<Func<T, object>>[] includeProperties)
+        public async Task<IEnumerable<T>> AllIncludingAsync(params Expression<Func<T, object>>[] includeProperties)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = _context.Set<T>();
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+            return await query.ToListAsync();
         }
 
-        public Task<IAsyncEnumerable<T>> GetAllAsync()
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().ToListAsync();
         }
 
         public Task<int> CountAsync()
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().CountAsync();
         }
 
         public async Task<T> GetSingleAsync(Guid id)
@@ -137,21 +142,18 @@ namespace App.Repository
             return await query.Where(predicate).FirstOrDefaultAsync();
         }
 
-        public Task<IAsyncEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().Where(predicate).ToListAsync();
         }
 
-        public Task AddAsync(T entity)
+        public async Task AddAsync(T entity)
         {
-            throw new NotImplementedException();
+            EntityEntry dbEntityEntry = _context.Entry<T>(entity);
+            await _context.Set<T>().AddAsync(entity);
         }
 
-        public Task UpdateAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public Task DeleteAsync(T entity)
         {
             throw new NotImplementedException();
@@ -162,9 +164,9 @@ namespace App.Repository
             throw new NotImplementedException();
         }
 
-        public Task CommitAsync()
+        public async Task CommitAsync()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
         }
     }
 }
