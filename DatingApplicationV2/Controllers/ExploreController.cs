@@ -23,7 +23,7 @@ namespace DatingApplicationV2.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var userList = await _userService.GetListAsync();
+            var userList = await _userService.GetAllAsync();
 
             return View(userList.Where(_=>_.Id!= _userService.CurrentUserId));
         }

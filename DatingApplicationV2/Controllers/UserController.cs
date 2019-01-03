@@ -13,39 +13,34 @@ using System.Threading.Tasks;
 using App.Model;
 using App.Service.Abstract;
 using App.Model.Abstract;
+using App.Repository;
 
 namespace DatingApplication.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IInterestRepository _interestRepository;
-
-        private readonly IUserService _userService;
-        private readonly UserManager<User> _userManager;
-        
         private readonly IMapper _mapper;
+        private readonly IUserService _userService;
         private readonly IFriendService _friendService;
         private readonly IImageService _imageService;
         private readonly IImageLikeService _imageLikeService;
+        private readonly IInterestRepository _interestRepository;
 
-        public UserController(IUserRepository userRepository, IUserService userService, UserManager<User> userManager, IInterestRepository interestRepository, IMapper mapper, IFriendService friendService, IImageService imageService, IImageLikeService imageLikeService)
+        public UserController(IMapper mapper, IUserService userService, IFriendService friendService, IImageService imageService, IImageLikeService imageLikeService, IInterestRepository interestRepository)
         {
-            _userRepository = userRepository;
-            _userService = userService;
-            _userManager = userManager;
-            _interestRepository = interestRepository;
             _mapper = mapper;
+            _userService = userService;
             _friendService = friendService;
             _imageService = imageService;
             _imageLikeService = imageLikeService;
+            _interestRepository = interestRepository;
         }
 
         // GET: Default
         [Authorize(Roles = "User")]
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            if (_userService.IsFilled(_userService.CurrentUserId))
+            if ( await _userService.IsFilledAsync(_userService.CurrentUserId) )
                 return RedirectToAction(nameof(Profile), new { id = _userService.CurrentUserId });
             return RedirectToAction(nameof(Edit));
         }
@@ -53,44 +48,29 @@ namespace DatingApplication.Controllers
 
         public async Task<ActionResult> Profile(Guid id)
         {
-            var user = await _userService.GetAsync(id);
-            var user2 = _userRepository.GetSingle(_ => _.Id == id, _ => _.Gallery, _=>_.InterestsApplicationUser );
-            ViewBag.Roles                   = await _userManager.GetRolesAsync(user);
-            //ViewBag.Photos                  = _imageService.GetList(id);
+            var user = await _userService.GetSingleAsync(
+                _ => _.Id == id,
+                _ => _.Interests,
+                _ => _.Gallery,
+                _ => _.ImagesComments,
+                _ => _.ImagesLikes,
+                _ => _.InvitationsReceived,
+                _ => _.InvitationsSent,
+                _ => _.Roles);
+
             ViewBag.Friends                 = await _friendService.GetUserFriendsAsync(id);
-            ViewBag.Interests               = _interestRepository.GetUserInterests(id);
-            ViewBag.ProfileImg              = user.ProfileImageSrc;
             ViewBag.PhotosLikes             = await _imageLikeService.CountImageLikesAsync(id);
             ViewBag.CurrentUserId           = _userService.CurrentUserId;
             ViewBag.IsModelUserFilled       = await _userService.IsFilledAsync(id);
-            ViewBag.ProfileBackgroundImg    = user.BackgroundImageSrc;
-            return View(user2);
-        }
-
-        // GET: Default/Details/5
-        [Authorize(Roles = "User")]
-        public ActionResult Details(Guid id)
-        {
-            var user = _userService.Get(id);
-            PopulateAssignedInterestData(user);
-            user = _userService.Get(user.Id);
-            var viewModel = _mapper.Map<User, ApplicationUserViewModel>(user);
-            try
-            {
-                _userService.IsFilled(user.Id);
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError(string.Empty, ex.Message);
-            }
-            return View(viewModel);
+           
+            return View(user);
         }
 
         // GET: Default/Edit
         [Authorize(Roles = "User")]
         public ActionResult Edit(string returnURL = null)
         {
-            var user = _userService.Get(Guid.Parse(_userManager.GetUserId(User)));
+            var user = _userService.GetSingle(_userService.CurrentUserId);
             PopulateAssignedInterestData(user);
             var viewModel = _mapper.Map<User, ApplicationUserViewModel>(user);
             if (_userService.IsFilled(user.Id))
@@ -122,17 +102,13 @@ namespace DatingApplication.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "User")]
-        public ActionResult Edit(User user, string[] selectedInterests, string selectedGender, string selectedEyes, string returnURL = null)
+        public ActionResult Edit(User user, Guid[] selectedInterests, string selectedGender, string selectedEyes, string returnURL = null)
         {
             try
             {
-                _userService.Update(user, selectedInterests, selectedGender, selectedEyes);
-                //TODO
-                //user.Gender = selectedGender;
-                //user.Eyes = selectedEyes;
-                //user.Hair = selectedHair;
-                //_userRepository.Update(user);
-                //_interestRepository.UpdateUserInterest(user.Id, selectedInterests);
+                _userService.UpdateGender(selectedGender);
+                _userService.UpdateEyes(selectedEyes);
+                _interestRepository.UpdateUserInterest(_userService.CurrentUserId, selectedInterests);
                 if (returnURL == null)
                     return RedirectToAction(nameof(Index));
                 return Redirect(returnURL);
@@ -146,36 +122,10 @@ namespace DatingApplication.Controllers
             return View(user);
         }
 
-        // GET: Default/Delete
-        [Authorize(Roles = "User")]
-        public ActionResult Delete()
-        {
-            return View();
-        }
-
-        // POST: Default/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize(Roles = "User")]
-        public ActionResult Delete(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Create delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
         public ActionResult RegisterSuccess(string returnURL = null)
         {
             ViewBag.ReturnUrl = returnURL;
             return View();
         }
-
     }
 }

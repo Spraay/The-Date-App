@@ -43,7 +43,7 @@ namespace DatingApplicationV2.Controllers
         public async Task<IActionResult> Add(Guid id, string returnURL = null)
         {
             var friendship = await _friendshipService.GetAsync(_userService.CurrentUserId, id);
-            var friend = await _userService.GetAsync(id);
+            var friend = await _userService.GetSingleAsync(id);
             ViewBag.ReturnURL = returnURL;
             if ( friendship==null)
             {
@@ -79,12 +79,12 @@ namespace DatingApplicationV2.Controllers
         public async Task<IActionResult> AlreadyFriends(Guid id, string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
-            return View(await _userService.GetAsync(id) );
+            return View(await _userService.GetSingleAsync(id) );
         }
         public async Task<IActionResult> NotAcceptJet(Guid id, string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
-            return View(await _userService.GetAsync(id));
+            return View(await _userService.GetSingleAsync(id));
         }
 
         public async Task<IActionResult> Delete(Guid id, string returnURL = null)
@@ -93,7 +93,7 @@ namespace DatingApplicationV2.Controllers
             if (friendship == null)
                 return RedirectToAction("ItemNotFound", "ErrorController", new { exception = "TO DO" } );
             ViewBag.ReturnURL = returnURL;
-            return View(await _userService.GetAsync(id));
+            return View(await _userService.GetSingleAsync(id));
         }
 
         [HttpPost, ActionName("Delete")]
@@ -107,7 +107,7 @@ namespace DatingApplicationV2.Controllers
         public async Task<IActionResult> DeleteSuccess(Guid id, string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
-            return View(await _userService.GetAsync(id));
+            return View(await _userService.GetSingleAsync(id));
         }
     }
 }

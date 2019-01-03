@@ -55,7 +55,7 @@ namespace DatingApplication.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var appUsers = await _userService.GetListAsync();
+            var appUsers = await _userService.GetAllAsync();
             if (!String.IsNullOrEmpty(searchString))
             {
 
@@ -86,7 +86,7 @@ namespace DatingApplication.Controllers
                     break;
             }
 
-            var viewModel = _mapper.Map<List<User>, List<ApplicationUserViewModel>>(appUsers);
+            var viewModel = _mapper.Map<List<User>, List<ApplicationUserViewModel>>(appUsers.ToList());
             var result = ( PaginatedList<ApplicationUserViewModel>.Create(viewModel, page ?? 1, pageSize?? 5));
             return View(result);
         }
