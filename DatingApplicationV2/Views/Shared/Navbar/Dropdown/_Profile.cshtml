@@ -3,7 +3,7 @@
 @inject IUserService _userService
 
 @{
-    var user = await _userService.GetSingleAsync(_userService.CurrentUserId);
+    var user = await _userService.GetAsync(_userService.CurrentUserId);
 }
 <!-- Dropdown Structure -->
 <ul id='profileDropdown' class='dropdown-content'>

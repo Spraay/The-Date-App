@@ -1,5 +1,5 @@
-﻿@model Validators.ApplicationUserViewModel
-@using App.Service.Abstract
+﻿@using App.Model.Assigned
+@model ApplicationUserViewModel
 @{
     ViewData["Title"] = "Edit Profile";
 }
@@ -111,7 +111,7 @@
                                         <div class="row col s12">
                                             @{
                                                 int cnt = 0;
-                                                List<DatingApplicationV2.Models.AssignedInterestData> interests = ViewBag.Interests;
+                                                List<AssignedInterestData> interests = ViewBag.Interests;
 
                                                 foreach (var interest in interests)
                                                 {
