@@ -2,6 +2,7 @@
 using App.DAO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Extensions.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace App.Repository
 {
-    public class EntityBaseRepository<T> : IEntityBaseRepository<T>
+    public partial class EntityBaseRepository<T> : IEntityBaseRepository<T>
             where T : class, IEntityBase, new()
     {
         private readonly ApplicationDbContext _context;
@@ -95,6 +96,70 @@ namespace App.Repository
         public virtual void Commit()
         {
             _context.SaveChanges();
+        }        
+    }
+
+    public partial class EntityBaseRepository<T> : IEntityBaseRepository<T>
+            where T : class, IEntityBase, new()
+    {
+        public async Task<IAsyncEnumerable<T>> AllIncludingAsync(params Expression<Func<T, object>>[] includeProperties)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IAsyncEnumerable<T>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> CountAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> GetSingleAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IAsyncEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteAsync(T entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteWhereAsync(Expression<Func<T, bool>> predicate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task CommitAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

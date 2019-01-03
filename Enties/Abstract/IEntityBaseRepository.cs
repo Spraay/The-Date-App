@@ -24,13 +24,13 @@ namespace App.Abstract
 
     public partial interface IEntityBaseRepository<T> where T : class, IEntityBase, new()
     {
-        Task<IEnumerable<T>> AllIncludingAsync(params Expression<Func<T, object>>[] includeProperties);
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<int> CountAsync();
+        Task <IAsyncEnumerable<T>> AllIncludingAsync(params Expression<Func<T, object>>[] includeProperties);
+        Task<IAsyncEnumerable<T>> GetAllAsync();
+        Task <int> CountAsync();
         Task<T> GetSingleAsync(Guid id);
         Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate);
         Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
-        Task<IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate);
+        Task<IAsyncEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate);
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
