@@ -1,7 +1,4 @@
-﻿using App.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using App.Model.Entity;
 
 namespace App.Repository.Abstract
 {

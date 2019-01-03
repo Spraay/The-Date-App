@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using App.Service.Abstract;;
+using App.Service.Abstract;
 using App.Model.Entity;
 using App.Model.View;
 using App.Model.Assigned;
@@ -116,6 +116,13 @@ namespace App.Service
         {
             return _userRepository.GetSingle(_ => _.Id == id);
         }
+
+        public async Task<IEnumerable<User>> GetAllAsync()
+        {
+            return await _userRepository.GetAllAsync();
+        }
+
+
 
         //public void UpdateInterests(string[] selectedInterests, Guid id)
         //{
@@ -251,6 +258,20 @@ namespace App.Service
                 });
             }
             return viewModel;
+        }
+
+        public async Task<User> GetSingleWithAllPropertiesAsync(Guid id)
+        {
+            return await _userRepository.GetSingleAsync(
+                _ => _.Id == id,
+                _ => _.Interests,
+                _ => _.Gallery,
+                _ => _.ImagesComments,
+                _ => _.ImagesLikes,
+                _ => _.InvitationsReceived,
+                _ => _.InvitationsSent,
+                _ => _.Roles
+            );
         }
     }
 }

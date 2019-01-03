@@ -2,9 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using App;
-using App.Abstract;
-using App.Model;
+using App.Model.Entity;
 using App.Service.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;

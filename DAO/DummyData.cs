@@ -1,5 +1,4 @@
-﻿using App;
-using App.Model;
+﻿using App.Model.Entity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;

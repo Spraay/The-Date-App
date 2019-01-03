@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Pagination
 {
@@ -36,20 +35,16 @@ namespace Pagination
             }
         }
 
-
-            public static async Task<PaginatedList<T>> CreateAsync<T>(IOrderedQueryable<T> qry, int pageIndex, int pageSize) where T : class
-            {
-                var totalRecordCount = await qry.CountAsync();
-                return new PaginatedList<T>(await qry.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync(), totalRecordCount, pageIndex, pageSize);
-            }
-
-   
-
-            public static PaginatedList<T> Create<T>(IEnumerable<T> qry, int pageIndex, int pageSize) where T : class
-            {
-                var totalRecordCount = qry.Count();
-                return new PaginatedList<T>(qry.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList(), totalRecordCount, pageIndex, pageSize);
+        public static async Task<PaginatedList<T>> CreateAsync(IOrderedQueryable<T> qry, int pageIndex, int pageSize)
+        {
+            var totalRecordCount = await qry.CountAsync();
+            return new PaginatedList<T>(await qry.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync(), totalRecordCount, pageIndex, pageSize);
         }
-        
+
+        public static PaginatedList<T> Create(IEnumerable<T> qry, int pageIndex, int pageSize)
+        {
+            var totalRecordCount = qry.Count();
+            return new PaginatedList<T>(qry.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList(), totalRecordCount, pageIndex, pageSize);
+        } 
     }
 }

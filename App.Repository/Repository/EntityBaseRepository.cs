@@ -1,4 +1,5 @@
 ﻿using App.DAO;
+using App.Model.Entity.Abstract;
 using App.Repository.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;

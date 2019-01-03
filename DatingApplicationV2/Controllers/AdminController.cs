@@ -6,10 +6,10 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Pagination;
-using Validators;
 using App.Service.Abstract;
-using App.Model;
-using App.Model.Abstract;
+using App.Repository.Abstract;
+using App.Model.Entity;
+using App.Model.View;
 
 namespace DatingApplication.Controllers
 {

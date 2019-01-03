@@ -1,10 +1,10 @@
 ﻿using App.DAO;
-using App.Model;
-using App.Model.Abstract;
+using App.Model.Entity;
+using App.Repository.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace App.Repository
 {
@@ -54,6 +54,26 @@ namespace App.Repository
         public IEnumerable<Interest> GetUserInterests(Guid id)
         {
             return FindBy(_ => _.UserId == id).Select(_ => _.Interest);
+        }
+
+        public Task<IEnumerable<Interest>> GetUserInterestsAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddUserInterestAsync(Guid id, Guid interest)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task DeleteUserInterestAsync(Guid id, Guid interest)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateUserInterestAsync(Guid id, Guid[] interests)
+        {
+            throw new NotImplementedException();
         }
     }
 }

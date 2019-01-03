@@ -5,6 +5,8 @@ using AutoMapper;
 using System.Threading.Tasks;
 using App.Service.Abstract;
 using App.Repository.Abstract;
+using App.Model.Entity;
+using App.Model.View;
 
 namespace DatingApplication.Controllers
 {
@@ -39,15 +41,8 @@ namespace DatingApplication.Controllers
 
         public async Task<ActionResult> Profile(Guid id)
         {
-            var user = await _userService.GetSingleAsync(
-                _ => _.Id == id,
-                _ => _.Interests,
-                _ => _.Gallery,
-                _ => _.ImagesComments,
-                _ => _.ImagesLikes,
-                _ => _.InvitationsReceived,
-                _ => _.InvitationsSent,
-                _ => _.Roles);
+            var user = await _userService.GetSingleWithAllPropertiesAsync(id);
+                
 
             ViewBag.Friends                 = await _friendService.GetUserFriendsAsync(id);
             ViewBag.PhotosLikes             = await _imageLikeService.CountImageLikesAsync(id);
@@ -62,7 +57,7 @@ namespace DatingApplication.Controllers
         public async Task<IActionResult> Edit(string returnURL = null)
         {
             var user = await _userService.GetAsync(_userService.CurrentUserId);
-            await PopulateAssignedInterestData(user);
+            await _userService.PopulateAssignedInterestData(user);
             var viewModel = _mapper.Map<User, ApplicationUserViewModel>(user);
             if (_userService.IsFilled(user.Id))
                 ViewBag.isFilled = true;
@@ -83,11 +78,7 @@ namespace DatingApplication.Controllers
             ViewBag.ReturnURL = returnURL;
             try
             {
-                _userService.UpdateEyes(selectedEyes);
-                _userService.UpdateGender(selectedGender);
-                _userService.UpdateInterests(selectedInterests);
-                //TODO: _userService.UpdateHair(selectedHair);
-                _userService.Update(user, );
+                _userService.Update(user, selectedInterests, selectedEyes, selectedGender/*, selectedHair*/);
             }
             catch
             {
@@ -95,7 +86,7 @@ namespace DatingApplication.Controllers
                 var viewModel = _mapper.Map<User, ApplicationUserViewModel>(user);
                 return RedirectToAction(nameof(Edit));
             }
-            PopulateAssignedInterestData(user);
+            _userService.PopulateAssignedInterestData(user);
             if( returnURL == null)
             {
                 return RedirectToAction(nameof(Index));

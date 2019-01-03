@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -12,14 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using App.DAO;
-using App.Model;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using App.Service.Abstract;
 using AutoMapper;
 using App.Service;
-using App.Model.Abstract;
 using App.Repository;
-using App.Abstract;
+using App.Model.Entity;
+using App.Repository.Abstract;
 
 namespace DatingApplicationV2
 {
