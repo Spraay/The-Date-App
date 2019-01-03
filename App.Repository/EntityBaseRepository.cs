@@ -12,8 +12,7 @@ using System.Threading.Tasks;
 
 namespace App.Repository
 {
-    public partial class EntityBaseRepository<T> : IEntityBaseRepository<T>
-            where T : class, IEntityBase, new()
+    public partial class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, IEntityBase, new()
     {
         private readonly ApplicationDbContext _context;
 
