@@ -5,10 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace App.Repository
 {
-    public class ConversationRepository : EntityBaseRepository<Conversation>, IConversationRepository
+    public partial class ConversationRepository : EntityBaseRepository<Conversation>, IConversationRepository
     {
         public ConversationRepository(ApplicationDbContext context) : base(context)
         {
@@ -23,5 +24,10 @@ namespace App.Repository
         {
             return FindBy(_ => _.Users.Select(__=>__.Id).Contains(id));
         }
+    }
+
+    public partial class ConversationRepository : EntityBaseRepository<Conversation>, IConversationRepository
+    {
+        
     }
 }
