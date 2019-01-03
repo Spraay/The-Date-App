@@ -117,19 +117,24 @@ namespace App.Repository
             throw new NotImplementedException();
         }
 
-        public Task<T> GetSingleAsync(Guid id)
+        public async Task<T> GetSingleAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate)
+        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().FirstOrDefaultAsync(predicate);
         }
 
-        public Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
-            throw new NotImplementedException();
+            IQueryable<T> query = _context.Set<T>();
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+            return await query.Where(predicate).FirstOrDefaultAsync();
         }
 
         public Task<IAsyncEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate)
