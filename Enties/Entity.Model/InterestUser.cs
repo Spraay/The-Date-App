@@ -1,9 +1,12 @@
 ﻿using App.Abstract;
 using System;
-namespace App.Model
+using System.ComponentModel.DataAnnotations;
+
+namespace App.Model.Entity
 {
     public class InterestUser : IEntityBase
     {
+        [Key]
         public Guid Id { get; set; }
         public DateTime CreatedDate { get; }
         public Guid InterestId { get; set; }

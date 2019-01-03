@@ -1,7 +1,7 @@
 ﻿using App.Abstract;
 using System;
 
-namespace App.Model
+namespace App.Model.Entity
 {
     public class ImageComment : IEntityBase, IComment<Image>
     {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 
-namespace App.Model
+namespace App.Model.Entity
 {
     public class Role : IdentityRole<Guid>, IEntityBase
     {
@@ -21,6 +21,6 @@ namespace App.Model
         public ICollection<UserRole> UsersInRole { get; set; }
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
-        
+        public override string Name { get => base.Name; set => base.Name = value; }
     }
 }

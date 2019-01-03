@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-namespace App.Model
+namespace App.Model.Entity
 {
     public class User : IdentityUser<Guid>, IEntityBase
     {

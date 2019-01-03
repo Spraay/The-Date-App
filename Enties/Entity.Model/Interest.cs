@@ -1,7 +1,7 @@
 ﻿using App.Abstract;
 using System;
 using System.Collections.Generic;
-namespace App.Model
+namespace App.Model.Entity
 {
     public class Interest : IEntityBase
     {
