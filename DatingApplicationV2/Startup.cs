@@ -49,6 +49,7 @@ namespace DatingApplicationV2
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<IInterestRepository, InterestRepository>();
+            services.AddScoped<IInterestUserRepository, InterestUserRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddTransient<IEmailSender, EmailSender>();

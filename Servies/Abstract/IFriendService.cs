@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using App;
-using App.Model;
+using App.Model.Entity;
 
 namespace App.Service.Abstract
 {

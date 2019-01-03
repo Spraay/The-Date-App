@@ -8,11 +8,8 @@
     var userImages = Model.Gallery;
     var userFriends = (List<User>) ViewBag.Friends;
     var totalUserLikes = ViewBag.PhotosLikes;
-    var profileImgSrc = ViewBag.ProfileImg;
-    var profileBacgroundImgSrc = ViewBag.ProfileBackgroundImg;
-    var userRoles = ViewBag.Roles;
     var isModeUserFilled = ViewBag.IsModelUserFilled;
-    var userInterests = (IEnumerable<Interest>) ViewBag.Interests;
+    var userInterests = (IEnumerable<string>) Model.Interests.Select(_=>_.Interest.Name);
 }
 
 <section id="content">
@@ -44,7 +41,7 @@
             <!-- profile-page-header -->
             <div id="profile-page-header" class="card" style="overflow: hidden;">
                 <div class="card-image waves-effect waves-block waves-light" style="height: 250px; z-index: 0;">
-                    <img class="activator" src="~/images/userimages/@profileBacgroundImgSrc" alt="user background">
+                    <img class="activator" src="~/images/userimages/@Model.BackgroundImageSrc" alt="user background">
                 </div>
                 <div class="card-content">
                     <div style="position: relative; height: 70px; top: -44px;">
@@ -90,7 +87,7 @@
 
                     <div class="row" style="margin-top: -200px;">
                         <div class="card-profile-image col s12 m3 inline" style="width: 170px; height: 120px; position: relative; top: 30px;">
-                            <img src="~/images/userimages/@profileImgSrc" alt="profile image" class="circle z-depth-2 responsive-img" style="height: 100%; width: 100%">
+                            <img src="~/images/userimages/@Model.ProfileImageSrc" alt="profile image" class="circle z-depth-2 responsive-img" style="height: 100%; width: 100%">
                         </div>
                         <div class="col s12 m12 center-align">
 
@@ -98,7 +95,7 @@
                         <div class="col s12 m3 offset-m3">
                             <h4 class="card-title grey-text text-darken-4">@Model.FirstName @Model.LastName</h4>
                             <p class="medium-small grey-text">
-                                Roles: @foreach (var r in userRoles)
+                                Roles: @foreach (var r in Model.Roles)
                                 {
                                     <text>@r </text>;
                                 }
@@ -313,7 +310,7 @@
                                             <div class="collection">
                                                 @foreach (var interest in userInterests)
                                                 {
-                                                    <a href="#!" class="collection-item">@interest.Name</a>
+                                                    <a href="#!" class="collection-item">@interest</a>
                                                 }
                                             </div>
                                         }

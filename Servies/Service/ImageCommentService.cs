@@ -1,13 +1,11 @@
 ﻿using App.DAO;
-using App;
 using Microsoft.EntityFrameworkCore;
-using App.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App.Service.Abstract;
-using App.Model;
+using App.Model.Entity;
 
 namespace App.Service
 {

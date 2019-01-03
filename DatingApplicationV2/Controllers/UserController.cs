@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using App.Abstract;
-using DatingApplicationV2.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using Validators;
 using System.Threading.Tasks;
-using App.Model;
 using App.Service.Abstract;
-using App.Model.Abstract;
-using App.Repository;
-using System.ComponentModel.DataAnnotations;
+using App.Repository.Abstract;
 
 namespace DatingApplication.Controllers
 {
