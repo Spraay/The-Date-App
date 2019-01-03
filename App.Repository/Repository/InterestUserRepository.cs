@@ -56,24 +56,47 @@ namespace App.Repository
             return FindBy(_ => _.UserId == id).Select(_ => _.Interest);
         }
 
-        public Task<IEnumerable<Interest>> GetUserInterestsAsync(Guid id)
+        public async Task<IEnumerable<Interest>> GetUserInterestsAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var result = await FindByAsync(_ => _.UserId == id);
+            return result.Select(_ => _.Interest);
         }
 
-        public Task AddUserInterestAsync(Guid id, Guid interest)
+        public async Task AddUserInterestAsync(Guid id, Guid interest)
         {
-            throw new NotImplementedException();
+            if (await GetSingleAsync(_ => _.UserId == id && _.InterestId == interest) == null)
+            {
+                await AddAsync(new InterestUser { InterestId = interest, UserId = id });
+            }
         }
 
-        public Task DeleteUserInterestAsync(Guid id, Guid interest)
+        public async Task DeleteUserInterestAsync(Guid id, Guid interest)
         {
-            throw new NotImplementedException();
+            await DeleteWhereAsync(_ => _.InterestId == interest && _.UserId == id);
         }
 
-        public Task UpdateUserInterestAsync(Guid id, Guid[] interests)
+        public async Task UpdateUserInterestAsync(Guid id, Guid[] interests)
         {
-            throw new NotImplementedException();
+            var userInterests = await GetUserInterestsAsync(id);
+            var allInterests = await GetAllAsync();
+            foreach (var i in allInterests)
+            {
+                if (interests.Contains(i.Id))
+                {
+                    if (!userInterests.Select(_=>_.Id).Contains(i.Id))
+                    {
+                        await AddUserInterestAsync(id, i.Id);
+                    }
+                }
+                else
+                {
+                    if (userInterests.Select(_ => _.Id).Contains(i.Id))
+                    {
+                        await DeleteUserInterestAsync(id, i.Id);
+                    }
+                }
+            }
+            await CommitAsync();
         }
     }
 }
