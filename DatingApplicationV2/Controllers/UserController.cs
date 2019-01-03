@@ -14,6 +14,7 @@ using App.Model;
 using App.Service.Abstract;
 using App.Model.Abstract;
 using App.Repository;
+using System.ComponentModel.DataAnnotations;
 
 namespace DatingApplication.Controllers
 {
@@ -68,10 +69,10 @@ namespace DatingApplication.Controllers
 
         // GET: Default/Edit
         [Authorize(Roles = "User")]
-        public ActionResult Edit(string returnURL = null)
+        public async Task<IActionResult> Edit(string returnURL = null)
         {
-            var user = _userService.GetSingle(_userService.CurrentUserId);
-            PopulateAssignedInterestData(user);
+            var user = await _userService.GetAsync(_userService.CurrentUserId);
+            await PopulateAssignedInterestData(user);
             var viewModel = _mapper.Map<User, ApplicationUserViewModel>(user);
             if (_userService.IsFilled(user.Id))
                 ViewBag.isFilled = true;
@@ -81,46 +82,37 @@ namespace DatingApplication.Controllers
             return View(viewModel);
         }
 
-        private void PopulateAssignedInterestData(User user)
-        {
-            var allInterests = _interestRepository.GetAll();
-            var applicationUserInterests = new HashSet<Guid>(_interestRepository.GetUserInterests(user.Id).Select(_=>_.Id));
-            var viewModel = new List<AssignedInterestData>();
-            foreach (var interest in allInterests)
-            {
-                viewModel.Add(new AssignedInterestData
-                {
-                    InterestID = interest.Id,
-                    InterestName = interest.Name,
-                    Assigned = applicationUserInterests.Contains(interest.Id)
-                });
-            }
-            ViewBag.Interests = viewModel;
-        }
+        
 
         // POST: Default/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "User")]
-        public ActionResult Edit(User user, Guid[] selectedInterests, string selectedGender, string selectedEyes, string returnURL = null)
+        public ActionResult Edit(User user, string[] selectedInterests, string selectedGender, string selectedEyes, /*TODO: string selectedHair,*/ string returnURL = null)
         {
+            ViewBag.ReturnURL = returnURL;
             try
             {
-                _userService.UpdateGender(selectedGender);
                 _userService.UpdateEyes(selectedEyes);
-                _interestRepository.UpdateUserInterest(_userService.CurrentUserId, selectedInterests);
-                if (returnURL == null)
-                    return RedirectToAction(nameof(Index));
-                return Redirect(returnURL);
+                _userService.UpdateGender(selectedGender);
+                _userService.UpdateInterests(selectedInterests);
+                //TODO: _userService.UpdateHair(selectedHair);
+                _userService.Update(user, );
             }
             catch
             {
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                var viewModel = _mapper.Map<User, ApplicationUserViewModel>(user);
+                return RedirectToAction(nameof(Edit));
             }
             PopulateAssignedInterestData(user);
-            ViewBag.ReturnURL = returnURL;
-            return View(user);
+            if( returnURL == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return Redirect(returnURL);
         }
+
 
         public ActionResult RegisterSuccess(string returnURL = null)
         {
