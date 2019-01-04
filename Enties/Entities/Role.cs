@@ -18,7 +18,6 @@ namespace App.Model.Entities
             this.Description = description;
             this.CreatedDate = createdDate;
         }
-        public ICollection<UserRole> UsersInRole { get; set; }
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
         public override string Name { get => base.Name; set => base.Name = value; }

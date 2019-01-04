@@ -8,7 +8,6 @@ namespace App.Model.Entities
     public class User : IdentityUser<Guid>, IEntityBase
     {
         public User() : base() { }
-        public ICollection<UserRole> Roles { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Height { get; set; }
