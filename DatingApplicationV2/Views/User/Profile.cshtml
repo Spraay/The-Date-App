@@ -10,33 +10,12 @@
     var totalUserLikes = ViewBag.PhotosLikes;
     var isModeUserFilled = ViewBag.IsModelUserFilled;
     var userInterests = (IEnumerable<string>) Model.Interests.Select(_=>_.Interest.Name);
+    var userRoles = ViewBag.Roles;
 }
 
 <section id="content">
     <!--start container-->
     <div class="container">
-        @if (currentUserId == Model.Id)
-        {
-        <div id="dashboard">
-            <ul class="collapsible no-border">
-                <li>
-                    <div class="collapsible-header grey darken-4 orange-text text-darken-1 no-border">
-                        <i class="material-icons">dashboard</i>
-                        Dash Board - Clik here to menage your profile
-                    </div>
-                    <div class="collapsible-body no-padding no-border">
-                        <div class="collection with-header no-border">
-                            <a class="collection-item row no-border grey darken-3">
-                                <div style="cursor: pointer;" class="col m4 "><i class="material-icons left">send</i>Menage Gallery</div>
-                                <div style="cursor: pointer;" class="col m8">Here you can menage your gallery<i class="material-icons right">send</i></div>
-                            </a>
-                            
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        }
         <div id="profile-page" class="section">
             <!-- profile-page-header -->
             <div id="profile-page-header" class="card" style="overflow: hidden;">
@@ -95,7 +74,7 @@
                         <div class="col s12 m3 offset-m3">
                             <h4 class="card-title grey-text text-darken-4">@Model.FirstName @Model.LastName</h4>
                             <p class="medium-small grey-text">
-                                Roles: @foreach (var r in Model.Roles)
+                                Roles: @foreach (var r in userRoles)
                                 {
                                     <text>@r </text>;
                                 }
