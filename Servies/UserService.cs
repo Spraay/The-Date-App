@@ -270,8 +270,7 @@ namespace App.Service
                 _ => _.ImagesComments,
                 _ => _.ImagesLikes,
                 _ => _.InvitationsReceived,
-                _ => _.InvitationsSent,
-                _ => _.Roles
+                _ => _.InvitationsSent
             );
         }
     }
