@@ -45,11 +45,8 @@ namespace DatingApplicationV2
 
             services.AddScoped<IInterestRepository, InterestRepository>();
             services.AddScoped<IInterestUserRepository, InterestUserRepository>();
-
-            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
-            services.AddScoped<IUserRoleService, UserRoleService>();
-
             services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IImageService, ImageService>();
