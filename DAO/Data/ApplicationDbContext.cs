@@ -8,9 +8,14 @@ namespace App.DAO
 {
    
     public class ApplicationDbContext
-    : IdentityDbContext<User, Role, Guid, IdentityUserClaim<Guid>, UserRole, IdentityUserLogin<Guid>,IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
+    : IdentityDbContext<User, Role, Guid>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+            
+        }
+
+       
         public DbSet<Interest> Interests { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<ImageLike> ImagesLikes { get; set; }
@@ -22,21 +27,6 @@ namespace App.DAO
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<UserRole>(userRole =>
-            {
-                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
-
-                userRole.HasOne(ur => ur.Role)
-                    .WithMany(r => r.UsersInRole)
-                    .HasForeignKey(ur => ur.RoleId)
-                    .IsRequired();
-
-                userRole.HasOne(ur => ur.User)
-                    .WithMany(r => r.Roles)
-                    .HasForeignKey(ur => ur.UserId)
-                    .IsRequired();
-            });
 
             modelBuilder.Entity<InterestUser>()
                 .HasKey(_ => new { _.InterestId, _.UserId });
@@ -121,6 +111,12 @@ namespace App.DAO
                 .WithMany(__ => __.ImagesComments)
                 .HasForeignKey(_ => _.CreatorId)
                 .OnDelete(DeleteBehavior.Restrict);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging(true);
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }
