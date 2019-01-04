@@ -1,6 +1,6 @@
 ﻿using App;
 using App.Model;
-using App.Model.Entity;
+using App.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

@@ -1,6 +1,6 @@
 ﻿using AutoMapper.Configuration;
 using App.Model.View;
-using App.Model.Entity;
+using App.Model.Entities;
 
 namespace Validators
 {

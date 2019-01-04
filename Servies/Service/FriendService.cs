@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using App.Service.Abstract;
 using App.Model;
-using App.Model.Entity;
+using App.Model.Entities;
+using App.Model.Enumerations;
 
 namespace App.Service
 {

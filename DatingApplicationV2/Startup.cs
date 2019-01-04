@@ -13,7 +13,7 @@ using App.Service.Abstract;
 using AutoMapper;
 using App.Service;
 using App.Repository;
-using App.Model.Entity;
+using App.Model.Entities;
 using App.Repository.Abstract;
 
 namespace DatingApplicationV2

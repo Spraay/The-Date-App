@@ -1,8 +1,8 @@
-﻿using App.Model.Entity.Abstract;
+﻿using App.Model.Entities.Abstract;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace App.Model.Entity
+namespace App.Model.Entities
 {
     public class InterestUser : IEntityBase
     {

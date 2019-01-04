@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using App.Model.Entity;
+using App.Model.Entities;
 using App.Repository.Abstract;
 
 namespace App.Repository

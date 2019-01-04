@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using App.Model.Entity;
+using App.Model.Entities;
 
 namespace DatingApplicationV2.Areas.Identity.Pages.Account
 {

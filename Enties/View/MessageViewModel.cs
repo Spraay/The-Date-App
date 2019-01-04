@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using App.Model.Entity;
+using App.Model.Entities;
 
 namespace Validators
 {

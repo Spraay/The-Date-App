@@ -1,7 +1,7 @@
-﻿using App.Model.Entity.Abstract;
+﻿using App.Model.Entities.Abstract;
 using System;
 
-namespace App.Model.Entity
+namespace App.Model.Entities
 {
     public class ImageLike : IEntityBase, ILike<Image>
     {

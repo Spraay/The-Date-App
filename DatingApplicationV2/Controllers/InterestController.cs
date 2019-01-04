@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System;
 using App.Repository.Abstract;
-using App.Model.Entity;
+using App.Model.Entities;
 
 namespace DatingApplicationV2.Controllers
 {

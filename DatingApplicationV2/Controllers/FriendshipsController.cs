@@ -3,7 +3,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using App.Service.Abstract;
-using App.Model.Entity;
+using App.Model.Entities;
+using App.Model.Enumerations;
 
 namespace DatingApplicationV2.Controllers
 {

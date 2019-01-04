@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using App.Service.Abstract;
-using App.Model.Entity;
+using App.Model.Entities;
 
 namespace DatingApplicationV2.Controllers
 {

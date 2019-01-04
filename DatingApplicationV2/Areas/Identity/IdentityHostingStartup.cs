@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using App.Model.Entity;
+using App.Model.Entities;
 
 [assembly: HostingStartup(typeof(DatingApplicationV2.Areas.Identity.IdentityHostingStartup))]
 namespace DatingApplicationV2.Areas.Identity

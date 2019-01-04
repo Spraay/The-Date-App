@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using App.Model.Entity;
+using App.Model.Entities;
 
 namespace DatingApplicationV2.Areas.Identity.Pages.Account
 {

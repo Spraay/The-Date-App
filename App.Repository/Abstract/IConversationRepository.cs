@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using App.Model.Entity;
+using App.Model.Entities;
 using System;
 
 namespace App.Repository.Abstract

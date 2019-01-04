@@ -1,5 +1,5 @@
 ﻿using App.Model.Assigned;
-using App.Model.Entity;
+using App.Model.Entities;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

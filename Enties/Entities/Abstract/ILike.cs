@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace App.Model.Entity.Abstract
+namespace App.Model.Entities.Abstract
 {
     public interface ILike<ItemType>
     {

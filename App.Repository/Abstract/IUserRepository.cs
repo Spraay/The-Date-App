@@ -1,4 +1,4 @@
-﻿using App.Model.Entity;
+﻿using App.Model.Entities;
 
 namespace App.Repository.Abstract
 {

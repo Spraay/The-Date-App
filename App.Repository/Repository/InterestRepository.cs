@@ -1,5 +1,5 @@
 ﻿using App.DAO;
-using App.Model.Entity;
+using App.Model.Entities;
 using App.Repository.Abstract;
 
 namespace App.Repository

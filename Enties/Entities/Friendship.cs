@@ -1,6 +1,7 @@
-﻿using App.Model.Entity.Abstract;
+﻿using App.Model.Entities.Abstract;
+using App.Model.Enumerations;
 using System;
-namespace App.Model.Entity
+namespace App.Model.Entities
 {
     public class Friendship : IEntityBase
     {

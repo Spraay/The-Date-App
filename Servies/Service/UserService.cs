@@ -7,10 +7,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using App.Service.Abstract;
-using App.Model.Entity;
+using App.Model.Entities;
 using App.Model.View;
 using App.Model.Assigned;
 using App.Repository.Abstract;
+using App.Model.Enumerations;
 
 namespace App.Service
 {

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App.Service.Abstract;
-using App.Model.Entity;
+using App.Model.Entities;
 
 namespace App.Service
 {

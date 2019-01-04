@@ -5,7 +5,7 @@ using AutoMapper;
 using System.Threading.Tasks;
 using App.Service.Abstract;
 using App.Repository.Abstract;
-using App.Model.Entity;
+using App.Model.Entities;
 using App.Model.View;
 
 namespace DatingApplication.Controllers
