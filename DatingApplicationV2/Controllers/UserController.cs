@@ -7,6 +7,7 @@ using App.Service.Abstract;
 using App.Repository.Abstract;
 using App.Model.Entities;
 using App.Model.View;
+using Microsoft.AspNetCore.Identity;
 
 namespace DatingApplication.Controllers
 {
@@ -18,8 +19,9 @@ namespace DatingApplication.Controllers
         private readonly IImageService _imageService;
         private readonly IImageLikeService _imageLikeService;
         private readonly IInterestRepository _interestRepository;
+        private readonly UserManager<User> _userManager;
 
-        public UserController(IMapper mapper, IUserService userService, IFriendService friendService, IImageService imageService, IImageLikeService imageLikeService, IInterestRepository interestRepository)
+        public UserController(IMapper mapper, IUserService userService, IFriendService friendService, IImageService imageService, IImageLikeService imageLikeService, IInterestRepository interestRepository, UserManager<User> userManager)
         {
             _mapper = mapper;
             _userService = userService;
@@ -27,7 +29,12 @@ namespace DatingApplication.Controllers
             _imageService = imageService;
             _imageLikeService = imageLikeService;
             _interestRepository = interestRepository;
+            _userManager = userManager;
         }
+
+
+
+
 
         // GET: Default
         [Authorize(Roles = "User")]
@@ -48,7 +55,7 @@ namespace DatingApplication.Controllers
             ViewBag.PhotosLikes             = await _imageLikeService.CountImageLikesAsync(id);
             ViewBag.CurrentUserId           = _userService.CurrentUserId;
             ViewBag.IsModelUserFilled       = await _userService.IsFilledAsync(id);
-           
+            ViewBag.Roles                   = await _userManager.GetRolesAsync(_userService.Get(id));
             return View(user);
         }
 
