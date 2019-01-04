@@ -64,6 +64,16 @@ namespace App.Repository
             return _context.Set<T>().Where(predicate);
         }
 
+        public IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+            return query.Where(predicate);
+        }
+
         public virtual void Add(T entity)
         {
             EntityEntry dbEntityEntry = _context.Entry<T>(entity);
@@ -94,7 +104,7 @@ namespace App.Repository
         public virtual void Commit()
         {
             _context.SaveChanges();
-        }        
+        }
     }
 
     public partial class EntityBaseRepository<T> : IEntityBaseRepository<T>
@@ -143,6 +153,16 @@ namespace App.Repository
         public async Task<IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate)
         {
             return await _context.Set<T>().Where(predicate).ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _context.Set<T>();
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+            return await query.Where(predicate).ToListAsync();
         }
 
         public async Task AddAsync(T entity)
