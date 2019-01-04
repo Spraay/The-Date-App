@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DAO.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190103124746_Init")]
-    partial class Init
+    [Migration("20190104231431_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace App.DAO.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("App.Model.Conversation", b =>
+            modelBuilder.Entity("App.Model.Entities.Conversation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -33,7 +33,7 @@ namespace App.DAO.Migrations
                     b.ToTable("Conversations");
                 });
 
-            modelBuilder.Entity("App.Model.ConversationUser", b =>
+            modelBuilder.Entity("App.Model.Entities.ConversationUser", b =>
                 {
                     b.Property<Guid>("ConversationId");
 
@@ -48,7 +48,7 @@ namespace App.DAO.Migrations
                     b.ToTable("ConversationUser");
                 });
 
-            modelBuilder.Entity("App.Model.Friendship", b =>
+            modelBuilder.Entity("App.Model.Entities.Friendship", b =>
                 {
                     b.Property<Guid>("SenderId");
 
@@ -65,7 +65,7 @@ namespace App.DAO.Migrations
                     b.ToTable("Friendships");
                 });
 
-            modelBuilder.Entity("App.Model.Image", b =>
+            modelBuilder.Entity("App.Model.Entities.Image", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -85,7 +85,7 @@ namespace App.DAO.Migrations
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("App.Model.ImageComment", b =>
+            modelBuilder.Entity("App.Model.Entities.ImageComment", b =>
                 {
                     b.Property<Guid>("CreatorId");
 
@@ -102,7 +102,7 @@ namespace App.DAO.Migrations
                     b.ToTable("ImagesComments");
                 });
 
-            modelBuilder.Entity("App.Model.ImageLike", b =>
+            modelBuilder.Entity("App.Model.Entities.ImageLike", b =>
                 {
                     b.Property<Guid>("CreatorId");
 
@@ -117,7 +117,7 @@ namespace App.DAO.Migrations
                     b.ToTable("ImagesLikes");
                 });
 
-            modelBuilder.Entity("App.Model.Interest", b =>
+            modelBuilder.Entity("App.Model.Entities.Interest", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -129,7 +129,7 @@ namespace App.DAO.Migrations
                     b.ToTable("Interests");
                 });
 
-            modelBuilder.Entity("App.Model.InterestUser", b =>
+            modelBuilder.Entity("App.Model.Entities.InterestUser", b =>
                 {
                     b.Property<Guid>("InterestId");
 
@@ -139,12 +139,14 @@ namespace App.DAO.Migrations
 
                     b.HasKey("InterestId", "UserId");
 
+                    b.HasAlternateKey("Id");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("InterestUser");
                 });
 
-            modelBuilder.Entity("App.Model.Message", b =>
+            modelBuilder.Entity("App.Model.Entities.Message", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -164,7 +166,7 @@ namespace App.DAO.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("App.Model.Role", b =>
+            modelBuilder.Entity("App.Model.Entities.Role", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -192,7 +194,7 @@ namespace App.DAO.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("App.Model.User", b =>
+            modelBuilder.Entity("App.Model.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -265,19 +267,6 @@ namespace App.DAO.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("App.Model.UserRole", b =>
-                {
-                    b.Property<Guid>("UserId");
-
-                    b.Property<Guid>("RoleId");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
@@ -335,6 +324,19 @@ namespace App.DAO.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId");
+
+                    b.Property<Guid>("RoleId");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.Property<Guid>("UserId");
@@ -352,108 +354,95 @@ namespace App.DAO.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("App.Model.ConversationUser", b =>
+            modelBuilder.Entity("App.Model.Entities.ConversationUser", b =>
                 {
-                    b.HasOne("App.Model.Conversation", "Conversation")
+                    b.HasOne("App.Model.Entities.Conversation", "Conversation")
                         .WithMany("Users")
                         .HasForeignKey("ConversationId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("App.Model.User", "User")
+                    b.HasOne("App.Model.Entities.User", "User")
                         .WithMany("Conversations")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("App.Model.Friendship", b =>
+            modelBuilder.Entity("App.Model.Entities.Friendship", b =>
                 {
-                    b.HasOne("App.Model.User", "Friend")
+                    b.HasOne("App.Model.Entities.User", "Friend")
                         .WithMany("InvitationsReceived")
                         .HasForeignKey("FriendId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("App.Model.User", "Sender")
+                    b.HasOne("App.Model.Entities.User", "Sender")
                         .WithMany("InvitationsSent")
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("App.Model.Image", b =>
+            modelBuilder.Entity("App.Model.Entities.Image", b =>
                 {
-                    b.HasOne("App.Model.User", "User")
+                    b.HasOne("App.Model.Entities.User", "User")
                         .WithMany("Gallery")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("App.Model.ImageComment", b =>
+            modelBuilder.Entity("App.Model.Entities.ImageComment", b =>
                 {
-                    b.HasOne("App.Model.Image", "CommentedItem")
+                    b.HasOne("App.Model.Entities.Image", "CommentedItem")
                         .WithMany("Comments")
                         .HasForeignKey("CommentedItemId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("App.Model.User", "Creator")
+                    b.HasOne("App.Model.Entities.User", "Creator")
                         .WithMany("ImagesComments")
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("App.Model.ImageLike", b =>
+            modelBuilder.Entity("App.Model.Entities.ImageLike", b =>
                 {
-                    b.HasOne("App.Model.User", "Creator")
+                    b.HasOne("App.Model.Entities.User", "Creator")
                         .WithMany("ImagesLikes")
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("App.Model.Image", "LikedItem")
+                    b.HasOne("App.Model.Entities.Image", "LikedItem")
                         .WithMany("Likes")
                         .HasForeignKey("LikedItemId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("App.Model.InterestUser", b =>
+            modelBuilder.Entity("App.Model.Entities.InterestUser", b =>
                 {
-                    b.HasOne("App.Model.Interest", "Interest")
+                    b.HasOne("App.Model.Entities.Interest", "Interest")
                         .WithMany("UsersInteresting")
                         .HasForeignKey("InterestId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("App.Model.User", "User")
+                    b.HasOne("App.Model.Entities.User", "User")
                         .WithMany("Interests")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("App.Model.Message", b =>
+            modelBuilder.Entity("App.Model.Entities.Message", b =>
                 {
-                    b.HasOne("App.Model.Conversation", "Conversation")
+                    b.HasOne("App.Model.Entities.Conversation", "Conversation")
                         .WithMany("Messages")
                         .HasForeignKey("ConversationId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("App.Model.User", "Sender")
+                    b.HasOne("App.Model.Entities.User", "Sender")
                         .WithMany("SentMessages")
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("App.Model.UserRole", b =>
-                {
-                    b.HasOne("App.Model.Role", "Role")
-                        .WithMany("UsersInRole")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("App.Model.User", "User")
-                        .WithMany("Roles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("App.Model.Role")
+                    b.HasOne("App.Model.Entities.Role")
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -461,7 +450,7 @@ namespace App.DAO.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("App.Model.User")
+                    b.HasOne("App.Model.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -469,7 +458,20 @@ namespace App.DAO.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("App.Model.User")
+                    b.HasOne("App.Model.Entities.User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.HasOne("App.Model.Entities.Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("App.Model.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -477,7 +479,7 @@ namespace App.DAO.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("App.Model.User")
+                    b.HasOne("App.Model.Entities.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

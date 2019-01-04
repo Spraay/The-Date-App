@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace App.DAO.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,11 +13,11 @@ namespace App.DAO.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    CreatedDate = table.Column<DateTime>(nullable: false)
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(maxLength: 256, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -299,6 +299,7 @@ namespace App.DAO.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_InterestUser", x => new { x.InterestId, x.UserId });
+                    table.UniqueConstraint("AK_InterestUser_Id", x => x.Id);
                     table.ForeignKey(
                         name: "FK_InterestUser_Interests_InterestId",
                         column: x => x.InterestId,
