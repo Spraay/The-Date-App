@@ -299,7 +299,6 @@ namespace App.DAO.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_InterestUser", x => new { x.InterestId, x.UserId });
-                    table.UniqueConstraint("AK_InterestUser_Id", x => x.Id);
                     table.ForeignKey(
                         name: "FK_InterestUser_Interests_InterestId",
                         column: x => x.InterestId,

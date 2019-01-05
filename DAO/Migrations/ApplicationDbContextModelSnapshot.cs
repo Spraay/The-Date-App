@@ -137,8 +137,6 @@ namespace App.DAO.Migrations
 
                     b.HasKey("InterestId", "UserId");
 
-                    b.HasAlternateKey("Id");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("InterestUser");

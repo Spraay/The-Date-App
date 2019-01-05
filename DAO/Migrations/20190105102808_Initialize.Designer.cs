@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DAO.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190104231431_Initialize")]
+    [Migration("20190105102808_Initialize")]
     partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,8 +138,6 @@ namespace App.DAO.Migrations
                     b.Property<Guid>("Id");
 
                     b.HasKey("InterestId", "UserId");
-
-                    b.HasAlternateKey("Id");
 
                     b.HasIndex("UserId");
 
