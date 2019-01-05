@@ -6,7 +6,7 @@
 }
 
 <div class="collection">
-    <a class="@(page == "/account/manage/index" ?  "collection-item active" : "collection-item")" asp-page="./Index">Profile</a>
+    <a class="@(page == "/account/manage/index" ?  "collection-item active" : "collection-item")" asp-page="./Index">Account</a>
     @*<a class="collection-item active" asp-page="./Index">Profile</a>*@
     <a class="@(page == "/account/manage/changepassword" ?  "collection-item active" : "collection-item")" id="change-password" asp-page="./ChangePassword">Password</a>
     @if (hasExternalLogins)
@@ -15,4 +15,5 @@
     }
     <a class="@(page == "/account/manage/twofactorauthentication" ?  "collection-item active" : "collection-item")" asp-page="./TwoFactorAuthentication">Two-factor authentication</a>
     <a class="@(page == "/account/manage/personaldata" ?  "collection-item active" : "collection-item")" asp-page="./PersonalData">Personal data</a>
+    <a class="@(page == "/account/manage/profile" ?  "collection-item active" : "collection-item")" asp-page="./Profile">Profile</a>
 </div>
