@@ -13,3 +13,11 @@ main {
 .no-border {
     border: none;
 }
+
+.pointer-cursor:hover{
+    cursor: pointer;
+}
+
+.hover-opacity:hover {
+    filter: brightness(130%);
+}
