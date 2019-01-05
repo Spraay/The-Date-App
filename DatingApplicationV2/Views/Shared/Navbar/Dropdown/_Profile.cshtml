@@ -1,9 +1,11 @@
 ﻿@using App.Service.Abstract
+@using App.Repository.Abstract
 @inject SignInManager<User> SignInManager
 @inject IUserService _userService
+@inject IUserRepository _userRepository
 
 @{
-    var user = await _userService.GetAsync(_userService.CurrentUserId);
+    var user = await _userRepository.GetSingleAsync(_userService.CurrentUserId);
 }
 <!-- Dropdown Structure -->
 <ul id='profileDropdown' class='dropdown-content'>
