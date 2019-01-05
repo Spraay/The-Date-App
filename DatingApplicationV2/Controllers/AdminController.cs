@@ -18,12 +18,14 @@ namespace DatingApplication.Controllers
     public class AdminController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IUserRepository _userRepository;
         private readonly IInterestRepository _interestRepository;
         private readonly IMapper _mapper;
 
-        public AdminController(IUserService userService, IInterestRepository interestRepository, IMapper mapper)
+        public AdminController(IUserService userService, IUserRepository userRepository, IInterestRepository interestRepository, IMapper mapper)
         {
             _userService = userService;
+            _userRepository = userRepository;
             _interestRepository = interestRepository;
             _mapper = mapper;
         }
@@ -40,9 +42,10 @@ namespace DatingApplication.Controllers
             int? page)
         {
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["FirstNameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "first_name_desc" : "";
+            ViewData["LastNameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "last_name_desc" : "";
             ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
-            ViewData["PageSize"] = pageSize?? 5;
+            ViewData["PageSize"] = pageSize?? 10;
 
             if (searchString != null)
             {
@@ -55,7 +58,7 @@ namespace DatingApplication.Controllers
 
             ViewData["CurrentFilter"] = searchString;
 
-            var appUsers = await _userService.GetAllAsync();
+            var appUsers = await _userRepository.GetAllAsync();
             if (!String.IsNullOrEmpty(searchString))
             {
 
@@ -72,7 +75,10 @@ namespace DatingApplication.Controllers
             }
             switch (sortOrder)
             {
-                case "name_desc":
+                case "first_name_desc":
+                    appUsers = appUsers.OrderByDescending(s => s.FirstName).ToList();
+                    break;
+                case "last_name_desc":
                     appUsers = appUsers.OrderByDescending(s => s.LastName).ToList();
                     break;
                 case "Date":

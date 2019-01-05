@@ -19,9 +19,10 @@ namespace DatingApplication.Controllers
         private readonly IImageService _imageService;
         private readonly IImageLikeService _imageLikeService;
         private readonly IInterestRepository _interestRepository;
+        private readonly IUserRepository _userRepository;
         private readonly UserManager<User> _userManager;
 
-        public UserController(IMapper mapper, IUserService userService, IFriendService friendService, IImageService imageService, IImageLikeService imageLikeService, IInterestRepository interestRepository, UserManager<User> userManager)
+        public UserController(IMapper mapper, IUserService userService, IFriendService friendService, IImageService imageService, IImageLikeService imageLikeService, IInterestRepository interestRepository, IUserRepository userRepository, UserManager<User> userManager)
         {
             _mapper = mapper;
             _userService = userService;
@@ -29,12 +30,9 @@ namespace DatingApplication.Controllers
             _imageService = imageService;
             _imageLikeService = imageLikeService;
             _interestRepository = interestRepository;
+            _userRepository = userRepository;
             _userManager = userManager;
         }
-
-
-
-
 
         // GET: Default
         [Authorize(Roles = "User")]
@@ -48,14 +46,16 @@ namespace DatingApplication.Controllers
 
         public async Task<ActionResult> Profile(Guid id)
         {
-            var user = await _userService.GetSingleWithAllPropertiesAsync(id);
+            var user = await _userRepository.GetSingleAsync(_=>_.Id == id,
+                _=>_.Interests,
+                _=>_.Gallery);
                 
 
             ViewBag.Friends                 = await _friendService.GetUserFriendsAsync(id);
             ViewBag.PhotosLikes             = await _imageLikeService.CountImageLikesAsync(id);
             ViewBag.CurrentUserId           = _userService.CurrentUserId;
             ViewBag.IsModelUserFilled       = await _userService.IsFilledAsync(id);
-            ViewBag.Roles                   = await _userManager.GetRolesAsync(_userService.Get(id));
+            ViewBag.Roles                   = await _userManager.GetRolesAsync(await _userRepository.GetSingleAsync(id));
             return View(user);
         }
 
@@ -63,8 +63,8 @@ namespace DatingApplication.Controllers
         [Authorize(Roles = "User")]
         public async Task<IActionResult> Edit(string returnURL = null)
         {
-            var user = await _userService.GetAsync(_userService.CurrentUserId);
-            await _userService.PopulateAssignedInterestData(user);
+            var user = await _userRepository.GetSingleAsync(_=>_.Id==_userService.CurrentUserId, _=>_.Interests);
+            ViewBag.Interests = await _userService.PopulateAssignedInterestDataAsync(user);
             var viewModel = _mapper.Map<User, ApplicationUserViewModel>(user);
             if (_userService.IsFilled(user.Id))
                 ViewBag.isFilled = true;
@@ -74,30 +74,17 @@ namespace DatingApplication.Controllers
             return View(viewModel);
         }
 
-        
-
         // POST: Default/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "User")]
-        public ActionResult Edit(User user, string[] selectedInterests, string selectedGender, string selectedEyes, /*TODO: string selectedHair,*/ string returnURL = null)
+        public async Task<IActionResult> Edit(ApplicationUserViewModel user, string[] selectedInterests, string selectedGender, string selectedEyes, /*TODO: string selectedHair,*/ string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
-            try
-            {
-                _userService.Update(user, selectedInterests, selectedEyes, selectedGender/*, selectedHair*/);
-            }
-            catch
-            {
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-                var viewModel = _mapper.Map<User, ApplicationUserViewModel>(user);
-                return RedirectToAction(nameof(Edit));
-            }
-            _userService.PopulateAssignedInterestData(user);
+            
+            await _userService.UpdateAsync(user, selectedInterests, selectedGender, selectedEyes);
             if( returnURL == null)
-            {
                 return RedirectToAction(nameof(Index));
-            }
             return Redirect(returnURL);
         }
 

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using App.Service.Abstract;
 using App.Model.Entities;
 using App.Model.Enumerations;
+using App.Repository.Abstract;
 
 namespace DatingApplicationV2.Controllers
 {
@@ -13,11 +14,13 @@ namespace DatingApplicationV2.Controllers
     {
 
         private readonly IUserService _userService;
+        private readonly IUserRepository _userRepository;
         private readonly IFriendService _friendshipService;
 
-        public FriendshipsController(IUserService userService, IFriendService friendshipService)
+        public FriendshipsController(IUserService userService, IUserRepository userRepository, IFriendService friendshipService)
         {
             _userService = userService;
+            _userRepository = userRepository;
             _friendshipService = friendshipService;
         }
 
@@ -44,7 +47,7 @@ namespace DatingApplicationV2.Controllers
         public async Task<IActionResult> Add(Guid id, string returnURL = null)
         {
             var friendship = await _friendshipService.GetAsync(_userService.CurrentUserId, id);
-            var friend = await _userService.GetAsync(id);
+            var friend = await _userRepository.GetSingleAsync(id);
             ViewBag.ReturnURL = returnURL;
             if ( friendship==null)
             {
@@ -80,12 +83,12 @@ namespace DatingApplicationV2.Controllers
         public async Task<IActionResult> AlreadyFriends(Guid id, string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
-            return View(await _userService.GetAsync(id) );
+            return View(await _userRepository.GetSingleAsync(id) );
         }
         public async Task<IActionResult> NotAcceptJet(Guid id, string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
-            return View(await _userService.GetAsync(id));
+            return View(await _userRepository.GetSingleAsync(id));
         }
 
         public async Task<IActionResult> Delete(Guid id, string returnURL = null)
@@ -94,7 +97,7 @@ namespace DatingApplicationV2.Controllers
             if (friendship == null)
                 return RedirectToAction("ItemNotFound", "ErrorController", new { exception = "TO DO" } );
             ViewBag.ReturnURL = returnURL;
-            return View(await _userService.GetAsync(id));
+            return View(await _userRepository.GetSingleAsync(id));
         }
 
         [HttpPost, ActionName("Delete")]
@@ -108,7 +111,7 @@ namespace DatingApplicationV2.Controllers
         public async Task<IActionResult> DeleteSuccess(Guid id, string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
-            return View(await _userService.GetAsync(id));
+            return View(await _userRepository.GetSingleAsync(id));
         }
     }
 }
