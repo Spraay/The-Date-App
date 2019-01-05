@@ -6,7 +6,6 @@ namespace App.Model.Entities
 {
     public class InterestUser : IEntityBase
     {
-        [Key]
         public Guid Id { get; set; }
         public DateTime CreatedDate { get; }
         public Guid InterestId { get; set; }
