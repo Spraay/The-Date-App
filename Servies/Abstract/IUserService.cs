@@ -1,5 +1,6 @@
 ﻿using App.Model.Assigned;
 using App.Model.Entities;
+using App.Model.View;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,26 +11,12 @@ namespace App.Service.Abstract
     {
         Guid CurrentUserId { get; }
         bool IsFilled(Guid id);
-        User Get(Guid id);
-        void UpdateEyes(string eyes);
-        void UpdateGender(string gender);
-        void UpdateInterests(string[] selectedInterests);
-        void Update(User user);
-        void Update(User user, string[] interests = null, string selectedEyes = null, string selectedGender = null);
-        
+        void Update(ApplicationUserViewModel user, string[] selectedInterests, string selectedGender, string selectedEyes);
     }
-
     public partial interface IUserService 
     {
-        Task<User> GetAsync(Guid id);
         Task<bool> IsFilledAsync(Guid id);
-        Task UpdateEyesAsync(string eyes);
-        Task UpdateGenderAsync(string gender);
-        Task UpdateInterestsAsync(string[] selectedInterests);
-        Task UpdateAsync(User user);
-        Task UpdateAsync(User user, string[] interests = null, string selectedEyes = null, string selectedGender = null);
-        Task <List<AssignedInterestData>> PopulateAssignedInterestData(User user);
-        Task<User> GetSingleWithAllPropertiesAsync(Guid id);
-        Task<IEnumerable<User>> GetAllAsync();
+        Task<List<AssignedInterestData>> PopulateAssignedInterestDataAsync(User user);
+        Task UpdateAsync(ApplicationUserViewModel user, string[] selectedInterests, string selectedGender, string selectedEyes);
     }
 }

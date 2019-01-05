@@ -56,114 +56,49 @@ namespace App.Service
             return true;
         }
 
-        public void UpdateGender(string selectedGender)
+        public void Update(ApplicationUserViewModel user, string[] selectedInterests, string selectedGender, string selectedEyes)
         {
-            var user = _userRepository.GetSingle(CurrentUserId);
-            Enum.TryParse(selectedGender, out Gender gender);
-            user.Gender = gender;
-            _userRepository.Update(user);
+            var userFromDB = _userRepository.GetSingle(user.Id);
+            userFromDB.FirstName = user.FirstName;
+            userFromDB.LastName = user.LastName;
+            userFromDB.Height = user.Height;
+            userFromDB.Weight = user.Weight;
+            userFromDB.Hair = user.Hair;
+            userFromDB.BirthDate = user.BirthDate;
+            _userRepository.Update(userFromDB);
             _userRepository.Commit();
+            //TODO FIX THIS FUCKING SHIT UpdateInterests(selectedInterests, user.Id);
         }
 
-        public void UpdateEyes(string selectedEyes)
+        public void UpdateInterests(string[] selectedInterests, Guid id)
         {
-            var user = _userRepository.GetSingle(CurrentUserId);
-            Enum.TryParse(selectedEyes, out Eyes eyes);
-            user.Eyes = eyes;
-            _userRepository.Update(user);
-            _userRepository.Commit();
-        }
+            var selectedInterestsHS = new HashSet<string>(selectedInterests);
+            var userInterestsHS = new HashSet<Guid>(_interestUserRepository.FindBy(_=>_.UserId == id).Select(_=>_.InterestId));
+            var allInterestsHS = new HashSet<Guid>(_interestRepository.GetAll().Select(_=>_.Id));
 
-        public void UpdateInterests(string[] interests)
-        {
-            List<Guid> interestGuid = new List<Guid>();
-            foreach(var i in interests)
+            foreach (var interest in allInterestsHS)
             {
-                interestGuid.Add(new Guid(i));
+                if (selectedInterestsHS.Contains(interest.ToString()))
+                {
+                    if (!userInterestsHS.Contains(interest))
+                    {
+                        _interestUserRepository.Add(new InterestUser()
+                        {
+                            InterestId = interest,
+                            UserId = id
+                        });
+                    }
+                }
+                else
+                {
+                    if (userInterestsHS.Contains(interest))
+                    {
+                        _interestUserRepository.DeleteWhere(_ => _.InterestId == interest && _.UserId == id);
+                    }
+                }
             }
-            _interestUserRepository.UpdateUserInterest(CurrentUserId, interestGuid.ToArray());
-        }
-
-        public void Update(User user)
-        {
-            var userToUpdate = _userRepository.GetSingle(_=>_.Id == user.Id, _=>_.Interests);
-            userToUpdate.BirthDate = user.BirthDate;
-            userToUpdate.Description = user.Description;
-            userToUpdate.Email = user.Email;
-            userToUpdate.FirstName = user.FirstName;
-            userToUpdate.LastName = user.LastName;
-            userToUpdate.Height = user.Height;
-            userToUpdate.Weight = user.Weight;
-            userToUpdate.Gallery = user.Gallery;
-            _userRepository.Update(userToUpdate);
-            _userRepository.Commit();
-        }
-
-        public void Update(User user, string[]interests = null, string selectedEyes = null, string selectedGender= null/*TODO:, string selectedHair = null*/)
-        {
-            if (user != null)
-                Update(user);
-            if (interests.Any())
-                UpdateInterests(interests);
-            if (selectedEyes != null)
-                UpdateEyes(selectedEyes);
-            if (selectedGender != null)
-                UpdateGender(selectedGender);
-            //TODO: if (selectedHair != null)
-            //    UpdateHair(selectedHair);
-        }
-
-        public User Get(Guid id)
-        {
-            return _userRepository.GetSingle(_ => _.Id == id);
-        }
-
-        public async Task<IEnumerable<User>> GetAllAsync()
-        {
-            return await _userRepository.GetAllAsync();
-        }
-
-
-
-        //public void UpdateInterests(string[] selectedInterests, Guid id)
-        //{
-        //    var user = Get(id);
-        //    if (selectedInterests == null)
-        //    {
-        //        user.InterestsApplicationUser = new List<InterestUser>();
-        //        return;
-        //    }
-
-        //    var selectedInterestsHS = new HashSet<string>(selectedInterests);
-        //    var userInterests = new HashSet<Guid>(user.InterestsApplicationUser.Select(_ => _.InterestId));
-        //    var allInterests = _interestRepository.GetAll();
-
-        //    foreach (var interest in allInterests)
-        //    {
-        //        if (selectedInterestsHS.Contains(interest.Id.ToString()))
-        //        {
-        //            if (!userInterests.Contains(interest.Id))
-        //            {
-        //                user.InterestsApplicationUser.Add(new InterestUser()
-        //                {
-        //                    Interest = allInterests.SingleOrDefault(_ => _.Id == interest.Id),
-        //                    User = user,
-        //                    InterestId = allInterests.SingleOrDefault(_ => _.Name == interest.Name).Id,
-        //                    UserId = user.Id
-        //                });
-        //            }
-        //        }
-        //        else
-        //        {
-        //            if (userInterests.Contains(interest.Id))
-        //            {
-        //                user.InterestsApplicationUser.Remove(user.InterestsApplicationUser.SingleOrDefault(_ => _.InterestId == interest.Id));
-        //            }
-        //        }
-        //    }
-        //    Update(user);
-        //    _context.SaveChanges();
-        //}
+            _interestUserRepository.Commit();
+        } 
     }
 
     //TASK PART
@@ -183,71 +118,10 @@ namespace App.Service
             return true;
         }
 
-        public async Task UpdateEyesAsync(string selectedEyes)
-        {
-            var user = await _userRepository.GetSingleAsync(CurrentUserId);
-            Enum.TryParse(selectedEyes, out Eyes eyes);
-            user.Eyes = eyes;
-            _userRepository.Update(user);
-            await _userRepository.CommitAsync();
-        }
-
-        public async Task UpdateGenderAsync(string selectedGender)
-        {
-            var user = await _userRepository.GetSingleAsync(CurrentUserId);
-            Enum.TryParse(selectedGender, out Gender gender);
-            user.Gender = gender;
-            _userRepository.Update(user);
-            await _userRepository.CommitAsync();
-        }
-
-        public async Task UpdateInterestsAsync(string[] selectedInterests)
-        {
-            List<Guid> interestGuid = new List<Guid>();
-            foreach (var i in selectedInterests)
-            {
-                interestGuid.Add(new Guid(i));
-            }
-            await _interestUserRepository.UpdateUserInterestAsync(CurrentUserId, interestGuid.ToArray());
-        }
-
-        public async Task UpdateAsync(User user)
-        {
-            var userToUpdate = await _userRepository.GetSingleAsync(_ => _.Id == user.Id, _ => _.Interests);
-            userToUpdate.BirthDate = user.BirthDate;
-            userToUpdate.Description = user.Description;
-            userToUpdate.Email = user.Email;
-            userToUpdate.FirstName = user.FirstName;
-            userToUpdate.LastName = user.LastName;
-            userToUpdate.Height = user.Height;
-            userToUpdate.Weight = user.Weight;
-            userToUpdate.Gallery = user.Gallery;
-            _userRepository.Update(userToUpdate);
-            await _userRepository.CommitAsync();
-        }
-
-        public async Task UpdateAsync(User user, string[] interests = null, string selectedEyes = null, string selectedGender = null)
-        {
-            if (user != null)
-                await UpdateAsync(user);
-            if (interests.Any())
-                await UpdateInterestsAsync(interests);
-            if (selectedEyes != null)
-                await UpdateEyesAsync(selectedEyes);
-            if (selectedGender != null)
-                await UpdateGenderAsync(selectedGender);
-        }
-
-        public async Task<User> GetAsync(Guid id)
-        {
-            return await _userRepository.GetSingleAsync(_ => _.Id == id);
-        }
-
-        public async Task<List<AssignedInterestData>> PopulateAssignedInterestData(User user)
+        public async Task<List<AssignedInterestData>> PopulateAssignedInterestDataAsync(User user)
         {
             var allInterests = await _interestRepository.GetAllAsync();
-            var userInterests = await _interestUserRepository.GetUserInterestsAsync(user.Id);
-            var applicationUserInterests = new HashSet<Guid>(userInterests.Select(_ => _.Id));
+            var userInterestsHS = new HashSet<Guid>(user.Interests.Select(_ => _.InterestId));
             var viewModel = new List<AssignedInterestData>();
             foreach (var interest in allInterests)
             {
@@ -255,23 +129,59 @@ namespace App.Service
                 {
                     InterestID = interest.Id,
                     InterestName = interest.Name,
-                    Assigned = applicationUserInterests.Contains(interest.Id)
+                    Assigned = userInterestsHS.Contains(interest.Id)
                 });
             }
             return viewModel;
         }
 
-        public async Task<User> GetSingleWithAllPropertiesAsync(Guid id)
+        public async Task UpdateAsync(ApplicationUserViewModel user, string[] selectedInterests, string selectedGender, string selectedEyes)
         {
-            return await _userRepository.GetSingleAsync(
-                _ => _.Id == id,
-                _ => _.Interests,
-                _ => _.Gallery,
-                _ => _.ImagesComments,
-                _ => _.ImagesLikes,
-                _ => _.InvitationsReceived,
-                _ => _.InvitationsSent
-            );
+            var userFromDB = await _userRepository.GetSingleAsync(user.Id);
+            userFromDB.FirstName = user.FirstName;
+            userFromDB.LastName = user.LastName;
+            userFromDB.Height = user.Height;
+            userFromDB.Weight = user.Weight;
+            userFromDB.Hair = user.Hair;
+            userFromDB.BirthDate = user.BirthDate;
+            userFromDB.Description = user.Description;
+            userFromDB.Gender = (Gender)Enum.Parse(typeof(Gender), selectedGender);
+            userFromDB.Eyes = (Eyes)Enum.Parse(typeof(Eyes), selectedEyes);
+            _userRepository.Update(userFromDB);
+            await _userRepository.CommitAsync();
+            await UpdateInterestsAsync(selectedInterests, user.Id);
+        }
+
+        public async Task UpdateInterestsAsync(string[] selectedInterests, Guid id)
+        {
+            var selectedInterestsHS = new HashSet<string>(selectedInterests);
+            var userInterests = await _interestUserRepository.FindByAsync(_ => _.UserId == id);
+            var userInterestsHS = new HashSet<Guid>(userInterests.Select(_=>_.InterestId));
+            var allInterests = await _interestRepository.GetAllAsync();
+            var allInterestsHS = new HashSet<Guid>(allInterests.Select(_ => _.Id));
+
+            foreach (var interest in allInterestsHS)
+            {
+                if (selectedInterestsHS.Contains(interest.ToString()))
+                {
+                    if (!userInterestsHS.Contains(interest))
+                    {
+                        await _interestUserRepository.AddAsync(new InterestUser()
+                        {
+                            InterestId = interest,
+                            UserId = id
+                        });
+                    }
+                }
+                else
+                {
+                    if (userInterestsHS.Contains(interest))
+                    {
+                        _interestUserRepository.DeleteWhere(_ => _.InterestId == interest && _.UserId == id);
+                    }
+                }
+            }
+            await _interestUserRepository.CommitAsync();
         }
     }
 }
