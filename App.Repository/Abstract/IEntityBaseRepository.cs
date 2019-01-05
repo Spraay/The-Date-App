@@ -34,8 +34,6 @@ namespace App.Repository.Abstract
         Task <IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate);
         Task <IEnumerable<T>> FindByAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
         Task AddAsync(T entity);
-        Task DeleteAsync(T entity);
-        Task DeleteWhereAsync(Expression<Func<T, bool>> predicate);
         Task CommitAsync();
     }
 }

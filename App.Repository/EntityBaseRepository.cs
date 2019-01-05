@@ -171,17 +171,6 @@ namespace App.Repository
             await _context.Set<T>().AddAsync(entity);
         }
 
-       
-        public Task DeleteAsync(T entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteWhereAsync(Expression<Func<T, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task CommitAsync()
         {
             await _context.SaveChangesAsync();
