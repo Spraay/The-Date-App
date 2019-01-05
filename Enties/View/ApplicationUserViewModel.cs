@@ -42,6 +42,8 @@ namespace App.Model.View
 
         public Eyes Eyes { get; set; }
         public Hair Hair { get; set; }
+        public string ProfileImageSrc { get; set; }
+        public string BackgroundImageSrc { get; set; }
 
         [Display(Name = "Descryption")]
         [StringLength(250)]
