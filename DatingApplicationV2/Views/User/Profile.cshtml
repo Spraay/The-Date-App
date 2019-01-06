@@ -9,7 +9,7 @@
     var userFriends = (List<User>) ViewBag.Friends;
     var totalUserLikes = ViewBag.PhotosLikes;
     var isModeUserFilled = ViewBag.IsModelUserFilled;
-    var userInterests = (IEnumerable<string>) Model.Interests.Select(_=>_.Interest.Name);
+    var userInterests = Model.Interests;
     var userRoles = ViewBag.Roles;
 }
 
@@ -290,7 +290,7 @@
                                             <div class="collection">
                                                 @foreach (var interest in userInterests)
                                                 {
-                                                    <a href="#!" class="collection-item">@interest</a>
+                                                    <a href="#!" class="collection-item">@interest.Interest.Name</a>
                                                 }
                                             </div>
                                         }

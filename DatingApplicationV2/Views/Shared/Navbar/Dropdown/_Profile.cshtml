@@ -5,7 +5,7 @@
 @inject IUserRepository _userRepository
 
 @{
-    var user = await _userRepository.GetSingleAsync(_userService.CurrentUserId);
+    var user = await _userRepository.GetSingleAsync(_=>_.Id == _userService.CurrentUserId);
 }
 <!-- Dropdown Structure -->
 <ul id='profileDropdown' class='dropdown-content'>
