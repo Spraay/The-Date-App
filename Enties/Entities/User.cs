@@ -32,5 +32,7 @@ namespace App.Model.Entities
 
         public IEnumerable<RealMeet> MeetsRequestsSent { get; set; }
         public IEnumerable<RealMeet> MeetsRequestsReceived { get; set; }
+        public IEnumerable<Vote> CastVotes { get; set; }
+        public IEnumerable<Vote> VotedsFrom { get; set; }
     }
 }

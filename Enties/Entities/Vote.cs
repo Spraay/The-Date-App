@@ -1,23 +1,18 @@
-﻿using System;
+﻿using App.Model.Entities.Abstract;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace App.Model.Entities
 {
-    public class Vote
+    public class Vote : IEntityBase
     {
-        public Guid Id { get; set; }
+        public RealMeet Meet { get; set; }
 
-        public DateTime CreatedDate { get; }
-
-        public User ThePersonWhoVote { get; set; }
-
-        public User ThePersonHeVoted { get; set; }
-
-        public Guid ThePersonWhoVoteId { get; set; }
-
-        public Guid ThePersonHeVotedId { get; set; }
-
+        [Range(1, 5)]
         public int Value { get; set; }
+        public Guid Id { get; set; }
+        public DateTime CreatedDate { get; }
     }
 }

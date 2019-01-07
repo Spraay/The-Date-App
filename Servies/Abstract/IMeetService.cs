@@ -14,11 +14,12 @@ namespace App.Service.Abstract
         IEnumerable<User> UserMeetsAccepted(Guid userId);
         IEnumerable<User> UserMeetsRequested(Guid userId);
 
-        Task <RealMeet> GetAsync(Guid whoId, Guid withId);
-        Task <bool> IsMeetWithAsync(Guid whoId, Guid withId);
+        Task<RealMeet> GetAsync(Guid whoId, Guid withId);
+        Task<bool> IsMeetWithAsync(Guid whoId, Guid withId);
         Task SetMeetWithAsync(Guid whoId, Guid withId);
-        Task <IEnumerable<User>> UserMeetsAcceptedAsync(Guid userId);
-        Task <IEnumerable<User>> UserMeetsRequestedAsync(Guid userId);
+        Task<IEnumerable<User>> UserMeetsAcceptedAsync(Guid userId);
+        Task<IEnumerable<User>> UserMeetsRequestedAsync(Guid userId);
         Task<IEnumerable<User>> UsersMarkedAsMetAsync(Guid userId);
+        Task<int> UserMeetsAcceptedCountAsync(Guid id);
     }
 }

@@ -54,6 +54,12 @@ namespace App.Service
             return result;
         }
 
+        public async Task<int> UserMeetsAcceptedCountAsync(Guid id)
+        {
+            var result = await UserMeetsAcceptedAsync(id);
+            return result.Count();
+        }
+
         public IEnumerable<User> UserMeetsRequested(Guid userId)
         {
             return _context.Meets.Where(_ => _.WithId == userId).Select(_ => _.Who);

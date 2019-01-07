@@ -14,5 +14,10 @@ namespace App.Model.Entities
         public Guid WhoId { get; set; }
 
         public Guid WithId { get; set; }
+
+        public virtual Vote Vote { get; set; }
+
+        public Guid? VoteId { get; set; }
+
     }
 }

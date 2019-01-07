@@ -11,6 +11,7 @@
     var isModeUserFilled = ViewBag.IsModelUserFilled;
     var userInterests = ViewBag.Interests;
     var userRoles = ViewBag.Roles;
+    var userMets = ViewBag.Mets;
 }
 
 <section id="content">
@@ -49,22 +50,35 @@
                                 <p class="medium-small">Photos</p>
                             </a>
                         </li>
-                        <li class="col s1 m1 no-cursor">
-
-                        </li>
-                        <li class="col s2 m2 right no-cursor">
-                            <div class="">
-                                <h4 class="card-title center">
-                                    <i class="material-icons orange-text">grade</i>
-                                    <i class="material-icons orange-text">grade</i>
-                                    <i class="material-icons">grade</i>
-                                    <i class="material-icons">grade</i>
-                                    <i class="material-icons">grade</i>
+                        <li class="col s1 m1 hover-opacity ">
+                            <a class="pointer-cursor">
+                                <h4 class="card-title">
+                                    @userImages.Count() 
+                                    <i class="material-icons grey-text">star_half</i>
                                 </h4>
-                                <p class="medium-small orange-text center"><b>Rating</b></p>
-                            </div>
+                                <p class="medium-small">Votes</p>
+                            </a>
                         </li>
-                        <li class="col s1 m1 no-cursor">
+                        <li class="col s1 m1 hover-opacity ">
+                            <a class="pointer-cursor">
+                                <h4 class="card-title">@userMets <i class="material-icons grey-text">how_to_reg</i></h4>
+                                <p class="medium-small">Mets</p>
+                            </a>
+                        </li>
+                        
+                        <li class="col s6 m6 right no-cursor">
+                            <div class="row col s6 m6">
+                                <h4 class="card-title text-center">
+                                    <i class="col s5 m5 medium-small orange-text text-center"><b>Rating</b></i>
+                                </h4>
+                                <p class="medium-small">
+                                    <i class="col s1 m1 material-icons orange-text right">star</i>
+                                    <i class="col s1 m1 material-icons orange-text right">star</i>
+                                    <i class="col s1 m1 material-icons orange-text right">star</i>
+                                    <i class="col s1 m1 material-icons orange-text right">star</i>
+                                    <i class="col s1 m1 material-icons orange-text right">star</i>
+                                </p>
+                            </div>
 
                         </li>
                     </ul>
