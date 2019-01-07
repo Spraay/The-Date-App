@@ -23,10 +23,10 @@
                     <div class="center">
                         <form asp-action="MeetConfirm" id="Form" asp-route-returnURL="@ViewBag.ReturnURL">
                             <input type="hidden" asp-for="Id" />
-                            <a id="FormSubmitButton" value="Invite" class="btn btn-floating btn-large waves-effect green pulse">
+                            <a id="FormSubmitButton" value="Invite" class="btn rounded btn-large waves-effect green pulse">
                                 <i class="material-icons">check</i>
                             </a>
-                            <a href="@ViewBag.ReturnURL" class="btn btn-floating btn-large waves-effect blue pulse">
+                            <a href="@ViewBag.ReturnURL" class="btn rounded btn-large waves-effect blue pulse">
                                 <i class="material-icons">replay</i>
                             </a>
                         </form>
