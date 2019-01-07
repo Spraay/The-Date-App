@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace App.DAO.Migrations
 {
-    public partial class Initializefix1 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -238,24 +238,26 @@ namespace App.DAO.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Meets",
+                name: "Votes",
                 columns: table => new
                 {
-                    WhoId = table.Column<Guid>(nullable: false),
-                    WithId = table.Column<Guid>(nullable: false)
+                    Value = table.Column<int>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: true),
+                    UserId1 = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Meets", x => new { x.WhoId, x.WithId });
+                    table.PrimaryKey("PK_Votes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Meets_AspNetUsers_WhoId",
-                        column: x => x.WhoId,
+                        name: "FK_Votes_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Meets_AspNetUsers_WithId",
-                        column: x => x.WithId,
+                        name: "FK_Votes_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -386,6 +388,37 @@ namespace App.DAO.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Meets",
+                columns: table => new
+                {
+                    WhoId = table.Column<Guid>(nullable: false),
+                    WithId = table.Column<Guid>(nullable: false),
+                    VoteId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Meets", x => new { x.WhoId, x.WithId });
+                    table.ForeignKey(
+                        name: "FK_Meets_Votes_VoteId",
+                        column: x => x.VoteId,
+                        principalTable: "Votes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Meets_AspNetUsers_WhoId",
+                        column: x => x.WhoId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Meets_AspNetUsers_WithId",
+                        column: x => x.WithId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -456,6 +489,13 @@ namespace App.DAO.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Meets_VoteId",
+                table: "Meets",
+                column: "VoteId",
+                unique: true,
+                filter: "[VoteId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Meets_WithId",
                 table: "Meets",
                 column: "WithId");
@@ -469,6 +509,16 @@ namespace App.DAO.Migrations
                 name: "IX_Messages_SenderId",
                 table: "Messages",
                 column: "SenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Votes_UserId",
+                table: "Votes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Votes_UserId1",
+                table: "Votes",
+                column: "UserId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -517,6 +567,9 @@ namespace App.DAO.Migrations
 
             migrationBuilder.DropTable(
                 name: "Interests");
+
+            migrationBuilder.DropTable(
+                name: "Votes");
 
             migrationBuilder.DropTable(
                 name: "Conversations");

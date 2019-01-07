@@ -24,6 +24,7 @@ namespace App.DAO.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<RealMeet> Meets { get; set; }
+        public DbSet<Vote> Votes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -126,6 +127,13 @@ namespace App.DAO.Data
                 .WithMany(_ => _.MeetsRequestsReceived)
                 .HasForeignKey(_ => _.WithId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<RealMeet>()
+                .HasOne(_ => _.Vote)
+                .WithOne(_ => _.Meet)
+                .HasForeignKey<RealMeet>(_ => _.VoteId)
+                .IsRequired(false);
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

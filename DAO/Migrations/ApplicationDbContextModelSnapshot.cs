@@ -164,7 +164,13 @@ namespace App.DAO.Migrations
 
                     b.Property<Guid>("WithId");
 
+                    b.Property<Guid?>("VoteId");
+
                     b.HasKey("WhoId", "WithId");
+
+                    b.HasIndex("VoteId")
+                        .IsUnique()
+                        .HasFilter("[VoteId] IS NOT NULL");
 
                     b.HasIndex("WithId");
 
@@ -270,6 +276,26 @@ namespace App.DAO.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("App.Model.Entities.Vote", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("UserId");
+
+                    b.Property<Guid?>("UserId1");
+
+                    b.Property<int>("Value");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserId1");
+
+                    b.ToTable("Votes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -447,6 +473,10 @@ namespace App.DAO.Migrations
 
             modelBuilder.Entity("App.Model.Entities.RealMeet", b =>
                 {
+                    b.HasOne("App.Model.Entities.Vote", "Vote")
+                        .WithOne("Meet")
+                        .HasForeignKey("App.Model.Entities.RealMeet", "VoteId");
+
                     b.HasOne("App.Model.Entities.User", "Who")
                         .WithMany("MeetsRequestsSent")
                         .HasForeignKey("WhoId")
@@ -456,6 +486,17 @@ namespace App.DAO.Migrations
                         .WithMany("MeetsRequestsReceived")
                         .HasForeignKey("WithId")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("App.Model.Entities.Vote", b =>
+                {
+                    b.HasOne("App.Model.Entities.User")
+                        .WithMany("CastVotes")
+                        .HasForeignKey("UserId");
+
+                    b.HasOne("App.Model.Entities.User")
+                        .WithMany("VotedsFrom")
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

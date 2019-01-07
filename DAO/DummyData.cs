@@ -175,8 +175,15 @@ namespace App.DAO
 
                 if (!context.Meets.Any())
                 {
-                    await context.Meets.AddAsync(new RealMeet() { Who = user1, With = user2 });
-                    await context.Meets.AddAsync(new RealMeet() { With = user1, Who = user2 });
+                    var meet1 = new RealMeet() { Who = user1, With = user2 };
+                    var meet2 = new RealMeet() { Who = user2, With = user1 };
+                    await context.Meets.AddAsync(meet1);
+                    await context.Meets.AddAsync(meet2);
+                    if (!context.Votes.Any())
+                    {
+                        await context.Votes.AddAsync(new Vote() { Meet = meet1, Value = 5 });
+                        await context.Votes.AddAsync(new Vote() { Meet = meet2, Value = 5 });
+                    }
                 }
             }
             if (!await context.Interests.AnyAsync())
