@@ -22,13 +22,10 @@ namespace DatingApplicationV2.Controllers
             _userRepository = userRepository;
         }
 
-        public async Task<IActionResult> Index(string returnURL = null)
+        public IActionResult Index(string returnURL = null)
         {
             ViewBag.returnURL = returnURL;
-            return await Task.Run<ActionResult>(() =>
-            {
-                return RedirectToAction(nameof(MeetsList), new { returnURL });
-            });
+            return RedirectToAction(nameof(MeetsList), new { returnURL });
         }
 
         public async Task<IActionResult> MeetsList(string returnURL = null)
@@ -37,22 +34,21 @@ namespace DatingApplicationV2.Controllers
             return View(await _meetService.UserMeetsAcceptedAsync(_userService.CurrentUserId));
         }
 
-        public async Task<IActionResult> Meet(Guid withId, string returnURL = null)
+        public async Task<IActionResult> Meet(Guid id, string returnURL = null)
         {
-            if(await _friendService.AreFriendsAsync(_userService.CurrentUserId, withId))
+            if (await _friendService.AreFriendsAsync(_userService.CurrentUserId, id))
             {
                 ViewBag.returnURL = returnURL;
-                return View();
+                return View(await _userRepository.GetSingleAsync(id));
             }
-            return await Task.Run<ActionResult>(() =>
-            {
-                return RedirectToAction(nameof(FriendshipsController.NotFriend), nameof(FriendshipsController), new { returnURL });
-            });
+            var controller = nameof(FriendshipsController).Substring(0, nameof(FriendshipsController).Length - 10);
+            return RedirectToAction(nameof(FriendshipsController.NotFriend), controller, new { id, returnURL });
         }
 
-        public async Task<IActionResult> MeetConfirm(Guid withId, string returnURL = null)
+        public async Task<IActionResult> MeetConfirm(Guid id, string returnURL = null)
         {
             ViewBag.returnURL = returnURL;
+            await _meetService.SetMeetWithAsync(_userService.CurrentUserId, id);
             return View(await _meetService.UserMeetsAcceptedAsync(_userService.CurrentUserId));
         }
     }
