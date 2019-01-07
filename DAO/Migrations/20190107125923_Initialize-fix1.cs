@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace App.DAO.Migrations
 {
-    public partial class Initialize : Migration
+    public partial class Initializefix1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -238,6 +238,30 @@ namespace App.DAO.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Meets",
+                columns: table => new
+                {
+                    WhoId = table.Column<Guid>(nullable: false),
+                    WithId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Meets", x => new { x.WhoId, x.WithId });
+                    table.ForeignKey(
+                        name: "FK_Meets_AspNetUsers_WhoId",
+                        column: x => x.WhoId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Meets_AspNetUsers_WithId",
+                        column: x => x.WithId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ConversationUser",
                 columns: table => new
                 {
@@ -432,6 +456,11 @@ namespace App.DAO.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Meets_WithId",
+                table: "Meets",
+                column: "WithId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Messages_ConversationId",
                 table: "Messages",
                 column: "ConversationId");
@@ -473,6 +502,9 @@ namespace App.DAO.Migrations
 
             migrationBuilder.DropTable(
                 name: "InterestUser");
+
+            migrationBuilder.DropTable(
+                name: "Meets");
 
             migrationBuilder.DropTable(
                 name: "Messages");

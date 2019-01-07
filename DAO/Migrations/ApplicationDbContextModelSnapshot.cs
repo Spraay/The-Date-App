@@ -158,6 +158,19 @@ namespace App.DAO.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("App.Model.Entities.RealMeet", b =>
+                {
+                    b.Property<Guid>("WhoId");
+
+                    b.Property<Guid>("WithId");
+
+                    b.HasKey("WhoId", "WithId");
+
+                    b.HasIndex("WithId");
+
+                    b.ToTable("Meets");
+                });
+
             modelBuilder.Entity("App.Model.Entities.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -430,6 +443,19 @@ namespace App.DAO.Migrations
                         .WithMany("SentMessages")
                         .HasForeignKey("SenderId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("App.Model.Entities.RealMeet", b =>
+                {
+                    b.HasOne("App.Model.Entities.User", "Who")
+                        .WithMany("MeetsRequestsSent")
+                        .HasForeignKey("WhoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("App.Model.Entities.User", "With")
+                        .WithMany("MeetsRequestsReceived")
+                        .HasForeignKey("WithId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>

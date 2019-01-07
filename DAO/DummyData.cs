@@ -172,6 +172,12 @@ namespace App.DAO
                 //    new Message(){ Sender = user2, Content = "Hi Krystian. Im fine, thanks", Conversation = conversation }
                 //};
                 //await context.Messages.AddRangeAsync(messages);
+
+                if (!context.Meets.Any())
+                {
+                    await context.Meets.AddAsync(new RealMeet() { Who = user1, With = user2 });
+                    await context.Meets.AddAsync(new RealMeet() { With = user1, Who = user2 });
+                }
             }
             if (!await context.Interests.AnyAsync())
             {

@@ -23,6 +23,7 @@ namespace App.DAO.Data
         public DbSet<Friendship> Friendships { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
+        public DbSet<RealMeet> Meets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -110,6 +111,20 @@ namespace App.DAO.Data
                 .HasOne(_ => _.Creator)
                 .WithMany(__ => __.ImagesComments)
                 .HasForeignKey(_ => _.CreatorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<RealMeet>()
+                .HasKey(_ => new { _.WhoId, _.WithId });
+
+            modelBuilder.Entity<RealMeet>()
+                .HasOne(_ => _.Who)
+                .WithMany(_ => _.MeetsRequestsSent)
+                .HasForeignKey(_ => _.WhoId);
+
+            modelBuilder.Entity<RealMeet>()
+                .HasOne(_ => _.With)
+                .WithMany(_ => _.MeetsRequestsReceived)
+                .HasForeignKey(_ => _.WithId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
 
