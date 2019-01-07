@@ -33,13 +33,13 @@ else
                     </div>
                     <div class="card-action grey">
                         <div class="center">
-                            <a class="btn-floating green" asp-controller="Friendships" asp-action="Add" asp-route-id="@item.SenderId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                            <a class="btn btn-large rounded green tooltipped" data-position="top" data-tooltip="Accept Request" asp-controller="Friendships" asp-action="Add" asp-route-id="@item.SenderId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <i class="material-icons">check</i>
                             </a>
-                            <a class="btn-floating red" asp-controller="Friendships" asp-action="Delete" asp-route-id="@item.SenderId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                            <a class="btn btn-large rounded red tooltipped" data-position="top" data-tooltip="Refuse Request" asp-controller="Friendships" asp-action="Delete" asp-route-id="@item.SenderId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <i class="material-icons">delete</i>
                             </a>
-                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-id="@item.SenderId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                            <a class="btn btn-large rounded blue tooltipped" data-position="top" data-tooltip="Show Profile" asp-controller="User" asp-action="Profile" asp-route-id="@item.SenderId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <i class="material-icons">info</i>
                             </a>
                         </div>
