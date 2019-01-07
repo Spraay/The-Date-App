@@ -5,16 +5,14 @@ using System.Text;
 
 namespace App.Model.Entities
 {
-    public class RealMeet : IEntityBase
+    public class RealMeet
     {
-        public Guid Id { get; set; }
-        public DateTime CreatedDate { get; }
+        public User Who { get; set; }
 
-        public User ThePersonWhoMet { get; set; }
+        public User With { get; set; }
 
-        public User ThePersonHeMet { get; set; }
+        public Guid WhoId { get; set; }
 
-        public Guid ThePersonWhoMetId { get; set; }
-        public Guid ThePersonHeMetId { get; set; }
+        public Guid WithId { get; set; }
     }
 }

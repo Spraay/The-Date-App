@@ -29,5 +29,8 @@ namespace App.Model.Entities
         public IEnumerable<ImageComment> ImagesComments { get; set; }
         public string ProfileImageSrc { get; set; } = "NoProfileImage.png";
         public string BackgroundImageSrc { get; set; } = "NoProfileBackground.png";
+
+        public IEnumerable<RealMeet> MeetsRequestsSent { get; set; }
+        public IEnumerable<RealMeet> MeetsRequestsReceived { get; set; }
     }
 }
