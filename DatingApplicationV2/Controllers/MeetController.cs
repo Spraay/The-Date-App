@@ -49,7 +49,7 @@ namespace DatingApplicationV2.Controllers
         {
             ViewBag.returnURL = returnURL;
             await _meetService.SetMeetWithAsync(_userService.CurrentUserId, id);
-            return View(await _meetService.UserMeetsAcceptedAsync(_userService.CurrentUserId));
+            return View(await _userRepository.GetSingleAsync(id));
         }
     }
 }
