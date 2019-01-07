@@ -39,7 +39,8 @@ namespace App.DAO
                     Weight = 75,
                     Height = 180,
                     BirthDate = DateTime.Parse("24.07.1996"),
-                    EmailConfirmed = true
+                    EmailConfirmed = true,
+                    Description = "Hello in my profile. I hope that you will like me. Im'a very honest and kind person with many interests :)"
                 },
                 new User
                 {
@@ -181,8 +182,8 @@ namespace App.DAO
                     await context.Meets.AddAsync(meet2);
                     if (!context.Votes.Any())
                     {
-                        await context.Votes.AddAsync(new Vote() { Meet = meet1, Value = 5 });
-                        await context.Votes.AddAsync(new Vote() { Meet = meet2, Value = 5 });
+                        await context.Votes.AddAsync(new Vote() { Meet = await context.Meets.SingleOrDefaultAsync(_ => _.Who == user1 && _.With == user2), Value = 5 });
+                        await context.Votes.AddAsync(new Vote() { Meet = await context.Meets.SingleOrDefaultAsync(_ => _.Who == user2 && _.With == user1), Value = 5 });
                     }
                 }
             }

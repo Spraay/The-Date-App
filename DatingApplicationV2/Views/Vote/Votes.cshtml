@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Vote>
+
+@{
+    ViewData["Title"] = "Votes";
+}
+@if (Model.Any())
+{
+    <div class="grey darken-3 z-depth-3" style="padding: 1vw; margin-top: -10px;">
+        <div class="center">
+            <p class="white-text" style="font-size: 3vw;">Votes<i style="vertical-align: bottom; font-size: 4vw !important;" class="inline-icon material-icons">star</i></p>
+        </div>
+    </div>
+}
+else
+{
+    <div class="valign-wrapper my-wrapper row">
+        <div class="col s12">
+            <div class="col s12 center"><i class="material-icons orange-text" style="font-size: 150px;">sentiment_dissatisfied</i></div>
+            <h1 class="orange-text center"> Votes list seems to be empty <a class="btn-floating btn-large blue" href="@ViewBag.ReturnURL"><i class="material-icons ">replay</i></a></h1>
+        </div>
+    </div>
+}
+@foreach (var item in Model)
+{
+    <a class="hover-opacity pointer-cursor">
+        <div class="card grey darken-4 hover-opacity">
+            <div class="card-content white-text">
+                <div class="card-title orange-text row">
+                    <div class="col s7 m7">Rating</div>
+                    @for (int i = 0; i < item.Value; i++)
+                    {
+                        <i class="col s1 m1 material-icons orange-text ">star</i>
+                    }
+                    @for (int i = item.Value; i < 5; i++)
+                    {
+                        <i class="col s1 m1 material-icons orange-text ">star_bordered</i>
+                    }
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <div id="full-stars-example-two">
+        <div class="rating-group">
+            <input disabled checked class="rating__input rating__input--none" name="rating3" id="rating3-none" value="0" type="radio">
+            <label aria-label="1 star" class="rating__label" for="rating3-1"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-1" value="1" type="radio">
+            <label aria-label="2 stars" class="rating__label" for="rating3-2"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-2" value="2" type="radio">
+            <label aria-label="3 stars" class="rating__label" for="rating3-3"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-3" value="3" type="radio">
+            <label aria-label="4 stars" class="rating__label" for="rating3-4"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-4" value="4" type="radio">
+            <label aria-label="5 stars" class="rating__label" for="rating3-5"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
+            <input class="rating__input" name="rating3" id="rating3-5" value="5" type="radio">
+        </div>
+        <p class="desc" style="font-family: sans-serif; font-size:0.9rem">
+            Full stars<br />
+            Must select a star value
+        </p>
+    </div>
+}

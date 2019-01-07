@@ -53,5 +53,11 @@ namespace DatingApplicationV2.Controllers
             await _meetService.SetMeetWithAsync(_userService.CurrentUserId, id);
             return View(await _userRepository.GetSingleAsync(id));
         }
+
+        public async Task<IActionResult> NotMeet(Guid id, string returnURL = null)
+        {
+            ViewBag.ReturnURL = returnURL;
+            return View(await _userRepository.GetSingleAsync(_ => _.Id == id));
+        }
     }
 }

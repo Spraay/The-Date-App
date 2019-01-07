@@ -20,23 +20,27 @@ namespace DatingApplication.Controllers
         private readonly IImageLikeService _imageLikeService;
         private readonly IUserInterestsService _userInterestService;
         private readonly IMeetService _meetService;
+        private readonly IVoteRepository _voteRepository;
         private readonly IUserRepository _userRepository;
         private readonly UserManager<User> _userManager;
 
-        public UserController(IMapper mapper, IUserService userService, IFriendService friendService, IImageLikeService imageLikeService, IUserInterestsService userInterestService, IMeetService MeetService, IUserRepository userRepository, UserManager<User> userManager)
+        public UserController(IMapper mapper, IUserService userService, IFriendService friendService, IImageLikeService imageLikeService, IUserInterestsService userInterestService, IMeetService meetService, IVoteRepository voteRepository, IUserRepository userRepository, UserManager<User> userManager)
         {
             _mapper = mapper;
             _userService = userService;
             _friendService = friendService;
             _imageLikeService = imageLikeService;
             _userInterestService = userInterestService;
-            _meetService = MeetService;
+            _meetService = meetService;
+            _voteRepository = voteRepository;
             _userRepository = userRepository;
             _userManager = userManager;
         }
 
+
+
         // GET: Default
-        
+
         public async Task<IActionResult> Index()
         {
             if ( await _userService.IsFilledAsync(_userService.CurrentUserId) )
@@ -57,6 +61,7 @@ namespace DatingApplication.Controllers
             ViewBag.IsModelUserFilled       = await _userService.IsFilledAsync(id);
             ViewBag.Roles                   = await _userManager.GetRolesAsync(await _userRepository.GetSingleAsync(id));
             ViewBag.Mets                    = await _meetService.UserMeetsAcceptedCountAsync(id);
+            ViewBag.Votes                   = await _voteRepository.FindByAsync(_=>_.Meet.WithId == id);
             return View(user);
         }
 

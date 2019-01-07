@@ -12,6 +12,7 @@
     var userInterests = ViewBag.Interests;
     var userRoles = ViewBag.Roles;
     var userMets = ViewBag.Mets;
+    var userVotes = ViewBag.Votes.Count;
 }
 
 <section id="content">
@@ -24,12 +25,12 @@
                 <div class="no-border no-padding" style="position: relative; top: -80px; left: 30px; width: 150px; height: 150px;">
                     <img src="~/images/userimages/@Model.ProfileImageSrc" alt="profile image" class="circle z-depth-2 responsive-img" style="height: 100%; width: 100%">
                 </div>
-                <div class="row col s12 card-content no-padding" style="margin-top: -160px;">
+                <div class="row col s12 m6 card-content no-padding" style="margin-top: -160px;">
                     <ul>
-                        <li class="col s2 m2 no-cursor">
+                        <li class="col s3 m3 no-cursor">
 
                         </li>
-                        <li class="col s2 m2 no-cursor">
+                        <li class="col s3 m3 no-cursor">
                             <h4 class="card-title grey-text text-darken-4">@Model.FirstName @Model.LastName</h4>
                             <p class="medium-small grey-text">
                                 Roles: @foreach (var r in userRoles)
@@ -51,9 +52,9 @@
                             </a>
                         </li>
                         <li class="col s1 m1 hover-opacity ">
-                            <a class="pointer-cursor">
+                            <a class="pointer-cursor" asp-controller="Vote" asp-action="Votes" asp-route-id="@Model.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <h4 class="card-title">
-                                    @userImages.Count() 
+                                    @userVotes
                                     <i class="material-icons grey-text">star_half</i>
                                 </h4>
                                 <p class="medium-small">Votes</p>
@@ -66,21 +67,7 @@
                             </a>
                         </li>
                         
-                        <li class="col s6 m6 right no-cursor">
-                            <div class="row col s6 m6">
-                                <h4 class="card-title text-center">
-                                    <i class="col s5 m5 medium-small orange-text text-center"><b>Rating</b></i>
-                                </h4>
-                                <p class="medium-small">
-                                    <i class="col s1 m1 material-icons orange-text right">star</i>
-                                    <i class="col s1 m1 material-icons orange-text right">star</i>
-                                    <i class="col s1 m1 material-icons orange-text right">star</i>
-                                    <i class="col s1 m1 material-icons orange-text right">star</i>
-                                    <i class="col s1 m1 material-icons orange-text right">star</i>
-                                </p>
-                            </div>
-
-                        </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -90,10 +77,34 @@
                 <!-- profile-page-sidebar-->
                 <div id="profile-page-sidebar" class="col s12 m4">
                     <!-- Profile About  -->
+                    <a class="hover-opacity pointer-cursor tooltipped" data-position="left" data-tooltip="Rate Authentity" asp-controller="Vote" asp-action="Vote" asp-route-id="@Model.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                        <div class="card grey darken-4 hover-opacity">
+                            <div class="card-content white-text">
+                                <div class="card-title orange-text row">
+                                    <div class="col s7 m7">Rating</div>
+                                    <i class="col s1 m1 material-icons orange-text ">star</i>
+                                    <i class="col s1 m1 material-icons orange-text ">star</i>
+                                    <i class="col s1 m1 material-icons orange-text">star_half</i>
+                                    <i class="col s1 m1 material-icons orange-text ">star_bordered</i>
+                                    <i class="col s1 m1 material-icons orange-text ">star_bordered</i>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                     <div class="card cyan">
                         <div class="card-content white-text">
                             <span class="card-title">About Me!</span>
-                            <p>@Model.Description</p>
+                            <script>
+                                function toggleTruncate() {
+                                    var el = document.getElementById("truncateEl1");
+                                    if (el.classList.contains("truncate")) {
+                                        el.classList = el.classList.remove("truncate");
+                                    } else {
+                                        el.setAttribute("class", "truncate");
+                                    }
+                                }
+                            </script>
+                            <a class="tooltipped blue-text text-lighten-4 pointer-cursor" data-position="top" data-tooltip="Click to expand"><p id="truncateEl1" class="truncate blue-text text-lighten-4" onclick="toggleTruncate()">@Model.Description</p></a>
                         </div>
                     </div>
                     <!-- Profile About  -->
