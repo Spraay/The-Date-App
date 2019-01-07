@@ -19,5 +19,6 @@ namespace App.Service.Abstract
         Task SetMeetWithAsync(Guid whoId, Guid withId);
         Task <IEnumerable<User>> UserMeetsAcceptedAsync(Guid userId);
         Task <IEnumerable<User>> UserMeetsRequestedAsync(Guid userId);
+        Task<IEnumerable<User>> UsersMarkedAsMetAsync(Guid userId);
     }
 }

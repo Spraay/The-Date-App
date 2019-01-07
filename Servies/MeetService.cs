@@ -28,8 +28,11 @@ namespace App.Service
 
         public async Task SetMeetWithAsync(Guid whoId, Guid withId)
         {
-            await _context.Meets.AddAsync(new RealMeet() { WhoId = whoId, WithId = withId });
-            await _context.SaveChangesAsync();
+            if (whoId != withId)
+            {
+                await _context.Meets.AddAsync(new RealMeet() { WhoId = whoId, WithId = withId });
+                await _context.SaveChangesAsync();
+            }
         }
 
         public IEnumerable<User> UserMeetsAccepted(Guid userId)
@@ -59,6 +62,11 @@ namespace App.Service
         public async Task<IEnumerable<User>> UserMeetsRequestedAsync(Guid userId)
         {
             return await _context.Meets.Where(_ => _.WithId == userId).Select(_ => _.Who).ToListAsync();
+        }
+
+        public async Task<IEnumerable<User>> UsersMarkedAsMetAsync(Guid userId)
+        {
+            return await _context.Meets.Where(_ => _.WhoId == userId).Select(_ => _.With).ToListAsync();
         }
     }
 }
