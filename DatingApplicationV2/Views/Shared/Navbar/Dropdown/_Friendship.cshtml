@@ -4,14 +4,17 @@
 <!-- Dropdown Structure -->
 <ul id='friendshipDropdown' class='dropdown-content' style="width: 400px;">
     <li>
-        <a asp-controller="Friendships" asp-action="Index">My Friends
+        <a asp-controller="Friendships" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+            My Friends
             <i class="material-icons">group</i>
             <span class="badge">@_friendService.GetUserFriends(_userService.CurrentUserId).Count()</span>
         </a>
     </li>
     <li class="divider" tabindex="-1"></li>
-    <li><a asp-controller="Friendships" asp-action="InvitationsSent">Invites Sent<i class="material-icons">redo</i></a></li>
-    <li><a asp-controller="Friendships" asp-action="InvitationsReceived">Invites Received<i class="material-icons">undo</i></a></li>
+    <li><a asp-controller="Friendships" asp-action="InvitationsSent" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">Invites Sent<i class="material-icons">redo</i></a></li>
+    <li><a asp-controller="Friendships" asp-action="InvitationsReceived" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">Invites Received<i class="material-icons">undo</i></a></li>
+    <li class="divider" tabindex="-1"></li>
+    <li><a asp-controller="Meet" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">Meets<i class="material-icons">how_to_reg</i></a></li>
 </ul>
 
 <li data-constrainWidth="false" class="center" style="width: 80px;">
