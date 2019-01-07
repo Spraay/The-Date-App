@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace DatingApplication.Controllers
 {
+    [Authorize(Roles = "User")]
     public class UserController : Controller
     {
         private readonly IMapper _mapper;
@@ -18,23 +19,24 @@ namespace DatingApplication.Controllers
         private readonly IFriendService _friendService;
         private readonly IImageLikeService _imageLikeService;
         private readonly IUserInterestsService _userInterestService;
+        private readonly IMeetService _meetService;
         private readonly IUserRepository _userRepository;
         private readonly UserManager<User> _userManager;
 
-        public UserController(IMapper mapper, IUserService userService, IFriendService friendService, IImageLikeService imageLikeService, IUserInterestsService userInterestService, IUserRepository userRepository, UserManager<User> userManager)
+        public UserController(IMapper mapper, IUserService userService, IFriendService friendService, IImageLikeService imageLikeService, IUserInterestsService userInterestService, IMeetService MeetService, IUserRepository userRepository, UserManager<User> userManager)
         {
             _mapper = mapper;
             _userService = userService;
             _friendService = friendService;
             _imageLikeService = imageLikeService;
             _userInterestService = userInterestService;
+            _meetService = MeetService;
             _userRepository = userRepository;
             _userManager = userManager;
         }
 
-
         // GET: Default
-        [Authorize(Roles = "User")]
+        
         public async Task<IActionResult> Index()
         {
             if ( await _userService.IsFilledAsync(_userService.CurrentUserId) )
@@ -54,6 +56,7 @@ namespace DatingApplication.Controllers
             ViewBag.CurrentUserId           = _userService.CurrentUserId;
             ViewBag.IsModelUserFilled       = await _userService.IsFilledAsync(id);
             ViewBag.Roles                   = await _userManager.GetRolesAsync(await _userRepository.GetSingleAsync(id));
+            ViewBag.Mets                    = await _meetService.UserMeetsAcceptedCountAsync(id);
             return View(user);
         }
 

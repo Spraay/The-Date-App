@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace DatingApplicationV2.Controllers
 {
-    [Authorize(Roles = "User,Admin")]
+    [Authorize(Roles = "User,Admin,Moderator")]
     public class FriendshipsController : Controller
     {
 

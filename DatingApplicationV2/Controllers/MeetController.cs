@@ -2,11 +2,13 @@
 using System.Threading.Tasks;
 using App.Repository.Abstract;
 using App.Service.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApplicationV2.Controllers
 {
+    [Authorize(Roles = "User,Admin,Moderator")]
     public class MeetController : Controller
     {
         private readonly IUserService _userService;

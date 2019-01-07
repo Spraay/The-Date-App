@@ -3,9 +3,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using App.Service.Abstract;
 using App.Model.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatingApplicationV2.Controllers
 {
+    [Authorize(Roles = "User,Admin,Moderator")]
     public class ImageCommentController : Controller
     {
         private readonly IUserService _userService;

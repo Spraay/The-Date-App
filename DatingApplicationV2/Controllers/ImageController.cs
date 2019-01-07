@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DatingApplicationV2.Controllers
 {
-    [Authorize(Roles = "User")]
+    [Authorize(Roles = "User,Admin,Moderator")]
     public class ImageController : Controller
     {
         private readonly IUserService _userService;

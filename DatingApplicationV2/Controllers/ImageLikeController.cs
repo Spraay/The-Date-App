@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using App.Service.Abstract;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DatingApplicationV2.Controllers
 {
+    [Authorize(Roles = "User,Admin,Moderator")]
     public class ImageLikeController : Controller
     {
         private readonly IUserService _userService;

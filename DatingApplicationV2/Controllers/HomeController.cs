@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics;
 using App.Model.Error;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
 namespace DatingApplicationV2.Controllers
 {
+    [Authorize(Roles = "User,Admin,Moderator")]
     public class HomeController : Controller
     {
         public IActionResult Index()
