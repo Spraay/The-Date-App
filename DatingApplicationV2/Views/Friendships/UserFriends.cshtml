@@ -29,18 +29,21 @@ else
             <div class="col m4">
                 <div class="card">
                     <div class="card-image inline">
-                        <img src="~/images/userimages/@Html.DisplayFor(m => item.ProfileImageSrc)" >
+                        <img src="~/images/userimages/@Html.DisplayFor(m => item.ProfileImageSrc)">
                         <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">
                             @Html.DisplayFor(m => item.FirstName)  @Html.DisplayFor(m => item.LastName)
                         </span>
                     </div>
                     <div class="card-action grey">
                         <div class="center">
-                            <a class="btn-floating red" asp-controller="Friendships" asp-action="Delete" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                <i class="material-icons">delete</i>
+                            <a class="btn btn-large rounded red tooltipped" data-position="top" data-tooltip="Delete Friend" asp-controller="Friendships" asp-action="Delete" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                <i class="large material-icons">delete</i>
                             </a>
-                            <a class="btn-floating blue" asp-controller="User" asp-action="Profile" asp-route-id="@item.Id">
-                                <i class="material-icons">info</i>
+                            <a class="btn btn-large rounded blue tooltipped" data-position="top" data-tooltip="Show Details" asp-controller="User" asp-action="Profile" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                <i class="large material-icons">info</i>
+                            </a>
+                            <a class="btn btn-large rounded green tooltipped" data-position="top" data-tooltip="Mark as met" asp-controller="Meet" asp-action="Meet" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                <i class="large material-icons">how_to_reg</i>
                             </a>
                         </div>
                     </div>
