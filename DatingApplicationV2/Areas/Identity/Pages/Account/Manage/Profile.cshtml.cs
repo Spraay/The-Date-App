@@ -9,7 +9,7 @@ namespace DatingApplicationV2.Areas.Identity.Pages.Account.Manage
 {
     public class ProfileModel : PageModel
     {
-        public async Task<IActionResult> OnGet()
+        public IActionResult OnGet()
         {
             return Page();
         }
