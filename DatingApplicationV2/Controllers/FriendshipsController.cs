@@ -6,6 +6,7 @@ using App.Service.Abstract;
 using App.Model.Entities;
 using App.Model.Enumerations;
 using App.Repository.Abstract;
+using System.Linq;
 
 namespace DatingApplicationV2.Controllers
 {
@@ -16,12 +17,14 @@ namespace DatingApplicationV2.Controllers
         private readonly IUserService _userService;
         private readonly IUserRepository _userRepository;
         private readonly IFriendService _friendshipService;
+        private readonly IMeetService _meetService;
 
-        public FriendshipsController(IUserService userService, IUserRepository userRepository, IFriendService friendshipService)
+        public FriendshipsController(IUserService userService, IUserRepository userRepository, IFriendService friendshipService, IMeetService meetService)
         {
             _userService = userService;
             _userRepository = userRepository;
             _friendshipService = friendshipService;
+            _meetService = meetService;
         }
 
         public IActionResult Index()
@@ -31,6 +34,10 @@ namespace DatingApplicationV2.Controllers
 
         public async Task<IActionResult> UserFriends(Guid id)
         {
+            var usersMarkedAsMet = await _meetService.UsersMarkedAsMetAsync(id);
+            var usersMet = await _meetService.UserMeetsAcceptedAsync(id);
+            ViewBag.MarkedAsMet = usersMarkedAsMet.Select(_ => _.Id);
+            ViewBag.UsersMet = usersMet.Select(_=>_.Id);
             return View( await _friendshipService.GetUserFriendsAsync(id) );
         }
 
