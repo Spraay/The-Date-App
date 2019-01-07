@@ -1,0 +1,39 @@
+﻿@using System
+@model User
+@{
+    ViewData["Title"] = "Meet";
+}
+
+<div class="grey darken-3 z-depth-3" style="padding: 1vw; margin-top: -10px;">
+    <div class="center">
+        <i style="vertical-align: bottom; font-size: 6vw !important;" class="inline-icon material-icons blue-text">add</i>
+        <h5 class="orange-text">Are you sure you want to confirm that you meet below in real world?</h5>
+        <h6 class="red-text"><b>Warrning! - Your decision will not be able to be reversed!</b></h6>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col s4 offset-l4">
+            <div class="card">
+                <div class="card-image">
+                    <img src="~/images/userimages/@Model.ProfileImageSrc">
+                    <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</span>
+                </div>
+                <div class="card-action grey">
+                    <div class="center">
+                        <form asp-action="MeetConfirm" id="Form" asp-route-returnURL="@ViewBag.ReturnURL">
+                            <input type="hidden" asp-for="Id" />
+                            <a id="FormSubmitButton" value="Invite" class="btn btn-floating btn-large waves-effect green pulse">
+                                <i class="material-icons">check</i>
+                            </a>
+                            <a href="@ViewBag.ReturnURL" class="btn btn-floating btn-large waves-effect blue pulse">
+                                <i class="material-icons">replay</i>
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -53,7 +53,9 @@ namespace DatingApplicationV2
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IImageLikeService, ImageLikeService>();
             services.AddScoped<IFriendService, FriendService>();
-           
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<IMeetService, MeetService>();
+
 
             services.AddAutoMapper();
 

@@ -68,6 +68,12 @@ namespace DatingApplicationV2.Controllers
             return AlreadyInvited(friend);
         }
 
+        public IActionResult NotFriend(Guid id, string returnURL = null)
+        {
+            ViewBag.ReturnURL = returnURL;
+            return View(_userRepository.GetSingleAsync(_=>_.Id==id));
+        }
+
         [HttpPost, ActionName("Add")]
         [ValidateAntiForgeryToken]
         public IActionResult AddConfirmed(Guid id, string returnURL = null)
