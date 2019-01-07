@@ -1,4 +1,5 @@
 ﻿using App.DAO;
+using App.DAO.Data;
 using App.Model.Entities.Abstract;
 using App.Repository.Abstract;
 using Microsoft.EntityFrameworkCore;

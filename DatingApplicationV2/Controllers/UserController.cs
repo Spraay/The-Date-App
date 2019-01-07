@@ -16,23 +16,22 @@ namespace DatingApplication.Controllers
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
         private readonly IFriendService _friendService;
-        private readonly IImageService _imageService;
         private readonly IImageLikeService _imageLikeService;
-        private readonly IInterestRepository _interestRepository;
+        private readonly IUserInterestsService _userInterestService;
         private readonly IUserRepository _userRepository;
         private readonly UserManager<User> _userManager;
 
-        public UserController(IMapper mapper, IUserService userService, IFriendService friendService, IImageService imageService, IImageLikeService imageLikeService, IInterestRepository interestRepository, IUserRepository userRepository, UserManager<User> userManager)
+        public UserController(IMapper mapper, IUserService userService, IFriendService friendService, IImageLikeService imageLikeService, IUserInterestsService userInterestService, IUserRepository userRepository, UserManager<User> userManager)
         {
             _mapper = mapper;
             _userService = userService;
             _friendService = friendService;
-            _imageService = imageService;
             _imageLikeService = imageLikeService;
-            _interestRepository = interestRepository;
+            _userInterestService = userInterestService;
             _userRepository = userRepository;
             _userManager = userManager;
         }
+
 
         // GET: Default
         [Authorize(Roles = "User")]
@@ -49,8 +48,7 @@ namespace DatingApplication.Controllers
             var user = await _userRepository.GetSingleAsync(_=>_.Id == id,
                 _=>_.Interests,
                 _=>_.Gallery);
-                
-
+            ViewBag.Interests               = await _userInterestService.GetUserInterestsAsync(id);
             ViewBag.Friends                 = await _friendService.GetUserFriendsAsync(id);
             ViewBag.PhotosLikes             = await _imageLikeService.CountImageLikesAsync(id);
             ViewBag.CurrentUserId           = _userService.CurrentUserId;
@@ -64,14 +62,13 @@ namespace DatingApplication.Controllers
         public async Task<IActionResult> Edit(string returnURL = null)
         {
             var user = await _userRepository.GetSingleAsync(_=>_.Id==_userService.CurrentUserId, _=>_.Interests);
-            ViewBag.Interests = await _userService.PopulateAssignedInterestDataAsync(user);
-            var viewModel = _mapper.Map<User, ApplicationUserViewModel>(user);
-            if (_userService.IsFilled(user.Id))
+            ViewBag.Interests = await _userInterestService.PopulateAssignedInterestDataAsync(user.Id);
+            if (await _userService.IsFilledAsync(user.Id))
                 ViewBag.isFilled = true;
             else
                 ViewBag.isFilled = false;
             ViewBag.ReturnURL = returnURL;
-            return View(viewModel);
+            return View(_mapper.Map<User, ApplicationUserViewModel>(user));
         }
 
         // POST: Default/Edit

@@ -9,6 +9,7 @@ using App.Service.Abstract;
 using App.Model;
 using App.Model.Entities;
 using App.Model.Enumerations;
+using App.DAO.Data;
 
 namespace App.Service
 {

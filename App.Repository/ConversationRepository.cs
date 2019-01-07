@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using App.Model.Entities;
 using App.Repository.Abstract;
+using App.DAO.Data;
 
 namespace App.Repository
 {
@@ -20,7 +21,7 @@ namespace App.Repository
 
         public IEnumerable<Conversation> GetUserConversations(Guid id)
         {
-            return FindBy(_ => _.Users.Select(__=>__.Id).Contains(id));
+            throw new NotImplementedException();
         }
     }
 

@@ -15,6 +15,7 @@ using App.Service;
 using App.Repository;
 using App.Model.Entities;
 using App.Repository.Abstract;
+using App.DAO.Data;
 
 namespace DatingApplicationV2
 {
@@ -44,7 +45,7 @@ namespace DatingApplicationV2
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddScoped<IInterestRepository, InterestRepository>();
-            services.AddScoped<IInterestUserRepository, InterestUserRepository>();
+            services.AddScoped<IUserInterestsService, UserInterestsService>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddTransient<IEmailSender, EmailSender>();

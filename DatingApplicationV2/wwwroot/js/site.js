@@ -1,11 +1,265 @@
 ﻿(function ($) {
     $(function () {
-        $('.parallax').parallax();
-       
-        $(".dropdown-trigger").dropdown({ hover: false, constrainWidth: false, coverTrigger: false });
-        $('.sidenav').sidenav();
-        $('.collapsible').collapsible();
+        
+        var window_width = $(window).width();
 
+        // convert rgb to hex value string
+        function rgb2hex(rgb) {
+            if (/^#[0-9A-F]{6}$/i.test(rgb)) {
+                return rgb;
+            }
+
+            rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+
+            if (rgb === null) {
+                return 'N/A';
+            }
+
+            function hex(x) {
+                return ('0' + parseInt(x).toString(16)).slice(-2);
+            }
+
+            return '#' + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+        }
+
+        $('.dynamic-color .col').each(function () {
+            $(this)
+                .children()
+                .each(function () {
+                    var color = $(this).css('background-color'),
+                        classes = $(this).attr('class');
+                    $(this).html('<span>' + rgb2hex(color) + ' ' + classes + '</span>');
+                    if (classes.indexOf('darken') >= 0 || $(this).hasClass('black')) {
+                        $(this).css('color', 'rgba(255,255,255,.9');
+                    }
+                });
+        });
+
+        // Floating-Fixed table of contents
+        setTimeout(function () {
+            var tocWrapperHeight = 260; // Max height of ads.
+            var tocHeight = $('.toc-wrapper .table-of-contents').length
+                ? $('.toc-wrapper .table-of-contents').height()
+                : 0;
+            var socialHeight = 95; // Height of unloaded social media in footer.
+            var footerOffset = $('body > footer').first().length
+                ? $('body > footer')
+                    .first()
+                    .offset().top
+                : 0;
+            var bottomOffset = footerOffset - socialHeight - tocHeight - tocWrapperHeight;
+
+            if ($('nav').length) {
+                console.log('Nav pushpin', $('nav').height());
+                $('.toc-wrapper').pushpin({
+                    top: $('nav').height(),
+                    bottom: bottomOffset
+                });
+            } else if ($('#index-banner').length) {
+                $('.toc-wrapper').pushpin({
+                    top: $('#index-banner').height(),
+                    bottom: bottomOffset
+                });
+            } else {
+                $('.toc-wrapper').pushpin({
+                    top: 0,
+                    bottom: bottomOffset
+                });
+            }
+        }, 100);
+
+        // BuySellAds Detection
+        var $bsa = $('.buysellads'),
+            $timesToCheck = 3;
+        function checkForChanges() {
+            if (!$bsa.find('#carbonads').length) {
+                $timesToCheck -= 1;
+                if ($timesToCheck >= 0) {
+                    setTimeout(checkForChanges, 500);
+                } else {
+                    var donateAd = $(
+                        '<div id="carbonads"><span><a class="carbon-text" href="#!" onclick="document.getElementById(\'paypal-donate\').submit();"><img src="images/donate.png" /> Help support us by turning off adblock. If you still prefer to keep adblock on for this page but still want to support us, feel free to donate. Any little bit helps.</a></form></span></div>'
+                    );
+
+                    $bsa.append(donateAd);
+                }
+            }
+        }
+        checkForChanges();
+
+        // BuySellAds Demos close button.
+        $('.buysellads.buysellads-demo .close').on('click', function () {
+            $(this)
+                .parent()
+                .remove();
+        });
+
+        // Github Latest Commit
+        if ($('.github-commit').length) {
+            // Checks if widget div exists (Index only)
+            $.ajax({
+                url: 'https://api.github.com/repos/dogfalo/materialize/commits/v1-dev',
+                dataType: 'json',
+                success: function (data) {
+                    var sha = data.sha,
+                        date = jQuery.timeago(data.commit.author.date);
+                    if (window_width < 1120) {
+                        sha = sha.substring(0, 7);
+                    }
+                    $('.github-commit')
+                        .find('.date')
+                        .html(date);
+                    $('.github-commit')
+                        .find('.sha')
+                        .html(sha)
+                        .attr('href', data.html_url);
+                }
+            });
+        }
+
+        // Toggle Flow Text
+        var toggleFlowTextButton = $('#flow-toggle');
+        toggleFlowTextButton.click(function () {
+            $('#flow-text-demo')
+                .children('p')
+                .each(function () {
+                    $(this).toggleClass('flow-text');
+                });
+        });
+
+        //    Toggle Containers on page
+        var toggleContainersButton = $('#container-toggle-button');
+        toggleContainersButton.click(function () {
+            $('body .browser-window .container, .had-container').each(function () {
+                $(this).toggleClass('had-container');
+                $(this).toggleClass('container');
+                if ($(this).hasClass('container')) {
+                    toggleContainersButton.text('Turn off Containers');
+                } else {
+                    toggleContainersButton.text('Turn on Containers');
+                }
+            });
+        });
+
+        // Detect touch screen and enable scrollbar if necessary
+        function is_touch_device() {
+            try {
+                document.createEvent('TouchEvent');
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }
+        if (is_touch_device()) {
+            $('#nav-mobile').css({ overflow: 'auto' });
+        }
+
+        // Set checkbox on forms.html to indeterminate
+        var indeterminateCheckbox = document.getElementById('indeterminate-checkbox');
+        if (indeterminateCheckbox !== null) indeterminateCheckbox.indeterminate = true;
+
+        // Pushpin Demo Init
+        if ($('.pushpin-demo-nav').length) {
+            $('.pushpin-demo-nav').each(function () {
+                var $this = $(this);
+                var $target = $('#' + $(this).attr('data-target'));
+                $this.pushpin({
+                    top: $target.offset().top,
+                    bottom: $target.offset().top + $target.outerHeight() - $this.height()
+                });
+            });
+        }
+
+        // CSS Transitions Demo Init
+        if ($('#scale-demo').length && $('#scale-demo-trigger').length) {
+            $('#scale-demo-trigger').click(function () {
+                $('#scale-demo').toggleClass('scale-out');
+            });
+        }
+
+        // Plugin initialization
+        $('.carousel').carousel();
+        $('.carousel.carousel-slider').carousel({
+            fullWidth: true,
+            indicators: true,
+            onCycleTo: function (item, dragged) { }
+        });
+        $('.collapsible').collapsible();
+        $('.collapsible.expandable').collapsible({
+            accordion: false
+        });
+
+        $('.dropdown-trigger').dropdown({
+            constrainWidth: false
+        });
+
+        $('.slider').slider();
+        $('.parallax').parallax();
+        $('.materialboxed').materialbox();
+        $('.modal').modal();
+        $('.scrollspy').scrollSpy();
+        $('.datepicker').datepicker();
+        $('.tabs').tabs();
+        $('.timepicker').timepicker();
+        $('.tooltipped').tooltip();
+        $('select')
+            .not('.disabled')
+            .formSelect();
+        $('.sidenav').sidenav();
+        $('.tap-target').tapTarget();
+        $('input.autocomplete').autocomplete({
+            data: { Apple: null, Microsoft: null, Google: 'http://placehold.it/250x250' }
+        });
+        $('input[data-length], textarea[data-length]').characterCounter();
+
+        // Swipeable Tabs Demo Init
+        if ($('#tabs-swipe-demo').length) {
+            $('#tabs-swipe-demo').tabs({ swipeable: true });
+        }
+
+        // Chips
+        $('.chips').chips();
+        $('.chips-initial').chips({
+            readOnly: true,
+            data: [
+                {
+                    tag: 'Apple'
+                },
+                {
+                    tag: 'Microsoft'
+                },
+                {
+                    tag: 'Google'
+                }
+            ]
+        });
+        $('.chips-placeholder').chips({
+            placeholder: 'Enter a tag',
+            secondaryPlaceholder: '+Tag'
+        });
+        $('.chips-autocomplete').chips({
+            autocompleteOptions: {
+                data: {
+                    Apple: null,
+                    Microsoft: null,
+                    Google: null
+                }
+            }
+        });
+
+        // Fab
+        $('.fixed-action-btn').floatingActionButton();
+        $('.fixed-action-btn.horizontal').floatingActionButton({
+            direction: 'left'
+        });
+        $('.fixed-action-btn.click-to-toggle').floatingActionButton({
+            direction: 'left',
+            hoverEnabled: false
+        });
+        $('.fixed-action-btn.toolbar').floatingActionButton({
+            toolbarEnabled: true
+        });
+    
         //a tag submit button for header form
         $("#HeaderFormSubmitButton").click(function () {
             $("#HeaderForm").submit();
@@ -15,90 +269,5 @@
         $("#FormSubmitButton").click(function () {
             $("#Form").submit();
         });
-
-        // admin menu
-        $(document).ready(function () {
-            $('.tap-target').tapTarget();
-        });
-
-        //fixed action buttons
-        $(document).ready(function () {
-            $('.fixed-action-btn').floatingActionButton();
-        });
-
-        $(document).ready(function () {
-            $('.tooltipped').tooltip();
-        });
-
-        $(document).ready(function () {
-            $('select').formSelect();
-        });
-
-        $(document).ready(function () {
-            $('.datepicker').datepicker();
-
-        });
-
     }); // end of document ready
 })(jQuery); // end of jQuery name space
-
-var colors = new Array(
-    [0, 155, 255],
-    [255, 153, 204],
-    [0, 102, 255],
-    [255, 102, 102],
-    [51, 102, 255],
-    [255, 0, 255]);
-
-var step = 0;
-//color table indices for: 
-// current color left
-// next color left
-// current color right
-// next color right
-var colorIndices = [0, 1, 2, 3];
-
-//transition speed
-var gradientSpeed = 0.002;
-
-function updateGradient() {
-
-    if ($ === undefined) return;
-
-    var c0_0 = colors[colorIndices[0]];
-    var c0_1 = colors[colorIndices[1]];
-    var c1_0 = colors[colorIndices[2]];
-    var c1_1 = colors[colorIndices[3]];
-
-    var istep = 1 - step;
-    var r1 = Math.round(istep * c0_0[0] + step * c0_1[0]);
-    var g1 = Math.round(istep * c0_0[1] + step * c0_1[1]);
-    var b1 = Math.round(istep * c0_0[2] + step * c0_1[2]);
-    var color1 = "rgb(" + r1 + "," + g1 + "," + b1 + ")";
-
-    var r2 = Math.round(istep * c1_0[0] + step * c1_1[0]);
-    var g2 = Math.round(istep * c1_0[1] + step * c1_1[1]);
-    var b2 = Math.round(istep * c1_0[2] + step * c1_1[2]);
-    var color2 = "rgb(" + r2 + "," + g2 + "," + b2 + ")";
-
-    $('.gradient-header').css({
-        background: "-webkit-gradient(linear, left top, right top, from(" + color1 + "), to(" + color2 + "))"
-    }).css({
-        background: "-moz-linear-gradient(left, " + color1 + " 0%, " + color2 + " 100%)"
-    });
-
-    step += gradientSpeed;
-    if (step >= 1) {
-        step %= 1;
-        colorIndices[0] = colorIndices[1];
-        colorIndices[2] = colorIndices[3];
-
-        //pick two new target color indices
-        //do not pick the same as the current one
-        colorIndices[1] = (colorIndices[1] + Math.floor(1 + Math.random() * (colors.length - 1))) % colors.length;
-        colorIndices[3] = (colorIndices[3] + Math.floor(1 + Math.random() * (colors.length - 1))) % colors.length;
-
-    }
-}
-
-setInterval(updateGradient, 10);

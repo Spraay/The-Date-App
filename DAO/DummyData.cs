@@ -1,4 +1,5 @@
-﻿using App.Model.Entities;
+﻿using App.DAO.Data;
+using App.Model.Entities;
 using App.Model.Enumerations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -158,8 +159,8 @@ namespace App.DAO
                 {
                     Users = new List<ConversationUser>()
                     {
-                        new ConversationUser(){ User = user1 },
-                        new ConversationUser(){ User = user2 }
+                        new ConversationUser(){ User = user1, },
+                        new ConversationUser(){ User = user2, }
                     },
 
                 };

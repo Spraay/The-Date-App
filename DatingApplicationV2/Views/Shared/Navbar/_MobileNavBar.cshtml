@@ -13,7 +13,7 @@
             </div>
             @if (User.Identity.IsAuthenticated)
             {
-                @if (!_profileService.IsFilled(Guid.Parse(UserManager.GetUserId(User))))
+                @if (!await _profileService.IsFilledAsync(Guid.Parse(UserManager.GetUserId(User))))
                 {
                     <p class="yellow-text lighten-3"><i class="material-icons">warning</i>Your profile details is not filled jet</p>
                     <a class="white-text" asp-area="" asp-controller="Manage" asp-action="Index" title="Manage"><i class="material-icons">assignment_ind</i> Welcome @UserManager.GetUserName(User)</a>

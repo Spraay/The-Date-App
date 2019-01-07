@@ -21,3 +21,11 @@ main {
 .hover-opacity:hover {
     filter: brightness(130%);
 }
+
+.no-cursor{
+    cursor: default;
+}
+
+.rounded {
+    border-radius: 25px;
+}

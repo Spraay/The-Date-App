@@ -9,69 +9,26 @@
     var userFriends = (List<User>) ViewBag.Friends;
     var totalUserLikes = ViewBag.PhotosLikes;
     var isModeUserFilled = ViewBag.IsModelUserFilled;
-    var userInterests = Model.Interests;
+    var userInterests = ViewBag.Interests;
     var userRoles = ViewBag.Roles;
 }
 
 <section id="content">
-    <!--start container-->
     <div class="container">
-        <div id="profile-page" class="section">
-            <!-- profile-page-header -->
-            <div id="profile-page-header" class="card" style="overflow: hidden;">
+        <div class="section">
+            <div class="card" style="overflow: hidden;">
                 <div class="card-image waves-effect waves-block waves-light" style="height: 250px; z-index: 0;">
                     <img class="activator" src="~/images/userimages/@Model.BackgroundImageSrc" alt="user background">
                 </div>
-                <div class="card-content">
-                    <div style="position: relative; height: 70px; top: -44px;">
-                        <div class="fixed-action-btn click-to-toggle direction-top direction-left" style="position: absolute; right: 24px;">
-                            <a class="btn-floating btn-large red">
-                                <i class="material-icons">menu</i>
-                            </a>
-                            <ul>
-                                @if (currentUserId == Model.Id)
-                                {
-                                    <li>
-                                        <a class="btn-floating orange" style="opacity: 0; transform: scale(0.4) translateY(0px) translateX(40px);"
-                                           asp-controller="User" asp-action="Edit" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                            <i class="material-icons">edit</i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="btn-floating purple" style="opacity: 0; transform: scale(0.4) translateY(0px) translateX(40px);"
-                                           asp-controller="Image" asp-action="Create" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                            <i class="material-icons">add_a_photo</i>
-                                        </a>
-                                    </li>
-                                }
+                <div class="no-border no-padding" style="position: relative; top: -80px; left: 30px; width: 150px; height: 150px;">
+                    <img src="~/images/userimages/@Model.ProfileImageSrc" alt="profile image" class="circle z-depth-2 responsive-img" style="height: 100%; width: 100%">
+                </div>
+                <div class="row col s12 card-content no-padding" style="margin-top: -160px;">
+                    <ul>
+                        <li class="col s2 m2 no-cursor">
 
-                                <li>
-                                    <a class="btn-floating green" style="opacity: 0; transform: scale(0.4) translateY(0px) translateX(40px);">
-                                        <i class="material-icons">chat</i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn-floating green" style="opacity: 0; transform: scale(0.4) translateY(0px) translateX(40px);">
-                                        <i class="material-icons">chat</i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="btn-floating green" style="opacity: 0; transform: scale(0.4) translateY(0px) translateX(40px);">
-                                        <i class="material-icons">chat</i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="row" style="margin-top: -200px;">
-                        <div class="card-profile-image col s12 m3 inline" style="width: 150px; height: 120px; position: relative; top: 30px;">
-                            <img src="~/images/userimages/@Model.ProfileImageSrc" alt="profile image" class="circle z-depth-2 responsive-img" style="height: 100%; width: 100%">
-                        </div>
-                        <div class="col s12 m12 center-align">
-
-                        </div>
-                        <div class="col s12 m3 offset-m3">
+                        </li>
+                        <li class="col s2 m2 no-cursor">
                             <h4 class="card-title grey-text text-darken-4">@Model.FirstName @Model.LastName</h4>
                             <p class="medium-small grey-text">
                                 Roles: @foreach (var r in userRoles)
@@ -79,22 +36,38 @@
                                     <text>@r </text>;
                                 }
                             </p>
-                        </div>
-                        <div class="col s12 m2 center-align">
-                            <h4 class="card-title grey-text text-darken-4">@userFriends.Count()</h4>
-                            <p class="medium-small grey-text">Friends</p>
-                        </div>
-                        <div class="col m6 right">
-                            <div class="col m12">
-                                <div class="col m1 right"><i class="material-icons">grade</i></div>
-                                <div class="col m1 right"><i class="material-icons">grade</i></div>
-                                <div class="col m1 right"><i class="material-icons orange-text">grade</i></div>
-                                <div class="col m1 right"><i class="material-icons orange-text">grade</i></div>
-                                <div class="col m1 right"><i class="material-icons orange-text">grade</i></div>
-                                <div class="col m2 right"><b class="orange-text">Rating</b></div>
+                        </li>
+                        <li class="col s1 m1 hover-opacity ">
+                            <a class="pointer-cursor">
+                                <h4 class="card-title">@userFriends.Count() <i class="material-icons grey-text">supervised_user_circle</i></h4>
+                                <p class="medium-small">Friends</p>
+                            </a>
+                        </li>
+                        <li class="col s1 m1 hover-opacity ">
+                            <a class="pointer-cursor">
+                                <h4 class="card-title">@userImages.Count() <i class="material-icons grey-text">images</i></h4>
+                                <p class="medium-small">Photos</p>
+                            </a>
+                        </li>
+                        <li class="col s1 m1 no-cursor">
+
+                        </li>
+                        <li class="col s2 m2 right no-cursor">
+                            <div class="">
+                                <h4 class="card-title center">
+                                    <i class="material-icons orange-text">grade</i>
+                                    <i class="material-icons orange-text">grade</i>
+                                    <i class="material-icons">grade</i>
+                                    <i class="material-icons">grade</i>
+                                    <i class="material-icons">grade</i>
+                                </h4>
+                                <p class="medium-small orange-text center"><b>Rating</b></p>
                             </div>
-                        </div>
-                    </div>
+                        </li>
+                        <li class="col s1 m1 no-cursor">
+
+                        </li>
+                    </ul>
                 </div>
             </div>
             <!--/ profile-page-header -->
@@ -112,23 +85,39 @@
                     <!-- Profile About  -->
                     <!-- Profile About Details  -->
                     <ul id="profile-page-about-details" class="collection z-depth-1">
-                        <li class="collection-item">
+                        <li class="collection-item grey">
                             <div class="row">
                                 <div class="col s5">
-                                    <i class="material-icons left">directions_bike</i> Total Interests
+                                    <i class="material-icons left">accessibility_new</i> Weight
                                 </div>
-                                <div class="col s7 right-align">@Model.Interests.Count()</div>
+                                <div class="col s7 right-align">@Model.Weight</div>
                             </div>
                         </li>
                         <li class="collection-item">
                             <div class="row">
                                 <div class="col s5">
-                                    <i class="material-icons left">collections</i>Images Added
+                                    <i class="material-icons left">accessibility_new</i>Height
                                 </div>
-                                <div class="col s7 right-align">@userImages.Count()</div>
+                                <div class="col s7 right-align">@Model.Height</div>
+                            </div>
+                        </li>
+                        <li class="collection-item grey">
+                            <div class="row">
+                                <div class="col s5">
+                                    <i class="material-icons left">wc</i>Gender
+                                </div>
+                                <div class="col s7 right-align">@Model.Gender</div>
                             </div>
                         </li>
                         <li class="collection-item">
+                            <div class="row">
+                                <div class="col s5">
+                                    <i class="material-icons left">visibility</i>Eyes
+                                </div>
+                                <div class="col s7 right-align">@Model.Eyes</div>
+                            </div>
+                        </li>
+                        <li class="collection-item grey">
                             <div class="row">
                                 <div class="col s5">
                                     <i class="material-icons left">cake</i> Birth date
@@ -203,10 +192,9 @@
                                         <li class="indicator"></li>
                                     </ul>
                                 </div>
-                                <div class="card-content grey lighten-2 z-depth-2">
+                                <div class="card-content deep-purple lighten-2 z-depth-2">
                                     <div id="photoList" style="display: none;" class="active">
-
-                                        @if (!userImages.Any())
+                                        @if (userImages.Count() < 1)
                                         {
                                             <div class="valign-wrapper my-wrapper row">
                                                 <div class="col s12">
@@ -219,7 +207,7 @@
                                             @foreach (var item in userImages)
                                             {
 
-                                                <div class="card deep-purple lighten-2">
+                                                <div class="card">
                                                     <div class="card-image waves-effect waves-block waves-light">
                                                         <img class="activator" src="~/images/userimages/@Html.DisplayFor(modelItem => item.Src)" />
                                                     </div>
@@ -276,7 +264,7 @@
 
                                     </div>
                                     <div id="interestsList" class="" style="display: none;">
-                                        @if (!userInterests.Any())
+                                        @if (userInterests.Count<1)
                                         {
                                             <div class="valign-wrapper my-wrapper row">
                                                 <div class="col s12">
@@ -290,7 +278,7 @@
                                             <div class="collection">
                                                 @foreach (var interest in userInterests)
                                                 {
-                                                    <a href="#!" class="collection-item">@interest.Interest.Name</a>
+                                                    <a href="#!" class="collection-item">@interest.Name</a>
                                                 }
                                             </div>
                                         }

@@ -2,7 +2,7 @@
 @inject IUserService _userService
 @inject IFriendService _friendService
 <!-- Dropdown Structure -->
-<ul id='friendshipDropdown' class='dropdown-content'>
+<ul id='friendshipDropdown' class='dropdown-content' style="width: 400px;">
     <li>
         <a asp-controller="Friendships" asp-action="Index">My Friends
             <i class="material-icons">group</i>
@@ -14,7 +14,7 @@
     <li><a asp-controller="Friendships" asp-action="InvitationsReceived">Invites Received<i class="material-icons">undo</i></a></li>
 </ul>
 
-<li data-constrainWidth="false">
+<li data-constrainWidth="false" style="">
     <a class='dropdown-trigger tooltipped' data-position="bottom" data-tooltip="Friends" href='#' data-target='friendshipDropdown'>
         <i class="material-icons">
             supervisor_account

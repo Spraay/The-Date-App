@@ -1,4 +1,5 @@
 ﻿using App.DAO;
+using App.DAO.Data;
 using App.Model.Entities;
 using App.Repository.Abstract;
 using System;
@@ -8,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace App.Repository
 {
-    public class InterestUserRepository : EntityBaseRepository<InterestUser>, IInterestUserRepository
-    {
-        public InterestUserRepository(ApplicationDbContext context) : base(context)
-        {
-        }
-    }
+    //public class InterestUserRepository : EntityBaseRepository<InterestUser>, IInterestUserRepository
+    //{
+    //    public InterestUserRepository(ApplicationDbContext context) : base(context)
+    //    {
+    //    }
+    //}
 }

@@ -241,7 +241,6 @@ namespace App.DAO.Migrations
                 name: "ConversationUser",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
                     ConversationId = table.Column<Guid>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false)
                 },
@@ -292,7 +291,6 @@ namespace App.DAO.Migrations
                 name: "InterestUser",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
                     InterestId = table.Column<Guid>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false)
                 },

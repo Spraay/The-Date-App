@@ -62,7 +62,7 @@ namespace DatingApplication.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
 
-                var tempUsersData = appUsers.Where(_ => _userService.IsFilled(_.Id)).ToList();
+                var tempUsersData = appUsers.Where( _=> _userService.IsFilledAsync(_.Id).Result).ToList();
                 appUsers = tempUsersData.Any() ? tempUsersData : appUsers;
 
                 tempUsersData = appUsers.Where(s =>

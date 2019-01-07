@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using App.Service.Abstract;
 using App.Model.Entities;
+using App.DAO.Data;
 
 namespace App.Service
 {

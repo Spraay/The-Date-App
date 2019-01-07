@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace App.Repository.Abstract
 {
-    public interface IInterestUserRepository : IEntityBaseRepository<InterestUser>
-    {
-    }
+    //public interface IInterestUserRepository : IEntityBaseRepository<InterestUser>
+    //{
+    //}
 }

@@ -15,7 +15,7 @@
             </div>
             <div class="col s10">
                 <span class="black-text">
-                    @if (_userService.IsFilled(Guid.Parse(UserManager.GetUserId(User))))
+                    @if (await _userService.IsFilledAsync(Guid.Parse(UserManager.GetUserId(User))))
                     {
                         <h1 class="white-text">Hello @Html.DisplayFor(model => model.FirstName)</h1>
                     }
@@ -31,7 +31,7 @@
             <div class="col s12 m12 l6">
                 <ul class="collection with-header collapsible">
                     <li class="collection-header blue darken-1"><h4 class="white-text text-accent-3">Details</h4></li>
-                    @if (_userService.IsFilled(Guid.Parse(UserManager.GetUserId(User))))
+                    @if (await _userService.IsFilledAsync(Guid.Parse(UserManager.GetUserId(User))))
                     {
                         <li class="collection-item">
                             <div class="row">
