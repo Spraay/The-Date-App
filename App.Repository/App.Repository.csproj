@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DAO\App.DAO.csproj" />
+    <ProjectReference Include="..\App.DAO\App.DAO.csproj" />
+    <ProjectReference Include="..\App.Model\App.Model.csproj" />
   </ItemGroup>
 
 </Project>

@@ -10,8 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DAO\App.DAO.csproj" />
-    <ProjectReference Include="..\Enties\App.Model.csproj" />
+    <ProjectReference Include="..\App.Model\App.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>
