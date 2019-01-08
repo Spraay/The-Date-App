@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.DAO.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190107204334_init")]
-    partial class init
+    [Migration("20190108100356_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
