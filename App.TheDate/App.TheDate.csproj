@@ -4,7 +4,6 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <UserSecretsId>aspnet-DatingApplicationV2-A05329B2-922E-4AF7-AD07-814EA0753F95</UserSecretsId>
     <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
-    <AssemblyName>App.TheDate</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
