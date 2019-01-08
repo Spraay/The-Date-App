@@ -30,10 +30,10 @@ namespace DatingApplicationV2.Controllers
             return RedirectToAction(nameof(MeetsList), new { returnURL });
         }
 
-        public async Task<IActionResult> MeetsList(string returnURL = null)
+        public async Task<IActionResult> MeetsList(Guid? id, string returnURL = null)
         {
             ViewBag.returnURL = returnURL;
-            return View(await _meetService.UserMeetsAcceptedAsync(_userService.CurrentUserId));
+            return View(await _meetService.UserMeetsAcceptedAsync(id ?? _userService.CurrentUserId));
         }
 
         public async Task<IActionResult> Meet(Guid id, string returnURL = null)

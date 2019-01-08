@@ -93,7 +93,7 @@ namespace DatingApplication.Controllers
             }
 
             var viewModel = _mapper.Map<List<User>, List<ApplicationUserViewModel>>(appUsers.ToList());
-            var result = ( PaginatedList<ApplicationUserViewModel>.Create(viewModel, page ?? 1, pageSize?? 5));
+            var result = ( PaginatedList<ApplicationUserViewModel>.Create(viewModel, page ?? 1, pageSize?? 10));
             return View(result);
         }
 

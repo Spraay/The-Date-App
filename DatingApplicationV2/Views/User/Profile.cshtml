@@ -18,19 +18,35 @@
 <section id="content">
     <div class="container">
         <div class="section">
+            
             <div class="card" style="overflow: hidden;">
-                <div class="card-image waves-effect waves-block waves-light" style="height: 250px; z-index: 0;">
-                    <img class="activator" src="~/images/userimages/@Model.BackgroundImageSrc" alt="user background">
+                <div class="row col s12 m12">
+                    <div class="col s12 m12 card-image waves-effect waves-block waves-light" style="height: 250px; z-index: 0;">
+                        <img class="activator" src="~/images/userimages/@Model.BackgroundImageSrc" alt="user background">
+                    </div>
+                    <div class=" col s12 m12 no-border no-padding" style="position: relative; top: -80px; left: 30px; width: 150px; height: 150px;">
+                        <img src="~/images/userimages/@Model.ProfileImageSrc" alt="profile image" class="circle z-depth-2 responsive-img" style="height: 100%; width: 100%">
+                        @if (Model.UserName == User.Identity.Name)
+                        {
+                            <a style="position: relative; top: -95px; left: 125px;" class="btn btn-floating green"><i class="material-icons">add_a_photo</i></a>
+                        }
+                        @if (!userFriends.Any(_ => _.UserName == User.Identity.Name) && Model.UserName != User.Identity.Name)
+                        {
+                            <a style="position: relative; top: -95px; left: 125px;" class="btn btn-floating blue"><i class="material-icons">person_add</i></a>
+                        }
+                        @if (userFriends.Any(_ => _.UserName == User.Identity.Name))
+                        {
+                            <a style="position: relative; top: -95px; left: 125px;" class="btn btn-floating red"><i class="material-icons">person_add_disabled</i></a>
+                        }
+
+                    </div>
                 </div>
-                <div class="no-border no-padding" style="position: relative; top: -80px; left: 30px; width: 150px; height: 150px;">
-                    <img src="~/images/userimages/@Model.ProfileImageSrc" alt="profile image" class="circle z-depth-2 responsive-img" style="height: 100%; width: 100%">
-                </div>
+                
+                <div class="row"></div>
                 <div class="row col s12 m6 card-content no-padding" style="margin-top: -160px;">
                     <ul>
-                        <li class="col s3 m3 no-cursor">
-
-                        </li>
-                        <li class="col s3 m3 no-cursor">
+                        <li class="col s2 m2"></li>
+                        <li class="col s3 m3 no-cursor" >
                             <h4 class="card-title grey-text text-darken-4">@Model.FirstName @Model.LastName</h4>
                             <p class="medium-small grey-text">
                                 Roles: @foreach (var r in userRoles)
@@ -39,19 +55,19 @@
                                 }
                             </p>
                         </li>
-                        <li class="col s1 m1 hover-opacity ">
-                            <a class="pointer-cursor">
+                        <li class="col s1 m1 hover-opacity" style="width: 90px;">
+                            <a class="pointer-cursor" asp-controller="Friendships" asp-action="UserFriends" asp-route-id="@Model.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <h4 class="card-title">@userFriends.Count() <i class="material-icons grey-text">supervised_user_circle</i></h4>
                                 <p class="medium-small">Friends</p>
                             </a>
                         </li>
-                        <li class="col s1 m1 hover-opacity ">
-                            <a class="pointer-cursor">
+                        <li class="col s2 m1 hover-opacity" style="width: 90px;">
+                            <a class="pointer-cursor" asp-controller="Image" asp-action="UserImages" asp-route-id="@Model.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <h4 class="card-title">@userImages.Count() <i class="material-icons grey-text">images</i></h4>
                                 <p class="medium-small">Photos</p>
                             </a>
                         </li>
-                        <li class="col s1 m1 hover-opacity ">
+                        <li class="col s1 m1 hover-opacity "style="width: 90px;">
                             <a class="pointer-cursor" asp-controller="Vote" asp-action="Votes" asp-route-id="@Model.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <h4 class="card-title">
                                     @userVotes
@@ -60,14 +76,14 @@
                                 <p class="medium-small">Votes</p>
                             </a>
                         </li>
-                        <li class="col s1 m1 hover-opacity ">
-                            <a class="pointer-cursor">
+                        <li class="col s1 m1 hover-opacity " style="width: 90px;">
+                            <a class="pointer-cursor" asp-controller="Meet" asp-action="MeetsList" asp-route-id="@Model.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <h4 class="card-title">@userMets <i class="material-icons grey-text">how_to_reg</i></h4>
                                 <p class="medium-small">Mets</p>
                             </a>
                         </li>
-                        
-                        
+
+
                     </ul>
                 </div>
             </div>
@@ -289,7 +305,7 @@
 
                                     </div>
                                     <div id="interestsList" class="" style="display: none;">
-                                        @if (userInterests.Count<1)
+                                        @if (userInterests.Count < 1)
                                         {
                                             <div class="valign-wrapper my-wrapper row">
                                                 <div class="col s12">
