@@ -23,7 +23,7 @@ namespace DatingApplicationV2.Controllers
 
         public async Task<IActionResult> ToggleLike(Guid id, string returnURL = null)
         {
-            await _imageLikeService.ToggleLikeAsync(_userService.CurrentUserId, id);
+            await _imageLikeService.ToggleLikeAsync(id, _userService.CurrentUserId);
             ViewBag.isLiked = await _imageLikeService.IsLikedByAsync(id, _userService.CurrentUserId);
             ViewBag.returnURL = returnURL + "?id=" + _userService.CurrentUserId.ToString();
             return View(await _imageRepository.GetSingleAsync(id));
