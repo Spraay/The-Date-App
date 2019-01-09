@@ -18,11 +18,11 @@ namespace App.Service
             _context = context;
         }
 
-        public void ToggleImageLike(Guid imageID, Guid userID)
+        public void ToggleLike(Guid id, Guid userId)
         {
-            if (IsImageLiked(imageID, userID))
+            if (IsLikedBy(id, userId))
             {
-                var likeToDel = _context.ImagesLikes.SingleOrDefault(_ => _.LikedItemId == imageID && _.CreatorId == userID);
+                var likeToDel = _context.ImagesLikes.SingleOrDefault(_ => _.LikedItemId == id && _.CreatorId == userId);
                 _context.ImagesLikes.Remove(likeToDel);
 
             }
@@ -31,42 +31,57 @@ namespace App.Service
                 _context.ImagesLikes.Add(
                     new ImageLike()
                     {
-                        LikedItemId = imageID,
-                        CreatorId = userID
+                        LikedItemId = id,
+                        CreatorId = userId
                     }
                 );
             }
             _context.SaveChanges();
         }
 
-        public bool IsImageLiked(Guid imageID, Guid userID)
+        public async Task ToggleLikeAsync(Guid id, Guid userId)
         {
-            return _context.ImagesLikes.Any(_ => _.LikedItemId == imageID && _.CreatorId == userID);
+            if (await IsLikedByAsync(id, userId))
+            {
+                var likeToDel = await _context.ImagesLikes.SingleOrDefaultAsync(_ => _.LikedItemId == id && _.CreatorId == userId);
+                _context.ImagesLikes.Remove(likeToDel);
+            }
+            else
+            {
+                await _context.ImagesLikes.AddAsync(
+                    new ImageLike()
+                    {
+                        LikedItemId = id,
+                        CreatorId = userId
+                    }
+                );
+            }
+            await _context.SaveChangesAsync();
         }
 
-        public int CountImageLikes(Guid id)
+        public bool IsLiked(Guid id)
+        {
+            return _context.ImagesLikes.Any(_ => _.LikedItemId == id);
+        }
+
+        public async Task<bool> IsLikedAsync(Guid id)
+        {
+            return await _context.ImagesLikes.AnyAsync(_ => _.LikedItemId == id);
+        }
+
+        public int Count(Guid id)
         {
             return _context.ImagesLikes.Count(_ => _.LikedItemId == id);
         }
 
-        public int CountUserImageLikes(Guid id)
+        public bool IsLikedBy(Guid id, Guid userId)
         {
-            var userImagesIds =  _context.Images.Where(_ => _.UserId == id).Select(_ => _.Id).ToList();
-            return  _context.ImagesLikes.Where(_ => userImagesIds.Contains(_.Id)).Count();
+            return _context.ImagesLikes.Any(_ => _.LikedItemId == id && _.CreatorId == userId);
         }
 
-    }
-    //TASK PART
-    public partial class ImageLikeService : IImageLikeService
-    {
-        public async Task<int> CountImageLikesAsync(Guid id)
+        public async Task<bool> IsLikedByAsync(Guid id, Guid userId)
         {
-            return await _context.ImagesLikes.CountAsync(_ => _.LikedItemId == id);
-        }
-        public async Task<int> CountUserImageLikesAsync(Guid id)
-        {
-            var userImagesIds = await _context.Images.Where(_ => _.UserId == id).Select(_ => _.Id).ToListAsync();
-            return await _context.ImagesLikes.Where(_ => userImagesIds.Contains(_.Id)).CountAsync();
+            return await _context.ImagesLikes.AnyAsync(_ => _.LikedItemId == id && _.CreatorId == userId);
         }
     }
 }
