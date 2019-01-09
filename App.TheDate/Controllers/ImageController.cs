@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using App.Model.Entities;
+using App.Repository.Abstract;
 using App.Service.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -16,55 +17,44 @@ namespace DatingApplicationV2.Controllers
     public class ImageController : Controller
     {
         private readonly IUserService _userService;
+        private readonly IUserRepository _userRepository;
         private readonly IImageService _imageService;
-        private readonly UserManager<User> _userManager;
-        private readonly IHostingEnvironment _appEnvironment;
+        private readonly IImageRepository _imageRepository;
 
-        private readonly string[] allowedExtensions = {
-            ".jpg",
-            ".img",
-            ".jpeg",
-            ".png",
-            ".gif"
-        };
-
-        public string GetAllowedExtensionsMsg()
-        {
-            string errorMsg = "Only this image extensions are allowed: ";
-            foreach (var e in allowedExtensions)
-            {
-                if (e != allowedExtensions[allowedExtensions.Count()-1])
-                    errorMsg += e + ", ";
-                else
-                    errorMsg += e;
-            }
-            return errorMsg;
-        }
-
-        public ImageController(IUserService userService, IImageService imageService, UserManager<User> userManager, IHostingEnvironment appEnvironment)
+        public ImageController(IUserService userService, IUserRepository userRepository, IImageService imageService, IImageRepository imageRepository)
         {
             _userService = userService;
+            _userRepository = userRepository;
             _imageService = imageService;
-            _userManager = userManager;
-            _appEnvironment = appEnvironment;
+            _imageRepository = imageRepository;
         }
 
         public ActionResult Index()
         {
-            return RedirectToAction(nameof(UserImages), new { id = _userManager.GetUserId(User)});
-           
-        }
-        // GET: Image
-        // user gallery
-        public ActionResult UserImages(Guid id)
-        {
-            return View(_imageService.GetList(id));
+            return RedirectToAction(nameof(UserImages), new { id = _userService.CurrentUserId });
         }
 
-        // GET: Image/Create
+        public async Task<IActionResult> UserImages(Guid id)
+        {
+            var r = await _imageRepository.AllIncludingAsync(_ => _.Likes, _=>_.Comments);
+            ViewBag.UserId = id;
+            var user = await _userRepository.GetSingleAsync(id);
+            ViewBag.UserName = user.UserName;
+            return View(r.Where(_=>_.UserId==id));
+        }
+
         public ActionResult Create()
         {
-            ViewBag.AllowedExtensionsMsg = GetAllowedExtensionsMsg();
+            ViewBag.AllowedExtensionsMsg = _imageService.GetAllowedExtensionsMsg();
+            return View();
+        }
+
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            if (await _imageRepository.IsOwnerAsync(_userService.CurrentUserId, id))
+            {
+                return View(_imageRepository.GetSingleAsync(id));
+            }
             return View();
         }
 
@@ -77,20 +67,16 @@ namespace DatingApplicationV2.Controllers
             {
                 if (file != null && file.Length > 0)
                 {
-                    if (!allowedExtensions.Contains(Path.GetExtension(file.FileName)))
+                    if (!_imageService.AllowedExtensions.Contains(Path.GetExtension(file.FileName)))
                     {
-                        ModelState.AddModelError(string.Empty, GetAllowedExtensionsMsg());
+                        ModelState.AddModelError(string.Empty, _imageService.GetAllowedExtensionsMsg());
                         return RedirectToAction(nameof(Create));
                     }
-
-                    Guid.TryParse(_userManager.GetUserId(User), out Guid currentUser);
-                    var uploads = Path.Combine(_appEnvironment.WebRootPath, "images\\userimages");
-                    var fileName = currentUser + Guid.NewGuid().ToString().Replace("-", "") + Path.GetExtension(file.FileName);
-                    using (var fileStream = new FileStream(Path.Combine(uploads, fileName), FileMode.Create))
-                    {
-                        await file.CopyToAsync(fileStream);
-                        _imageService.Create(fileName, currentUser, image.Title, image.Description);
-                    }
+                    var img = await _imageService.CreateImageAsync(file, _userService.CurrentUserId);
+                    img.Title = image.Title;
+                    img.Description = image.Description;
+                    await _imageRepository.AddAsync(img);
+                    await _imageRepository.CommitAsync();
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -98,42 +84,54 @@ namespace DatingApplicationV2.Controllers
         }
 
         // GET: Image/Delete/5
-        public ActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            if (_imageService.IsOwner(id, Guid.Parse(_userManager.GetUserId(User))))
-                return View(_imageService.Get(id));
+            if (await _imageRepository.IsOwnerAsync(_userService.CurrentUserId, id))
+                return View(await _imageRepository.GetSingleAsync(id));
             ModelState.AddModelError(string.Empty, "You are not owner of photo with id = "+id+"");
             return RedirectToAction(nameof(Index));
-
         }
 
         // POST: Image/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
+            var img = await _imageRepository.GetSingleAsync(_=>_.Id==id, _=>_.User);
             
-            var img = _imageService.Get(id);
-            var path = Path.Combine(_appEnvironment.WebRootPath, "images\\userimages", img.Src);
-            if (System.IO.File.Exists(path))
+            if (img.User.ProfileImageSrc == img.Src )
             {
-                System.IO.File.Delete(path);
+                img.User.ProfileImageSrc = "NoProfileImage.png";
+                _userRepository.Update(img.User);
+                await _userRepository.CommitAsync();
             }
-            _imageService.Delete(img.Src);
+            _imageRepository.DeleteWhere(_=>_.Id == id);
+            await _imageRepository.CommitAsync();
+            _imageService.DeleteFile(img.Src);
+            
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult SetProfilePhoto(Guid id, string returnURL = null)
+        public async Task<IActionResult> SetProfilePhoto(Guid id, string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
-            _imageService.SetProfilePhoto(_userService.CurrentUserId, id);
-            return View(_imageService.Get(id));
+            var user = await _userRepository.GetSingleAsync(_ => _.Id == _userService.CurrentUserId);
+            var img = await _imageRepository.GetSingleAsync(_ => _.Id == id);
+            user.ProfileImageSrc = img.Src;
+            _userRepository.Update(user);
+            await _userRepository.CommitAsync();
+            return View(img);
         }
-        public IActionResult SetProfileBackgroundPhoto(Guid id, string returnURL = null)
+
+        public async Task<IActionResult> SetProfileBackgroundPhoto(Guid id, string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
-            _imageService.SetProfileBackgroundPhoto(_userService.CurrentUserId, id);
-            return View(_imageService.Get(id));
+            var user = await _userRepository.GetSingleAsync(_ => _.Id == _userService.CurrentUserId);
+            var img = await _imageRepository.GetSingleAsync(_ => _.Id == id);
+            user.BackgroundImageSrc = img.Src;
+            _userRepository.Update(user);
+            await _userRepository.CommitAsync();
+            return View(img);
         }
     }
 }

@@ -51,16 +51,16 @@ namespace DatingApplicationV2.Controllers
             if (ModelState.IsValid)
             {
                 _interestRepository.Add(interest);
+                _interestRepository.Commit();
                 return RedirectToAction(nameof(Index));
             }
             return View(interest);
         }
 
         // GET: Interests/Edit/5
-        public IActionResult Edit(Guid? id)
+        public IActionResult Edit(Guid id)
         {
-            if (id.HasValue) return View(_interestRepository.GetSingle(_ => _.Id == id.Value));
-            return null;
+            return View(_interestRepository.GetSingle(_ => _.Id == id));
         }
 
         // POST: Interests/Edit/5
@@ -78,6 +78,7 @@ namespace DatingApplicationV2.Controllers
             if (ModelState.IsValid)
             {
                 _interestRepository.Update(interest);
+                _interestRepository.Commit();
                 return RedirectToAction(nameof(Index));
             }
             return View(interest);
@@ -107,6 +108,7 @@ namespace DatingApplicationV2.Controllers
         public IActionResult DeleteConfirmed(Guid id)
         {
             _interestRepository.DeleteWhere(_=>_.Id == id);
+            _interestRepository.Commit();
             return RedirectToAction(nameof(Index));
         }
 

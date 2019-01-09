@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using App.Service.Abstract;
 using Microsoft.AspNetCore.Authorization;
+using App.Repository.Abstract;
+using System.Threading.Tasks;
 
 namespace DatingApplicationV2.Controllers
 {
@@ -9,22 +11,22 @@ namespace DatingApplicationV2.Controllers
     public class ImageLikeController : Controller
     {
         private readonly IUserService _userService;
-        private readonly IImageService _imageService;
+        private readonly IImageRepository _imageRepository;
         private readonly IImageLikeService _imageLikeService;
 
-        public ImageLikeController(IUserService userService, IImageService imageService, IImageLikeService imageLikeService)
+        public ImageLikeController(IUserService userService, IImageRepository imageRepository, IImageLikeService imageLikeService)
         {
             _userService = userService;
-            _imageService = imageService;
+            _imageRepository = imageRepository;
             _imageLikeService = imageLikeService;
         }
 
-        public ActionResult ToggleLike(Guid id, string returnURL = null)
+        public async Task<IActionResult> ToggleLike(Guid id, string returnURL = null)
         {
-            _imageLikeService.ToggleImageLike(id, _userService.CurrentUserId);
-            ViewBag.isLiked = _imageLikeService.IsImageLiked(id, _userService.CurrentUserId);
-            ViewBag.returnURL = returnURL + "?userID=" + _userService.CurrentUserId.ToString();
-            return View(_imageService.Get(id));
+            await _imageLikeService.ToggleLikeAsync(_userService.CurrentUserId, id);
+            ViewBag.isLiked = await _imageLikeService.IsLikedByAsync(id, _userService.CurrentUserId);
+            ViewBag.returnURL = returnURL + "?id=" + _userService.CurrentUserId.ToString();
+            return View(await _imageRepository.GetSingleAsync(id));
         }
     }
 }

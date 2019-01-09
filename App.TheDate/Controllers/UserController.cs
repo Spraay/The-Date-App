@@ -56,7 +56,7 @@ namespace DatingApplication.Controllers
                 _=>_.Gallery);
             ViewBag.Interests               = await _userInterestService.GetUserInterestsAsync(id);
             ViewBag.Friends                 = await _friendService.GetUserFriendsAsync(id);
-            ViewBag.PhotosLikes             = await _imageLikeService.CountImageLikesAsync(id);
+            ViewBag.PhotosLikes             = _imageLikeService.Count(id);
             ViewBag.CurrentUserId           = _userService.CurrentUserId;
             ViewBag.IsModelUserFilled       = await _userService.IsFilledAsync(id);
             ViewBag.Roles                   = await _userManager.GetRolesAsync(await _userRepository.GetSingleAsync(id));
