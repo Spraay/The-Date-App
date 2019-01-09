@@ -19,7 +19,12 @@ main {
 }
 
 .hover-opacity:hover {
+    
     filter: brightness(130%);
+}
+
+.hover-blue:hover {
+    color: #2196f3;
 }
 
 .no-cursor{
@@ -28,4 +33,9 @@ main {
 
 .rounded {
     border-radius: 25px;
+}
+
+.inline-icon {
+    vertical-align: central;
+    font-size: 15px !important;
 }
