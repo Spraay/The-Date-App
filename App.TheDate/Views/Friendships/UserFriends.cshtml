@@ -24,13 +24,12 @@ else
     </div>
 }
 
-<div class="container">
-    <div class="row">
+    <div class="container">
         @foreach (var item in Model)
         {
             <div class="col m4">
-                <div class="card">
-                    <div class="card-image inline">
+                <div class="card" >
+                    <div class="card-image inline ">
                         <img src="~/images/userimages/@Html.DisplayFor(m => item.ProfileImageSrc)">
                         <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">
                             @Html.DisplayFor(m => item.FirstName)  @Html.DisplayFor(m => item.LastName)

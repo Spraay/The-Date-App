@@ -28,7 +28,11 @@
                         <img src="~/images/userimages/@Model.ProfileImageSrc" alt="profile image" class="circle z-depth-2 responsive-img" style="height: 100%; width: 100%">
                         @if (Model.UserName == User.Identity.Name)
                         {
-                            <a style="position: relative; top: -95px; left: 125px;" class="btn btn-floating green"><i class="material-icons">add_a_photo</i></a>
+                            <a style="position: relative; top: -95px; left: 125px;" class="btn btn-floating green"
+                               asp-controller="Image"
+                                asp-action="Create"
+                                asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"
+                               ><i class="material-icons">add_a_photo</i></a>
                         }
                         @if (!userFriends.Any(_ => _.UserName == User.Identity.Name) && Model.UserName != User.Identity.Name)
                         {

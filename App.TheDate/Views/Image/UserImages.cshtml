@@ -1,50 +1,14 @@
 ﻿@model IEnumerable<Image>
-@inject UserManager<User> _userManager
-@inject IImageLikeService _imageLikeService
-@inject IUserService _userService
+@{
+    var userName = (string)ViewBag.UserName;
+    var userId = (Guid)ViewBag.UserId;
+}
 
 @{
     ViewData["Title"] = "UserImages";
 }
 
-@if (Model.Count() == 0)
-{
-    <br /><br /><br />
-    <div class="container">
-        <div class="row grey z-depth-2">
-            <h1 class="col s12 white-text">
-                <b>
-                    Upss... <i class="material-icons large left">
-                        sentiment_very_dissatisfied
-                    </i>
-                </b>
-            </h1>
-            <h1 class="col s12 white-text center">
-                <b>
-                    <i class="material-icons large pulse">
-                        person_add_disabled
-                    </i>
-                </b>
-            </h1>
-            <h4 class="center white-text">Your gallery seems to be empty!</h4>
-            <h5 class="center white-text">Do you want to add photos? Click the green, plus button</h5>
-
-            <br /><br /><br />
-        </div>
-        <div class="row">
-            <p class="center-align">
-
-                <a asp-action="Create" style="position: relative; bottom: 45px;" class="btn btn-floating btn-large waves-effect green pulse">
-                    <i class="material-icons">add</i>
-                </a>
-            </p>
-        </div>
-        <div class=" col s12">
-            <h4 class="center"></h4>
-        </div>
-    </div>
-}
-else
+@if (Model.Any())
 {
     <div class="parallax-container" style="height: 300px">
         <div class="section no-pad-bot">
@@ -59,32 +23,44 @@ else
         </div>
         <div class="parallax"><img src="~/images/photographer.jpg" alt="Unsplashed background img 1" style="opacity: 1; transform: translate3d(-50%, 168.122px, 0px);"></div>
     </div>
-    <div class="row">
-        <div class="col s12">
-            <div class="fixed-action-btn direction-top" style="top: 100px; right: 40px;">
-                <a asp-action="Create" class="btn-floating btn-large green waves-effect waves-light pulse">
-                    <i class="material-icons">add</i>
-                </a>
+    @if (User.Identity.Name == userName)
+    {
+        <div class="row">
+            <div class="col s12">
+                <div class="fixed-action-btn direction-top" style="top: 100px; right: 40px;">
+                    <a asp-action="Create" class="btn-floating btn-large green waves-effect waves-light pulse">
+                        <i class="material-icons">add</i>
+                    </a>
+                </div>
             </div>
         </div>
+    }
+}
+else
+{
+    <div class="valign-wrapper my-wrapper row">
+        <div class="col s12">
+            <div class="col s12 center"><i class="material-icons orange-text" style="font-size: 150px;">sentiment_dissatisfied</i></div>
+            <h1 class="orange-text center">
+                @if (User.Identity.Name == userName)
+                {<text>Your gallery seems to be empty. Try add some photos <a asp-controller="Image" asp-action="Create" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">here</a></text>}
+                else { }
+            </h1>
+        </div>
     </div>
+}
     <div class="container">
-
-        @foreach (var item in Model)
-        {
-
-            <div class="card">
-                <div class="card-image waves-effect waves-block waves-light">
-                    <img class="" src="~/images/userimages/@Html.DisplayFor(modelItem => item.Src)" />
-                    <div class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">
-                        <div class="container">
-                            <span class="left">@Html.DisplayFor(modelItem => item.Title)</span>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col l4 s10 m6 xl3">
+                    <div class="card z-depth-2 col s12 no-padding">
+                        <div class="card-image medium">
+                            <img style="width: 100%; height: 210px;" class="responsive-img" src="~/images/userimages/@item.Src">
                         </div>
-                        @if (item.UserId == Guid.Parse(_userManager.GetUserId(User)))
-                        {
-                        <span class="right">
-
-                            <a class="btn btn-large red waves-effect waves-light tooltipped"
+                        <div class="divider"></div>
+                        <div class="col s12 no-padding center" style="position: relative; top: -20px;">
+                            <a class="btn rounded red waves-effect waves-light tooltipped"
                                data-position="top"
                                data-tooltip="Delete Photo"
                                asp-action="Delete"
@@ -92,7 +68,7 @@ else
                                asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <i class="material-icons">delete_forever</i>
                             </a>
-                            <a class="btn btn-large blue waves-effect waves-light tooltipped"
+                            <a class="btn  rounded blue waves-effect waves-light tooltipped"
                                data-position="top"
                                data-tooltip="Edit Photo"
                                asp-action="Edit"
@@ -100,7 +76,7 @@ else
                                asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <i class="material-icons">edit</i>
                             </a>
-                            <a class="btn btn-large green waves-effect waves-light tooltipped"
+                            <a class="btn  rounded green waves-effect waves-light tooltipped"
                                data-position="top"
                                data-tooltip="Set As Profile Photo"
                                asp-action="SetProfilePhoto"
@@ -108,33 +84,121 @@ else
                                asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
                                 <i class="material-icons">face</i>
                             </a>
-                        </span>
-                        }
+                        </div>
+                        <div class="col s12 center" style="position: relative; top: -10px;">
+                            <div class="truncate"><b>@item.Title</b></div>
+                        </div>
+                        <div class="col s12" style="position: relative; top: -15px;">
+                            <a class="left pointer-cursor"><p class="no-padding darken-3">@item.Likes.Count() likes</p></a>
+                            <a class="right pointer-cursor"><p class="no-padding blue-grey-text darken-3">@item.Comments.Count() comments</p></a>
+                        </div>
+                        <div class="col s12 divider" style="position: relative; top: -15px;"></div>
+                        <div class="col s12"  style="position: relative; top: -15px; margin-bottom: -20px">
+                            @if (true)
+                            {
+                                <a  class="left grey-text text-darken-3"><p class="pointer-cursor hover-blue">Like <i class="material-icons inline-icon">thumb_up</i></p></a>
+                            }
+                            else
+                            {
+                                <a  class="left grey-text text-darken-3"><p class="pointer-cursor hover-blue">Like <i class="material-icons inline-icon">thumb_down</i></p></a>
+                            }
+                            <a class="right grey-text text-darken-3"><p class="pointer-cursor hover-blue">Comment <i class="material-icons inline-icon">comment</i></p></a>
+                        </div>
                     </div>
                 </div>
-                <div class="collapsible z-depth-0">
-                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
-                    <hr />
-                    <ul class="collapsible">
-                        <li>
-                            <div class="collapsible-header"><a class="btn-flat" id="lc" onload="document.getElementById('lc').innerText = 'Likes by api '+ GetImageLikes('@item.Id')">
-                                <script src="~/../Scripts/Service/ImageLikeService.js">
-                                    alert(GetImageLikes(@item.Id));
-                                </script>    
-                                @_imageLikeService.CountImageLikes(item.Id)Likes By mvc</a></div>
-                            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                        </li>
-                        <li>
-                            <div class="collapsible-header"><a class="btn-flat">4 Comments</a></div>
-                            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-                        </li>
-                    </ul>
+            }
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @*<div class="container">
+            @foreach (var item in Model)
+            {
+
+
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img src="~/images/userimages/@Html.DisplayFor(modelItem => item.Src)" style="width: 100%; height: 100%">
+                    <div style="position: absolute; bottom: 10px; width: 100%;">
+                        <div class="row">
+                            @if (User.Identity.Name == userName)
+                            {
+                                <div class="container center">
+                                    <div class="row"></div>
+                                    <a class="btn btn-large rounded red waves-effect waves-light tooltipped"
+                                       data-position="top"
+                                       data-tooltip="Delete Photo"
+                                       asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                        <i class="material-icons">delete_forever</i>
+                                    </a>
+                                    <a class="btn btn-large rounded blue waves-effect waves-light tooltipped"
+                                       data-position="top"
+                                       data-tooltip="Edit Photo"
+                                       asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                    <a class="btn btn-large rounded green waves-effect waves-light tooltipped"
+                                       data-position="top"
+                                       data-tooltip="Set As Profile Photo"
+                                       asp-action="SetProfilePhoto"
+                                       asp-route-id="@item.Id"
+                                       asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                        <i class="material-icons">face</i>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="blue-grey lighten-4 grey-text text-darken-3">
+                    <div class="row col s12 m12" style="margin: 0;">
+                        <div class="col s6 m6">
+                            <p><a class="grey-text text-darken-1 pointer-cursor hover-opacity">Likes @item.Likes.Count()</a></p>
+                        </div>
+                        <div class="col s6 m6">
+                            <p class="right"><a class="grey-text text-darken-1 pointer-cursor hover-opacity">Comments @item.Comments.Count()</a></p>
+                        </div>
+                    </div>
+                    <div class="row col s12 m12">
+                        <div class="col s6 m6">
+                            <script>
+
+                            </script>
+                            @if (true)
+                            {
+                                <a style="font-size: 18px;" class="left grey-text text-darken-3"><p class="pointer-cursor hover-blue">Like <i class="material-icons inline-icon">thumb_up</i></p></a>
+                            }
+                            else
+                            {
+                                <a style="font-size: 18px;" class="left grey-text text-darken-3"><p class="pointer-cursor hover-blue">Like <i class="material-icons inline-icon">thumb_down</i></p></a>
+                            }
+                        </div>
+                        <div class="col s6 m6">
+                            <a style="font-size: 18px;" class="right grey-text text-darken-3"><p class="pointer-cursor hover-blue">Comment <i class="inline-icon material-icons">comment</i></p></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <a asp-controller="ImageLike" asp-action="ToggleLike" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">Like</a>
-        }
-    </div>
-}
+            }
+        </div>*@
+
 
 
 
