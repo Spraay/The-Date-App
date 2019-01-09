@@ -5,9 +5,9 @@
 <div class="parallax-container" style="height: 300px">
     <div class="section no-pad-bot">
         <div class="container">
-            <h1 class="header white-text text-darken-1">Image Upload</h1>
+            <h1 class="header white-text text-darken-1">Edit your photo</h1>
             <div class="row col blue darken-1">
-                <h5 class=" center col s12 white-text">Here you can add your image, and share it!</h5>
+                <h5 class=" center col s12 white-text">Here you can edit image title and descryption</h5>
             </div>
         </div>
     </div>
@@ -18,29 +18,14 @@
     <div class="container white z-depth-3">
         <br />
         <br />
-        <div class="col s12">
-            <h5 class="blue-grey-text lighten-3 center pulsate"><i class="material-icons medium center">info</i></h5>
-            <h5 class="blue-grey-text lighten-3 center">@ViewData["AllowedExtensionsMsg"]</h5>
-        </div>
+       
+        <img style="width: 100%" src="~/images/userimages/@Model.Src"/>
+        
         <br>
-        <form method="post" enctype="multipart/form-data" asp-controller="Image" asp-action="Create" id="Form">
-            <div class="row">
-                <div class="col s12">
-                    <div class="file-field input-field">
-                        <div class="btn">
-                            <i class="material-icons left">image</i>
-                            <span>Image</span>
-                            <input type="file" name="file">
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <form method="post" asp-controller="Image" asp-action="Edit" id="Form">
             <div class="row">
                 <div class="input-field col s12 m4 l4">
+                    <input type="hidden" asp-for="Id" />
                     <textarea asp-for="Title" class="materialize-textarea"></textarea>
                     <label asp-for="Title">Title</label>
                     <span asp-validation-for="Title" class="text-danger"></span>

@@ -53,10 +53,27 @@ namespace DatingApplicationV2.Controllers
         {
             if (await _imageRepository.IsOwnerAsync(_userService.CurrentUserId, id))
             {
-                return View(_imageRepository.GetSingleAsync(id));
+                var image = await _imageRepository.GetSingleAsync(id);
+                return View(image);
             }
-            return View();
+            return RedirectToAction(nameof(UserImages), new { id });
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit([Bind("Id,Title,Description")] Image image)
+        {
+            var img = await _imageRepository.GetSingleAsync(image.Id);
+            if (img!=null && img.UserId == _userService.CurrentUserId)
+            {
+                img.Description = image.Description;
+                img.Title = image.Title;
+                _imageRepository.Update(img);
+                await _imageRepository.CommitAsync();
+            }
+            return RedirectToAction(nameof(UserImages), new { id = img.UserId });
+        }
+
 
         // POST: Image/Create
         [HttpPost]
