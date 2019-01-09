@@ -44,6 +44,21 @@ namespace App.DAO
                 },
                 new User
                 {
+                    UserName = "user1",
+                    Email = "scarlettjohansson@gmail.com",
+                    FirstName = "Scarlett",
+                    LastName = "Johansson",
+                    PhoneNumber = "6572132821",
+                    Eyes = Eyes.Blue,
+                    Gender = Gender.Male,
+                    Weight = 54,
+                    Height = 163,
+                    BirthDate = DateTime.Parse("22.11.1984"),
+                    EmailConfirmed = true,
+                    ProfileImageSrc = "scarlett_johansson.jpg"
+                },
+                new User
+                {
                     UserName = "user2",
                     Email = "gigihadid@gmail.com",
                     FirstName = "Gigi",
