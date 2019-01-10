@@ -95,13 +95,13 @@ else
                         </div>
                         <div class="col s12" style="position: relative; top: -15px;">
                             <a class="left pointer-cursor"><p class="no-padding darken-3">@item.Likes.Count() likes</p></a>
-                            <a class="right pointer-cursor"><p class="no-padding blue-grey-text darken-3">@item.Comments.Count() comments</p></a>
+                            <a class="right pointer-cursor" asp-controller="ImageComment" asp-action="List" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><p class="no-padding blue-grey-text darken-3">@item.Comments.Count() comments</p></a>
                         </div>
                         <div class="col s12 divider" style="position: relative; top: -15px;"></div>
                         <div class="col s12" style="position: relative; top: -15px; margin-bottom: -20px">
                             @{ var liked = !item.Likes.Select(_ => _.CreatorId).Contains(currentUserId); }
                             <a class="left grey-text text-darken-3" asp-controller="ImageLike" asp-action="ToggleLike" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><p class="pointer-cursor hover-blue">@(liked ? "Like" : "Unlike")<i class="material-icons inline-icon">@(liked ? "thumb_up" : "thumb_down")</i></p></a>
-                            <a class="right grey-text text-darken-3"><p class="pointer-cursor hover-blue">Comment <i class="material-icons inline-icon">comment</i></p></a>
+                            <a class="right grey-text text-darken-3" asp-controller="ImageComment" asp-action="Create" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><p class="pointer-cursor hover-blue">Comment <i class="material-icons inline-icon">comment</i></p></a>
                         </div>
                     </div>
                 </div>

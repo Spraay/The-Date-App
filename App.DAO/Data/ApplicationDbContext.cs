@@ -1,6 +1,5 @@
 ﻿using System;
 using App.Model.Entities;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,7 +24,6 @@ namespace App.DAO.Data
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<RealMeet> Meets { get; set; }
         public DbSet<Vote> Votes { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -101,18 +99,21 @@ namespace App.DAO.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<ImageComment>()
-                .HasKey(_ => new { _.CreatorId, _.CommentedItemId });
+                .HasOne(_ => _.Creator)
+                .WithMany(_ => _.ImagesComments)
+                .HasForeignKey(_ => _.CreatorId);
 
             modelBuilder.Entity<ImageComment>()
                 .HasOne(_ => _.CommentedItem)
-                .WithMany(__ => __.Comments)
-                .HasForeignKey(_ => _.CommentedItemId);
-
-            modelBuilder.Entity<ImageComment>()
-                .HasOne(_ => _.Creator)
-                .WithMany(__ => __.ImagesComments)
-                .HasForeignKey(_ => _.CreatorId)
+                .WithMany(_ => _.Comments)
+                .HasForeignKey(_ => _.CommentedItemId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Image>()
+                .HasMany(_ => _.Comments)
+                .WithOne(_ => _.CommentedItem);
+
+
 
             modelBuilder.Entity<RealMeet>()
                 .HasKey(_ => new { _.WhoId, _.WithId });

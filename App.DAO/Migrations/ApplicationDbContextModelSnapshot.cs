@@ -15,7 +15,7 @@ namespace App.DAO.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -83,17 +83,20 @@ namespace App.DAO.Migrations
 
             modelBuilder.Entity("App.Model.Entities.ImageComment", b =>
                 {
-                    b.Property<Guid>("CreatorId");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("CommentedItemId");
 
                     b.Property<string>("Content");
 
-                    b.Property<Guid>("Id");
+                    b.Property<Guid>("CreatorId");
 
-                    b.HasKey("CreatorId", "CommentedItemId");
+                    b.HasKey("Id");
 
                     b.HasIndex("CommentedItemId");
+
+                    b.HasIndex("CreatorId");
 
                     b.ToTable("ImagesComments");
                 });
@@ -424,12 +427,12 @@ namespace App.DAO.Migrations
                     b.HasOne("App.Model.Entities.Image", "CommentedItem")
                         .WithMany("Comments")
                         .HasForeignKey("CommentedItemId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("App.Model.Entities.User", "Creator")
                         .WithMany("ImagesComments")
                         .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("App.Model.Entities.ImageLike", b =>

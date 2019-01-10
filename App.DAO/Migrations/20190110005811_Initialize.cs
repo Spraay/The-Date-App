@@ -194,9 +194,9 @@ namespace App.DAO.Migrations
                 name: "Friendships",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
                     SenderId = table.Column<Guid>(nullable: false),
                     FriendId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false),
                     Status = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -241,8 +241,8 @@ namespace App.DAO.Migrations
                 name: "Votes",
                 columns: table => new
                 {
-                    Value = table.Column<int>(nullable: false),
                     Id = table.Column<Guid>(nullable: false),
+                    Value = table.Column<int>(nullable: false),
                     UserId = table.Column<Guid>(nullable: true),
                     UserId1 = table.Column<Guid>(nullable: true)
                 },
@@ -348,28 +348,28 @@ namespace App.DAO.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ImagesComments", x => new { x.CreatorId, x.CommentedItemId });
+                    table.PrimaryKey("PK_ImagesComments", x => x.Id);
                     table.ForeignKey(
                         name: "FK_ImagesComments_Images_CommentedItemId",
                         column: x => x.CommentedItemId,
                         principalTable: "Images",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ImagesComments_AspNetUsers_CreatorId",
                         column: x => x.CreatorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "ImagesLikes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
                     CreatorId = table.Column<Guid>(nullable: false),
-                    LikedItemId = table.Column<Guid>(nullable: false)
+                    LikedItemId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -477,6 +477,11 @@ namespace App.DAO.Migrations
                 name: "IX_ImagesComments_CommentedItemId",
                 table: "ImagesComments",
                 column: "CommentedItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ImagesComments_CreatorId",
+                table: "ImagesComments",
+                column: "CreatorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ImagesLikes_LikedItemId",

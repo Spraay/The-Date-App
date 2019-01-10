@@ -1,68 +1,131 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using App.Service.Abstract;
 using App.Model.Entities;
-using Microsoft.AspNetCore.Authorization;
 using App.Repository.Abstract;
+using App.Service.Abstract;
+using App.Model.Error;
+using App.Model.View;
 
-namespace DatingApplicationV2.Controllers
+namespace App.TheDate.Controllers
 {
-    [Authorize(Roles = "User,Admin,Moderator")]
     public class ImageCommentController : Controller
     {
+        private readonly IImageCommentRepository _imageCommentRepository;
         private readonly IUserService _userService;
-        private readonly IImageRepository _imageRepository;
-        private readonly IImageCommentService _imageCommentService;
 
-        public ImageCommentController(IUserService userService, IImageRepository imageRepository, IImageCommentService imageCommentService)
+        public ImageCommentController(IImageCommentRepository imageCommentRepository, IUserService userService)
         {
+            _imageCommentRepository = imageCommentRepository;
             _userService = userService;
-            _imageRepository = imageRepository;
-            _imageCommentService = imageCommentService;
         }
 
-        public async Task<IActionResult> Details(Guid id, string returnURL = null)
+        // GET: ImageComments/5
+        public async Task<IActionResult> List(Guid? id)
         {
-            return View(await _imageCommentService.GetAsync(id));
+            if (!id.HasValue)
+                return NotFound();
+            var query = _imageCommentRepository
+                .FindByAsync(_ => _.CommentedItemId == (id.Value),
+                    _ => _.CommentedItem,
+                    _ => _.Creator
+                );
+            ViewBag.CurrentUserId = _userService.CurrentUserId;
+            return View(new BigImageCommentModel() { ImageComments = await query });
         }
-        public async Task<IActionResult> Add(Guid id, string returnURL = null)
+
+        public IActionResult Create(Guid? id, string returnURL = null)
         {
-           
-            if (!await _imageRepository.IsExistsAsync(id))
-                RedirectToAction(nameof(ImageNotExists), new { id, returnURL });
+            if(!id.HasValue)
+                return NotFound();
             ViewBag.ReturnURL = returnURL;
-            return View(new ImageComment() { CommentedItemId = id, CreatorId = _userService.CurrentUserId });
+            var newImage = new ImageComment()
+            {
+                CreatorId = _userService.CurrentUserId,
+                CommentedItemId = id.Value
+            };
+            return View(newImage);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("ID,CreatorID,CommentedItemID,Content")] ImageComment imageComment, string returnURL = null)
+        public async Task<IActionResult> Create([Bind("Id,CommentedItemId,CreatorId,Content")] ImageComment imageComment)
         {
-            var img = await _imageRepository.GetSingleAsync(imageComment.CommentedItemId);
             if (ModelState.IsValid)
             {
-                await _imageCommentService.CreateAsync(imageComment.Id, _userService.CurrentUserId, imageComment.Content);
-                return RedirectToAction(nameof(ImageController) ,nameof(ImageController.UserImages), new { userID = img.UserId });
+                _imageCommentRepository.Add(new ImageComment() { CommentedItemId = imageComment.CommentedItemId, CreatorId = _userService.CurrentUserId, Content = imageComment.Content });
+                await _imageCommentRepository.CommitAsync();
+                return RedirectToAction(nameof(List), new { id = imageComment.CommentedItemId });
             }
-            ViewData["CommentedItemID"] = img.Id;
-            ViewData["CreatorID"] = _userService.CurrentUserId;
             return View(imageComment);
         }
 
-        public async Task<IActionResult> Edit(Guid id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateAsd(Guid imgId, string content)
         {
-            var imageComment = await _imageCommentService.GetAsync(id);
-            ViewData["CommentedItemID"] = imageComment.CommentedItemId;
-            ViewData["CreatorID"] = imageComment.CreatorId;
-            return View(imageComment);
+            if (ModelState.IsValid)
+            {
+                _imageCommentRepository.Add(new ImageComment() { CommentedItemId = imgId, CreatorId = _userService.CurrentUserId, Content = content });
+                await _imageCommentRepository.CommitAsync();
+                return RedirectToAction(nameof(List), new { id = imgId });
+            }
+            return RedirectToAction(nameof(Create), new { id = imgId });
         }
 
-        public IActionResult ImageNotExists(Guid id, string returnURL = null)
+        // GET: ImageComments/Edit/5
+        public async Task<IActionResult> Edit(Guid? id, string returnURL = null)
         {
-            ViewData["ImageID"]= id;
+            if (!id.HasValue)
+                return NotFound();
+            var imageComment = await _imageCommentRepository.GetSingleAsync(id.Value);
+            if (imageComment == null)
+                return NotFound();
             ViewBag.ReturnURL = returnURL;
-            return View();
+            return View(imageComment);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,CreatorId,CommentedItemId,Content")] ImageComment imageComment)
+        {
+            if (id != imageComment.CreatorId)
+                return NotFound();
+            if (ModelState.IsValid)
+            {
+                _imageCommentRepository.Update(imageComment);
+                await _imageCommentRepository.CommitAsync();
+                return RedirectToAction(nameof(List), new { id });
+            }
+            return View(imageComment);
+        }
+
+        public async Task<IActionResult> Delete(Guid? id, string returnURL = null)
+        {
+            if (!id.HasValue)
+                return NotFound();
+            var imageComment = await _imageCommentRepository
+                .GetSingleAsync(_ => _.Id == (id.Value),
+                    _ => _.CommentedItem,
+                    _ => _.Creator
+                );
+            if (imageComment == null)
+            {
+                var error = new ItemError() { Id = id.Value, Type = typeof(ImageComment) };
+                return RedirectToAction("ItemNotFound", "Error", new { error, returnURL });
+            }
+           
+            ViewBag.ReturnURL = returnURL;
+            return View(imageComment);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        {
+            _imageCommentRepository.DeleteWhere(_ => _.Id == id);
+            await _imageCommentRepository.CommitAsync();
+            return RedirectToAction(nameof(List));
         }
     }
 }
