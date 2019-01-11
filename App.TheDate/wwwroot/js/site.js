@@ -271,3 +271,14 @@
         });
     }); // end of document ready
 })(jQuery); // end of jQuery name space
+
+function toggleTruncate()
+{
+    var el = document.getElementById("truncateEl1");
+    if (el.classList.contains("truncate")) {
+        el.classList = el.classList.remove("truncate");
+    }
+    else {
+        el.setAttribute("class", "truncate");
+    }
+}
