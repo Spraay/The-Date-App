@@ -51,7 +51,6 @@
     <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
     <None Include="wwwroot\lib\jquery\dist\jquery.js" />
     <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
-    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
     <None Include="wwwroot\lib\materialize\js\materialize.js" />
     <None Include="wwwroot\lib\materialize\js\materialize.min.js" />
     <None Include="wwwroot\lib\materialize\LICENSE" />

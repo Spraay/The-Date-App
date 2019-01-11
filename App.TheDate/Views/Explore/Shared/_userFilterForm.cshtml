@@ -1,0 +1,99 @@
+﻿@model UserFilter
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<div class="grey darken-3">
+
+    <ul class="collapsible no-border no-padding z-depth-0  grey darken-3">
+        <li>
+            <div class="collapsible-header no-border center grey darken-3 grey-text"><i class="material-icons">filter_list</i>Filter List</div>
+            <div class="collapsible-body no-border no-padding grey-text">
+                <form asp-controller="Explore" asp-action="Users" class="col s12">
+                    <input hidden name="searchString" value="@ViewData["SearchString"]">
+                    <input hidden asp-for="Page" value="@ViewData["Page"]">
+                    <input hidden asp-for="PageSize" value="@ViewData["SearchString"]">
+                    <input hidden name="searchString" value="@ViewData["SearchString"]">
+                    <div class="col s12">
+                        <blockquote>
+                            <p>
+                                <div>I am looking for:</div>
+                                <div class="col s6">
+                                    <label class="small">Man</label><br />
+                                    <a class="switch">
+                                        <label>
+                                            No
+                                            <input type="checkbox" asp-for="LookingForMan">
+                                            <span class="lever"></span>
+                                            Yes
+                                        </label>
+                                    </a>
+                                </div>
+                                <div class="col s6">
+                                    <label class="small">Woman</label><br />
+                                    <a class="switch">
+                                        <label>
+                                            No
+                                            <input type="checkbox" asp-for="LookingForWoman">
+                                            <span class="lever"></span>
+                                            Yes
+                                        </label>
+                                    </a>
+                                </div>
+                            </p>
+                        </blockquote>
+                    </div>
+                    <div class="col s12">
+                        <blockquote>
+                            <p>
+                                Born:
+                                <div class="col s6">
+                                    <label>From</label>
+                                    <div class="input-field">
+                                        <input type="range" asp-for="BornFrom" min="1900" max="2001" />
+                                    </div>
+                                </div>
+                                <div class="col s6">
+                                    <label>To</label>
+                                    <div class="input-field">
+                                        <input type="range" asp-for="BornTo" min="1900" max="2001" />
+                                    </div>
+                                </div>
+                            </p>
+                        </blockquote>
+                    </div>
+                    <div class="col s12">
+                        <blockquote>
+                            <p>
+                                Sort by:
+                                <div class="col s4">
+                                    <label>
+                                        <input type="checkbox" />
+                                        <span>Red</span>
+                                    </label>
+                                </div>
+                                <div class="col s4">
+                                    <label>
+                                        <input type="checkbox" />
+                                        <span>Red</span>
+                                    </label>
+                                </div>
+                                <div class="col s4">
+                                    <label>
+                                        <input type="checkbox" />
+                                        <span>Red</span>
+                                    </label>
+                                </div>
+                            </p>
+
+                        </blockquote>
+                        <div class="col s12 input-field center">
+                            <input class="btn" type="submit" value="Save" />
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
+
+</div>
