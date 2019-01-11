@@ -18,8 +18,15 @@
         </a>
     </li>
 </ul>
-<li data-constrainWidth="false" class="center" style="width: 80px;">
-    <a class='dropdown-trigger tooltipped' data-position="bottom" data-tooltip="Settings" href='#' data-target='userSettingsDropdown'>
+<li  class="center" style="width: 80px;">
+    <a class='dropdown-trigger tooltipped no-autoinit' id="settingsDropdownTrigger"  data-constrainWidth="false" data-position="bottom" data-tooltip="Settings" href='#' data-target='userSettingsDropdown'>
         <i class="material-icons">settings</i>
     </a>
 </li>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $('#settingsDropdownTrigger').dropdown({
+            constrainWidth: false
+        });
+    });
+</script>

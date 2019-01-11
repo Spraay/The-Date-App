@@ -2,12 +2,105 @@
 @model PaginatedList<ApplicationUserViewModel>
 
 @{
-    ViewData["Title"] = "Users"; 
+    ViewData["Title"] = "Users";
+    
 }
-
+<script>
+    function insertDataToForm() {
+        $('#page').val($('#'));
+        $('#pageSize').val();
+        $('#sortOrder').val($('#orderByLabel').val());
+        $('#sortItem').val($('#sortByLabel').val());
+        alert($('#sortItem').val());
+    }
+</script>
 <div class="grey darken-3 z-depth-2" style="padding: 1vw; margin-top: -10px;">
     <div class="center">
         <p class="white-text" style="font-size: 3vw;">@ViewData["Title"]<i style="vertical-align: bottom; font-size: 4vw !important;" class="inline-icon material-icons">edit</i></p>
+    </div>
+    <div class="container">
+        <ul id="dropdown1" class="dropdown-content col s6 no-padding">
+            <li><a onclick="$('#sortByLabel').html('First Name'); $('#sortItem').val('first_name')">First Name</a></li>
+            <li><a onclick="$('#sortByLabel').html('Last Name'); $('#sortItem').val('last_name')">Last Name</a></li>
+            <li class="divider"></li>
+            <li><a onclick="$('#sortByLabel').html('Born Date');$('#sortItem').val('date');">Born Date</a></li>
+        </ul>
+        <ul id="dropdown2" class="dropdown-content ">
+            <li ><a onclick="$('#orderByLabel').html('Ascending');$('#sortOrder').val('asce')">Ascending</a></li>
+            <li><a onclick="$('#orderByLabel').html('Descending');$('#sortOrder').val('desc')">Descending</a></li>
+        </ul>
+        <div class="row col s12 no-padding">
+            <div class="col s12 m12 l4">
+                <nav class="grey darken-2 z-depth-0">
+                    <div class="nav-wrapper">
+                        <form asp-action="Users" id="Form">
+                            <div class="input-field col s12 no-padding grey-text">
+                                <input hidden id="page" name="page" value='@ViewData["Page"]'>
+                                <input hidden id="pageSize" name="pageSize" value='@ViewData["PageSize"]'>
+                                <input hidden id="sortItem" name="sortItem" value='@ViewData["SortItem"]'>
+                                <input hidden id="sortOrder" name="sortOrder" value='@ViewData["SortOrder"]'>
+                                <input type="checkbox" id="filtrFemale" name="filtrFemale" checked='@ViewData["FiltrFemale"]'>
+                                <input type="checkbox" id="filtrMale" name="filtrMale" checked='@ViewData["FiltrMale"]'>
+                                <input id="searchString" name="searchString" type="search" value='@ViewData["SearchString"]' required>
+                                <label class="label-icon" for="searchString"><i class="material-icons">search</i></label>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+            <div class="col s12 m10 l7">
+                <nav class="color grey darken-2 z-depth-0 no-padding col s12">
+                    <div class="nav-wrapper">
+                        <ul class="col s12 no-padding">
+                            <li class="col s6 no-padding">
+                                <a class="dropdown-trigger" constraintWidth="true" href="#!" data-target="dropdown1">Sort By<i class="material-icons right">arrow_drop_down</i> <label id="sortByLabel"> @ViewData["SortItemName"]</label></a>
+                            </li>
+                            <li class="col s6 no-padding"><a class="dropdown-trigger" constraintWidth="true" href="#!" data-target="dropdown2">Order By<i class="material-icons right">arrow_drop_down</i> <label id="orderByLabel"> @ViewData["SortOrderName"]</label></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="col s12 m2 l1">
+                <nav class="color grey darken-2 z-depth-0">
+                    <div class="nav-wrapper">
+                        <ul class="col s12 right no-padding text-center">
+                            <li class="center col s12 no-padding">
+                                <a id="FormSubmitButton">
+                                    <i class="material-icons">send</i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="col s6">
+                <blockquote class="white-text">
+                    Filtr Male
+                    <div class="switch">
+                        <label>
+                            No
+                            <input type="checkbox" id="maleSwitch" onclick='$("#filtrMale").val($(this).checked)'>
+                            <span class="lever"></span>
+                            Yes
+                        </label>
+                    </div>
+                </blockquote>
+            </div>
+            <div class="col s6">
+                <blockquote class="white-text">
+                    Filtr Female
+                    <div class="switch">
+                        <label>
+                            No
+                            <input type="checkbox" id="femaleSwitch" onclick='$("#filtrFemale").val($(this).checked)'>
+                            <span class="lever"></span>
+                            Yes
+                        </label>
+                    </div>
+                </blockquote>
+
+            </div>
+        </div>
     </div>
 </div>
 

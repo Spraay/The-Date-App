@@ -189,9 +189,7 @@
             accordion: false
         });
 
-        $('.dropdown-trigger').dropdown({
-            constrainWidth: false
-        });
+       
 
         $('.slider').slider();
         $('.parallax').parallax();

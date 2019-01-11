@@ -25,12 +25,13 @@ namespace DatingApplicationV2.Controllers
         private readonly IMapper _mapper;
         private readonly IExploreService _exploreService;
 
-        public ExploreController(IUserService userService, IUserRepository userRepository, IInterestRepository interestRepository, IMapper mapper)
+        public ExploreController(IUserService userService, IUserRepository userRepository, IInterestRepository interestRepository, IMapper mapper, IExploreService exploreService)
         {
             _userService = userService;
             _userRepository = userRepository;
             _interestRepository = interestRepository;
             _mapper = mapper;
+            _exploreService = exploreService;
         }
 
         public ActionResult Index()
@@ -38,63 +39,75 @@ namespace DatingApplicationV2.Controllers
             return RedirectToAction(nameof(Users));
         }
 
-        public async Task<IActionResult> Users(string sortOrder,
+        public async Task<IActionResult> Users(string sortItem, string sortOrder,
             string currentFilter,
             string searchString,
+            string filtrMale,
+            string filtrFemale,
             int? pageSize,
             int? page)
         {
-            ViewData["CurrentSort"] = sortOrder;
-            ViewData["FirstNameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "first_name_desc" : "";
-            ViewData["LastNameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "last_name_desc" : "";
-            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["SortItem"] = String.IsNullOrEmpty(sortItem) ? "last_name" : sortItem;
+            ViewData["SortOrder"] = String.IsNullOrEmpty(sortOrder) ? "asce" : sortOrder;
             ViewData["PageSize"] = pageSize ?? 10;
+            ViewData["FiltrMale"] = String.IsNullOrEmpty(sortItem) ? "false" : filtrMale;
+            ViewData["FiltrFemale"] = String.IsNullOrEmpty(sortItem) ? "false" : filtrFemale;
 
             if (searchString != null)
             {
                 page = 1;
+                searchString=searchString.Replace(" ", string.Empty);
             }
             else
             {
                 searchString = currentFilter;
             }
+                
+            ViewData["SearchString"] = searchString;
 
-            ViewData["CurrentFilter"] = searchString;
+            var appUsers = (!String.IsNullOrEmpty(searchString))
+                ? await _userRepository.FindByAsync(_=> searchString.Contains(_.FirstName) || searchString.Contains(_.LastName) || searchString.Contains(_.Description))
+                : await _userRepository.GetAllAsync();
 
-            var appUsers = await _userRepository.GetAllAsync();
-            if (!String.IsNullOrEmpty(searchString))
+            if(filtrMale == "true")
+                appUsers = appUsers.Where(_ => _.Gender != Gender.Male);
+
+            if (filtrFemale == "false")
+                appUsers = appUsers.Where(_ => _.Gender != Gender.Female);
+
+            switch (sortItem+"_"+sortOrder)
             {
-
-                var tempUsersData = appUsers.Where(_ => _userService.IsFilledAsync(_.Id).Result).ToList();
-                appUsers = tempUsersData.Any() ? tempUsersData : appUsers;
-
-                tempUsersData = appUsers.Where(s =>
-                    s.FirstName.Contains(searchString) ||
-                    s.LastName.Contains(searchString) ||
-                    s.Description.Contains(searchString)
-                ).ToList();
-
-                appUsers = tempUsersData.Any() ? tempUsersData : appUsers;
-            }
-            switch (sortOrder)
-            {
+                case "first_name_asce":
+                    appUsers = appUsers.OrderBy(s => s.FirstName).ToList();
+                    ViewBag.SortItemName = "First Name";
+                    ViewBag.SortOrderName = "Ascending";
+                    break;
                 case "first_name_desc":
                     appUsers = appUsers.OrderByDescending(s => s.FirstName).ToList();
+                    ViewBag.SortItemName = "First Name";
+                    ViewBag.SortOrderName = "Descending";
+                    break;
+                case "last_name_asce":
+                    appUsers = appUsers.OrderBy(s => s.LastName).ToList();
+                    ViewBag.SortItemName = "Last Name";
+                    ViewBag.SortOrderName = "Ascending";
                     break;
                 case "last_name_desc":
                     appUsers = appUsers.OrderByDescending(s => s.LastName).ToList();
+                    ViewBag.SortItemName = "Last Name";
+                    ViewBag.SortOrderName = "Descending";
                     break;
-                case "Date":
+                case "date_asce":
                     appUsers = appUsers.OrderBy(s => s.BirthDate).ToList();
+                    ViewBag.SortItemName = "Born Date";
+                    ViewBag.SortOrderName = "Ascending";
                     break;
                 case "date_desc":
                     appUsers = appUsers.OrderByDescending(s => s.BirthDate).ToList();
-                    break;
-                default:
-                    appUsers = appUsers.OrderBy(s => s.LastName).ToList();
+                    ViewBag.SortItemName = "Born Date";
+                    ViewBag.SortOrderName = "Descending";
                     break;
             }
-
             var viewModel = _mapper.Map<List<User>, List<ApplicationUserViewModel>>(appUsers.ToList());
             var result = (PaginatedList<ApplicationUserViewModel>.Create(viewModel, page ?? 1, pageSize ?? 10));
             return View(result);

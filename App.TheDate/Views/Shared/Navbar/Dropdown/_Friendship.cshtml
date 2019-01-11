@@ -18,9 +18,21 @@
 </ul>
 
 <li data-constrainWidth="false" class="center" style="width: 80px;">
-    <a class='dropdown-trigger tooltipped' data-position="bottom" data-tooltip="Friends" href='#' data-target='friendshipDropdown'>
+    <a class='dropdown-trigger tooltipped' id="friendsDropdownTrigger" data-position="bottom" data-tooltip="Friends" href='#' data-target='friendshipDropdown'>
         <i class="material-icons">
             supervisor_account
         </i>
     </a>
 </li>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        $('#friendsDropdownTrigger').dropdown({
+            constrainWidth: false
+        });
+    });
+
+
+
+</script>
