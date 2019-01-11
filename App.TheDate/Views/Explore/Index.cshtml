@@ -1,0 +1,22 @@
+﻿@model IEnumerable<User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+    <div class="row">
+        <h1>Users List</h1>
+    </div>
+    <ul class="collection">
+        @foreach (var item in Model)
+        {
+        <li class="collection-item avatar">
+            <img src="~/images/userimages/@item.ProfileImageSrc" alt="" class="circle">
+            <p>
+                @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+            </p>
+            <a class="secondary-content" asp-controller="Friendships" asp-action="Add" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">Invite</a>
+        </li>
+        }
+    </ul>
+</div>

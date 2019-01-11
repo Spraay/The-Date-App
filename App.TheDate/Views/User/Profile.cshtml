@@ -21,54 +21,36 @@
             
             <div class="card" style="overflow: hidden;">
                 <div class="row col s12 m12">
-                    <div class="col s12 m12 card-image waves-effect waves-block waves-light no-border no-padding" style="height: 250px; z-index: 0;">
+                    <div class="col s12 m12 card-image waves-effect waves-block waves-light" style="height: 250px; z-index: 0;">
                         <img class="activator" src="~/images/userimages/@Model.BackgroundImageSrc" alt="user background">
                     </div>
-                    <div class=" col s12 m12 no-border no-padding" style="position: relative; bottom: 75px; width: 100%; height: 50px;">
-                        <div class="col s12 m12" style="position: relative; left: 35px; width: 180px; height: 150px;">
-                            <img src="~/images/userimages/@Model.ProfileImageSrc" alt="profile image" class="circle z-depth-2 responsive-img" style="height: 100%; width: 100%">
-                        </div>
-                        
+                    <div class=" col s12 m12 no-border no-padding" style="position: relative; top: -80px; left: 30px; width: 150px; height: 150px;">
+                        <img src="~/images/userimages/@Model.ProfileImageSrc" alt="profile image" class="circle z-depth-2 responsive-img" style="height: 100%; width: 100%">
                         @if (Model.UserName == User.Identity.Name)
                         {
-                            <a asp-controller="Image"
-                               asp-action="Create"
-                               asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"
-                               style="position: absolute; top: 55px; left: 180px;"
-                               class="btn btn-floating green"
-                            ><i class="material-icons">add_a_photo</i></a>
-                            <a asp-controller="User"
-                               asp-action="Edit"
-                               asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"
-                               style="position: absolute; top: 45px; right: 35px;"
-                               class="btn btn-large btn-floating orange"
-                            ><i class="material-icons">edit</i></a>
+                            <a style="position: relative; top: -95px; left: 125px;" class="btn btn-floating green"
+                               asp-controller="Image"
+                                asp-action="Create"
+                                asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"
+                               ><i class="material-icons">add_a_photo</i></a>
                         }
                         @if (!userFriends.Any(_ => _.UserName == User.Identity.Name) && Model.UserName != User.Identity.Name)
                         {
-                            <a asp-controller="Friendships"
-                               asp-action="Add"
-                               asp-route-id="@Model.Id"
-                               asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"
-                                style="position: absolute; top: 55px; left: 180px;" class="btn btn-floating large blue"><i class="material-icons">person_add</i></a>
+                            <a style="position: relative; top: -95px; left: 125px;" class="btn btn-floating blue"><i class="material-icons">person_add</i></a>
                         }
                         @if (userFriends.Any(_ => _.UserName == User.Identity.Name))
                         {
-                            <a asp-controller="Friendships"
-                               asp-action="Delete"
-                               asp-route-id="@Model.Id"
-                               asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"
-                                style="position: absolute; top: 55px; left: 180px;" class="btn btn-floating large red"><i class="material-icons">person_add_disabled</i></a>
+                            <a style="position: relative; top: -95px; left: 125px;" class="btn btn-floating red"><i class="material-icons">person_add_disabled</i></a>
                         }
 
                     </div>
                 </div>
                 
                 <div class="row"></div>
-                <div class="row col s12 m4 card-content no-padding" style="margin-top: -200px;">
+                <div class="row col s12 m6 card-content no-padding" style="margin-top: -160px;">
                     <ul>
-                        <li class="col s12 m2 l3"></li>
-                        <li class="col s12 m12 l2 no-cursor" >
+                        <li class="col s2 m2"></li>
+                        <li class="col s3 m3 no-cursor" >
                             <h4 class="card-title grey-text text-darken-4">@Model.FirstName @Model.LastName</h4>
                             <p class="medium-small grey-text">
                                 Roles: @foreach (var r in userRoles)
@@ -104,6 +86,8 @@
                                 <p class="medium-small">Mets</p>
                             </a>
                         </li>
+
+
                     </ul>
                 </div>
             </div>

@@ -36,16 +36,11 @@ namespace DatingApplicationV2.Controllers
 
         public async Task<IActionResult> UserImages(Guid id)
         {
-            var query = _imageRepository
-                .FindByAsync(
-                    _=>_.UserId==id,
-                    _ => _.Likes,
-                    _=>_.Comments,
-                    _=>_.User
-                );
-            ViewBag.User = await _userRepository.GetSingleAsync(id);
+            var userGallery = await _imageRepository.AllIncludingAsync(_ => _.Likes, _=>_.Comments);
             ViewBag.CurrentUserId = _userService.CurrentUserId;
-            return View(await query);
+            var user = await _userRepository.GetSingleAsync(id);
+            ViewBag.GalleryUserName = user.UserName;
+            return View(userGallery.Where(_=>_.UserId==id));
         }
 
         public ActionResult Create()

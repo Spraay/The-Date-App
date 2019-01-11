@@ -1,7 +1,13 @@
-﻿@model ImageComment
+﻿@model App.Model.Entities.ImageComment
+
 @{
     ViewData["Title"] = "Create";
 }
+
+<h2>Create</h2>
+
+<h4>ImageComment</h4>
+<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create" asp-route-returnURL="@ViewBag.ReturnURL">
@@ -20,3 +26,12 @@
         </form>
     </div>
 </div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@

@@ -1,23 +1,11 @@
 ﻿@model IEnumerable<Image>
 @{
-    var galleryUser = (User)ViewBag.User;
+    var galeryUserName = (string)ViewBag.GalleryUserName;
     var currentUserId = (Guid)ViewBag.CurrentUserId;
 }
 
 @{
     ViewData["Title"] = "UserImages";
-}
-@if (User.Identity.Name == galleryUser.UserName)
-{
-    <div class="row">
-        <div class="col s12">
-            <div class="fixed-action-btn direction-top" style="top: 100px; right: 40px;">
-                <a asp-action="Create" class="btn-floating btn-large green waves-effect waves-light pulse">
-                    <i class="material-icons">add</i>
-                </a>
-            </div>
-        </div>
-    </div>
 }
 
 @if (Model.Any())
@@ -25,16 +13,30 @@
     <div class="parallax-container" style="height: 300px">
         <div class="section no-pad-bot">
             <div class="container">
-                <h1 class="header white-text text-darken-1">@galleryUser.FirstName @galleryUser.LastName Gallery</h1>
+                <h1 class="header white-text text-darken-1">User Gallery</h1>
                 <div class="row col blue darken-1">
                     <h5 class=" center col s12 white-text">
-                        @((User.Identity.Name == galleryUser.UserName) ? "In the list below you can see your photos!" : "In the list below you can see " + galleryUser.FirstName + " photos!")
+                        @*Gallery user name: @galeryUserName <br>
+                        CurrentUserName: @User.Identity.Name <br>*@
+                        @((User.Identity.Name == galeryUserName) ? "In the list below you can see your photos!" : "In the list below you can see user photos!")
                     </h5>
                 </div>
             </div>
         </div>
         <div class="parallax"><img src="~/images/photographer.jpg" alt="Unsplashed background img 1" style="opacity: 1; transform: translate3d(-50%, 168.122px, 0px);"></div>
     </div>
+    @if (User.Identity.Name == galeryUserName)
+    {
+        <div class="row">
+            <div class="col s12">
+                <div class="fixed-action-btn direction-top" style="top: 100px; right: 40px;">
+                    <a asp-action="Create" class="btn-floating btn-large green waves-effect waves-light pulse">
+                        <i class="material-icons">add</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
 }
 else
 {
@@ -42,65 +44,164 @@ else
         <div class="col s12">
             <div class="col s12 center"><i class="material-icons orange-text" style="font-size: 150px;">sentiment_dissatisfied</i></div>
             <h1 class="orange-text center">
-                @((User.Identity.Name == galleryUser.UserName) ? "Your gallery seems to be empty. Try add some photos" : "This user has no photos")
+                @if (User.Identity.Name == galeryUserName)
+                {<text>Your gallery seems to be empty. Try add some photos <a asp-controller="Image" asp-action="Create" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">here</a></text>}
+                else { }
             </h1>
         </div>
     </div>
 }
-<div class="container">
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col l4 s10 m6 xl3">
-                <div class="card z-depth-2 col s12 no-padding">
-                    <div class="card-image medium">
-                        <img style="width: 100%; height: 210px;" class="responsive-img" src="~/images/userimages/@item.Src">
-                    </div>
-                    <div class="divider"></div>
-                    @if (User.Identity.Name == galleryUser.UserName)
-                    {
-                        <div class="col s12 no-padding center" style="position: relative; top: -20px;">
-                            <a class="btn rounded red waves-effect waves-light tooltipped"
-                               data-position="top"
-                               data-tooltip="Delete Photo"
-                               asp-action="Delete"
-                               asp-route-id="@item.Id"
-                               asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                <i class="material-icons">delete_forever</i>
-                            </a>
-                            <a class="btn  rounded blue waves-effect waves-light tooltipped"
-                               data-position="top"
-                               data-tooltip="Edit Photo"
-                               asp-action="Edit"
-                               asp-route-id="@item.Id"
-                               asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                <i class="material-icons">edit</i>
-                            </a>
-                            <a class="btn  rounded green waves-effect waves-light tooltipped"
-                               data-position="top"
-                               data-tooltip="Set As Profile Photo"
-                               asp-action="SetProfilePhoto"
-                               asp-route-id="@item.Id"
-                               asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                <i class="material-icons">face</i>
-                            </a>
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col l4 s10 m6 xl3">
+                    <div class="card z-depth-2 col s12 no-padding">
+                        <div class="card-image medium">
+                            <img style="width: 100%; height: 210px;" class="responsive-img" src="~/images/userimages/@item.Src">
                         </div>
-                    }
-                    <div class="col s12 center" style="position: relative;">
-                        <div class="truncate"><b>@item.Title</b></div>
+                        <div class="divider"></div>
+                        @if (User.Identity.Name == galeryUserName)
+                        {
+                            <div class="col s12 no-padding center" style="position: relative; top: -20px;">
+                                <a class="btn rounded red waves-effect waves-light tooltipped"
+                                   data-position="top"
+                                   data-tooltip="Delete Photo"
+                                   asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                    <i class="material-icons">delete_forever</i>
+                                </a>
+                                <a class="btn  rounded blue waves-effect waves-light tooltipped"
+                                   data-position="top"
+                                   data-tooltip="Edit Photo"
+                                   asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                    <i class="material-icons">edit</i>
+                                </a>
+                                <a class="btn  rounded green waves-effect waves-light tooltipped"
+                                   data-position="top"
+                                   data-tooltip="Set As Profile Photo"
+                                   asp-action="SetProfilePhoto"
+                                   asp-route-id="@item.Id"
+                                   asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                    <i class="material-icons">face</i>
+                                </a>
+                            </div>
+                        }
+                        <div class="col s12 center" style="position: relative;">
+                            <div class="truncate"><b>@item.Title</b></div>
+                        </div>
+                        <div class="col s12" style="position: relative; top: -15px;">
+                            <a class="left pointer-cursor"><p class="no-padding darken-3">@item.Likes.Count() likes</p></a>
+                            <a class="right pointer-cursor" asp-controller="ImageComment" asp-action="List" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><p class="no-padding blue-grey-text darken-3">@item.Comments.Count() comments</p></a>
+                        </div>
+                        <div class="col s12 divider" style="position: relative; top: -15px;"></div>
+                        <div class="col s12" style="position: relative; top: -15px; margin-bottom: -20px">
+                            @{ var liked = !item.Likes.Select(_ => _.CreatorId).Contains(currentUserId); }
+                            <a class="left grey-text text-darken-3" asp-controller="ImageLike" asp-action="ToggleLike" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><p class="pointer-cursor hover-blue">@(liked ? "Like" : "Unlike")<i class="material-icons inline-icon">@(liked ? "thumb_up" : "thumb_down")</i></p></a>
+                            <a class="right grey-text text-darken-3" asp-controller="ImageComment" asp-action="Create" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><p class="pointer-cursor hover-blue">Comment <i class="material-icons inline-icon">comment</i></p></a>
+                        </div>
                     </div>
-                    <div class="col s12" style="position: relative; top: -15px;">
-                        <a class="left no-cursor"><p class="no-padding blue-grey-text darken-3">@item.Likes.Count() likes</p></a>
-                        <a class="right no-cursor"><p class="no-padding blue-grey-text darken-3">@item.Comments.Count() comments</p></a>
+                </div>
+            }
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @*<div class="container">
+            @foreach (var item in Model)
+            {
+
+
+            <div class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <img src="~/images/userimages/@Html.DisplayFor(modelItem => item.Src)" style="width: 100%; height: 100%">
+                    <div style="position: absolute; bottom: 10px; width: 100%;">
+                        <div class="row">
+                            @if (User.Identity.Name == userName)
+                            {
+                                <div class="container center">
+                                    <div class="row"></div>
+                                    <a class="btn btn-large rounded red waves-effect waves-light tooltipped"
+                                       data-position="top"
+                                       data-tooltip="Delete Photo"
+                                       asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                        <i class="material-icons">delete_forever</i>
+                                    </a>
+                                    <a class="btn btn-large rounded blue waves-effect waves-light tooltipped"
+                                       data-position="top"
+                                       data-tooltip="Edit Photo"
+                                       asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                    <a class="btn btn-large rounded green waves-effect waves-light tooltipped"
+                                       data-position="top"
+                                       data-tooltip="Set As Profile Photo"
+                                       asp-action="SetProfilePhoto"
+                                       asp-route-id="@item.Id"
+                                       asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                        <i class="material-icons">face</i>
+                                    </a>
+                                </div>
+                            }
+                        </div>
                     </div>
-                    <div class="col s12 divider" style="position: relative; top: -15px;"></div>
-                    <div class="col s12" style="position: relative; top: -15px; margin-bottom: -20px">
-                        @{ var liked = !item.Likes.Select(_ => _.CreatorId).Contains(currentUserId); }
-                        <a class="left grey-text text-darken-3" asp-controller="ImageLike" asp-action="ToggleLike" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><p class="pointer-cursor hover-blue">@(liked ? "Like" : "Unlike")<i class="material-icons inline-icon">@(liked ? "thumb_up" : "thumb_down")</i></p></a>
-                        <a class="right grey-text text-darken-3" asp-controller="ImageComment" asp-action="List" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><p class="pointer-cursor hover-blue">Comment <i class="material-icons inline-icon">comment</i></p></a>
+                </div>
+                <div class="blue-grey lighten-4 grey-text text-darken-3">
+                    <div class="row col s12 m12" style="margin: 0;">
+                        <div class="col s6 m6">
+                            <p><a class="grey-text text-darken-1 pointer-cursor hover-opacity">Likes @item.Likes.Count()</a></p>
+                        </div>
+                        <div class="col s6 m6">
+                            <p class="right"><a class="grey-text text-darken-1 pointer-cursor hover-opacity">Comments @item.Comments.Count()</a></p>
+                        </div>
+                    </div>
+                    <div class="row col s12 m12">
+                        <div class="col s6 m6">
+                            <script>
+
+                            </script>
+                            @if (true)
+                            {
+                                <a style="font-size: 18px;" class="left grey-text text-darken-3"><p class="pointer-cursor hover-blue">Like <i class="material-icons inline-icon">thumb_up</i></p></a>
+                            }
+                            else
+                            {
+                                <a style="font-size: 18px;" class="left grey-text text-darken-3"><p class="pointer-cursor hover-blue">Like <i class="material-icons inline-icon">thumb_down</i></p></a>
+                            }
+                        </div>
+                        <div class="col s6 m6">
+                            <a style="font-size: 18px;" class="right grey-text text-darken-3"><p class="pointer-cursor hover-blue">Comment <i class="inline-icon material-icons">comment</i></p></a>
+                        </div>
                     </div>
                 </div>
             </div>
-        }
-    </div>
-</div>
+            }
+        </div>*@
+
+
+
+
+
+
+
+
