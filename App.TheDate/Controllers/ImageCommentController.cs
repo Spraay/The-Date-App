@@ -5,23 +5,26 @@ using App.Model.Entities;
 using App.Repository.Abstract;
 using App.Service.Abstract;
 using App.Model.Error;
-using App.Model.View;
+using Microsoft.AspNetCore.Authorization;
 
 namespace App.TheDate.Controllers
 {
+    [Authorize(Roles = "User,Admin,Moderator")]
     public class ImageCommentController : Controller
     {
         private readonly IImageCommentRepository _imageCommentRepository;
+        private readonly IImageRepository _imageRepository;
         private readonly IUserService _userService;
 
-        public ImageCommentController(IImageCommentRepository imageCommentRepository, IUserService userService)
+        public ImageCommentController(IImageCommentRepository imageCommentRepository, IImageRepository imageRepository, IUserService userService)
         {
             _imageCommentRepository = imageCommentRepository;
+            _imageRepository = imageRepository;
             _userService = userService;
         }
 
         // GET: ImageComments/5
-        public async Task<IActionResult> List(Guid? id)
+        public async Task<IActionResult> List(Guid? id, string returnURL = null)
         {
             if (!id.HasValue)
                 return NotFound();
@@ -30,8 +33,13 @@ namespace App.TheDate.Controllers
                     _ => _.CommentedItem,
                     _ => _.Creator
                 );
+            ViewBag.Image = await _imageRepository
+                .GetSingleAsync(_=>_.Id == id.Value,
+                    _=>_.Likes
+                );
             ViewBag.CurrentUserId = _userService.CurrentUserId;
-            return View(new BigImageCommentModel() { ImageComments = await query });
+            ViewBag.ReturnURL = returnURL;
+            return View(await query);
         }
 
         public IActionResult Create(Guid? id, string returnURL = null)
@@ -62,14 +70,15 @@ namespace App.TheDate.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsd(Guid imgId, string content)
+        public async Task<IActionResult> CreateByText(Guid imgId, string content, ImageComment imageComment = null)
         {
-            if (ModelState.IsValid)
+            if (imgId != Guid.Empty && content!=string.Empty)
             {
                 _imageCommentRepository.Add(new ImageComment() { CommentedItemId = imgId, CreatorId = _userService.CurrentUserId, Content = content });
                 await _imageCommentRepository.CommitAsync();
                 return RedirectToAction(nameof(List), new { id = imgId });
             }
+            ModelState.AddModelError("AddError", "Image Id or comment content is empty values");
             return RedirectToAction(nameof(Create), new { id = imgId });
         }
 
