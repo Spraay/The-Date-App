@@ -6,7 +6,7 @@
 <div class="row grey darken-4 z-depth-2" style="height: 200px">
     <div class="section no-pad-bot">
         <div class="container">
-            <h1 class="header materialize-red-text pulsate"><i class="material-icons left large">delete</i>Photo Delete</h1>
+            <h1 class="header red-text center"><i class="material-icons left large">delete</i>Photo Delete</h1>
         </div>
     </div>
 </div>
@@ -21,10 +21,10 @@
         <form id="Form" asp-action="Delete">
             <input type="hidden" asp-for="Id" />
 
-            <a asp-action="Index" class="btn btn-floating btn-large waves-effect blue pulse">
+            <a asp-action="Index" class="btn rounded btn-large waves-effect blue pulse">
                 <i class="material-icons">replay</i>
             </a>
-            <a id="FormSubmitButton" value="Delete" class="btn btn-floating btn-large waves-effect red pulse">
+            <a id="FormSubmitButton" value="Delete" class="btn rounded btn-large waves-effect red pulse">
                 <i class="material-icons">delete_forever</i>
             </a>
         </form>
