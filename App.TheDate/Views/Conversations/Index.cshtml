@@ -1,0 +1,67 @@
+﻿@model IEnumerable<App.Model.Entities.Conversation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="fixed-action-btn direction-top" style="top: 100px; right: 40px;">
+    <a asp-action="Create" class="btn-floating btn-large pulse green waves-effect waves-light">
+        <i class="material-icons">add</i>
+    </a>
+</div>
+@if (Model.Any())
+{
+    <div class="grey darken-3 z-depth-3" style="padding: 1vw; margin-top: -10px;">
+        <div class="center">
+            <p class="white-text" style="font-size: 3vw;">Conversations<i style="vertical-align: bottom; font-size: 4vw !important;" class="inline-icon material-icons">message</i></p>
+        </div>
+    </div>
+    <br /> <br />
+    <div class="container white z-depth-3">
+        <div class="row col s12 m12 l12">
+            
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)" class="btn-floating yellow darken-1 waves-effect waves-light">
+                                    <i class="material-icons">mode_edit</i>
+                                </a>
+                                <a asp-controller="Messages" asp-action="Conversation" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)" class="btn-floating blue waves-effect waves-light">
+                                    <i class="material-icons">message</i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)" class="btn-floating red waves-effect waves-light">
+                                    <i class="material-icons">delete_forever</i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+}
+else
+{
+    <div class="valign-wrapper my-wrapper row">
+        <div class="col s12">
+            <div class="col s12 center"><i class="material-icons orange-text" style="font-size: 150px;">sentiment_dissatisfied</i></div>
+            <h1 class="orange-text center"> Your conversation list seems to be empty. Try add new one by clicking on green plus button</h1>
+        </div>
+    </div>
+}

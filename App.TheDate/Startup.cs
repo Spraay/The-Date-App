@@ -51,6 +51,8 @@ namespace DatingApplicationV2
             services.AddScoped<IImageRepository, ImageRepository>();
             services.AddScoped<IImageCommentRepository, ImageCommentRepository>();
             services.AddScoped<IVoteRepository, VoteRepository>();
+            services.AddScoped<IConversationRepository, ConversationRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
 
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IUserService, UserService>();
@@ -60,6 +62,7 @@ namespace DatingApplicationV2
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IMeetService, MeetService>();
             services.AddTransient<IExploreService, ExploreService>();
+            services.AddTransient<IConversationsService, ConversationsService>();
 
 
             services.AddAutoMapper();

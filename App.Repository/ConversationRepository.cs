@@ -1,31 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using App.DAO.Data;
 using App.Model.Entities;
 using App.Repository.Abstract;
-using App.DAO.Data;
 
 namespace App.Repository
 {
-    public partial class ConversationRepository : EntityBaseRepository<Conversation>, IConversationRepository
+    public class ConversationRepository : EntityBaseRepository<Conversation>, IConversationRepository
     {
-        public ConversationRepository(ApplicationDbContext context) : base(context)
-        {
-        }
+        public ConversationRepository(ApplicationDbContext context) : base(context) { }
 
-        public Message GetLastMessage(Guid id)
+        public async Task<IEnumerable<Conversation>> GetUserConversationsAsync(Guid id)
         {
-            return GetSingle(_ => _.Id == id, _ => _.Messages).Messages.LastOrDefault();
+            return await FindByAsync(_ => _.Users.Select(__=>__.UserId).Contains(id), _=>_.Messages, _=>_.Users);
         }
-
-        public IEnumerable<Conversation> GetUserConversations(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public partial class ConversationRepository : EntityBaseRepository<Conversation>, IConversationRepository
-    {
-        
     }
 }

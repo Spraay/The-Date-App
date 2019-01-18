@@ -1,7 +1,7 @@
 ﻿<!-- Dropdown Structure -->
 @*<ul id='messageDropdown' class='dropdown-content' data-constrainWidth="false">
     <li>
-        <a asp-controller="MessageForm" asp-action="ConversationList">
+        <a asp-controller="Message" asp-action="Conversation">
             Conversations
             <i class="material-icons">list</i>
         </a>
@@ -12,19 +12,19 @@
             <i class="material-icons">add</i>
         </a>
     </li>
-</ul>
+</ul>*@
 <li data-constrainWidth="false">
     <a 
-        class='dropdown-trigger tooltipped'
+        class='@*dropdown-trigger*@ tooltipped'
         data-position="bottom"
         data-tooltip="Messages"
-        data-target='messageDropdown'
-        asp-controller="MessageForm"
+        @*data-target='messageDropdown'*@
+        asp-controller="Conversations"
         asp-action="Index"
     >
         <i class="material-icons">
             message
         </i>
     </a>
-</li>*@
+</li>
 

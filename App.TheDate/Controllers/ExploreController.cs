@@ -50,13 +50,14 @@ namespace DatingApplicationV2.Controllers
             ViewData["SortItem"] = String.IsNullOrEmpty(sortItem) ? "last_name" : sortItem;
             ViewData["SortOrder"] = String.IsNullOrEmpty(sortOrder) ? "asce" : sortOrder;
             ViewData["PageSize"] = pageSize ?? 10;
-            ViewData["FiltrMale"] = String.IsNullOrEmpty(sortItem) ? "false" : filtrMale;
-            ViewData["FiltrFemale"] = String.IsNullOrEmpty(sortItem) ? "false" : filtrFemale;
+            ViewData["FiltrMale"] = String.IsNullOrEmpty(filtrMale) ? "false" : filtrMale;
+            ViewData["FiltrFemale"] = String.IsNullOrEmpty(filtrFemale) ? "false" : filtrFemale;
 
+            var temp = string.Empty;
             if (searchString != null)
             {
                 page = 1;
-                searchString=searchString.Replace(" ", string.Empty);
+                temp = searchString.Replace(" ", string.Empty);
             }
             else
             {
@@ -64,15 +65,15 @@ namespace DatingApplicationV2.Controllers
             }
                 
             ViewData["SearchString"] = searchString;
-
-            var appUsers = (!String.IsNullOrEmpty(searchString))
-                ? await _userRepository.FindByAsync(_=> searchString.Contains(_.FirstName) || searchString.Contains(_.LastName) || searchString.Contains(_.Description))
+            
+            var appUsers = (!String.IsNullOrEmpty(temp))
+                ? await _userRepository.FindByAsync(_=> temp.Contains(_.FirstName) || temp.Contains(_.LastName) || temp.Contains(_.Description))
                 : await _userRepository.GetAllAsync();
 
             if(filtrMale == "true")
                 appUsers = appUsers.Where(_ => _.Gender != Gender.Male);
 
-            if (filtrFemale == "false")
+            if (filtrFemale == "true")
                 appUsers = appUsers.Where(_ => _.Gender != Gender.Female);
 
             switch (sortItem+"_"+sortOrder)

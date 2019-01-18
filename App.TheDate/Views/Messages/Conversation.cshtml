@@ -1,0 +1,47 @@
+﻿@model App.Model.Entities.Conversation
+@{
+    var messages = (List<Message>) ViewBag.Messages;
+    var users = Model.Users;
+}
+
+<div class="row">
+    <div class="col s12 m10 l8 offset-l2 offset-m1">
+        <div class="card">
+            
+            <div class="card-content">
+                <h5 class="">@Model.Name</h5>
+            </div>
+            <div class="card-content">
+                <partial name="Shared/_MessageForm.cshtml" model="@new Message() { ConversationId = Model.Id }" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m10 l8 offset-l2 offset-m1 white z-depth-2">
+                <div class="" style="position: relative; left: 10px;"><h3> Messages</h3>@(messages.Any() ? "" : "Nobody added message yet")</div>
+
+
+                <ul class="collection">
+                    @foreach (var message in messages.OrderBy(_ => _.CreatedDate))
+                    {
+                        <li class="collection-item avatar col s12 row ">
+                            <a asp-controller="User" asp-action="Profile" asp-route-id="@message.Sender.Id"><img src="~/images/userimages/@message.Sender.ProfileImageSrc" alt="" class="circle"></a>
+                            <div class="col s8 title left-align left text-left"><b><a asp-controller="User" asp-action="Profile" asp-route-id="@message.Sender.Id">@message.Sender.FirstName @message.Sender.LastName</a>: </b>@message.Content</div>
+                            @if (message.Sender.UserName == User.Identity.Name)
+                            {
+                                <div class="valign-wrapper" style="height: 100%; position: absolute; top: 0px; right: 10px;">
+                                    <div class="inline text-right">
+                                        
+                                        <a class="btn rounded red" asp-controller="Messages" asp-action="Delete" asp-route-id="@message.Id"><i class="material-icons">delete_forever</i></a>
+                                    </div>
+                                </div>
+
+                            }
+                        </li>
+                    }
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    
+</div>
