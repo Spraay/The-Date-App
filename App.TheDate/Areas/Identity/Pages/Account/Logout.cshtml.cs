@@ -21,8 +21,9 @@ namespace DatingApplicationV2.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
-        public void OnGet()
+        public void OnGet(string returnUrl = null)
         {
+            LocalRedirect(returnUrl);
         }
 
         public async Task<IActionResult> OnPost(string returnUrl = null)
