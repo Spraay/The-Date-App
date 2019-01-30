@@ -10,7 +10,6 @@ using App.Model.Entities;
 using App.Repository.Abstract;
 using App.Service.Abstract;
 using Microsoft.AspNetCore.Authorization;
-
 namespace App.TheDate.Controllers
 {
     [Authorize(Roles = "User,Admin,Moderator")]
