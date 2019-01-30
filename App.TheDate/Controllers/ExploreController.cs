@@ -25,7 +25,11 @@ namespace DatingApplicationV2.Controllers
         private readonly IMapper _mapper;
         private readonly IExploreService _exploreService;
 
-        public ExploreController(IUserService userService, IUserRepository userRepository, IInterestRepository interestRepository, IMapper mapper, IExploreService exploreService)
+        public ExploreController(IUserService userService,
+            IUserRepository userRepository,
+            IInterestRepository interestRepository,
+            IMapper mapper,
+            IExploreService exploreService)
         {
             _userService = userService;
             _userRepository = userRepository;

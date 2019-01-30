@@ -14,7 +14,7 @@
                         favorite
                     </i>
                 </a>
-                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down inline">
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -48,7 +48,7 @@ else
                         favorite
                     </i>
                 </a>
-                <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul class="left hide-on-med-and-down">
                     @await Html.PartialAsync("Navbar/_Explore")
                 </ul>

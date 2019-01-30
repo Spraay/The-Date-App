@@ -7,19 +7,15 @@ using App.Model.Entities;
 
 namespace DatingApplicationV2.Controllers
 {
-    [Authorize(Roles = "User,Admin,Moderator")]
+    [Authorize(Roles = "Admin,Moderator")]
     public class InterestController : Controller
     {
-        
         private readonly IInterestRepository _interestRepository;
 
         public InterestController(IInterestRepository interestRepository)
         {
             _interestRepository = interestRepository;
         }
-
-
-
 
         // GET: Interests
         public IActionResult Index()
