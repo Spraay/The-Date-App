@@ -1,5 +1,33 @@
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+# was manually edited
 ################################################################################
 
-/.vs/TheDate/v15/Server/sqlite3/db.lock
+#
+/.vs
+#
+/App.DAO/bin
+#/App.DAO/obj
+#
+/App.Model/bin
+#/App.Model/obj
+#
+/App.Pagination/bin
+#/App.Pagination/obj
+#
+/App.Repository/bin
+#/App.Repository/obj
+#
+/App.Servies/bin
+#/App.Servies/obj
+#
+/App.TheDate/bin
+#/App.TheDate/obj
+#
+/App.Validators/bin
+#/App.Validators/obj
+#
+#/App.TheDate/wwwroot/images/userimages
+#
+
+
