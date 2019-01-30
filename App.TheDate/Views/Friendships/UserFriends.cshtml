@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "User Friends";
-    var usersMarkedAsMet = (IEnumerable<Guid>)ViewBag.MarkedAsMet;
+    var usersMarkedAsMet = (IEnumerable<Guid>) ViewBag.MarkedAsMet;
     var usersMet = (IEnumerable<Guid>)ViewBag.UsersMet;
 }
 
@@ -24,27 +24,51 @@ else
     </div>
 }
 
-<div class="container">
-    <div class="row">
-        
+    <div class="container">
         @foreach (var item in Model)
         {
-            <div class="col m4 s4 l4">
-                <div class="card">
-                    <div class="card-image col m12 s12 l12">
-                        <div class="thumbnail no-border no-padding" >
-                            <img src="~/images/userimages/@item.ProfileImageSrc" class="responsive-img" />
-                        </div>
-                        <span class="card-title" style="background: rgba(0, 0, 0, 0.5); width: 100%">@Html.DisplayFor(m => item.FirstName) @Html.DisplayFor(m => item.LastName)</span>
+            <div class="col m4">
+                <div class="card" >
+                    <div class="card-image inline ">
+                        <img src="~/images/userimages/@Html.DisplayFor(m => item.ProfileImageSrc)">
+                        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">
+                            @Html.DisplayFor(m => item.FirstName)  @Html.DisplayFor(m => item.LastName)
+                        </span>
                     </div>
-                    <div class="card-action grey col m12 s12 l12">
+                    <div class="card-action grey">
                         <div class="center">
                             <a class="btn btn-large rounded red tooltipped" data-position="top" data-tooltip="Delete Friend" asp-controller="Friendships" asp-action="Delete" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                <i class="material-icons">delete</i>
+                                <i class="large material-icons">delete</i>
                             </a>
-                            <a class="btn btn-large rounded blue tooltipped" data-position="top" data-tooltip="Show Profile" asp-controller="User" asp-action="Profile" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                <i class="material-icons">info</i>
+                            <a class="btn btn-large rounded blue tooltipped" data-position="top" data-tooltip="Show Details" asp-controller="User" asp-action="Profile" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                <i class="large material-icons">info</i>
                             </a>
+                            @if (!usersMarkedAsMet.Contains(item.Id) || !usersMet.Contains(item.Id))
+                            {
+                                <a class="btn btn-large rounded green tooltipped" data-position="top" data-tooltip="Mark as met" asp-controller="Meet" asp-action="Meet" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                    <i class="large material-icons">how_to_reg</i>
+                                </a>
+                            }
+                            @{
+                                var goldStars = 3;
+                            }
+                            <div class="no-cursor">
+                                <h4 class="card-title center">
+
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        if (i < goldStars)
+                                        {
+                                            <a><i class="material-icons yellow-text">grade</i></a>
+                                        }
+                                        else
+                                        {
+                                            <a><i class="material-icons white-text ">grade</i></a>
+                                        }
+                                    }
+                                </h4>
+                                <h6 class="medium-small yellow-text center"><b>Rating</b></h6>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -52,10 +76,3 @@ else
         }
     </div>
 </div>
-
-<style>
-    .thumbnail img {
-        height: 250px;
-        width: 100%;
-    }
-</style>
