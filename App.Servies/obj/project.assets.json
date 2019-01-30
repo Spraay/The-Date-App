@@ -4469,7 +4469,7 @@
       ]
     },
     "System.Runtime.CompilerServices.Unsafe/4.5.1": {
-      "sha512": "x/3d5xb+mc9e4I2GOOT+HPRWMZLbYjNN/kYKsb0fyUKcWizn/t1CIrGRLIBhv7H0ptYEt+WTTztdPmwSUMyKig==",
+      "sha512": "qUJMNWhbm9oZ3XaMFiEMiYmRPszbnXIkRIi7+4b2Md2xZ6JUOepf0/kY3S85qistRohl9OdMe4PsO+RdG2kTIQ==",
       "type": "package",
       "path": "system.runtime.compilerservices.unsafe/4.5.1",
       "files": [
@@ -5107,7 +5107,7 @@
       ]
     },
     "System.ValueTuple/4.5.0": {
-      "sha512": "fa3P1cPe2SlrjCjJ/yc3mcXkDj4GQORmileNFYBtBZh2qddzwRubagAkj8yz/yF9oLvJVqaZYar9l2SCqNKDJg==",
+      "sha512": "xZtSZNEHGa+tGsKuP4sh257vxJ/yemShz4EusmomkynMzuEDDjVaErBNewpzEF6swUgbcrSQAX3ELsEp1zCOwA==",
       "type": "package",
       "path": "system.valuetuple/4.5.0",
       "files": [
@@ -5190,11 +5190,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Servies\\App.Service.csproj",
+      "projectUniqueName": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Servies\\App.Service.csproj",
       "projectName": "App.Service",
-      "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Servies\\App.Service.csproj",
+      "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Servies\\App.Service.csproj",
       "packagesPath": "C:\\Users\\Spray\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Servies\\obj\\",
+      "outputPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Servies\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Programy\\64bit\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5213,17 +5213,17 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.DAO\\App.DAO.csproj": {
-              "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.DAO\\App.DAO.csproj"
+            "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.DAO\\App.DAO.csproj": {
+              "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.DAO\\App.DAO.csproj"
             },
-            "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Model\\App.Model.csproj": {
-              "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Model\\App.Model.csproj"
+            "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Model\\App.Model.csproj": {
+              "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Model\\App.Model.csproj"
             },
-            "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Pagination\\App.Pagination.csproj": {
-              "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Pagination\\App.Pagination.csproj"
+            "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Pagination\\App.Pagination.csproj": {
+              "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Pagination\\App.Pagination.csproj"
             },
-            "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Repository\\App.Repository.csproj": {
-              "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Repository\\App.Repository.csproj"
+            "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Repository\\App.Repository.csproj": {
+              "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Repository\\App.Repository.csproj"
             }
           }
         }

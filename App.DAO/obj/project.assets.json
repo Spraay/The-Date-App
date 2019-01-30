@@ -4279,7 +4279,7 @@
       ]
     },
     "System.Runtime.CompilerServices.Unsafe/4.5.1": {
-      "sha512": "x/3d5xb+mc9e4I2GOOT+HPRWMZLbYjNN/kYKsb0fyUKcWizn/t1CIrGRLIBhv7H0ptYEt+WTTztdPmwSUMyKig==",
+      "sha512": "qUJMNWhbm9oZ3XaMFiEMiYmRPszbnXIkRIi7+4b2Md2xZ6JUOepf0/kY3S85qistRohl9OdMe4PsO+RdG2kTIQ==",
       "type": "package",
       "path": "system.runtime.compilerservices.unsafe/4.5.1",
       "files": [
@@ -4939,11 +4939,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.DAO\\App.DAO.csproj",
+      "projectUniqueName": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.DAO\\App.DAO.csproj",
       "projectName": "App.DAO",
-      "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.DAO\\App.DAO.csproj",
+      "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.DAO\\App.DAO.csproj",
       "packagesPath": "C:\\Users\\Spray\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.DAO\\obj\\",
+      "outputPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.DAO\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Programy\\64bit\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -4962,8 +4962,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Model\\App.Model.csproj": {
-              "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Model\\App.Model.csproj"
+            "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Model\\App.Model.csproj": {
+              "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Model\\App.Model.csproj"
             }
           }
         }

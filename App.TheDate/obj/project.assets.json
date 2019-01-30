@@ -5825,7 +5825,6 @@
       "sha512": "ex8MZwgoyqHim1L6/65FnfjdSMtSKSuSU3DVoiCADZACc05T7f8uRB7SnDIP5LPQKLUBLilfNkd1p14RLyfdQA==",
       "type": "package",
       "path": "microsoft.aspnetcore.razor.design/2.2.0",
-      "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6208,7 +6207,6 @@
       "sha512": "HS3iRWZKcUw/8eZ/08GXKY2Bn7xNzQPzf8gRPHGSowX7u7XXu9i9YEaBeBNKUXWfI7qjvT2zXtLUvbN0hds8vg==",
       "type": "package",
       "path": "microsoft.codeanalysis.analyzers/1.1.0",
-      "hasTools": true,
       "files": [
         ".nupkg.metadata",
         "ThirdPartyNotices.rtf",
@@ -6480,7 +6478,6 @@
       "sha512": "wn1ULjQbFadRosiNJE4B65iR5eYL3FkMezH4Tyv8EmdmN5XfCTzIgkk1mQJ1Zcb61Kb3qyZMeGidanwR7h/gug==",
       "type": "package",
       "path": "microsoft.entityframeworkcore.tools/2.2.0",
-      "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -8988,11 +8985,12 @@
       ]
     },
     "System.Composition/1.0.31": {
-      "sha512": "I+D26qpYdoklyAVUdqwUBrEIckMNjAYnuPJy/h9dsQItpQwVREkDFs4b4tkBza0kT2Yk48Lcfsv2QQ9hWsh9Iw==",
+      "sha512": "CbzwbjxT04VU+JzQuPOYfUCybzBtbGZdqGJS9482dDBoBHbt3Zz0QAJ/Cjzpmq5xdL+hhW4FYWf/3wq2OCVXgg==",
       "type": "package",
       "path": "system.composition/1.0.31",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "system.composition.1.0.31.nupkg.sha512",
@@ -9028,11 +9026,12 @@
       ]
     },
     "System.Composition.Hosting/1.0.31": {
-      "sha512": "fN1bT4RX4vUqjbgoyuJFVUizAl2mYF5VAb+bVIxIYZSSc0BdnX+yGAxcavxJuDDCQ1K+/mdpgyEFc8e9ikjvrg==",
+      "sha512": "KlZ4qkaa1p/U2WKr353XeQ9bjrxBwn9FcD5k9WFEuV1MloDMnTnhUwQU7h1WigvsCYykzoRdnDLq33wnUPwBeg==",
       "type": "package",
       "path": "system.composition.hosting/1.0.31",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/System.Composition.Hosting.dll",
@@ -11206,7 +11205,7 @@
       ]
     },
     "System.Runtime.CompilerServices.Unsafe/4.5.1": {
-      "sha512": "x/3d5xb+mc9e4I2GOOT+HPRWMZLbYjNN/kYKsb0fyUKcWizn/t1CIrGRLIBhv7H0ptYEt+WTTztdPmwSUMyKig==",
+      "sha512": "qUJMNWhbm9oZ3XaMFiEMiYmRPszbnXIkRIi7+4b2Md2xZ6JUOepf0/kY3S85qistRohl9OdMe4PsO+RdG2kTIQ==",
       "type": "package",
       "path": "system.runtime.compilerservices.unsafe/4.5.1",
       "files": [
@@ -13177,11 +13176,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.TheDate\\App.TheDate.csproj",
+      "projectUniqueName": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.TheDate\\App.TheDate.csproj",
       "projectName": "App.TheDate",
-      "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.TheDate\\App.TheDate.csproj",
+      "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.TheDate\\App.TheDate.csproj",
       "packagesPath": "C:\\Users\\Spray\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.TheDate\\obj\\",
+      "outputPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.TheDate\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Programy\\64bit\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13200,23 +13199,23 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.DAO\\App.DAO.csproj": {
-              "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.DAO\\App.DAO.csproj"
+            "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.DAO\\App.DAO.csproj": {
+              "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.DAO\\App.DAO.csproj"
             },
-            "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Model\\App.Model.csproj": {
-              "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Model\\App.Model.csproj"
+            "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Model\\App.Model.csproj": {
+              "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Model\\App.Model.csproj"
             },
-            "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Pagination\\App.Pagination.csproj": {
-              "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Pagination\\App.Pagination.csproj"
+            "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Pagination\\App.Pagination.csproj": {
+              "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Pagination\\App.Pagination.csproj"
             },
-            "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Repository\\App.Repository.csproj": {
-              "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Repository\\App.Repository.csproj"
+            "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Repository\\App.Repository.csproj": {
+              "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Repository\\App.Repository.csproj"
             },
-            "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Servies\\App.Service.csproj": {
-              "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Servies\\App.Service.csproj"
+            "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Servies\\App.Service.csproj": {
+              "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Servies\\App.Service.csproj"
             },
-            "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Validators\\App.Validator.csproj": {
-              "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Validators\\App.Validator.csproj"
+            "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Validators\\App.Validator.csproj": {
+              "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Validators\\App.Validator.csproj"
             }
           }
         }

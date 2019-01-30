@@ -1,0 +1,9 @@
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Pagination\bin\Debug\netstandard2.0\Pagination.deps.json
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Pagination\bin\Debug\netstandard2.0\Pagination.dll
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Pagination\bin\Debug\netstandard2.0\Pagination.pdb
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Pagination\obj\Debug\netstandard2.0\Pagination.csprojAssemblyReference.cache
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Pagination\obj\Debug\netstandard2.0\Pagination.csproj.CoreCompileInputs.cache
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Pagination\obj\Debug\netstandard2.0\Pagination.AssemblyInfoInputs.cache
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Pagination\obj\Debug\netstandard2.0\Pagination.AssemblyInfo.cs
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Pagination\obj\Debug\netstandard2.0\Pagination.dll
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Pagination\obj\Debug\netstandard2.0\Pagination.pdb

@@ -1,0 +1,14 @@
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\bin\Debug\netstandard2.0\Validator.deps.json
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\bin\Debug\netstandard2.0\Validator.dll
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\bin\Debug\netstandard2.0\Validator.pdb
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\bin\Debug\netstandard2.0\DAO.dll
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\bin\Debug\netstandard2.0\Entity.dll
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\bin\Debug\netstandard2.0\DAO.pdb
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\bin\Debug\netstandard2.0\Entity.pdb
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\obj\Debug\netstandard2.0\Validator.csprojAssemblyReference.cache
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\obj\Debug\netstandard2.0\Validator.csproj.CoreCompileInputs.cache
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\obj\Debug\netstandard2.0\Validator.AssemblyInfoInputs.cache
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\obj\Debug\netstandard2.0\Validator.AssemblyInfo.cs
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\obj\Debug\netstandard2.0\Validator.csproj.CopyComplete
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\obj\Debug\netstandard2.0\Validator.dll
+D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\Validators\obj\Debug\netstandard2.0\Validator.pdb

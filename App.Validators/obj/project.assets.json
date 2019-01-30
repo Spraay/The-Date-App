@@ -1559,7 +1559,7 @@
       ]
     },
     "Microsoft.Extensions.DependencyInjection/2.1.1": {
-      "sha512": "ZPFcDUbSwaEVWMyef8+9GqiTAghHX+eLeIEW032i4LDFAdyM4J4brV0UzChlKtClT7cuip/Of6G+veDnO3/bCw==",
+      "sha512": "2nshYaLTn73Ie+/yTkb7EZIXwQeFIXsYCBy/jSY9bMayYykGNjdWa25frayhuPAGVbZpEgfgp3d4JRVEuVyEqQ==",
       "type": "package",
       "path": "microsoft.extensions.dependencyinjection/2.1.1",
       "files": [
@@ -3252,7 +3252,7 @@
       ]
     },
     "System.Runtime.CompilerServices.Unsafe/4.5.1": {
-      "sha512": "x/3d5xb+mc9e4I2GOOT+HPRWMZLbYjNN/kYKsb0fyUKcWizn/t1CIrGRLIBhv7H0ptYEt+WTTztdPmwSUMyKig==",
+      "sha512": "qUJMNWhbm9oZ3XaMFiEMiYmRPszbnXIkRIi7+4b2Md2xZ6JUOepf0/kY3S85qistRohl9OdMe4PsO+RdG2kTIQ==",
       "type": "package",
       "path": "system.runtime.compilerservices.unsafe/4.5.1",
       "files": [
@@ -3784,7 +3784,7 @@
       ]
     },
     "System.ValueTuple/4.5.0": {
-      "sha512": "fa3P1cPe2SlrjCjJ/yc3mcXkDj4GQORmileNFYBtBZh2qddzwRubagAkj8yz/yF9oLvJVqaZYar9l2SCqNKDJg==",
+      "sha512": "xZtSZNEHGa+tGsKuP4sh257vxJ/yemShz4EusmomkynMzuEDDjVaErBNewpzEF6swUgbcrSQAX3ELsEp1zCOwA==",
       "type": "package",
       "path": "system.valuetuple/4.5.0",
       "files": [
@@ -3848,11 +3848,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Validators\\App.Validator.csproj",
+      "projectUniqueName": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Validators\\App.Validator.csproj",
       "projectName": "App.Validator",
-      "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Validators\\App.Validator.csproj",
+      "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Validators\\App.Validator.csproj",
       "packagesPath": "C:\\Users\\Spray\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Validators\\obj\\",
+      "outputPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Validators\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "D:\\Programy\\64bit\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -3871,8 +3871,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Model\\App.Model.csproj": {
-              "projectPath": "C:\\Users\\Spray\\Desktop\\datingapplicationv2\\App.Model\\App.Model.csproj"
+            "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Model\\App.Model.csproj": {
+              "projectPath": "C:\\Users\\Spray\\Desktop\\The-Date-App\\App.Model\\App.Model.csproj"
             }
           }
         }
