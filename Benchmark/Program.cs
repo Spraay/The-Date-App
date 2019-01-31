@@ -8,7 +8,7 @@ namespace Benchmarks
     {
         public static void Main()
         {
-            BenchmarkRunner.Run<FriendshipsControllerResponseBenchmark>();
+            BenchmarkRunner.Run<ExploreControllerResponseBenchmark>();
         }
     }
 }
