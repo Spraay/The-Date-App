@@ -23,7 +23,7 @@ using System;
 #line default
 #line hidden
 #line 3 "C:\Users\Spray\Desktop\The-Date-App\App.TheDate\Views\_ViewImports.cshtml"
-using DatingApplicationV2.Areas.Identity;
+using App.TheDate.Areas.Identity;
 
 #line default
 #line hidden
@@ -43,7 +43,7 @@ using App.Service.Abstract;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"082612b0f2165afc0496db7cfc8cffc74f044031", @"/Views/Interest/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"805b65725f9c98ebfddbadd6b3513a917bb782fa", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d5b3d057190327018203cdc0549572cc79dc2002", @"/Views/_ViewImports.cshtml")]
     public class Views_Interest_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Interest>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Create", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -89,7 +89,7 @@ using App.Service.Abstract;
             WriteLiteral("<div class=\"container\">\r\n\r\n\r\n    <h2>Interest List</h2>\r\n\r\n\r\n    <div class=\"fixed-action-btn direction-top\" style=\"top: 100px; right: 40px;\">\r\n        ");
             EndContext();
             BeginContext(225, 146, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "082612b0f2165afc0496db7cfc8cffc74f0440316947", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "082612b0f2165afc0496db7cfc8cffc74f0440316939", async() => {
                 BeginContext(310, 57, true);
                 WriteLiteral("\r\n            <i class=\"material-icons\">add</i>\r\n        ");
                 EndContext();
@@ -141,7 +141,7 @@ using App.Service.Abstract;
             WriteLiteral("\r\n                    </td>\r\n                    <td>\r\n                        ");
             EndContext();
             BeginContext(879, 206, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "082612b0f2165afc0496db7cfc8cffc74f0440319850", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "082612b0f2165afc0496db7cfc8cffc74f0440319842", async() => {
                 BeginContext(986, 95, true);
                 WriteLiteral("\r\n                            <i class=\"material-icons\">mode_edit</i>\r\n                        ");
                 EndContext();
@@ -177,7 +177,7 @@ using App.Service.Abstract;
             WriteLiteral("\r\n                        ");
             EndContext();
             BeginContext(1111, 193, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "082612b0f2165afc0496db7cfc8cffc74f04403112386", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "082612b0f2165afc0496db7cfc8cffc74f04403112378", async() => {
                 BeginContext(1210, 90, true);
                 WriteLiteral("\r\n                            <i class=\"material-icons\">info</i>\r\n                        ");
                 EndContext();
@@ -213,7 +213,7 @@ using App.Service.Abstract;
             WriteLiteral("\r\n                        ");
             EndContext();
             BeginContext(1330, 201, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "082612b0f2165afc0496db7cfc8cffc74f04403114922", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "082612b0f2165afc0496db7cfc8cffc74f04403114914", async() => {
                 BeginContext(1427, 100, true);
                 WriteLiteral("\r\n                            <i class=\"material-icons\">delete_forever</i>\r\n                        ");
                 EndContext();

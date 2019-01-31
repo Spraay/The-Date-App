@@ -23,7 +23,7 @@ using System;
 #line default
 #line hidden
 #line 3 "C:\Users\Spray\Desktop\The-Date-App\App.TheDate\Views\_ViewImports.cshtml"
-using DatingApplicationV2.Areas.Identity;
+using App.TheDate.Areas.Identity;
 
 #line default
 #line hidden
@@ -43,7 +43,7 @@ using App.Service.Abstract;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d5c044cd40b70ebca7a469a596f5dbf1902d030d", @"/Views/Meet/MeetsList.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"805b65725f9c98ebfddbadd6b3513a917bb782fa", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d5b3d057190327018203cdc0549572cc79dc2002", @"/Views/_ViewImports.cshtml")]
     public class Views_Meet_MeetsList : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<User>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("class", new global::Microsoft.AspNetCore.Html.HtmlString("btn btn-large rounded blue tooltipped"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -148,7 +148,7 @@ WriteAttributeValue("", 803, ViewBag.returnURL, 803, 18, false);
             WriteLiteral("            <div class=\"col m4\">\r\n                <div class=\"card\">\r\n                    <div class=\"card-image inline\">\r\n                        ");
             EndContext();
             BeginContext(1255, 76, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "d5c044cd40b70ebca7a469a596f5dbf1902d030d9723", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "d5c044cd40b70ebca7a469a596f5dbf1902d030d9715", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -193,7 +193,7 @@ AddHtmlAttributeValue("", 1285, Html.DisplayFor(m => item.ProfileImageSrc), 1285
             WriteLiteral("\r\n                        </span>\r\n                    </div>\r\n                    <div class=\"card-action grey\">\r\n                        <div class=\"center\">\r\n                            ");
             EndContext();
             BeginContext(1728, 270, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d5c044cd40b70ebca7a469a596f5dbf1902d030d12448", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d5c044cd40b70ebca7a469a596f5dbf1902d030d12440", async() => {
                 BeginContext(1896, 98, true);
                 WriteLiteral("\r\n                                <i class=\"material-icons\">info</i>\r\n                            ");
                 EndContext();
@@ -233,7 +233,7 @@ AddHtmlAttributeValue("", 1285, Html.DisplayFor(m => item.ProfileImageSrc), 1285
             WriteLiteral("\r\n                            ");
             EndContext();
             BeginContext(2028, 476, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d5c044cd40b70ebca7a469a596f5dbf1902d030d15492", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d5c044cd40b70ebca7a469a596f5dbf1902d030d15484", async() => {
                 BeginContext(2203, 297, true);
                 WriteLiteral(@"
                                 <i class=""material-icons tiny yellow-text"">star</i>

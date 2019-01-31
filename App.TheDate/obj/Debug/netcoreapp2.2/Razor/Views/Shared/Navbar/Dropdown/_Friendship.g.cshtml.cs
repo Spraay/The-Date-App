@@ -23,7 +23,7 @@ using System;
 #line default
 #line hidden
 #line 3 "C:\Users\Spray\Desktop\The-Date-App\App.TheDate\Views\_ViewImports.cshtml"
-using DatingApplicationV2.Areas.Identity;
+using App.TheDate.Areas.Identity;
 
 #line default
 #line hidden
@@ -43,7 +43,7 @@ using App.Service.Abstract;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"82e398f0b87bf67dc3f5f4428934c3ec157d2d7f", @"/Views/Shared/Navbar/Dropdown/_Friendship.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"805b65725f9c98ebfddbadd6b3513a917bb782fa", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d5b3d057190327018203cdc0549572cc79dc2002", @"/Views/_ViewImports.cshtml")]
     public class Views_Shared_Navbar_Dropdown__Friendship : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Friendships", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -77,7 +77,7 @@ using App.Service.Abstract;
             WriteLiteral("<!-- Dropdown Structure -->\r\n<ul id=\'friendshipDropdown\' class=\'dropdown-content\' style=\"width: 400px;\">\r\n    <li>\r\n        ");
             EndContext();
             BeginContext(227, 311, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "82e398f0b87bf67dc3f5f4428934c3ec157d2d7f5587", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "82e398f0b87bf67dc3f5f4428934c3ec157d2d7f5579", async() => {
                 BeginContext(344, 107, true);
                 WriteLiteral("\r\n            My Friends\r\n            <i class=\"material-icons\">group</i>\r\n            <span class=\"badge\">");
                 EndContext();
@@ -124,7 +124,7 @@ using App.Service.Abstract;
             WriteLiteral("\r\n    </li>\r\n    <li class=\"divider\" tabindex=\"-1\"></li>\r\n    <li>");
             EndContext();
             BeginContext(604, 177, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "82e398f0b87bf67dc3f5f4428934c3ec157d2d7f8862", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "82e398f0b87bf67dc3f5f4428934c3ec157d2d7f8854", async() => {
                 BeginContext(731, 46, true);
                 WriteLiteral("Invites Sent<i class=\"material-icons\">redo</i>");
                 EndContext();
@@ -161,7 +161,7 @@ using App.Service.Abstract;
             WriteLiteral("</li>\r\n    <li>");
             EndContext();
             BeginContext(796, 185, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "82e398f0b87bf67dc3f5f4428934c3ec157d2d7f11569", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "82e398f0b87bf67dc3f5f4428934c3ec157d2d7f11561", async() => {
                 BeginContext(927, 50, true);
                 WriteLiteral("Invites Received<i class=\"material-icons\">undo</i>");
                 EndContext();
@@ -198,7 +198,7 @@ using App.Service.Abstract;
             WriteLiteral("</li>\r\n    <li class=\"divider\" tabindex=\"-1\"></li>\r\n    <li>");
             EndContext();
             BeginContext(1041, 159, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "82e398f0b87bf67dc3f5f4428934c3ec157d2d7f14337", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "82e398f0b87bf67dc3f5f4428934c3ec157d2d7f14329", async() => {
                 BeginContext(1151, 45, true);
                 WriteLiteral("Meets<i class=\"material-icons\">how_to_reg</i>");
                 EndContext();

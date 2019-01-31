@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
-namespace TheDate.Areas.Identity.Pages
+namespace App.TheDate.Areas.Identity.Pages
 {
     [AllowAnonymous]
     public class ErrorModel : PageModel

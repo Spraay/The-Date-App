@@ -23,7 +23,7 @@ using System;
 #line default
 #line hidden
 #line 3 "C:\Users\Spray\Desktop\The-Date-App\App.TheDate\Views\_ViewImports.cshtml"
-using DatingApplicationV2.Areas.Identity;
+using App.TheDate.Areas.Identity;
 
 #line default
 #line hidden
@@ -43,7 +43,7 @@ using App.Service.Abstract;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"422c1480280f491d56691213a8c8178c70287c34", @"/Views/Image/UserImages.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"805b65725f9c98ebfddbadd6b3513a917bb782fa", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d5b3d057190327018203cdc0549572cc79dc2002", @"/Views/_ViewImports.cshtml")]
     public class Views_Image_UserImages : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Image>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Create", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -118,7 +118,7 @@ using App.Service.Abstract;
             WriteLiteral("    <div class=\"row\">\r\n        <div class=\"col s12\">\r\n            <div class=\"fixed-action-btn direction-top\" style=\"top: 100px; right: 40px;\">\r\n                ");
             EndContext();
             BeginContext(393, 168, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "422c1480280f491d56691213a8c8178c70287c3412812", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "422c1480280f491d56691213a8c8178c70287c3412804", async() => {
                 BeginContext(484, 73, true);
                 WriteLiteral("\r\n                    <i class=\"material-icons\">add</i>\r\n                ");
                 EndContext();
@@ -188,7 +188,7 @@ using App.Service.Abstract;
             WriteLiteral("\r\n                    </h5>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"parallax\">");
             EndContext();
             BeginContext(1319, 137, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "422c1480280f491d56691213a8c8178c70287c3416641", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "422c1480280f491d56691213a8c8178c70287c3416633", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -249,7 +249,7 @@ else
             WriteLiteral("            <div class=\"col l4 s10 m6 xl3\">\r\n                <div class=\"card z-depth-2 col s12 no-padding\">\r\n                    <div class=\"card-image medium\">\r\n                        ");
             EndContext();
             BeginContext(2234, 100, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "422c1480280f491d56691213a8c8178c70287c3419781", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "422c1480280f491d56691213a8c8178c70287c3419773", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -285,7 +285,7 @@ AddHtmlAttributeValue("", 2323, item.Src, 2323, 9, false);
             WriteLiteral("                        <div class=\"col s12 no-padding center\" style=\"position: relative; top: -20px;\">\r\n                            ");
             EndContext();
             BeginContext(2639, 493, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "422c1480280f491d56691213a8c8178c70287c3422077", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "422c1480280f491d56691213a8c8178c70287c3422069", async() => {
                 BeginContext(3020, 108, true);
                 WriteLiteral("\r\n                                <i class=\"material-icons\">delete_forever</i>\r\n                            ");
                 EndContext();
@@ -332,7 +332,7 @@ AddHtmlAttributeValue("", 2323, item.Src, 2323, 9, false);
             WriteLiteral("\r\n                            ");
             EndContext();
             BeginContext(3162, 481, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "422c1480280f491d56691213a8c8178c70287c3425503", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "422c1480280f491d56691213a8c8178c70287c3425495", async() => {
                 BeginContext(3541, 98, true);
                 WriteLiteral("\r\n                                <i class=\"material-icons\">edit</i>\r\n                            ");
                 EndContext();
@@ -379,7 +379,7 @@ AddHtmlAttributeValue("", 2323, item.Src, 2323, 9, false);
             WriteLiteral("\r\n                            ");
             EndContext();
             BeginContext(3673, 503, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "422c1480280f491d56691213a8c8178c70287c3428920", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "422c1480280f491d56691213a8c8178c70287c3428912", async() => {
                 BeginContext(4074, 98, true);
                 WriteLiteral("\r\n                                <i class=\"material-icons\">face</i>\r\n                            ");
                 EndContext();
@@ -472,7 +472,7 @@ AddHtmlAttributeValue("", 2323, item.Src, 2323, 9, false);
             WriteLiteral("                        ");
             EndContext();
             BeginContext(5120, 332, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "422c1480280f491d56691213a8c8178c70287c3434877", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "422c1480280f491d56691213a8c8178c70287c3434869", async() => {
                 BeginContext(5301, 37, true);
                 WriteLiteral("<p class=\"pointer-cursor hover-blue\">");
                 EndContext();
@@ -539,7 +539,7 @@ AddHtmlAttributeValue("", 2323, item.Src, 2323, 9, false);
             WriteLiteral("\r\n                        ");
             EndContext();
             BeginContext(5478, 281, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "422c1480280f491d56691213a8c8178c70287c3439751", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "422c1480280f491d56691213a8c8178c70287c3439743", async() => {
                 BeginContext(5657, 98, true);
                 WriteLiteral("<p class=\"pointer-cursor hover-blue\">Comment <i class=\"material-icons inline-icon\">comment</i></p>");
                 EndContext();

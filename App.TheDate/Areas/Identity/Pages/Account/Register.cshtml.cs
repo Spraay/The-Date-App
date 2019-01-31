@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using DatingApplication.Controllers;
 using App.Model.Entities;
 
-namespace TheDate.Areas.Identity.Pages.Account
+namespace App.TheDate.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel

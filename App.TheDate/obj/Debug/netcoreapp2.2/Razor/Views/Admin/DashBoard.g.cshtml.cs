@@ -22,7 +22,7 @@ using System;
 #line default
 #line hidden
 #line 3 "C:\Users\Spray\Desktop\The-Date-App\App.TheDate\Views\_ViewImports.cshtml"
-using DatingApplicationV2.Areas.Identity;
+using App.TheDate.Areas.Identity;
 
 #line default
 #line hidden
@@ -52,7 +52,7 @@ using DatingApplication.Controllers;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"eb937edc345b48798a9342cc0e81803147bb44aa", @"/Views/Admin/DashBoard.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"805b65725f9c98ebfddbadd6b3513a917bb782fa", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d5b3d057190327018203cdc0549572cc79dc2002", @"/Views/_ViewImports.cshtml")]
     public class Views_Admin_DashBoard : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/images/adminbackground1.jpg"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -91,7 +91,7 @@ using DatingApplication.Controllers;
             WriteLiteral("<div class=\"parallax-container\">\r\n    <div class=\"parallax\">");
             EndContext();
             BeginContext(178, 41, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "eb937edc345b48798a9342cc0e81803147bb44aa5388", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "eb937edc345b48798a9342cc0e81803147bb44aa5380", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -124,7 +124,7 @@ using DatingApplication.Controllers;
                     <td> ");
             EndContext();
             BeginContext(599, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa6948", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa6940", async() => {
                 BeginContext(647, 12, true);
                 WriteLiteral("Interest GUI");
                 EndContext();
@@ -148,7 +148,7 @@ using DatingApplication.Controllers;
             WriteLiteral(" </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> ");
             EndContext();
             BeginContext(741, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa8611", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa8603", async() => {
                 BeginContext(789, 12, true);
                 WriteLiteral("Interest GUI");
                 EndContext();
@@ -172,7 +172,7 @@ using DatingApplication.Controllers;
             WriteLiteral(" </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> ");
             EndContext();
             BeginContext(883, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa10274", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa10266", async() => {
                 BeginContext(931, 12, true);
                 WriteLiteral("Interest GUI");
                 EndContext();
@@ -196,7 +196,7 @@ using DatingApplication.Controllers;
             WriteLiteral(" </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> ");
             EndContext();
             BeginContext(1025, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa11939", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa11931", async() => {
                 BeginContext(1073, 12, true);
                 WriteLiteral("Interest GUI");
                 EndContext();
@@ -220,7 +220,7 @@ using DatingApplication.Controllers;
             WriteLiteral(" </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> ");
             EndContext();
             BeginContext(1167, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa13606", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa13598", async() => {
                 BeginContext(1215, 12, true);
                 WriteLiteral("Interest GUI");
                 EndContext();
@@ -244,7 +244,7 @@ using DatingApplication.Controllers;
             WriteLiteral(" </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> ");
             EndContext();
             BeginContext(1309, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa15273", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa15265", async() => {
                 BeginContext(1357, 12, true);
                 WriteLiteral("Interest GUI");
                 EndContext();
@@ -268,7 +268,7 @@ using DatingApplication.Controllers;
             WriteLiteral(" </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> ");
             EndContext();
             BeginContext(1451, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa16940", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa16932", async() => {
                 BeginContext(1499, 12, true);
                 WriteLiteral("Interest GUI");
                 EndContext();
@@ -292,7 +292,7 @@ using DatingApplication.Controllers;
             WriteLiteral(" </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> ");
             EndContext();
             BeginContext(1593, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa18607", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa18599", async() => {
                 BeginContext(1641, 12, true);
                 WriteLiteral("Interest GUI");
                 EndContext();
@@ -316,7 +316,7 @@ using DatingApplication.Controllers;
             WriteLiteral(" </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> ");
             EndContext();
             BeginContext(1735, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa20274", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa20266", async() => {
                 BeginContext(1783, 12, true);
                 WriteLiteral("Interest GUI");
                 EndContext();
@@ -340,7 +340,7 @@ using DatingApplication.Controllers;
             WriteLiteral(" </td>\r\n                </tr>\r\n                <tr>\r\n                    <td> ");
             EndContext();
             BeginContext(1877, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa21941", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "eb937edc345b48798a9342cc0e81803147bb44aa21933", async() => {
                 BeginContext(1925, 12, true);
                 WriteLiteral("Interest GUI");
                 EndContext();

@@ -23,7 +23,7 @@ using System;
 #line default
 #line hidden
 #line 3 "C:\Users\Spray\Desktop\The-Date-App\App.TheDate\Views\_ViewImports.cshtml"
-using DatingApplicationV2.Areas.Identity;
+using App.TheDate.Areas.Identity;
 
 #line default
 #line hidden
@@ -43,7 +43,7 @@ using App.Service.Abstract;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"26467a366697e19da9e8b3d4df050534344bcf7a", @"/Views/ImageComment/List.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"805b65725f9c98ebfddbadd6b3513a917bb782fa", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d5b3d057190327018203cdc0549572cc79dc2002", @"/Views/_ViewImports.cshtml")]
     public class Views_ImageComment_List : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<ImageComment>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-controller", "Image", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -116,7 +116,7 @@ using App.Service.Abstract;
             WriteLiteral("        <div class=\"fixed-action-btn\" style=\"position: absolute; top: 100px; left: 40px; width: 30px;\">\r\n            ");
             EndContext();
             BeginContext(509, 311, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26467a366697e19da9e8b3d4df050534344bcf7a11745", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26467a366697e19da9e8b3d4df050534344bcf7a11737", async() => {
                 BeginContext(748, 68, true);
                 WriteLiteral("\r\n                <i class=\"material-icons\">replay</i>\r\n            ");
                 EndContext();
@@ -164,7 +164,7 @@ using App.Service.Abstract;
             WriteLiteral("    <div class=\"row\">\r\n        <div class=\"col s12 m10 l8 offset-l2 offset-m1\">\r\n            <div class=\"card\">\r\n                <div class=\"card-image\">\r\n                    ");
             EndContext();
             BeginContext(1020, 42, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "26467a366697e19da9e8b3d4df050534344bcf7a15065", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "26467a366697e19da9e8b3d4df050534344bcf7a15057", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -196,7 +196,7 @@ AddHtmlAttributeValue("", 1050, image.Src, 1050, 10, false);
                     ");
             EndContext();
             BeginContext(1468, 640, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26467a366697e19da9e8b3d4df050534344bcf7a17074", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26467a366697e19da9e8b3d4df050534344bcf7a17066", async() => {
                 BeginContext(1983, 52, true);
                 WriteLiteral("\r\n                        <i class=\"material-icons\">");
                 EndContext();
@@ -294,7 +294,7 @@ AddHtmlAttributeValue("", 1050, image.Src, 1050, 10, false);
                     ");
             EndContext();
             BeginContext(2834, 104, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "26467a366697e19da9e8b3d4df050534344bcf7a22988", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "26467a366697e19da9e8b3d4df050534344bcf7a22980", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();
@@ -338,9 +338,9 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = new ImageComment(
             WriteLiteral("                    <li class=\"collection-item avatar col s12 row \">\r\n                        ");
             EndContext();
             BeginContext(3464, 171, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26467a366697e19da9e8b3d4df050534344bcf7a25862", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26467a366697e19da9e8b3d4df050534344bcf7a25854", async() => {
                 BeginContext(3545, 86, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "26467a366697e19da9e8b3d4df050534344bcf7a26127", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "26467a366697e19da9e8b3d4df050534344bcf7a26119", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -396,7 +396,7 @@ AddHtmlAttributeValue("", 3575, comment.Creator.ProfileImageSrc, 3575, 32, false
             WriteLiteral("\r\n                        <div class=\"col s8 title left-align left text-left\"><b>");
             EndContext();
             BeginContext(3716, 137, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26467a366697e19da9e8b3d4df050534344bcf7a30164", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26467a366697e19da9e8b3d4df050534344bcf7a30156", async() => {
                 BeginContext(3798, 25, false);
 #line 74 "C:\Users\Spray\Desktop\The-Date-App\App.TheDate\Views\ImageComment\List.cshtml"
                                                                                                                                                            Write(comment.Creator.FirstName);
@@ -466,7 +466,7 @@ AddHtmlAttributeValue("", 3575, comment.Creator.ProfileImageSrc, 3575, 32, false
             WriteLiteral("                            <div class=\"valign-wrapper\" style=\"height: 100%; position: absolute; top: 0px; right: 10px;\">\r\n                                <div class=\"inline text-right\">\r\n                                    ");
             EndContext();
             BeginContext(4212, 143, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26467a366697e19da9e8b3d4df050534344bcf7a34715", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26467a366697e19da9e8b3d4df050534344bcf7a34707", async() => {
                 BeginContext(4317, 34, true);
                 WriteLiteral("<i class=\"material-icons\">edit</i>");
                 EndContext();
@@ -504,7 +504,7 @@ AddHtmlAttributeValue("", 3575, comment.Creator.ProfileImageSrc, 3575, 32, false
             WriteLiteral("\r\n                                    ");
             EndContext();
             BeginContext(4393, 152, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26467a366697e19da9e8b3d4df050534344bcf7a37486", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26467a366697e19da9e8b3d4df050534344bcf7a37478", async() => {
                 BeginContext(4497, 44, true);
                 WriteLiteral("<i class=\"material-icons\">delete_forever</i>");
                 EndContext();

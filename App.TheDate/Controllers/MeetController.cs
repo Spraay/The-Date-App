@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace TheDate.Controllers
+namespace App.TheDate.Controllers
 {
     [Authorize(Roles = "User,Admin,Moderator")]
     public class MeetController : Controller

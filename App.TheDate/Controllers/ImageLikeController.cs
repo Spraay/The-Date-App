@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using App.Repository.Abstract;
 using System.Threading.Tasks;
 
-namespace TheDate.Controllers
+namespace App.TheDate.Controllers
 {
     [Authorize(Roles = "User,Admin,Moderator")]
     public class ImageLikeController : Controller

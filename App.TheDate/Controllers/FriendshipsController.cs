@@ -8,7 +8,7 @@ using App.Model.Enumerations;
 using App.Repository.Abstract;
 using System.Linq;
 
-namespace TheDate.Controllers
+namespace App.TheDate.Controllers
 {
     [Authorize(Roles = "User,Admin,Moderator")]
     public class FriendshipsController : Controller

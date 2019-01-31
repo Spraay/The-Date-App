@@ -23,7 +23,7 @@ using System;
 #line default
 #line hidden
 #line 3 "C:\Users\Spray\Desktop\The-Date-App\App.TheDate\Views\_ViewImports.cshtml"
-using DatingApplicationV2.Areas.Identity;
+using App.TheDate.Areas.Identity;
 
 #line default
 #line hidden
@@ -48,7 +48,7 @@ using App.Model.Enumerations;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7760f7c6c4e1e75b6b02f84fbab63765e05bc08d", @"/Views/User/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"805b65725f9c98ebfddbadd6b3513a917bb782fa", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d5b3d057190327018203cdc0549572cc79dc2002", @"/Views/_ViewImports.cshtml")]
     public class Views_User_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<ApplicationUserViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("src", new global::Microsoft.AspNetCore.Html.HtmlString("~/images/NoProfileImage.png"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -91,7 +91,7 @@ using App.Model.Enumerations;
             WriteLiteral("<div class=\"\" style=\"margin-top: -8px;\">\r\n    <div class=\"col s12 card grey darken-2\">\r\n        <div class=\"row teal darken card-panel\">\r\n            <div class=\"col s2\">\r\n                ");
             EndContext();
             BeginContext(396, 101, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "7760f7c6c4e1e75b6b02f84fbab63765e05bc08d6861", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "7760f7c6c4e1e75b6b02f84fbab63765e05bc08d6853", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -438,7 +438,7 @@ using App.Model.Enumerations;
             WriteLiteral("                </ul>\r\n                ");
             EndContext();
             BeginContext(6865, 189, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7760f7c6c4e1e75b6b02f84fbab63765e05bc08d24511", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7760f7c6c4e1e75b6b02f84fbab63765e05bc08d24503", async() => {
                 BeginContext(7016, 34, true);
                 WriteLiteral("<i class=\"material-icons\">edit</i>");
                 EndContext();
@@ -471,7 +471,7 @@ using App.Model.Enumerations;
                 ");
             EndContext();
             BeginContext(7467, 189, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7760f7c6c4e1e75b6b02f84fbab63765e05bc08d26712", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7760f7c6c4e1e75b6b02f84fbab63765e05bc08d26704", async() => {
                 BeginContext(7618, 34, true);
                 WriteLiteral("<i class=\"material-icons\">edit</i>");
                 EndContext();

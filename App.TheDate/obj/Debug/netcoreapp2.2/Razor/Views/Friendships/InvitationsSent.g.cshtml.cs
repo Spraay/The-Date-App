@@ -23,7 +23,7 @@ using System;
 #line default
 #line hidden
 #line 3 "C:\Users\Spray\Desktop\The-Date-App\App.TheDate\Views\_ViewImports.cshtml"
-using DatingApplicationV2.Areas.Identity;
+using App.TheDate.Areas.Identity;
 
 #line default
 #line hidden
@@ -43,7 +43,7 @@ using App.Service.Abstract;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"e21b63f5f21a680ca8008e03e97a1b6beaeb68f3", @"/Views/Friendships/InvitationsSent.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"805b65725f9c98ebfddbadd6b3513a917bb782fa", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d5b3d057190327018203cdc0549572cc79dc2002", @"/Views/_ViewImports.cshtml")]
     public class Views_Friendships_InvitationsSent : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Friendship>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("style", new global::Microsoft.AspNetCore.Html.HtmlString("width: 400px; height: 350px;"), global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -135,7 +135,7 @@ else
             WriteLiteral("            <div class=\"col m4 center\">\r\n                <div class=\"card \">\r\n                    <div class=\"card-image\">\r\n                        ");
             EndContext();
             BeginContext(1006, 97, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "e21b63f5f21a680ca8008e03e97a1b6beaeb68f38203", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "e21b63f5f21a680ca8008e03e97a1b6beaeb68f38195", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -181,7 +181,7 @@ AddHtmlAttributeValue("", 1036, item.Friend.ProfileImageSrc, 1036, 28, false);
             WriteLiteral("</span>\r\n                    </div>\r\n                    <div class=\"card-action grey\">\r\n                        <div class=\"center\">\r\n                            ");
             EndContext();
             BeginContext(1457, 191, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e21b63f5f21a680ca8008e03e97a1b6beaeb68f311140", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e21b63f5f21a680ca8008e03e97a1b6beaeb68f311132", async() => {
                 BeginContext(1544, 100, true);
                 WriteLiteral("\r\n                                <i class=\"material-icons\">delete</i>\r\n                            ");
                 EndContext();
@@ -217,7 +217,7 @@ AddHtmlAttributeValue("", 1036, item.Friend.ProfileImageSrc, 1036, 28, false);
             WriteLiteral("\r\n                            ");
             EndContext();
             BeginContext(1678, 213, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e21b63f5f21a680ca8008e03e97a1b6beaeb68f313747", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e21b63f5f21a680ca8008e03e97a1b6beaeb68f313739", async() => {
                 BeginContext(1789, 98, true);
                 WriteLiteral("\r\n                                <i class=\"material-icons\">info</i>\r\n                            ");
                 EndContext();

@@ -17,7 +17,7 @@ using App.Model.Entities;
 using App.Repository.Abstract;
 using App.DAO.Data;
 
-namespace TheDate
+namespace App.TheDate
 {
     public class Startup
     {

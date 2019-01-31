@@ -23,7 +23,7 @@ using System;
 #line default
 #line hidden
 #line 3 "C:\Users\Spray\Desktop\The-Date-App\App.TheDate\Views\_ViewImports.cshtml"
-using DatingApplicationV2.Areas.Identity;
+using App.TheDate.Areas.Identity;
 
 #line default
 #line hidden
@@ -43,7 +43,7 @@ using App.Service.Abstract;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"72bf42f4e2da2b2fd253db677c0aeb54871320d6", @"/Views/Messages/Conversation.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"805b65725f9c98ebfddbadd6b3513a917bb782fa", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d5b3d057190327018203cdc0549572cc79dc2002", @"/Views/_ViewImports.cshtml")]
     public class Views_Messages_Conversation : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<App.Model.Entities.Conversation>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("name", "Shared/_MessageForm.cshtml", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -99,7 +99,7 @@ using App.Service.Abstract;
             WriteLiteral("</h5>\r\n            </div>\r\n            <div class=\"card-content\">\r\n                ");
             EndContext();
             BeginContext(411, 98, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "72bf42f4e2da2b2fd253db677c0aeb54871320d67535", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("partial", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "72bf42f4e2da2b2fd253db677c0aeb54871320d67527", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.PartialTagHelper>();
@@ -143,9 +143,9 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_PartialTagHelper.Model = new Message() { C
             WriteLiteral("                        <li class=\"collection-item avatar col s12 row \">\r\n                            ");
             EndContext();
             BeginContext(1053, 169, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "72bf42f4e2da2b2fd253db677c0aeb54871320d610433", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "72bf42f4e2da2b2fd253db677c0aeb54871320d610425", async() => {
                 BeginContext(1133, 85, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "72bf42f4e2da2b2fd253db677c0aeb54871320d610698", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "72bf42f4e2da2b2fd253db677c0aeb54871320d610690", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -201,7 +201,7 @@ AddHtmlAttributeValue("", 1163, message.Sender.ProfileImageSrc, 1163, 31, false)
             WriteLiteral("\r\n                            <div class=\"col s8 title left-align left text-left\"><b>");
             EndContext();
             BeginContext(1307, 134, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "72bf42f4e2da2b2fd253db677c0aeb54871320d614743", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "72bf42f4e2da2b2fd253db677c0aeb54871320d614735", async() => {
                 BeginContext(1388, 24, false);
 #line 28 "C:\Users\Spray\Desktop\The-Date-App\App.TheDate\Views\Messages\Conversation.cshtml"
                                                                                                                                                               Write(message.Sender.FirstName);
@@ -274,7 +274,7 @@ AddHtmlAttributeValue("", 1163, message.Sender.ProfileImageSrc, 1163, 31, false)
                                         ");
             EndContext();
             BeginContext(1861, 148, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "72bf42f4e2da2b2fd253db677c0aeb54871320d619375", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "72bf42f4e2da2b2fd253db677c0aeb54871320d619367", async() => {
                 BeginContext(1961, 44, true);
                 WriteLiteral("<i class=\"material-icons\">delete_forever</i>");
                 EndContext();
