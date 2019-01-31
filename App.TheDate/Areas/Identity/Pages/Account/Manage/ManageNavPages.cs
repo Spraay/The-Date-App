@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace DatingApplicationV2.Areas.Identity.Pages.Account.Manage
+namespace TheDate.Areas.Identity.Pages.Account.Manage
 {
     public static class ManageNavPages
     {

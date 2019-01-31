@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using App.Model.Error;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DatingApplicationV2.Controllers
+namespace TheDate.Controllers
 {
     public class ErrorController : Controller
     {

@@ -17,7 +17,7 @@ using App.Model.Entities;
 using App.Repository.Abstract;
 using App.DAO.Data;
 
-namespace DatingApplicationV2
+namespace TheDate
 {
     public class Startup
     {

@@ -5,8 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using App.Model.Entities;
 using App.DAO.Data;
 
-[assembly: HostingStartup(typeof(DatingApplicationV2.Areas.Identity.IdentityHostingStartup))]
-namespace DatingApplicationV2.Areas.Identity
+[assembly: HostingStartup(typeof(TheDate.Areas.Identity.IdentityHostingStartup))]
+namespace TheDate.Areas.Identity
 {
     public class IdentityHostingStartup : IHostingStartup
     {

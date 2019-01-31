@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
-namespace DatingApplicationV2.Controllers
+namespace TheDate.Controllers
 {
     [Authorize(Roles = "User,Admin,Moderator")]
     public class HomeController : Controller

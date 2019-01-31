@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DatingApplicationV2.Areas.Identity.Pages.Account.Manage
+namespace TheDate.Areas.Identity.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {

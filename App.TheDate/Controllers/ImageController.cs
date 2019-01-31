@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DatingApplicationV2.Controllers
+namespace TheDate.Controllers
 {
     [Authorize(Roles = "User,Admin,Moderator")]
     public class ImageController : Controller
