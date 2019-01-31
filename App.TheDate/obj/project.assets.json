@@ -4825,6 +4825,7 @@
           "App.Pagination": "1.0.0",
           "App.Repository": "1.0.0",
           "AutoMapper": "7.0.1",
+          "Microsoft.AspNetCore.Identity.UI": "2.2.0",
           "Microsoft.AspNetCore.Owin": "2.2.0",
           "Microsoft.Extensions.Identity.Stores": "2.2.0"
         },
