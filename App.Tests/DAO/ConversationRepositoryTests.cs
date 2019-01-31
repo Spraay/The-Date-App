@@ -42,7 +42,7 @@ namespace DAO.Tests
             var startTime = DateTime.Now;
             var result = _repository.GetAll();
             var endTime = DateTime.Now;
-            var expectedTimeMs = 2.0000;
+            var expectedTimeMs = 2.5000;
             var reachedTime = (endTime - startTime).TotalMilliseconds;
             Assert.True(reachedTime < expectedTimeMs, $"Expected time is {expectedTimeMs} ms, reached time is {reachedTime} ms");
             Assert.True(context.Conversations.Any());
