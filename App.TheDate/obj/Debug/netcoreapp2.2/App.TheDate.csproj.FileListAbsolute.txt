@@ -265,3 +265,11 @@ C:\Users\Spray\Desktop\The-Date-App\App.TheDate\obj\Debug\netcoreapp2.2\App.TheD
 C:\Users\Spray\Desktop\The-Date-App\App.TheDate\obj\Debug\netcoreapp2.2\App.TheDate.csproj.CopyComplete
 C:\Users\Spray\Desktop\The-Date-App\App.TheDate\obj\Debug\netcoreapp2.2\App.TheDate.dll
 C:\Users\Spray\Desktop\The-Date-App\App.TheDate\obj\Debug\netcoreapp2.2\App.TheDate.pdb
+C:\The-Date-App\App.TheDate\obj\Debug\netcoreapp2.2\App.TheDate.csprojAssemblyReference.cache
+C:\The-Date-App\App.TheDate\obj\Debug\netcoreapp2.2\App.TheDate.csproj.CoreCompileInputs.cache
+C:\The-Date-App\App.TheDate\obj\Debug\netcoreapp2.2\App.TheDate.RazorAssemblyInfo.cache
+C:\The-Date-App\App.TheDate\obj\Debug\netcoreapp2.2\App.TheDate.RazorAssemblyInfo.cs
+C:\The-Date-App\App.TheDate\obj\Debug\netcoreapp2.2\App.TheDate.AssemblyInfoInputs.cache
+C:\The-Date-App\App.TheDate\obj\Debug\netcoreapp2.2\App.TheDate.AssemblyInfo.cs
+C:\The-Date-App\App.TheDate\obj\Debug\netcoreapp2.2\App.TheDate.dll
+C:\The-Date-App\App.TheDate\obj\Debug\netcoreapp2.2\App.TheDate.pdb

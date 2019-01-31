@@ -36,3 +36,15 @@ C:\Users\Spray\Desktop\The-Date-App\App.Validators\obj\Debug\netstandard2.0\App.
 C:\Users\Spray\Desktop\The-Date-App\App.Validators\obj\Debug\netstandard2.0\App.Validator.csproj.CopyComplete
 C:\Users\Spray\Desktop\The-Date-App\App.Validators\obj\Debug\netstandard2.0\App.Validator.dll
 C:\Users\Spray\Desktop\The-Date-App\App.Validators\obj\Debug\netstandard2.0\App.Validator.pdb
+C:\The-Date-App\App.Validators\bin\Debug\netstandard2.0\App.Validator.deps.json
+C:\The-Date-App\App.Validators\bin\Debug\netstandard2.0\App.Validator.dll
+C:\The-Date-App\App.Validators\bin\Debug\netstandard2.0\App.Validator.pdb
+C:\The-Date-App\App.Validators\bin\Debug\netstandard2.0\App.Model.dll
+C:\The-Date-App\App.Validators\bin\Debug\netstandard2.0\App.Model.pdb
+C:\The-Date-App\App.Validators\obj\Debug\netstandard2.0\App.Validator.csprojAssemblyReference.cache
+C:\The-Date-App\App.Validators\obj\Debug\netstandard2.0\App.Validator.csproj.CoreCompileInputs.cache
+C:\The-Date-App\App.Validators\obj\Debug\netstandard2.0\App.Validator.AssemblyInfoInputs.cache
+C:\The-Date-App\App.Validators\obj\Debug\netstandard2.0\App.Validator.AssemblyInfo.cs
+C:\The-Date-App\App.Validators\obj\Debug\netstandard2.0\App.Validator.csproj.CopyComplete
+C:\The-Date-App\App.Validators\obj\Debug\netstandard2.0\App.Validator.dll
+C:\The-Date-App\App.Validators\obj\Debug\netstandard2.0\App.Validator.pdb
