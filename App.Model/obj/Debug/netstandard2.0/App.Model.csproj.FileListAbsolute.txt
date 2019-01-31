@@ -19,7 +19,6 @@ D:\Dokumenty\Inzynierka\Aplikacja\datingapplicationv2\App.Model\obj\Debug\netsta
 C:\Users\Spray\Desktop\The-Date-App\App.Model\bin\Debug\netstandard2.0\App.Model.deps.json
 C:\Users\Spray\Desktop\The-Date-App\App.Model\bin\Debug\netstandard2.0\App.Model.dll
 C:\Users\Spray\Desktop\The-Date-App\App.Model\bin\Debug\netstandard2.0\App.Model.pdb
-C:\Users\Spray\Desktop\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model.csprojAssemblyReference.cache
 C:\Users\Spray\Desktop\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model.csproj.CoreCompileInputs.cache
 C:\Users\Spray\Desktop\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model.AssemblyInfoInputs.cache
 C:\Users\Spray\Desktop\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model.AssemblyInfo.cs

@@ -19,10 +19,11 @@ namespace App.Service
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public ExploreService(IUserService userService, IUserRepository userRepository)
+        public ExploreService(IUserService userService, IUserRepository userRepository, IMapper mapper)
         {
             _userService = userService;
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<User>> GetOnlyFilledProfilesAsync()
