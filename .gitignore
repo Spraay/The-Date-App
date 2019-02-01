@@ -5,6 +5,7 @@
 
 #
 /.vs
+*.user
 #
 /App.DAO/bin/
 /App.DAO/obj/
@@ -35,6 +36,9 @@
 /Benchmark/obj/
 /Benchmark/bin/
 #
+
+
+
 /App.TheDate/wwwroot/images/userimages/e865fb4d-3126-4d5a-105e-08d6761a8c86a4b454fb617f42019eed95bcef5ff495.jpg
 /App.TheDate/wwwroot/images/userimages/9be87db7-3a4f-4e83-fd80-08d67627dd85eec9729aa3de405095b3ba1315dc006b.png
 /App.TheDate/wwwroot/images/userimages/9be87db7-3a4f-4e83-fd80-08d67627dd85e58867a3523a483ca03127fdff3abe7f.png
