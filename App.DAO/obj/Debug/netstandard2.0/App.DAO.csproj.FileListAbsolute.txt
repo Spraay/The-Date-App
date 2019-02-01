@@ -34,15 +34,3 @@ C:\Users\Spray\Desktop\The-Date-App\App.DAO\obj\Debug\netstandard2.0\App.DAO.Ass
 C:\Users\Spray\Desktop\The-Date-App\App.DAO\obj\Debug\netstandard2.0\App.DAO.csproj.CopyComplete
 C:\Users\Spray\Desktop\The-Date-App\App.DAO\obj\Debug\netstandard2.0\App.DAO.dll
 C:\Users\Spray\Desktop\The-Date-App\App.DAO\obj\Debug\netstandard2.0\App.DAO.pdb
-C:\The-Date-App\App.DAO\bin\Debug\netstandard2.0\App.DAO.deps.json
-C:\The-Date-App\App.DAO\bin\Debug\netstandard2.0\App.DAO.dll
-C:\The-Date-App\App.DAO\bin\Debug\netstandard2.0\App.DAO.pdb
-C:\The-Date-App\App.DAO\bin\Debug\netstandard2.0\App.Model.dll
-C:\The-Date-App\App.DAO\bin\Debug\netstandard2.0\App.Model.pdb
-C:\The-Date-App\App.DAO\obj\Debug\netstandard2.0\App.DAO.csprojAssemblyReference.cache
-C:\The-Date-App\App.DAO\obj\Debug\netstandard2.0\App.DAO.csproj.CoreCompileInputs.cache
-C:\The-Date-App\App.DAO\obj\Debug\netstandard2.0\App.DAO.AssemblyInfoInputs.cache
-C:\The-Date-App\App.DAO\obj\Debug\netstandard2.0\App.DAO.AssemblyInfo.cs
-C:\The-Date-App\App.DAO\obj\Debug\netstandard2.0\App.DAO.csproj.CopyComplete
-C:\The-Date-App\App.DAO\obj\Debug\netstandard2.0\App.DAO.dll
-C:\The-Date-App\App.DAO\obj\Debug\netstandard2.0\App.DAO.pdb

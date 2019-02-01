@@ -24,12 +24,3 @@ C:\Users\Spray\Desktop\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model
 C:\Users\Spray\Desktop\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model.AssemblyInfo.cs
 C:\Users\Spray\Desktop\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model.dll
 C:\Users\Spray\Desktop\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model.pdb
-C:\The-Date-App\App.Model\bin\Debug\netstandard2.0\App.Model.deps.json
-C:\The-Date-App\App.Model\bin\Debug\netstandard2.0\App.Model.dll
-C:\The-Date-App\App.Model\bin\Debug\netstandard2.0\App.Model.pdb
-C:\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model.csprojAssemblyReference.cache
-C:\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model.csproj.CoreCompileInputs.cache
-C:\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model.AssemblyInfoInputs.cache
-C:\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model.AssemblyInfo.cs
-C:\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model.dll
-C:\The-Date-App\App.Model\obj\Debug\netstandard2.0\App.Model.pdb

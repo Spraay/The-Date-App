@@ -24,12 +24,3 @@ C:\Users\Spray\Desktop\The-Date-App\App.Pagination\obj\Debug\netstandard2.0\App.
 C:\Users\Spray\Desktop\The-Date-App\App.Pagination\obj\Debug\netstandard2.0\App.Pagination.AssemblyInfo.cs
 C:\Users\Spray\Desktop\The-Date-App\App.Pagination\obj\Debug\netstandard2.0\App.Pagination.dll
 C:\Users\Spray\Desktop\The-Date-App\App.Pagination\obj\Debug\netstandard2.0\App.Pagination.pdb
-C:\The-Date-App\App.Pagination\bin\Debug\netstandard2.0\App.Pagination.deps.json
-C:\The-Date-App\App.Pagination\bin\Debug\netstandard2.0\App.Pagination.dll
-C:\The-Date-App\App.Pagination\bin\Debug\netstandard2.0\App.Pagination.pdb
-C:\The-Date-App\App.Pagination\obj\Debug\netstandard2.0\App.Pagination.csprojAssemblyReference.cache
-C:\The-Date-App\App.Pagination\obj\Debug\netstandard2.0\App.Pagination.csproj.CoreCompileInputs.cache
-C:\The-Date-App\App.Pagination\obj\Debug\netstandard2.0\App.Pagination.AssemblyInfoInputs.cache
-C:\The-Date-App\App.Pagination\obj\Debug\netstandard2.0\App.Pagination.AssemblyInfo.cs
-C:\The-Date-App\App.Pagination\obj\Debug\netstandard2.0\App.Pagination.dll
-C:\The-Date-App\App.Pagination\obj\Debug\netstandard2.0\App.Pagination.pdb

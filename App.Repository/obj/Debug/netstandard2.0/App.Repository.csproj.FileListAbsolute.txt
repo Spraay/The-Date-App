@@ -26,17 +26,3 @@ C:\Users\Spray\Desktop\The-Date-App\App.Repository\obj\Debug\netstandard2.0\App.
 C:\Users\Spray\Desktop\The-Date-App\App.Repository\obj\Debug\netstandard2.0\App.Repository.csproj.CopyComplete
 C:\Users\Spray\Desktop\The-Date-App\App.Repository\obj\Debug\netstandard2.0\App.Repository.dll
 C:\Users\Spray\Desktop\The-Date-App\App.Repository\obj\Debug\netstandard2.0\App.Repository.pdb
-C:\The-Date-App\App.Repository\bin\Debug\netstandard2.0\App.Repository.deps.json
-C:\The-Date-App\App.Repository\bin\Debug\netstandard2.0\App.Repository.dll
-C:\The-Date-App\App.Repository\bin\Debug\netstandard2.0\App.Repository.pdb
-C:\The-Date-App\App.Repository\bin\Debug\netstandard2.0\App.DAO.dll
-C:\The-Date-App\App.Repository\bin\Debug\netstandard2.0\App.Model.dll
-C:\The-Date-App\App.Repository\bin\Debug\netstandard2.0\App.DAO.pdb
-C:\The-Date-App\App.Repository\bin\Debug\netstandard2.0\App.Model.pdb
-C:\The-Date-App\App.Repository\obj\Debug\netstandard2.0\App.Repository.csprojAssemblyReference.cache
-C:\The-Date-App\App.Repository\obj\Debug\netstandard2.0\App.Repository.csproj.CoreCompileInputs.cache
-C:\The-Date-App\App.Repository\obj\Debug\netstandard2.0\App.Repository.AssemblyInfoInputs.cache
-C:\The-Date-App\App.Repository\obj\Debug\netstandard2.0\App.Repository.AssemblyInfo.cs
-C:\The-Date-App\App.Repository\obj\Debug\netstandard2.0\App.Repository.csproj.CopyComplete
-C:\The-Date-App\App.Repository\obj\Debug\netstandard2.0\App.Repository.dll
-C:\The-Date-App\App.Repository\obj\Debug\netstandard2.0\App.Repository.pdb
