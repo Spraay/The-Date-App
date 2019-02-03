@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DatingApplicationV2.Areas.Identity.Pages.Account
+namespace App.TheDate.Areas.Identity.Pages.Account
 {
     public class AccessDeniedModel : PageModel
     {

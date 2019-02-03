@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using App.Model.Entities;
 
-namespace DatingApplicationV2.Areas.Identity.Pages.Account.Manage
+namespace App.TheDate.Areas.Identity.Pages.Account.Manage
 {
     public class EnableAuthenticatorModel : PageModel
     {

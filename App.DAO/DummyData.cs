@@ -38,7 +38,7 @@ namespace App.DAO
                     Gender = Gender.Male,
                     Weight = 75,
                     Height = 180,
-                    BirthDate = DateTime.Parse("24.07.1996"),
+                    //BirthDate = DateTime.Parse("24.07.1996"),
                     EmailConfirmed = true,
                     Description = "Hello in my profile. I hope that you will like me. Im'a very honest and kind person with many interests :)"
                 },
@@ -53,7 +53,7 @@ namespace App.DAO
                     Gender = Gender.Female,
                     Weight = 54,
                     Height = 163,
-                    BirthDate = DateTime.Parse("22.11.1984"),
+                    //BirthDate = DateTime.Parse("22.11.1984"),
                     EmailConfirmed = true,
                     ProfileImageSrc = "scarlett_johansson.jpg"
                 },
@@ -68,7 +68,7 @@ namespace App.DAO
                     Gender = Gender.Female,
                     Weight = 57,
                     Height = 179,
-                    BirthDate = DateTime.Parse("23.04.1995"),
+                    //BirthDate = DateTime.Parse("23.04.1995"),
                     EmailConfirmed = true,
                     ProfileImageSrc = "gigi_hadid.jpg"
                 },
@@ -83,7 +83,7 @@ namespace App.DAO
                     Gender = Gender.Female,
                     Weight = 47,
                     Height = 155,
-                    BirthDate = DateTime.Parse("26.06.1993"),
+                    //BirthDate = DateTime.Parse("26.06.1993"),
                     EmailConfirmed = true,
                     ProfileImageSrc = "arrianna_grande.jpg"
         },
@@ -98,7 +98,7 @@ namespace App.DAO
                     Gender = Gender.Female,
                     Weight = 52,
                     Height = 160,
-                    BirthDate = DateTime.Parse("23.10.1983"),
+                    //BirthDate = DateTime.Parse("23.10.1983"),
                     EmailConfirmed = true,
                     ProfileImageSrc = "emilia_clarke.jpg"
                 },
@@ -113,7 +113,7 @@ namespace App.DAO
                     Gender = Gender.Female,
                     Weight = 63,
                     Height = 175,
-                    BirthDate = DateTime.Parse("15.08.1990"),
+                    //BirthDate = DateTime.Parse("15.08.1990"),
                     EmailConfirmed = true,
                     ProfileImageSrc = "jennifer_lawrence.jpg"
                 },
@@ -128,7 +128,7 @@ namespace App.DAO
                     Gender = Gender.Female,
                     Weight = 55,
                     Height = 164,
-                    BirthDate = DateTime.Parse("15.08.1969"),
+                    //BirthDate = DateTime.Parse("15.08.1969"),
                     EmailConfirmed = true,
                     ProfileImageSrc = "jennifer_lopez.jpg"
                 },
@@ -143,7 +143,7 @@ namespace App.DAO
                     Gender = Gender.Female,
                     Weight = 51,
                     Height = 164,
-                    BirthDate = DateTime.Parse("11.02.1969"),
+                    //BirthDate = DateTime.Parse("11.02.1969"),
                     EmailConfirmed = true,
                     ProfileImageSrc = "jessica_alba.jpg"
                 },
@@ -158,7 +158,7 @@ namespace App.DAO
                     Gender = Gender.Female,
                     Weight = 51,
                     Height = 173,
-                    BirthDate = DateTime.Parse("09.10.1987"),
+                    //BirthDate = DateTime.Parse("09.10.1987"),
                     EmailConfirmed = true,
                     ProfileImageSrc = "alejandra_buitrago.jpg"
                 }

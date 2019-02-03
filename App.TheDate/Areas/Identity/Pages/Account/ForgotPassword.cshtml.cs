@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using App.Model.Entities;
 
-namespace DatingApplicationV2.Areas.Identity.Pages.Account
+namespace App.TheDate.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel

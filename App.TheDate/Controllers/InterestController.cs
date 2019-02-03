@@ -5,7 +5,7 @@ using System;
 using App.Repository.Abstract;
 using App.Model.Entities;
 
-namespace DatingApplicationV2.Controllers
+namespace App.TheDate.Controllers
 {
     [Authorize(Roles ="Admin,Moderator")]
     public class InterestController : Controller

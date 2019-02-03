@@ -7,7 +7,7 @@ using App.Service.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DatingApplicationV2.Controllers
+namespace App.TheDate.Controllers
 {
     public class VoteController : Controller
     {
