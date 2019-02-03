@@ -10,9 +10,11 @@ using App.Model.Entities;
 using App.Repository.Abstract;
 using App.Service.Abstract;
 using App.Model.Error;
+using Microsoft.AspNetCore.Authorization;
 
 namespace App.TheDate.Controllers
 {
+    [Authorize(Roles="Admin,User,Moderator")]
     public class MessagesController : Controller
     {
         private readonly IConversationRepository _conversationRepository;

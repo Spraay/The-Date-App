@@ -14,7 +14,7 @@ using Pagination;
 using App.Model.Enumerations;
 using System.Linq.Expressions;
 
-namespace App.TheDate.Controllers
+namespace DatingApplicationV2.Controllers
 {
     [Authorize(Roles = "User,Admin,Moderator")]
     public class ExploreController : Controller

@@ -5,9 +5,9 @@ using System;
 using App.Repository.Abstract;
 using App.Model.Entities;
 
-namespace App.TheDate.Controllers
+namespace DatingApplicationV2.Controllers
 {
-    [Authorize(Roles ="Admin,Moderator")]
+    [Authorize(Roles = "Admin,Moderator")]
     public class InterestController : Controller
     {
         private readonly IInterestRepository _interestRepository;
