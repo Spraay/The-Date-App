@@ -18,13 +18,13 @@
                 <div class="background">
                     <img src="~/images/userimages/NoProfileBackground.png">
                 </div>
-                <a asp-controller="User" asp-action="Profile" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><img class="circle" src="~/images/userimages/@user.ProfileImageSrc"></a>
-                <a asp-controller="User" asp-action="Profile" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><span class="white-text name">@user.FirstName @user.LastName</span></a>
-                <a asp-controller="User" asp-action="Profile" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><span class="white-text email">@user.Email</span></a>
+                <a asp-controller="User" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><img class="circle" src="~/images/userimages/@user.ProfileImageSrc"></a>
+                <a asp-controller="User" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><span class="white-text name">@user.FirstName @user.LastName</span></a>
+                <a asp-controller="User" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><span class="white-text email">@user.Email</span></a>
             </div>
         </li>
         <li class="" style="margin-left: -18px; margin-right: 18px;">
-            <a class="white-text" asp-controller="User" asp-action="Profile" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><i class="material-icons white-text">account_box</i> Your Profile</a>
+            <a class="white-text" asp-controller="User" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><i class="material-icons white-text">account_box</i> Your Profile</a>
         </li>
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
