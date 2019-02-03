@@ -6,6 +6,8 @@
 #
 /.vs
 *.user
+*/bin/
+*/obj/
 #
 /App.DAO/bin/
 /App.DAO/obj/
@@ -33,10 +35,6 @@
 /App.Tests/DAO/bin/
 /App.Tests/DAO/obj/
 #
-/Benchmark/obj/
-/Benchmark/bin/
-#
-
 
 
 /App.TheDate/wwwroot/images/userimages/e865fb4d-3126-4d5a-105e-08d6761a8c86a4b454fb617f42019eed95bcef5ff495.jpg
