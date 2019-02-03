@@ -23,7 +23,7 @@
                 <a asp-controller="User" asp-action="Profile" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><span class="white-text email">@user.Email</span></a>
             </div>
         </li>
-        <li class="" style="margin-left: -18px;">
+        <li class="" style="margin-left: -18px; margin-right: 18px;">
             <a class="white-text" asp-controller="User" asp-action="Profile" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><i class="material-icons white-text">account_box</i> Your Profile</a>
         </li>
         <li class="no-padding">
@@ -47,7 +47,7 @@
                 </li>
             </ul>
         </li>
-        <li class="" style="margin-left: -18px;">
+        <li class="" style="margin-left: -18px; margin-right: 18px;">
             <a class="white-text" asp-controller="Conversations" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><i class="material-icons white-text">message</i> Conversations</a>
         </li>
         <li class="" style="margin-left: -18px;">
@@ -55,14 +55,14 @@
                asp-area="Identity"
                asp-page="/Account/Manage/Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><i class="material-icons white-text">settings</i>Settings</a>
         </li>
-        <li class="pointer-cursor" style="margin-left: -18px;">
+        <li class="" style="margin-left: -18px; margin-right: 18px;">
             <a class="white-text" onclick="$('#HeaderForm').submit()"><i class="material-icons white-text">power_settings_new</i> Logout</a>
         </li>
 
     }
     else
     {
-        <li style="margin-left: 18px;"><p class="white-text">Welcome Guest!</p></li>
+        <li class="" style="margin-left: -18px; margin-right: 18px;"><p class="white-text">Welcome Guest!</p></li>
         <li class="" style="margin-left: -18px;"><a class="white-text" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
         <li class="" style="margin-left: -18px;"><a class="white-text" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
 
