@@ -1,17 +1,26 @@
 ﻿@{
     ViewBag.Title = "The Date";
 }
+
+
 <div class="slider fullscreen">
+    <div style="position: absolute; left: 50%; bottom: 30%; z-index: 9999">
+        <ul>
+            <li style="position: relative; left: -50%;">
+                <a class="btn btn-large red lighten-2 rounded"
+                   asp-action="Index"
+                   asp-controller="Explore">Explore</a>
+            </li>
+        </ul>
+
+    </div>
     <ul class="slides">
         <li class="active" style="opacity: 1; transform: translateX(0px) translateY(0px);">
             <img src="~/images/banner3.jpg"> <!-- random image -->
             <div class="caption center-align" style="opacity: 1; transform: translateX(0px) translateY(0px);">
                 <h3 class="red-text">Hello</h3>
                 <h5 class="light red-text text-lighten-2">Do you want to meet someone?</h5>
-                <a class="btn btn-large red lighten-2 rounded"
-                   asp-action="Index"
-                   asp-controller="Explore"
-                >Explore</a>
+
             </div>
         </li>
         <li class="" style="opacity: 0; transform: translateX(0px) translateY(0px);">
@@ -23,7 +32,7 @@
                 <h5 class="light red-text text-lighten-2">
                     Find a second such person and forget about it forever
                 </h5>
-                <a class="btn btn-large red lighten-2 rounded">Explore</a>
+
             </div>
         </li>
         <li class="" style="opacity: 0; transform: translateX(0px) translateY(0px);">
@@ -31,10 +40,7 @@
             <div class="caption right-align" style="opacity: 0; transform: translateX(100px);">
                 <h3 class="red-text">Flirt, date, romance</h3>
                 <h5 class="light red-text text-lighten-2">We have everything you are looking for</h5>
-                <a class="btn btn-large red lighten-2 rounded"
-                   asp-action="Index"
-                   asp-controller="Explore"
-                >Explore</a>
+
             </div>
         </li>
     </ul>
