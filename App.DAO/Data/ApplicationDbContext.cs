@@ -24,6 +24,7 @@ namespace App.DAO.Data
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<RealMeet> Meets { get; set; }
         public DbSet<Vote> Votes { get; set; }
+        public DbSet<Notification> Notyfications { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -135,6 +136,10 @@ namespace App.DAO.Data
                 .HasForeignKey<RealMeet>(_ => _.VoteId)
                 .IsRequired(false);
 
+            modelBuilder.Entity<Notification>()
+                .HasOne(_ => _.User)
+                .WithMany(__ => __.Notifications)
+                .HasForeignKey(_ => _.UserId);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
