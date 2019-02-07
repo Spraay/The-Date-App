@@ -13,13 +13,10 @@
 </div>
 <br /><br />
 <div class="container">
-
     <div class="center">
         <h5 class="orange-text">Are you sure you want to delete...</h5>
         <h5 class="orange-text">this comment <i>'@Model.Content'</i> under image below?</h5>
         <img style="width: 450px;" src="~/images/userimages/@Model.CommentedItem.Src" class="z-depth-1" />
-
-
         <form id="Form" asp-action="Delete">
             <input type="hidden" name="imgId" value="@Model.CommentedItemId" />
             <input type="hidden" asp-for="CreatorId" />
@@ -34,4 +31,5 @@
         </form>
     </div>
 </div>
+<br /><br />
 
