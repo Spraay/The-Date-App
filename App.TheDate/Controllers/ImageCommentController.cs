@@ -130,11 +130,11 @@ namespace App.TheDate.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(Guid id, Guid imgId)
         {
             _imageCommentRepository.DeleteWhere(_ => _.Id == id);
             await _imageCommentRepository.CommitAsync();
-            return RedirectToAction(nameof(List));
+            return RedirectToAction(nameof(List), new { id = imgId });
         }
     }
 }
