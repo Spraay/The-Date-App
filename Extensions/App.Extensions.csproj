@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="ClaimsPrincipalExtensions.cs">
+      <Generator>ClaimsPrincipalExtensions</Generator>
+    </Compile>
+  </ItemGroup>
+
+</Project>

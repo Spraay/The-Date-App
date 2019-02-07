@@ -17,6 +17,7 @@ using App.Model.Entities;
 using App.Repository.Abstract;
 using App.DAO.Data;
 using System;
+using App.TheDate.Hubs;
 
 namespace App.TheDate
 {
@@ -58,6 +59,7 @@ namespace App.TheDate
             services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+           
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IInterestRepository, InterestRepository>();
@@ -82,7 +84,9 @@ namespace App.TheDate
 
             services.AddAutoMapper();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSignalR();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -112,6 +116,11 @@ namespace App.TheDate
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            app.UseSignalR(route =>
+            {
+                route.MapHub<NotificationHub>("/notyfihub");
+            });
 
             app.UseMvc(routes =>
             {

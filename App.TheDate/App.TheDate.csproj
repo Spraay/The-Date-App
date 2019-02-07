@@ -17,6 +17,7 @@
     <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.6.0" />
+    <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.0" />
     <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.AzureAppServices.HostingStartup" Version="2.2.0" />
@@ -27,6 +28,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\App.DAO\App.DAO.csproj" />
+    <ProjectReference Include="..\App.Extensions\App.Extensions.csproj" />
     <ProjectReference Include="..\App.Model\App.Model.csproj" />
     <ProjectReference Include="..\App.Pagination\App.Pagination.csproj" />
     <ProjectReference Include="..\App.Repository\App.Repository.csproj" />
