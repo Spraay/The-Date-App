@@ -8,11 +8,12 @@
 
 @if (Model.Any())
 {
-    <div class="grey darken-3 z-depth-3" style="padding: 1vw; margin-top: -10px;">
-        <div class="center">
-            <p class="white-text" style="font-size: 3vw;">Friends<i style="vertical-align: bottom; font-size: 4vw !important;" class="inline-icon material-icons">group</i></p>
-        </div>
-    </div>
+    var subheader = new SubHeaderViewModel()
+    {
+        Title = "Friends",
+        TitleIcon = "group",
+    };
+    @await Html.PartialAsync("_SubHeader", subheader)
 }
 else
 {
@@ -23,39 +24,4 @@ else
         </div>
     </div>
 }
-
-<div class="container">
-    <div class="row">
-        
-        @foreach (var item in Model)
-        {
-            <div class="col m4 s12 l4">
-                <div class="card">
-                    <div class="card-image col m12 s12 l12">
-                        <div class="thumbnail no-border no-padding" >
-                            <img src="~/images/userimages/@item.ProfileImageSrc" class="responsive-img" />
-                        </div>
-                        <span class="card-title" style="background: rgba(0, 0, 0, 0.5); width: 100%">@Html.DisplayFor(m => item.FirstName) @Html.DisplayFor(m => item.LastName)</span>
-                    </div>
-                    <div class="card-action grey col m12 s12 l12">
-                        <div class="center">
-                            <a class="btn btn-large rounded red tooltipped" data-position="top" data-tooltip="Delete Friend" asp-controller="Friendships" asp-action="Delete" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                <i class="material-icons">delete</i>
-                            </a>
-                            <a class="btn btn-large rounded blue tooltipped" data-position="top" data-tooltip="Show Profile" asp-controller="User" asp-action="Profile" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                <i class="material-icons">info</i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div>
-
-<style>
-    .thumbnail img {
-        height: 250px;
-        width: 100%;
-    }
-</style>
+@await Html.PartialAsync("_UserGrid", Model);

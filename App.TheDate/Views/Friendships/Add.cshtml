@@ -1,16 +1,17 @@
-﻿@using System
-@model User
+﻿@model User
 
 @{
     ViewData["Title"] = "Add Friend";
+    var subheader = new SubHeaderViewModel()
+    {
+        Title = "Adding new friend",
+        TitleIcon = "add",
+        Message = "You are sure you want to add a user below to your friends list?",
+        MessageColor = "orange-text"
+    };
 }
 
-<div class="grey darken-3 z-depth-3" style="padding: 1vw; margin-top: -10px;">
-    <div class="center">
-        <i style="vertical-align: bottom; font-size: 6vw !important;" class="inline-icon material-icons blue-text">add</i>
-        <h5 class="orange-text">Are you sure you want to add the person below to your friends?</h5>
-    </div>
-</div>
+@await Html.PartialAsync("_SubHeader", subheader)
 <div class="container">
     <div class="row">
         <div class="col s4 offset-l4">
@@ -21,7 +22,7 @@
                 </div>
                 <div class="card-action grey">
                     <div class="center">
-                        <form asp-action="Add" id="Form" asp-route-returnURL ="@ViewBag.ReturnURL">
+                        <form asp-action="Add" id="Form" asp-route-returnURL="@ViewBag.ReturnURL">
                             <input type="hidden" asp-for="Id" />
                             <a id="FormSubmitButton" value="Invite" class="btn btn-large rounded waves-effect green pulse">
                                 <i class="material-icons">check</i>

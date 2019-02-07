@@ -2,13 +2,18 @@
 
 @{
     ViewData["Title"] = "Delete";
+    var subheader = new SubHeaderViewModel()
+    {
+        Title = "Deleting friend",
+        TitleIcon = "delete",
+        TitleColour = "red-text",
+        Message = "Are you sure you want to delete friendship with the person below?",
+        MessageColor = "orange-text"
+    };
 }
-<div class="grey darken-3 z-depth-3" style="padding: 1vw; margin-top: -10px;">
-    <div class="center">
-        <i style="vertical-align: bottom; font-size: 6vw !important;" class="inline-icon material-icons red-text">delete</i>
-        <h5 class="orange-text">Are you sure you want to delete friendship with the person below?</h5>
-    </div>
-</div>
+
+@await Html.PartialAsync("_SubHeader", subheader)
+
 <div class="container">
     <div class="row">
         <div class="col s4 offset-l4">

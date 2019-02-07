@@ -7,11 +7,13 @@
 
 @if (Model.Any())
 {
-    <div class="grey darken-3 z-depth-3" style="padding: 1vw; margin-top: -10px;">
-        <div class="center">
-            <p class="white-text" style="font-size: 3vw;">Invites sent<i style="vertical-align: bottom; font-size: 4vw !important;" class="inline-icon material-icons">redo</i></p>
-        </div>
-    </div>
+    var subheader = new SubHeaderViewModel()
+    {
+        Title = "Invites sent",
+        TitleIcon = "redo",
+    };
+    @await Html.PartialAsync("_SubHeader", subheader)
+    
 }
 else
 {
