@@ -12,22 +12,26 @@
             </i>
         </a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-            <li class="left"><a asp-controller="Explore" asp-action=""><i class="material-icons">search</i> Explore</a></li>
-            @if (SignInManager.IsSignedIn(User))
-            {
-                @await Html.PartialAsync("Navbar/Dropdown/_Profile")
-                @await Html.PartialAsync("Navbar/Dropdown/_Friendship")
-                @await Html.PartialAsync("Navbar/Dropdown/_Messages")
-                @await Html.PartialAsync("Navbar/Dropdown/_Settings")
-                @await Html.PartialAsync("Navbar/_LogOut")
-            }
-            else
-            {
-                <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-                <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-            }
+        <ul class="left hide-on-med-and-down">
+            <li class=""><a asp-controller="Explore" asp-action=""><i class="material-icons left">search</i> Explore</a></li>
+
         </ul>
+            <ul class="right hide-on-med-and-down">
+                
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    @await Html.PartialAsync("Navbar/Dropdown/_Profile")
+                    @await Html.PartialAsync("Navbar/Dropdown/_Friendship")
+                    @await Html.PartialAsync("Navbar/Dropdown/_Messages")
+                    @await Html.PartialAsync("Navbar/Dropdown/_Settings")
+                    @await Html.PartialAsync("Navbar/_LogOut")
+                }
+                else
+                {
+                    <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                    <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+                }
+            </ul>
     </div>
 </nav>
 
