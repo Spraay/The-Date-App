@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace App.Service.Abstract
 {
-    public interface IConversationsService
+    public interface IConversationsService : IBasicService<Conversation>
     {
-        Task<IEnumerable<User>> GetUsersAsync(Guid id);
-
-        Task UpdateUsersAsync(Conversation conversation, IEnumerable<User> userFriends, string[] selectedUsers);
-        Task UpdateAsync(string name, IEnumerable<User> userFriends, string[] selectedUsers, Guid id);
+        Task UpdateUsersAsync(Guid id, Guid[] userList);
+        Task UpdateNameAsync(Guid id, string name);
+        Task<IEnumerable<Conversation>> GetUserConversationsAsync(Guid userId);
     }
 }

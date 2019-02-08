@@ -1,12 +1,14 @@
 ﻿using App.DAO.Data;
 using App.Model.Assigned;
 using App.Model.Entities;
+using App.Repository.Abstract;
 using App.Service.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,59 +16,80 @@ namespace App.Service
 {
     public class ConversationsService : IConversationsService
     {
-        private readonly ApplicationDbContext _context;
-
-        public ConversationsService(ApplicationDbContext context)
+        private readonly IConversationRepository _repository;
+        private readonly IFriendRepository _friendRepository;
+        public ConversationsService(IConversationRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        public async Task<IEnumerable<User>> GetUsersAsync(Guid id)
+        public async Task UpdateUsersAsync(Guid id, Guid[] userList)
         {
-            IQueryable<User> query = _context.Set<ConversationUser>()
-                .Where(_ => _.UserId == id)
-                .Select(_ => _.User);
-            return await query.ToListAsync();
-        }
-
-        public async Task UpdateUsersAsync(Conversation conversation, IEnumerable<User> userFriends, string[] selectedUsers)
-        {
-
-            var id = conversation.Id;
-            var conversationUsersIds = conversation.Users.Select(_=>_.UserId);
-            
-            foreach (var friendId in userFriends.Select(_ => _.Id))
+            var conversation = _repository.GetSingle(_=>_.Id == id, _=>_.Users);
+            var newUsers = new List<ConversationUser>() { };
+            foreach(var userId in userList)
             {
-                if (selectedUsers.Contains(friendId.ToString()))
-                {
-                    if (!conversationUsersIds.Contains(friendId))
-                    {
-                        conversation.Users = (conversation.Users.Concat(new[] { new ConversationUser() { UserId = friendId } })).ToList();
-                        
-                    }
-                }
-                else
-                {
-                    if (conversationUsersIds.Contains(friendId))
-                    {
-                        conversation.Users = conversation.Users.Where(_ => _.UserId != friendId).ToList();  
-                    }
-                }
+                newUsers.Add(new ConversationUser() { UserId = userId, ConversationId = id });
             }
-            _context.Conversations.Update(conversation);
-            await _context.SaveChangesAsync();
+            conversation.Users = newUsers;
+            _repository.Update(conversation);
+            await _repository.CommitAsync();
         }
 
-        public async Task UpdateAsync(string name, IEnumerable<User> userFriends, string[] selectedUsers, Guid id)
+        public async Task<IEnumerable<Conversation>> GetUserConversationsAsync(Guid currentUserId)
         {
-            var conversation = await _context.Set<Conversation>()
-                 .Include(_ => _.Users)
-                 .SingleOrDefaultAsync(_ => _.Id == id);
+            return await _repository.FindByAsync(_ => _.Users.Select(__ => __.UserId).Contains(currentUserId));
+        }
 
-            conversation.Name = name;
+        public async Task<Conversation> GetAsync(Guid id)
+        {
+            return await GetAsync(id, null);
+        }
 
-            await UpdateUsersAsync(conversation, userFriends, selectedUsers);
+        public async Task<Conversation> GetAsync(Guid id, params Expression<Func<Conversation, object>>[] includeProperties)
+        {
+            return await _repository.GetSingleAsync(_=>_.Id == id, includeProperties);
+        }
 
+        public async Task AddAsync(Conversation entity)
+        {
+            await _repository.AddAsync(entity);
+            await _repository.CommitAsync();
+        }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            _repository.DeleteWhere(_ => _.Id == id);
+            await _repository.CommitAsync();
+        }
+
+        public async Task UpdateAsync(Conversation entity)
+        {
+            _repository.Update(entity);
+            await _repository.CommitAsync();
+        }
+
+        public async Task<IEnumerable<Conversation>> GetAllAsync()
+        {
+            return await _repository.GetAllAsync();
+        }
+
+        public async Task <IEnumerable<Conversation>> FindByAsync(Expression<Func<Conversation, bool>> predicate)
+        {
+            return await FindByAsync(predicate, null);
+        }
+
+        public async Task <IEnumerable<Conversation>> FindByAsync(Expression<Func<Conversation, bool>> predicate, params Expression<Func<Conversation, object>>[] includeProperties)
+        {
+            return await _repository.FindByAsync(predicate, includeProperties);
+        }
+
+        public async Task UpdateNameAsync(Guid id, string name)
+        {
+            var entity = await GetAsync(id);
+            entity.Name = name;
+            _repository.Update(entity);
+            await _repository.CommitAsync();
         }
     }
 }
