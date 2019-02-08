@@ -16,11 +16,11 @@ using System.Threading.Tasks;
 
 namespace App.Service
 {
-    public class BasicService<EntityType> : IBasicService<EntityType> where EntityType : class, IEntityBase, new()
+    public class BasicEntityService<EntityType> : IBasicEntityService<EntityType> where EntityType : class, IEntityBase, new()
     {
         private readonly IEntityBaseRepository<EntityType> _repository;
 
-        public BasicService(IEntityBaseRepository<EntityType> repository)
+        public BasicEntityService(IEntityBaseRepository<EntityType> repository)
         {
             _repository = repository;
         }

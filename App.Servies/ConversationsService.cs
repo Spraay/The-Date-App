@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace App.Service
 {
-    public class ConversationsService : BasicService<Conversation>, IConversationsService 
+    public class ConversationsService : BasicEntityService<Conversation>, IConversationsService 
     {
         public ConversationsService(IEntityBaseRepository<Conversation> repository) : base(repository)
         {

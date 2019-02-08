@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace App.Service.Abstract
 {
-    public interface IBasicService<EntityType>
+    public interface IBasicEntityService<EntityType>
     {
         Task<EntityType> GetAsync(Guid id);
         Task<EntityType> GetAsync(Guid id, params Expression<Func<EntityType, object>>[] includeProperties);
