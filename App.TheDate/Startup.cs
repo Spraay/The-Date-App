@@ -60,28 +60,32 @@ namespace App.TheDate
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
            
-
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+
             services.AddScoped<IInterestRepository, InterestRepository>();
             services.AddScoped<IUserInterestsService, UserInterestsService>();
-            services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddScoped<IImageRepository, ImageRepository>();
+            services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<IImageLikeService, ImageLikeService>();
             services.AddScoped<IImageCommentRepository, ImageCommentRepository>();
+
             services.AddScoped<IVoteRepository, VoteRepository>();
+
             services.AddScoped<IConversationRepository, ConversationRepository>();
+            services.AddTransient<IConversationsService, ConversationsService>();
+
             services.AddScoped<IMessageRepository, MessageRepository>();
 
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IImageService, ImageService>();
-            services.AddScoped<IImageLikeService, ImageLikeService>();
+            
             services.AddScoped<IFriendService, FriendService>();
-            services.AddTransient<IEmailSender, EmailSender>();
+            
             services.AddScoped<IMeetService, MeetService>();
+
             services.AddTransient<IExploreService, ExploreService>();
-            services.AddTransient<IConversationsService, ConversationsService>();
-
-
+           
             services.AddAutoMapper();
 
             services.AddSignalR();
