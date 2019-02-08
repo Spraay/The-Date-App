@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace App.Service.Abstract
 {
-    public interface IConversationsService : IBasicEntityService<Conversation>
+    public interface IConversationsService : IEntityBaseService<Conversation>
     {
         Task UpdateUsersAsync(Guid id, Guid[] userList);
         Task UpdateNameAsync(Guid id, string name);

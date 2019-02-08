@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App.Model.Entities.Abstract;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App.Service.Abstract
 {
-    public interface IBasicEntityService<EntityType>
+    public interface IEntityBaseService<EntityType> where EntityType : class, IEntityBase, new()
     {
         Task<EntityType> GetAsync(Guid id);
         Task<EntityType> GetAsync(Guid id, params Expression<Func<EntityType, object>>[] includeProperties);

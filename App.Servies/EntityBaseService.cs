@@ -16,18 +16,18 @@ using System.Threading.Tasks;
 
 namespace App.Service
 {
-    public class BasicEntityService<EntityType> : IBasicEntityService<EntityType> where EntityType : class, IEntityBase, new()
+    public abstract class EntityBaseService<EntityType> : IEntityBaseService<EntityType> where EntityType : class, IEntityBase, new()
     {
         private readonly IEntityBaseRepository<EntityType> _repository;
 
-        public BasicEntityService(IEntityBaseRepository<EntityType> repository)
+        public EntityBaseService(IEntityBaseRepository<EntityType> repository)
         {
             _repository = repository;
         }
 
         public async Task<EntityType> GetAsync(Guid id)
         {
-            return await GetAsync(id, null);
+            return await _repository.GetSingleAsync(id);
         }
 
         public async Task<EntityType> GetAsync(Guid id, params Expression<Func<EntityType, object>>[] includeProperties)
@@ -60,7 +60,7 @@ namespace App.Service
 
         public async Task <IEnumerable<EntityType>> FindByAsync(Expression<Func<EntityType, bool>> predicate)
         {
-            return await FindByAsync(predicate, null);
+            return await _repository.FindByAsync(predicate);
         }
 
         public async Task <IEnumerable<EntityType>> FindByAsync(Expression<Func<EntityType, bool>> predicate, params Expression<Func<EntityType, object>>[] includeProperties)

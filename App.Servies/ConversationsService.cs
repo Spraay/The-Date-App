@@ -1,25 +1,20 @@
-﻿using App.DAO.Data;
-using App.Model.Assigned;
-using App.Model.Entities;
-using App.Repository;
+﻿using App.Model.Entities;
 using App.Repository.Abstract;
 using App.Service.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace App.Service
 {
-    public class ConversationsService : BasicEntityService<Conversation>, IConversationsService 
+    public class ConversationsService : EntityBaseService<Conversation>, IConversationsService
     {
-        public ConversationsService(IEntityBaseRepository<Conversation> repository) : base(repository)
+        private readonly IConversationRepository _repository;
+        public ConversationsService(IConversationRepository repository) : base(repository)
         {
-            
+            _repository = repository;
         }
 
         public async Task UpdateUsersAsync(Guid id, Guid[] userList)
