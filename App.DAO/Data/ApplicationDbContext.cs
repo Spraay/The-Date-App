@@ -14,7 +14,6 @@ namespace App.DAO.Data
             
         }
 
-       
         public DbSet<Interest> Interests { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<ImageLike> ImagesLikes { get; set; }
@@ -24,7 +23,7 @@ namespace App.DAO.Data
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<RealMeet> Meets { get; set; }
         public DbSet<Vote> Votes { get; set; }
-        public DbSet<Notification> Notyfications { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
