@@ -84,8 +84,9 @@ namespace App.TheDate
 
             services.AddAutoMapper();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddSignalR();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -118,7 +119,7 @@ namespace App.TheDate
 
             app.UseSignalR(route =>
             {
-                route.MapHub<NotificationHub>("/notificationHub");
+                route.MapHub<NotificationHub>("/notyfihub");
             });
 
             app.UseMvc(routes =>

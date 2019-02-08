@@ -1,7 +1,5 @@
 ﻿@inject SignInManager<User> SignInManager
 
-<script src="~/lib/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/notification.js"></script>
 <nav>
     <div class="nav-wrapper">
         <a asp-controller="Home" asp-action="Index" class="brand-logo center" style="font-size: 25px">
@@ -18,7 +16,7 @@
             <li class=""><a asp-controller="Explore" asp-action="Index"><i class="material-icons left">search</i> Explore</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
-
+            
             @if (SignInManager.IsSignedIn(User))
             {
                 @await Html.PartialAsync("Navbar/Dropdown/_Profile")
