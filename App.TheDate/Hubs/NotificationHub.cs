@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +8,9 @@ namespace App.TheDate.Hubs
 {
     public class NotificationHub : Hub
     {
-        [Authorize(Roles = "User,Admin,Moderator")]
-        public async Task SendNotification(string userName, string content)
+        public Task SendNotification(Guid userId, string content)
         {
-            await Clients.User(userName).SendAsync("ReceiveMessage", userName, content);
+            return Clients.All.SendAsync("ReceiveMessage", content);
         }
     }
 }
