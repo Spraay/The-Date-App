@@ -1,0 +1,12 @@
+﻿@model IEnumerable<User>
+
+@foreach (var u in Model)
+{
+    <a class="pointer-cursor" asp-controller="User" asp-action="Profile" asp-route-id="" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+        <div class="chip">
+            <img src="~/images/userimages/@u.ProfileImageSrc" alt="Conversation member">
+            @u.FirstName @u.LastName
+        </div>
+    </a>
+    
+}

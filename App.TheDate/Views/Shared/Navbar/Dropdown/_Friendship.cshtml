@@ -1,13 +1,13 @@
 ﻿@using App.Service.Abstract
 @inject IUserService _userService
-@inject IFriendService _friendService
+
 <!-- Dropdown Structure -->
 <ul id='friendshipDropdown' class='dropdown-content' style="width: 400px;">
     <li>
         <a asp-controller="Friendships" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
             My Friends
             <i class="material-icons">group</i>
-            <span class="badge">@_friendService.GetUserFriends(_userService.CurrentUserId).Count()</span>
+            @*<span class="badge">@userFriends.Count()</span>*@
         </a>
     </li>
     <li class="divider" tabindex="-1"></li>

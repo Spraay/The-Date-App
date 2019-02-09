@@ -11,7 +11,7 @@ namespace App.DAO.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20190208084117_notification")]
-    partial class notification
+    partial class Notification
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

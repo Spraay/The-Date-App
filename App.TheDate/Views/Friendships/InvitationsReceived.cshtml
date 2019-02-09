@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Friendship>
+﻿@model IEnumerable<User>
 
 @{
     ViewData["Title"] = "Invitations";
@@ -21,33 +21,5 @@ else
         </div>
     </div>
 }
-<div class="container">
-    <div class="row">
-
-        @foreach (var item in Model)
-        {
-            <div class="col m4">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="~/images/userimages/@item.Sender.ProfileImageSrc">
-                        <span class="card-title" style="width:100%; background: rgba(0, 0, 0, 0.5);">@Html.DisplayFor(m => item.Sender.FirstName) @Html.DisplayFor(m => item.Sender.LastName)</span>
-                    </div>
-                    <div class="card-action grey">
-                        <div class="center">
-                            <a class="btn btn-large rounded green tooltipped" data-position="top" data-tooltip="Accept Request" asp-controller="Friendships" asp-action="Add" asp-route-id="@item.SenderId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                <i class="material-icons">check</i>
-                            </a>
-                            <a class="btn btn-large rounded red tooltipped" data-position="top" data-tooltip="Refuse Request" asp-controller="Friendships" asp-action="Delete" asp-route-id="@item.SenderId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                <i class="material-icons">delete</i>
-                            </a>
-                            <a class="btn btn-large rounded blue tooltipped" data-position="top" data-tooltip="Show Profile" asp-controller="User" asp-action="Profile" asp-route-id="@item.SenderId" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                <i class="material-icons">info</i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-</div>
+@await Html.PartialAsync("_UserGrid", Model);
 

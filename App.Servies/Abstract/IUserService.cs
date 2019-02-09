@@ -1,10 +1,11 @@
-﻿using App.Model.View;
+﻿using App.Model.Entities;
+using App.Model.View;
 using System;
 using System.Threading.Tasks;
 
 namespace App.Service.Abstract
 {
-    public partial interface IUserService
+    public interface IUserService : IEntityBaseService<User>
     {
         Guid CurrentUserId { get; }
 

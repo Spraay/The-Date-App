@@ -5,12 +5,12 @@ namespace App.Extensions
 {
     public static class ClaimsPrincipalExtensions
     {
-        public static string GetUserId(this ClaimsPrincipal principal)
+        public static Guid GetUserId(this ClaimsPrincipal principal)
         {
             if (principal == null)
                 throw new ArgumentNullException(nameof(principal));
-
-            return principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            Guid.TryParse(principal.FindFirst(ClaimTypes.NameIdentifier)?.Value, result: out Guid result);
+            return result;
         }
     }
 }

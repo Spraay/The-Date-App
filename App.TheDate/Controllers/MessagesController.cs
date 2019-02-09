@@ -1,59 +1,51 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using App.DAO.Data;
 using App.Model.Entities;
 using App.Repository.Abstract;
 using App.Service.Abstract;
 using App.Model.Error;
 using Microsoft.AspNetCore.Authorization;
+using App.Service;
 
 namespace App.TheDate.Controllers
 {
     [Authorize(Roles="Admin,User,Moderator")]
     public class MessagesController : Controller
     {
-        private readonly IConversationRepository _conversationRepository;
-        private readonly IUserService _userService;
-        private readonly IFriendService _friendService;
-        private readonly IUserRepository _userRepository;
-        private readonly IConversationsService _conversationsService;
         private readonly IMessageRepository _messageRepository;
+        private readonly IConversationsService _conversationsService;
+        private readonly IUserService _userService;
+        private readonly IUserRepository _userRepository;
+        private readonly Guid _userId;
 
-        public MessagesController(IConversationRepository conversationRepository, IUserService userService, IFriendService friendService, IUserRepository userRepository, IConversationsService conversationsService, IMessageRepository messageRepository)
+        public MessagesController(IMessageRepository messageRepository, IConversationsService conversationsService, IUserService userService, IUserRepository userRepository) 
         {
-            _conversationRepository = conversationRepository;
-            _userService = userService;
-            _friendService = friendService;
             _userRepository = userRepository;
-            _conversationsService = conversationsService;
             _messageRepository = messageRepository;
+            _conversationsService = conversationsService;
+            _userService = userService;
+            _userId = _userService.CurrentUserId;
         }
-
 
         // GET: Messages
         public async Task<IActionResult> Conversation(Guid id, string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
-            ViewBag.Messages = await _messageRepository.FindByAsync(_ => _.ConversationId == id, _ => _.Sender);
-            return View(await _conversationRepository.GetSingleAsync(_ => _.Id == id, _ => _.Users));
+            var result = await _conversationsService.GetAsync(id, _ => _.Users, _ => _.Messages);
+            ViewBag.ConversationUsers = await _userRepository.FindByAsync(_=>_.Conversations.Select(__=>__.ConversationId).Contains(id));
+            return View(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(Guid conversationId, string content, string returnURL = null)
         {
-            var conversation = await _conversationRepository.GetSingleAsync(_ => _.Id == conversationId, _ => _.Users, _ => _.Messages);
-            var message = new Message() { Content = content, SenderId = _userService.CurrentUserId };
-            conversation.Messages = conversation.Messages.Concat(new[] { message }).ToList();
-            _conversationRepository.Update(conversation);
-            await _conversationRepository.CommitAsync();
-            return RedirectToAction(nameof(Conversation), new { conversation.Id, returnURL });
+            var message = new Message() { Content = content, SenderId = _userId, ConversationId = conversationId };
+            await _messageRepository.AddAsync(message);
+            await _messageRepository.CommitAsync();
+            return RedirectToAction(nameof(Conversation), new { id=conversationId, returnURL });
         }
-
 
         public async Task<IActionResult> Delete(Guid? id, string returnURL = null)
         {

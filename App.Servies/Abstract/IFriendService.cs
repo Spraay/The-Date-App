@@ -5,26 +5,12 @@ using App.Model.Entities;
 
 namespace App.Service.Abstract
 {
-    public partial interface IFriendService
+    public interface IFriendService : IEntityBaseService<Friendship> 
     {
-        Friendship Get(Guid id1, Guid id2);
-        bool AreFriends(Guid id1, Guid id2);
-        List <User> GetUserFriends(Guid id);
-        List <Friendship> GetInvitationsSent(Guid id);
-        List <Friendship> GetInvitationsReceived(Guid id);
-        void AddFriend(Guid id1, Guid id2);
-        void DeleteFriend(Guid id1, Guid id2);
-    }
-
-    //TASK PART
-    public partial interface IFriendService 
-    {
-        Task<Friendship> GetAsync(Guid id1, Guid id2);
-        Task <bool> AreFriendsAsync(Guid id1, Guid id2);
-        Task <List<User>> GetUserFriendsAsync(Guid id);
-        Task <List<Friendship>> GetInvitationsSentAsync(Guid id);
-        Task <List<Friendship>> GetInvitationsReceivedAsync(Guid id);
-        Task AddFriendAsync(Guid id1, Guid id2);
-        Task DeleteFriendAsync(Guid id1, Guid id2);
+        Task<Friendship> GetFriendshipBetween(Guid userId1, Guid userId2);
+        Task<IEnumerable<User>> GetUserFriendsAsync(Guid id);
+        Task<IEnumerable<User>> GetUserSentInvitationsAsync(Guid id);
+        Task<IEnumerable<User>> GetUserReceievedInvitationsAsync(Guid id);
+        Task<bool> AreFriendsAsync(Guid userId1, Guid userId2);
     }
 }

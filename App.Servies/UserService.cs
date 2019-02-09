@@ -13,7 +13,7 @@ using App.Model.Enumerations;
 
 namespace App.Service
 {
-    public partial class UserService : IUserService
+    public partial class UserService : EntityBaseService<User>, IUserService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IMapper _mapper;
@@ -21,13 +21,13 @@ namespace App.Service
         private readonly IUserInterestsService _userInterestService;
         private readonly IUserRepository _userRepository;
 
-        public UserService(IHttpContextAccessor httpContextAccessor, IMapper mapper, IInterestRepository interestRepository, IUserInterestsService userInterestService, IUserRepository userRepository)
+        public UserService(IUserRepository repository, IHttpContextAccessor httpContextAccessor, IMapper mapper, IInterestRepository interestRepository, IUserInterestsService userInterestService) : base(repository)
         {
             _httpContextAccessor = httpContextAccessor;
             _mapper = mapper;
             _interestRepository = interestRepository;
             _userInterestService = userInterestService;
-            _userRepository = userRepository;
+            _userRepository = repository;
         }
 
         public Guid CurrentUserId

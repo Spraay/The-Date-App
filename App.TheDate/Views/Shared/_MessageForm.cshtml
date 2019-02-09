@@ -1,0 +1,16 @@
+﻿@model App.Model.Entities.Message
+    <form class="col s12" id="messageForm" asp-action="Create" asp-controller="Messages" asp-route-returnURL="@ViewBag.ReturnURL">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="SenderId" />
+        <input type="hidden" asp-for="ConversationId" />
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="red-text"></div>
+            <div class="input-field col s10">
+                <label for="Content" class="">Message</label>
+                <input asp-for="Content" name="Content" class="validate" />
+            </div>
+            <div class="input-field col s2 white">
+                <a onclick="$('#messageForm').submit()" class="btn rounded btn-large"><i class="material-icons">send</i></a>
+            </div>
+        </div>
+    </form>

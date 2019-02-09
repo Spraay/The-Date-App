@@ -1,47 +1,100 @@
-﻿@model App.Model.Entities.Conversation
+﻿@model Conversation
 @{
-    var messages = (List<Message>) ViewBag.Messages;
-    var users = Model.Users;
+    ViewData["Title"] = "Conversation";
+    IEnumerable<User> conversationUsers = ViewBag.ConversationUsers;
+    IEnumerable<Message> messages = Model.Messages;
+    
 }
+<div class="hide-on-small-and-down">
+    <br /><br />
+</div>
 
-<div class="row">
-    <div class="col s12 m10 l8 offset-l2 offset-m1">
-        <div class="card">
-            
-            <div class="card-content">
-                <h5 class="">@Model.Name</h5>
-            </div>
-            <div class="card-content">
-                <partial name="Shared/_MessageForm.cshtml" model="@new Message() { ConversationId = Model.Id }" />
+        @*<ul class="collection no-border z-depth-2">
+            <li class="collection-item">
+                <h3> Messages:</h3>
+                <h6 class="grey-text">@Model.FirstOrDefault().Conversation.Name</h6>
+                @await Html.PartialAsync("_UsersChips", messages.FirstOrDefault().Conversation.Users.Select(_=>_.User))
+                @(messages.Any() ? "" : "Nobody added message yet")
+            </li>
+            @foreach (var message in messages.OrderBy(_ => _.CreatedDate))
+            {
+                <li class="collection-item avatar scrolling">
+                    <a asp-controller="User" asp-action="Profile" asp-route-id="@message.SenderId"><img src="~/images/userimages/@message.Sender.ProfileImageSrc" alt="" class="circle"></a>
+                    <div class="col s8 title left-align left text-left"><b><a asp-controller="User" asp-action="Profile" asp-route-id="@message.Sender.Id">@message.Sender.FirstName @message.Sender.LastName</a>: </b>@message.Content</div>
+                    @if (message.Sender.UserName == User.Identity.Name)
+                    {
+                        <div class="valign-wrapper" style="height: 100%; position: absolute; top: 0px; right: 10px;">
+                            <div class="inline text-right">
+                                <a class="btn rounded red" asp-controller="Messages" asp-action="Delete" asp-route-id="@message.Id"><i class="material-icons">delete_forever</i></a>
+                            </div>
+                        </div>
+                    }
+                </li>
+            }
+            <li class="collection-item col s12">
+                @await Html.PartialAsync("_MessageForm", new Message() { ConversationId = Model.FirstOrDefault().ConversationId })
+            </li>
+        </ul>*@
+<div class="row ">
+    <div class="col s12 m8 l6 offset-m2 offset-l3 white z-depth-2">
+        <div class="row">
+            <div class="col s12">
+                <h6 class="grey-text">@Model.Name</h6>
+                <ul class="collapsible z-depth-0 no-border">
+                    <li>
+                        <h8 class="collapsible-header no-border z-depth-0 grey-text"><i class="material-icons">group</i>Conversation users...</h8>
+                        <div class="collapsible-body col s12">
+                            @await Html.PartialAsync("_UsersChips", conversationUsers)
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="row">
-            <div class="col s12 m10 l8 offset-l2 offset-m1 white z-depth-2">
-                <div class="" style="position: relative; left: 10px;"><h3> Messages</h3>@(messages.Any() ? "" : "Nobody added message yet")</div>
+            @*@foreach (var message in messages.OrderBy(_ => _.CreatedDate))*@
+            @for(int i=0; i<messages.Count(); i++) 
+            {
+                var message = messages.ElementAt(i);
+                var iO = message.Sender.UserName == User.Identity.Name;
+                <div class=" col s12">
+                    <div class='@(iO?"right":"left") col s1'>
+                        @if (i + 1 >= messages.Count() || messages.ElementAt(i+1).Sender.UserName != User.Identity.Name)
+                        {
+                            <div class="valign-wrapper">
+                                <img src="~/images/userimages/@message.Sender.ProfileImageSrc" alt="" class="circle" style='position:relative; @(iO?"right: 15px;":";") top: -10px; width: 40px; height: 40px;' />
+                            </div>
+                        }
+                        
+                    </div>
+                    <div class='center col s11'>
+                        <div class="valign-wrapper @(iO?"right":"left")">
+                            <div class="">
+                                @if (iO)
+                                {
+                                    <a asp-controller="Messages"
+                                       asp-action="Delete"
+                                       asp-route-id="@message.Id"
+                                    ><i style="position: relative; top: 5px; right: -10px;" class='left pointer-cursor tiny material-icons grey-text text-lighten-1 hover-opacity'>clear</i></a>@message.Content
+                                }
+                                else
+                                {
+                                    @message.Content
+                                }
+                            </div>
+                        </div>
+                    </div>
 
 
-                <ul class="collection">
-                    @foreach (var message in messages.OrderBy(_ => _.CreatedDate))
-                    {
-                        <li class="collection-item avatar col s12 row ">
-                            <a asp-controller="User" asp-action="Profile" asp-route-id="@message.Sender.Id"><img src="~/images/userimages/@message.Sender.ProfileImageSrc" alt="" class="circle"></a>
-                            <div class="col s8 title left-align left text-left"><b><a asp-controller="User" asp-action="Profile" asp-route-id="@message.Sender.Id">@message.Sender.FirstName @message.Sender.LastName</a>: </b>@message.Content</div>
-                            @if (message.Sender.UserName == User.Identity.Name)
-                            {
-                                <div class="valign-wrapper" style="height: 100%; position: absolute; top: 0px; right: 10px;">
-                                    <div class="inline text-right">
-                                        
-                                        <a class="btn rounded red" asp-controller="Messages" asp-action="Delete" asp-route-id="@message.Id"><i class="material-icons">delete_forever</i></a>
-                                    </div>
-                                </div>
-
-                            }
-                        </li>
-                    }
-                </ul>
+                </div>
+                }
             </div>
-
+        <div class="row">
+            <div class="valign-wrapper col s12">
+                @await Html.PartialAsync("_MessageForm", new Message() { ConversationId = Model.Id })
+            </div>
         </div>
     </div>
-    
 </div>
+
+
+

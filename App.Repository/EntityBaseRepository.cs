@@ -140,6 +140,11 @@ namespace App.Repository
         {
             return await _context.Set<T>().FirstOrDefaultAsync(predicate);
         }
+ 
+        public async Task<bool> IsExistsAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _context.Set<T>().AnyAsync(predicate);
+        }
 
         public async Task<T> GetSingleAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {

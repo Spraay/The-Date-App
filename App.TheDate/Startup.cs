@@ -40,20 +40,16 @@ namespace App.TheDate
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            //services.AddDbContext<ApplicationDbContext>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
-
             // Use SQL Database if in Azure, otherwise, use SQLite
             if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
                 services.AddDbContext<ApplicationDbContext>(options =>
                         options.UseSqlServer(
-                            Configuration.GetConnectionString("MyDbConnection")));
+                            Configuration.GetConnectionString("ProductionDbConnection")));
             else
                 services.AddDbContext<ApplicationDbContext>(options =>
                         //options.UseSqlite("Data Source=localdatabase.db"));
                         options.UseSqlServer(
-                            Configuration.GetConnectionString("DefaultConnection")));
+                            Configuration.GetConnectionString("DevelopmentDbConnection")));
 
             // Automatically perform database migration
             services.BuildServiceProvider().GetService<ApplicationDbContext>().Database.Migrate();
@@ -79,7 +75,8 @@ namespace App.TheDate
             services.AddScoped<IMessageRepository, MessageRepository>();
 
             services.AddTransient<IEmailSender, EmailSender>();
-            
+
+            services.AddTransient<IFriendRepository, FriendRepository>();
             services.AddScoped<IFriendService, FriendService>();
             
             services.AddScoped<IMeetService, MeetService>();

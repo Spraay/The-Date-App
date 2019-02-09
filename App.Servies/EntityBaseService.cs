@@ -30,9 +30,19 @@ namespace App.Service
             return await _repository.GetSingleAsync(id);
         }
 
+        public async Task<EntityType> GetAsync(Expression<Func<EntityType, bool>> predicate)
+        {
+            return await _repository.GetSingleAsync(predicate);
+        }
+
         public async Task<EntityType> GetAsync(Guid id, params Expression<Func<EntityType, object>>[] includeProperties)
         {
-            return await _repository.GetSingleAsync(_=>_.Id == id, includeProperties);
+            return await _repository.GetSingleAsync(_ => _.Id == id, includeProperties);
+        }
+
+        public async Task<EntityType> GetAsync(Expression<Func<EntityType, bool>> predicate, params Expression<Func<EntityType, object>>[] includeProperties)
+        {
+            return await _repository.GetSingleAsync(predicate, includeProperties);
         }
 
         public async Task AddAsync(EntityType entity)

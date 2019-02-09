@@ -10,7 +10,9 @@ namespace App.Service.Abstract
     public interface IEntityBaseService<EntityType> where EntityType : class, IEntityBase, new()
     {
         Task<EntityType> GetAsync(Guid id);
+        Task<EntityType> GetAsync(Expression<Func<EntityType, bool>> predicate);
         Task<EntityType> GetAsync(Guid id, params Expression<Func<EntityType, object>>[] includeProperties);
+        Task<EntityType> GetAsync(Expression<Func<EntityType, bool>> predicate, params Expression<Func<EntityType, object>>[] includeProperties);
         Task AddAsync(EntityType entity);
         Task DeleteAsync(Guid id);
         Task UpdateAsync(EntityType entity);

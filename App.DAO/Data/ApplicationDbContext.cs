@@ -47,9 +47,6 @@ namespace App.DAO.Data
                 .HasForeignKey(_ => _.UserId);
 
             modelBuilder.Entity<Friendship>()
-                .HasKey(_ => new { _.SenderId, _.FriendId });
-
-            modelBuilder.Entity<Friendship>()
                 .HasOne(p => p.Sender)
                 .WithMany(h => h.InvitationsSent)
                 .HasForeignKey(p => p.SenderId)
