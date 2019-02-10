@@ -3,11 +3,13 @@
         <input type="hidden" asp-for="Id" />
         <input type="hidden" asp-for="SenderId" />
         <input type="hidden" asp-for="ConversationId" />
-        <div class="row" >
-            <div asp-validation-summary="ModelOnly" class="red-text"></div>
-            <div class="input-field col s10">
+        <div class="row">
+            <div class="input-field col s9">
                 <label for="Content" class="">Message</label>
-                <textarea style="overflow-y: scroll; max-height: 100px;" asp-for="Content" name="Content" class="validate materialize-textarea"></textarea>
+                <textarea id="ctnt" style="overflow-y: scroll; max-height: 100px;" asp-for="Content" name="Content" class="materialize-textarea"></textarea>
+            </div>
+            <div class="col s1" style="position: relative; left: 0px; top: 25px;">
+                <i onclick="$('#ctnt').val('')" class="material-icons grey-text pointer-cursor">clear</i>
             </div>
             <div class="input-field col s2 white">
                 <a onclick="$('#messageForm').submit()" class="btn rounded btn-large"><i class="material-icons">send</i></a>
