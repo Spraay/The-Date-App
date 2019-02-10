@@ -11,7 +11,14 @@
     <div class="col s12 m8 l6 offset-m2 offset-l3 white z-depth-2">
         <div class="row">
             <div class="col s12">
-                <h6 class="grey-text">@Model.Name</h6>
+                <div class="col s12">
+                    <div class="col s6 left">
+                        <h6 class="grey-text">@Model.Name</h6>
+                    </div>
+                    <div class="col s6 valign right ">
+                        <h6><a class="grey-text pointer-cursor" asp-controller="Conversations" asp-action="Edit" asp-route-id="@Model.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><i class="material-icons right hover-opacity">settings</i></a></h6>
+                    </div>
+                </div>
                 <ul class="collapsible z-depth-0 no-border">
                     <li>
                         <h8 class="collapsible-header no-border z-depth-0 grey-text"><i class="material-icons">group</i>Conversation users...</h8>
@@ -22,33 +29,33 @@
                 </ul>
             </div>
         </div>
-        <div class="row scrolling">
+        <div class="row" style="overflow-y:scroll; height:400px; padding: 10px;">
             @for(int i=0; i<messages.Count(); i++) 
             {
                 var message = messages.ElementAt(i);
                 var iO = message.Sender.UserName == User.Identity.Name;
                 <div class=" col s12">
                     <div class='@(iO?"right":"left") col s1'>
-                        @if (i + 1 >= messages.Count() || messages.ElementAt(i).Sender.UserName != messages.ElementAt(i+1).Sender.UserName)
+                        @if (i + 1 >= messages.Count() || ( messages.ElementAt(i).Sender.UserName != messages.ElementAt(i+1).Sender.UserName && !iO))
                         {
                             <div class="valign-wrapper">
-                                <img src="~/images/userimages/@message.Sender.ProfileImageSrc" alt="" class="circle" style='position:relative; @(iO?"right: 15px;":";") top: -10px; width: 40px; height: 40px;' />
+                                <img src="~/images/userimages/@message.Sender.ProfileImageSrc" alt="" class="circle" style='position:relative; @(iO?"right: 15px;":";") top: 20px; width: 40px; height: 40px;' />
                             </div>
                         }
                     </div>
-                    <div class='center col s11'>
+                    <div class=' col s11 '>
                         <div class="valign-wrapper @(iO?"right":"left")">
-                            <div class="">
+                            <div class="center" style="padding: 1px; ">
                                 @if (iO)
                                 {
-                                    <a asp-controller="Messages"
-                                       asp-action="Delete"
-                                       asp-route-id="@message.Id"
-                                    ><i style="position: relative; top: 5px; right: -10px;" class='left pointer-cursor tiny material-icons grey-text text-lighten-1 hover-opacity'>clear</i></a>@message.Content
+                                   
+                                    <div class="blue rounded white-text" style="padding: 4px; width: 120%; position:relative; right: -15px;">@message.Content</div>
+
+                                    
                                 }
                                 else
                                 {
-                                    @message.Content
+                                    <div class="grey lighten-2 rounded" style="padding: 4px; width: 120%;  position:relative; left: 1px;">@message.Content</div>
                                 }
                             </div>
                         </div>
@@ -57,7 +64,7 @@
                 }
             </div>
         <div class="row">
-            <div class="valign-wrapper col s12">
+            <div class="valign-wrapper col s12" href="#">
                 @await Html.PartialAsync("_MessageForm", new Message() { ConversationId = Model.Id })
             </div>
         </div>
