@@ -6,7 +6,7 @@ namespace App.Model.View
 {
     public class UserCardLinkViewModel
     {
-        public string ActionName { get; set; }
+        public string Action { get; set; }
         public string Controller { get; set; }
         public string LinkText { get; set; }
         public object RouteValues { get; set; }
