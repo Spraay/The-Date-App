@@ -3,23 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DatingApplication</title>
-    <!--Let browser know website is optimized for mobile-->
+    <title>@*<viewdata name="Title"></viewdata>*@ @ViewData["Title"] - DatingApplication</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    @await Html.PartialAsync("_Styles")
-    
+    <partial name="_Styles" />
 </head>
-<body class="">
-
+<body>
     <header style="z-index: 9999">
-        @await Html.PartialAsync("Navbar/_NavBar")
-        @await Html.PartialAsync("Navbar/_MobileNavBar")
+        <partial name="Navbar/_NavBar" />
+        <partial name="Navbar/_MobileNavBar" />
     </header>
     <main>
         @RenderBody()
     </main>
-    @await Html.PartialAsync("_Footer")
-    @RenderSection("Scripts", required: false)
-    @await Html.PartialAsync("_Scripts")
+    <partial name="_Footer" />
+    <partial name="_Scripts" />
 </body>
 </html>

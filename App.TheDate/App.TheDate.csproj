@@ -37,7 +37,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
-    <Folder Include="Views\Messages\Shared\" />
   </ItemGroup>
 
   <ItemGroup>

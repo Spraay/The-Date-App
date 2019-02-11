@@ -47,7 +47,6 @@
                             {
                                 <div style="@(iO?"":"margin-top: -40px;")">
                                     <img src="~/images/userimages/@current.Sender.ProfileImageSrc" alt="" class="circle" style='width: 40px; height: 40px; position: relative; left: -45px;' />
-
                                 </div>
                             }
                         </div>
@@ -55,7 +54,7 @@
                 </div>
             }
         </div>
-        <div id="CMWFooter" class="row section">
+        <div id="CMWFooter" class="section">
             <div class="valign-wrapper col s12">
                 @await Html.PartialAsync("_MessageForm", new Message() { ConversationId = Model.Id })
             </div>

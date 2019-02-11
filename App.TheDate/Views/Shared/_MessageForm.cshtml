@@ -1,18 +1,17 @@
 ﻿@model App.Model.Entities.Message
-    <form class="col s12" id="messageForm" asp-action="Create" asp-controller="Messages" asp-route-returnURL="@ViewBag.ReturnURL">
-        <input type="hidden" asp-for="Id" />
-        <input type="hidden" asp-for="SenderId" />
-        <input type="hidden" asp-for="ConversationId" />
-        <div class="row">
-            <div class="input-field col s9">
-                <label for="Content" class="">Message</label>
-                <textarea id="ctnt" style="overflow-y: scroll; max-height: 100px;" asp-for="Content" name="Content" class="materialize-textarea"></textarea>
-            </div>
-            <div class="col s1" style="position: relative; left: 0px; top: 25px;">
-                <i onclick="$('#ctnt').val('')" class="material-icons grey-text pointer-cursor">clear</i>
-            </div>
-            <div class="input-field col s2 white">
-                <a onclick="$('#messageForm').submit()" class="btn rounded btn-large"><i class="material-icons">send</i></a>
-            </div>
+<form class="col s12" id="messageForm" asp-action="Create" asp-controller="Messages" asp-route-returnURL="@ViewBag.ReturnURL">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="SenderId" />
+    <input type="hidden" asp-for="ConversationId" />
+    <div class="col s12">
+        <div class="input-field col s10">
+            <label for="Content" class="">Message</label>
+            <textarea id="ctnt" style="overflow-y: scroll; max-height: 100px;" asp-for="Content" name="Content" class="materialize-textarea"></textarea>
+            
         </div>
-    </form>
+       
+        <div class="input-field white col s1" style="position: relative; right: 10px;" >
+            <a onclick="$('#messageForm').submit()" class="btn rounded btn-large"><i class="material-icons">send</i></a>
+        </div>
+    </div>
+</form>

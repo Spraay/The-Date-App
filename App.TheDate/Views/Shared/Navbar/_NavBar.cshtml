@@ -1,5 +1,4 @@
 ﻿@inject SignInManager<User> SignInManager
-
 <nav>
     <div class="nav-wrapper">
         <a asp-controller="Home" asp-action="Index" class="brand-logo center" style="font-size: 25px">
@@ -16,14 +15,13 @@
             <li class=""><a asp-controller="Explore" asp-action="Index"><i class="material-icons left">search</i> Explore</a></li>
         </ul>
         <ul class="right hide-on-med-and-down">
-            
             @if (SignInManager.IsSignedIn(User))
             {
-                @await Html.PartialAsync("Navbar/Dropdown/_Profile")
-                @await Html.PartialAsync("Navbar/Dropdown/_Friendship")
-                @await Html.PartialAsync("Navbar/Dropdown/_Messages")
-                @await Html.PartialAsync("Navbar/Dropdown/_Settings")
-                @await Html.PartialAsync("Navbar/_LogOut")
+                <partial name="Navbar/Dropdown/_Profile" />
+                <partial name="Navbar/Dropdown/_Friendship" />
+                <partial name="Navbar/Dropdown/_Messages" />
+                <partial name="Navbar/Dropdown/_Settings" />
+                <partial name="Navbar/_LogOut" />
             }
             else
             {
