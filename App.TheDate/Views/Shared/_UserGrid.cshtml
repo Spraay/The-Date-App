@@ -1,26 +1,28 @@
-﻿@model IEnumerable<User>
+﻿@model List<UserCardViewModel>
+@using App.TheDate.Extensions
+@{
+    List<UserCardLinkViewModel> links = (List<UserCardLinkViewModel>)ViewData["links"];
+}
 <div class="container">
     <div class="row center center-align">
-
         @foreach (var item in Model)
         {
             <div class="col m6 s12 l4 @((item == Model.FirstOrDefault() && Model.Count()==2?"offset-l2":((item == Model.FirstOrDefault() && Model.Count()==1?"offset-l4 offset-m3":""))))">
                 <div class="card">
                     <div class="card-image col m12 s12 l12">
                         <div class="thumbnail no-border no-padding">
-                            <img src="~/images/userimages/@item.ProfileImageSrc" class="responsive-img" />
+                            <img src="~/images/userimages/@item.User.ProfileImageSrc" class="responsive-img" />
                         </div>
-                        <span class="card-title" style="background: rgba(0, 0, 0, 0.5); width: 100%">@Html.DisplayFor(m => item.FirstName) @Html.DisplayFor(m => item.LastName)</span>
+                        <span class="card-title" style="background: rgba(0, 0, 0, 0.5); width: 100%">@Html.DisplayFor(m => item.User.FirstName) @Html.DisplayFor(m => item.User.LastName)</span>
                     </div>
                     <div class="card-action grey col m12 s12 l12">
                         <div class="center">
-                            <a class="btn btn-large rounded red tooltipped" data-position="top" data-tooltip="Delete Friend" asp-controller="Friendships" asp-action="Delete" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                <i class="material-icons">delete</i>
-                            </a>
-                            <a class="btn btn-large rounded blue tooltipped" data-position="top" data-tooltip="Show Profile" asp-controller="User" asp-action="Profile" asp-route-id="@item.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
-                                <i class="material-icons">info</i>
-                            </a>
+                            @foreach (var l in item.Links)
+                            {
+                                @Html.IconActionLink(l.IconText, l.IconHtmlAttributes, l.LinkText, l.ActionName, l.Controller, l.RouteValues, l.LinkHtmlAttributes);
+                            }
                         </div>
+                       
                     </div>
                 </div>
             </div>
@@ -31,6 +33,6 @@
 <style>
     .thumbnail img {
         height: 250px;
-        width: 100%;
+        width: 250px;
     }
 </style>

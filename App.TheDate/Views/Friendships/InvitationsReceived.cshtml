@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<User>
+@using Microsoft.AspNetCore.Routing
 
 @{
     ViewData["Title"] = "Invitations";
+    List<UserCardViewModel> UsersCards = new List<UserCardViewModel>();
 }
 @if (Model.Any())
 {
@@ -21,5 +23,61 @@ else
         </div>
     </div>
 }
-@await Html.PartialAsync("_UserGrid", Model);
+@{
+    var returnURL = Url.RouteUrl(ViewContext.RouteData.Values);
+
+    foreach (var u in Model)
+    {
+        var links = new List<UserCardLinkViewModel>();
+
+        var linkAttrs = new { @class = "btn btn-large rounded blue tooltipped", data_position = "top", data_tooltip = "Show Profile" };
+        var iconAttrs = new { @class = "material-icon" };
+        IDictionary<string, object> htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(linkAttrs);
+        IDictionary<string, object> linkAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(iconAttrs);
+
+        links.Add(new UserCardLinkViewModel() {
+            ActionName = "Profile",
+            Controller = "User",
+            LinkText = "",
+            RouteValues = new { id = u.Id, returnURL },
+            LinkHtmlAttributes = htmlAttributes,
+            IconText = "info",
+            IconHtmlAttributes = iconAttrs
+
+        });
+
+        linkAttrs = new { @class = "btn btn-large rounded green tooltipped", data_position = "top", data_tooltip = "Accept Invivtation" };
+        htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(linkAttrs);
+        links.Add(new UserCardLinkViewModel() {
+            ActionName = "Add",
+            Controller = "Friendships",
+            LinkText = "",
+            RouteValues = new { id = u.Id, returnURL },
+            LinkHtmlAttributes = htmlAttributes,
+            IconText = "add",
+            IconHtmlAttributes = iconAttrs
+        });
+
+        linkAttrs = new { @class = "btn btn-large rounded red tooltipped", data_position = "top", data_tooltip = "Reject Invivtation" };
+        htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(linkAttrs);
+        links.Add(new UserCardLinkViewModel()
+        {
+            ActionName = "Delete",
+            Controller = "Friendships",
+            LinkText = "",
+            RouteValues = new { id = u.Id, returnURL },
+            LinkHtmlAttributes = htmlAttributes,
+            IconText = "delete_forever",
+            IconHtmlAttributes = iconAttrs
+        });
+
+        UsersCards.Add( new UserCardViewModel()
+        {
+            User = u,
+            Links = links
+        });
+    }
+}
+@await Html.PartialAsync("_UserGrid", UsersCards);
+
 
