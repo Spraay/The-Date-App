@@ -3,7 +3,6 @@
 
 @{
     ViewData["Title"] = "Invitations";
-    List<UserCardViewModel> UsersCards = new List<UserCardViewModel>();
 }
 @if (Model.Any())
 {
@@ -24,13 +23,14 @@ else
     </div>
 }
 @{
+    List<UserCardViewModel> UsersCards = new List<UserCardViewModel>();
     var returnURL = Url.RouteUrl(ViewContext.RouteData.Values);
 
     foreach (var u in Model)
     {
         var links = new List<UserCardLinkViewModel>();
 
-        var linkAttrs = new { @class = "btn btn-large rounded blue tooltipped", data_position = "top", data_tooltip = "Show Profile" };
+        var linkAttrs = new { @class = "btn btn-large rounded blue tooltipped", data_position = "top", data_tooltip = "Show Profile", style = "margin: 5px;" };
         var iconAttrs = new { @class = "material-icon" };
         IDictionary<string, object> htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(linkAttrs);
         IDictionary<string, object> linkAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(iconAttrs);
@@ -46,7 +46,7 @@ else
 
         });
 
-        linkAttrs = new { @class = "btn btn-large rounded green tooltipped", data_position = "top", data_tooltip = "Accept Invivtation" };
+        linkAttrs = new { @class = "btn btn-large rounded green tooltipped", data_position = "top", data_tooltip = "Accept Invivtation", style = "margin: 5px;" };
         htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(linkAttrs);
         links.Add(new UserCardLinkViewModel() {
             ActionName = "Add",
@@ -58,7 +58,7 @@ else
             IconHtmlAttributes = iconAttrs
         });
 
-        linkAttrs = new { @class = "btn btn-large rounded red tooltipped", data_position = "top", data_tooltip = "Reject Invivtation" };
+        linkAttrs = new { @class = "btn btn-large rounded red tooltipped", data_position = "top", data_tooltip = "Reject Invivtation", style = "margin: 5px;" };
         htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(linkAttrs);
         links.Add(new UserCardLinkViewModel()
         {
