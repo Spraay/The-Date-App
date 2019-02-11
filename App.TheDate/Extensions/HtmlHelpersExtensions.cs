@@ -1,61 +1,46 @@
-﻿using Microsoft.AspNetCore.Hosting.Server;
-using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Abstractions;
+﻿using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 
 namespace App.TheDate.Extensions
 {
     public static class HtmlHelpersExtensions 
     {
-
-        public static IHtmlContent ActionLinkNonEncoded(this HtmlHelper htmlHelper, string linkText,
-                        string action, string controller, object routeValues, object htmlAttributes)
+        public static IHtmlContent IconActionLink(this IHtmlHelper helper,
+            string iconName,
+            object iconHtmlAttributes,
+            string linkText,
+            string actionName,
+            string controllerName,
+            object routeValues,
+            object linkHtmlAttributes)
         {
-            TagBuilder tagBuilder;
-           
-            tagBuilder = new TagBuilder("a");
-
-            tagBuilder.InnerHtml.Append(linkText);
-
-           
-
-            tagBuilder.MergeAttributes(new RouteValueDictionary(htmlAttributes));
-
-            return tagBuilder;
-        }
-        public static IHtmlContent IconActionLink(this IHtmlHelper helper, string iconName, object iconHtmlAttributes, string linkText, string actionName, string controllerName, object routeValues, object linkHtmlAttributes)
-        {
+            UrlHelper urlHelper = new UrlHelper(helper.ViewContext.RequestContext, helper.RouteCollection);
             var content = new HtmlContentBuilder();
-            var linkStart = new TagBuilder("a");
+            var anchorStart = new TagBuilder("a");
             
-            string rVString = "?";
+            string routeValuesToString = "?";
             foreach(var r in new RouteValueDictionary(routeValues))
             {
-                rVString += r.Key.ToString()+"="+r.Value.ToString()+"&";
+                routeValuesToString += r.Key.ToString()+"="+r.Value.ToString()+"&";
             }
-            rVString.Remove(rVString.Length-1);
-            linkStart.MergeAttribute("href", "../"+controllerName+"/"+actionName+"/"+rVString);
-            linkStart.MergeAttributes(new RouteValueDictionary(linkHtmlAttributes));
-            linkStart.InnerHtml.Append(linkText);
-            linkStart.TagRenderMode = TagRenderMode.StartTag;
+            routeValuesToString.Remove(routeValuesToString.Length-1);
+
+            anchorStart.MergeAttribute("href", "../"+controllerName+"/"+actionName+"/"
+                + routeValuesToString);
+
+            anchorStart.MergeAttributes(new RouteValueDictionary(linkHtmlAttributes));
+            anchorStart.InnerHtml.Append(linkText);
+            anchorStart.TagRenderMode = TagRenderMode.StartTag;
 
             var icon = MaterialIcon(helper, iconName, iconHtmlAttributes);
 
-            var linkEnd = new TagBuilder("a") { TagRenderMode = TagRenderMode.EndTag };
+            var anchorEnd = new TagBuilder("a") { TagRenderMode = TagRenderMode.EndTag };
 
-            content.AppendHtml(linkStart);
+            content.AppendHtml(anchorStart);
             content.AppendHtml(icon);
-            content.AppendHtml(linkEnd);
+            content.AppendHtml(anchorEnd);
 
             return content;
         }
