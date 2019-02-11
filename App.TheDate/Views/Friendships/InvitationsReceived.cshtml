@@ -36,7 +36,7 @@ else
         IDictionary<string, object> linkAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(iconAttrs);
 
         links.Add(new UserCardLinkViewModel() {
-            ActionName = "Profile",
+            Action = "Profile",
             Controller = "User",
             LinkText = "",
             RouteValues = new { id = u.Id, returnURL },
@@ -49,7 +49,7 @@ else
         linkAttrs = new { @class = "btn btn-large rounded green tooltipped", data_position = "top", data_tooltip = "Accept Invivtation", style = "margin: 5px;" };
         htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(linkAttrs);
         links.Add(new UserCardLinkViewModel() {
-            ActionName = "Add",
+            Action = "Add",
             Controller = "Friendships",
             LinkText = "",
             RouteValues = new { id = u.Id, returnURL },
@@ -62,7 +62,7 @@ else
         htmlAttributes = HtmlHelper.AnonymousObjectToHtmlAttributes(linkAttrs);
         links.Add(new UserCardLinkViewModel()
         {
-            ActionName = "Delete",
+            Action = "Delete",
             Controller = "Friendships",
             LinkText = "",
             RouteValues = new { id = u.Id, returnURL },
