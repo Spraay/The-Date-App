@@ -53,15 +53,15 @@ namespace App.TheDate.Controllers
                 return View(friend);
             
             if (friendship.FriendId == id && friendship.Status != Status.Accepted)
-                return NotAcceptJet(friend, returnURL);
+                return RedirectToAction(nameof(NotAcceptJet), new { id = friend.Id, returnURL } );
 
             if (friendship.SenderId == id && friendship.Status != Status.Accepted)
                 return View(friend);
             
             if (friendship.Status==Status.Accepted)
-                return AlreadyFriends(friend, returnURL);
-            
-            return AlreadyInvited(friend);
+                return RedirectToAction(nameof(AlreadyFriends), new { id = friend.Id, returnURL });
+
+            return RedirectToAction(nameof(AlreadyInvited), new { id = friend.Id, returnURL });
         }
 
         public async Task <IActionResult> NotFriend(Guid id, string returnURL = null)
@@ -77,20 +77,20 @@ namespace App.TheDate.Controllers
             _friendshipService.AddAsync(new Friendship() { SenderId = _userId, FriendId = id });
             return Redirect(returnURL);
         }
-        public IActionResult AlreadyInvited(User user, string returnURL = null)
+        public async Task<IActionResult> AlreadyInvited(Guid id, string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
-            return View(user);
+            return View(await _userService.GetAsync(id));
         }
-        public IActionResult AlreadyFriends(User user, string returnURL = null)
+        public async Task<IActionResult> AlreadyFriends(Guid id, string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
-            return View(user);
+            return View(await _userService.GetAsync(id));
         }
-        public IActionResult NotAcceptJet(User user, string returnURL = null)
+        public async Task<IActionResult> NotAcceptJet(Guid id, string returnURL = null)
         {
             ViewBag.ReturnURL = returnURL;
-            return View(user);
+            return View(await _userService.GetAsync(id));
         }
 
         public async Task<IActionResult> Delete(Guid id, string returnURL = null)
