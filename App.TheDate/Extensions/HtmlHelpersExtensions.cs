@@ -16,7 +16,7 @@ namespace App.TheDate.Extensions
             object routeValues,
             object linkHtmlAttributes)
         {
-            UrlHelper urlHelper = new UrlHelper(helper.ViewContext.RequestContext, helper.RouteCollection);
+            //UrlHelper urlHelper = new UrlHelper(helper.ViewContext.RequestContext, helper.RouteCollection);
             var content = new HtmlContentBuilder();
             var anchorStart = new TagBuilder("a");
             
