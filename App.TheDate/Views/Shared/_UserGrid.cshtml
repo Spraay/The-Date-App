@@ -1,5 +1,6 @@
 ﻿@model List<UserCardViewModel>
-@using App.TheDate.Extensions
+@using Microsoft.AspNetCore.Routing
+@addTagHelper App.TheDate.Helpers.Helpers, App.TheDate.Helpers
 @{
     List<UserCardLinkViewModel> links = (List<UserCardLinkViewModel>)ViewData["links"];
 }
@@ -19,8 +20,15 @@
                         <div class="center">
                             @foreach (var l in item.Links)
                             {
-                                @Html.IconActionLink(l.IconText, l.IconHtmlAttributes, l.LinkText, l.ActionName, l.Controller, l.RouteValues, l.LinkHtmlAttributes);
+                                var x = new RouteValueDictionary(l.LinkHtmlAttributes);
+                                var y = x.FirstOrDefault(_ => _.Key == "class");
+                                var z = x.FirstOrDefault(_ => _.Key == "data-position");
+                                var o = x.FirstOrDefault(_ => _.Key == "data-tooltip");
+                                //@Html.IconActionLink(l.IconText, l.IconHtmlAttributes, l.LinkText, l.ActionName, l.Controller, new { id = item.User.Id } , l.LinkHtmlAttributes);
+                                <a class="@y.Value" data-position="@z.Value" data-tooltip="@o.Value" asp-action="@l.Action" asp-controller="@l.Controller" asp-route-id="@item.User.Id"><i class="material-icons">@l.IconText</i></a>
                             }
+
+                            @*@Html.IconActionLink("Test", new { style = "color: red;" }, "TestLinkText", "TestActionName", "TestControllerName", new { id = 1 }, new { @class = "blue" } );*@
                         </div>
                     </div>
                 </div>
