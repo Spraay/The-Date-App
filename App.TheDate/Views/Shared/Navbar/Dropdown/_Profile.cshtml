@@ -7,12 +7,10 @@
 @{
     var user = await _userRepository.GetSingleAsync(_=>_.Id == _userService.CurrentUserId);
 }
-<!-- Dropdown Structure -->
 <ul id='profileDropdown' class='dropdown-content'>
     <li>Manage</li>
     <li>My Profile</li>
 </ul>
-
 <li class="avatar">
     <a class="left tooltipped" data-position="bottom" data-tooltip="Profile" asp-controller="User" asp-action="Index">
         <img src="~/images/userimages/@user.ProfileImageSrc" alt="" class="circle left" style="height: 44px; width: 44px; margin-top: 10px; margin-right: 5px;">
