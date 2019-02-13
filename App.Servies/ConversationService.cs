@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace App.Service
 {
-    public class ConversationsService : EntityBaseService<Conversation>, IConversationsService
+    public class ConversationService : EntityBaseService<Conversation>, IConversationService
     {
         private readonly IConversationRepository _repository;
-        public ConversationsService(IConversationRepository repository) : base(repository)
+        public ConversationService(IConversationRepository repository) : base(repository)
         {
             _repository = repository;
         }

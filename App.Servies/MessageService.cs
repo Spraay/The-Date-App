@@ -9,13 +9,11 @@ namespace App.Service
 {
     public class MessageService : EntityBaseService<Message>, IMessageService
     {
-        private readonly IMessageRepository _messageRepository;
-        private readonly IConversationRepository _conversationRepository;
+        private readonly IMessageRepository _repository;
 
-        public MessageService(IMessageRepository messageRepository, IConversationRepository conversationRepository) : base(messageRepository)
+        public MessageService(IMessageRepository repository) : base(repository)
         {
-            _messageRepository = messageRepository;
-            _conversationRepository = conversationRepository;
+            _repository = repository;
         }
     }
 }
