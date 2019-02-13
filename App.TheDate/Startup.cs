@@ -70,9 +70,10 @@ namespace App.TheDate
             services.AddScoped<IVoteRepository, VoteRepository>();
 
             services.AddScoped<IConversationRepository, ConversationRepository>();
-            services.AddTransient<IConversationsService, ConversationsService>();
+            services.AddTransient<IConversationService, ConversationService>();
 
             services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IMessageService, MessageService>();
 
             services.AddTransient<IEmailSender, EmailSender>();
 
