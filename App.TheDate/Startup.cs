@@ -18,6 +18,7 @@ using App.Repository.Abstract;
 using App.DAO.Data;
 using System;
 using App.TheDate.Hubs;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace App.TheDate
 {
@@ -91,6 +92,12 @@ namespace App.TheDate
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Latest)
                 .AddJsonOptions(_ => _.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            // Register the Swagger generator, defining 1 or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("alpha", new Info { Title = "My API", Version = "alpha" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -124,6 +131,16 @@ namespace App.TheDate
             app.UseSignalR(route =>
             {
                 route.MapHub<NotificationHub>("/notyfihub");
+            });
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/alpha/swagger.json", "My API Alpha");
             });
 
             app.UseMvc(routes =>
