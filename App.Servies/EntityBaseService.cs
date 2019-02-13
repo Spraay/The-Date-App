@@ -77,5 +77,15 @@ namespace App.Service
         {
             return await _repository.FindByAsync(predicate, includeProperties);
         }
+
+        public async Task<bool> IsExistsAsync(Guid id)
+        {
+            return await IsExistsAsync(_ => _.Id == id);
+        }
+
+        public async Task<bool> IsExistsAsync(Expression<Func<EntityType, bool>> predicate)
+        {
+            return await _repository.IsExistsAsync(predicate);
+        }
     }
 }
