@@ -15,9 +15,9 @@ namespace App.TheDate.Controllers
         private readonly IUserService _userService;
         private readonly IFriendService _friendService;
         private readonly IUserRepository _userRepository;
-        private readonly IConversationsService _conversationsService;
+        private readonly IConversationService _conversationsService;
 
-        public ConversationsController( IUserService userService, IFriendService friendService, IUserRepository userRepository, IConversationsService conversationsService)
+        public ConversationsController( IUserService userService, IFriendService friendService, IUserRepository userRepository, IConversationService conversationsService)
         {
             _userService = userService;
             _friendService = friendService;
