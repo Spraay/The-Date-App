@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.DAO.Data;
+using App.Repository;
+using App.Repository.Abstract;
+using App.Service;
+using App.Service.Abstract;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -25,6 +31,19 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+                services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseSqlServer(
+                            Configuration.GetConnectionString("ProductionDbConnection")));
+            else
+                services.AddDbContext<ApplicationDbContext>(options =>
+                        //options.UseSqlite("Data Source=localdatabase.db"));
+                        options.UseSqlServer(
+                            Configuration.GetConnectionString("DevelopmentDbConnection")));
+
+            services.AddScoped<IConversationRepository, ConversationRepository>();
+
+            services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddScoped<IMessageService, MessageService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

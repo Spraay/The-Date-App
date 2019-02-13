@@ -2,19 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Model.Entities;
+using App.Service.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+    [Authorize(Roles="User, Admin")]
     [Route("api/[controller]")]
     [ApiController]
-    public class ValuesController : ControllerBase
+    public class MessagesController : ControllerBase
     {
+        private readonly IMessageService _messageService;
+
+        public MessagesController(IMessageService messageService)
+        {
+            _messageService = messageService;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ActionResult<IEnumerable<Message>>> GetTodoItems()
         {
-            return new string[] { "value1", "value2" };
+            var result = await _messageService.GetAllAsync();
+            return result.ToList();
         }
 
         // GET api/values/5
