@@ -15,12 +15,12 @@ namespace App.TheDate.Controllers
     public class MessagesController : Controller
     {
         private readonly IMessageRepository _messageRepository;
-        private readonly IConversationsService _conversationsService;
+        private readonly IConversationService _conversationsService;
         private readonly IUserService _userService;
         private readonly IUserRepository _userRepository;
         private readonly Guid _userId;
 
-        public MessagesController(IMessageRepository messageRepository, IConversationsService conversationsService, IUserService userService, IUserRepository userRepository) 
+        public MessagesController(IMessageRepository messageRepository, IConversationService conversationsService, IUserService userService, IUserRepository userRepository) 
         {
             _userRepository = userRepository;
             _messageRepository = messageRepository;
