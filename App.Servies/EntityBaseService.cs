@@ -5,7 +5,10 @@ using App.Model.Entities.Abstract;
 using App.Repository;
 using App.Repository.Abstract;
 using App.Service.Abstract;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -87,5 +90,17 @@ namespace App.Service
         {
             return await _repository.IsExistsAsync(predicate);
         }
+
+        public object SelectNeededObjects(IEnumerable<EntityType> enties, params Expression<Func<EntityType, object>>[] selectedProperties)
+        {
+            var posts = enties.Select(_ => new { selectedProperties });
+            JObject o = JObject.FromObject(new
+            {
+                posts
+            });
+            return o;
+            // TODO
+        }
+       
     }
 }

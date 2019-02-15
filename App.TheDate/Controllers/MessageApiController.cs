@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using App.Model.Entities;
-using App.Model.View;
+using App.Model.API;
 using App.Service.Abstract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace API.Controllers
 {
@@ -16,67 +16,56 @@ namespace API.Controllers
     [ApiController]
     public class MessagesApiController : ControllerBase
     {
-        private readonly IMessageService _messageService;
         private readonly IConversationService _conversationsService;
         private readonly IUserService _userService;
 
-        public MessagesApiController(IMessageService messageService, IConversationService conversationsService, IUserService userService)
+        public MessagesApiController(IConversationService conversationsService, IUserService userService)
         {
-            _messageService = messageService;
             _conversationsService = conversationsService;
             _userService = userService;
         }
 
         [HttpGet]
-        [Route("")]
-        [Route("conversations")]
-        public async Task<ActionResult<IEnumerable<Message>>> GetAllMessages()
-        {
-            var result = await _messageService.GetAllAsync();
-            return result.ToList();
-        }
-
-        [HttpGet]
         [Route("conversation/{id}")]
-        public async Task<ActionResult<Conversation>> GetConversation(Guid id)
+        public async Task<JObject> GetConversationDetails(Guid id)
         {
-            var qR = await _conversationsService.GetAsync(id, _ => _.Users, _ => _.Messages);
-            var cUsers = await _userService.FindByAsync(_=> qR.Users.Select(__=>__.UserId).Contains(_.Id));
-            return new JsonResult(new ConversationViewModel()
-            {
-                Id = id,
-                Name = qR.Name,
-                Messages = qR.Messages.ToList(),
-                Users = cUsers.ToList()
-            });
+            if(await _conversationsService.IsExistsAsync(id))
+            { 
+                var queryResult =  await _conversationsService.GetAsync(id, _=>_.Users, _=>_.Messages);
+                var users = queryResult.Users.Select(_ => _.User).Select(_ => new { _.Id, _.FirstName, _.LastName, _.ProfileImageSrc });
+                JObject o = JObject.FromObject(new
+                {
+                    queryResult.Id,
+                    queryResult.Name,
+                });
+                return o;
+            }
+            return ObjectNotExists(id);
         }
 
-        
-
-
-        //// GET api/values/5
-        //[HttpGet("{id}")]
-        //public ActionResult<string> Get(int id)
+        //[HttpGet]
+        //[Route("conversation/{id}/users")]
+        //public async Task<JObject> GetConversationUsers(Guid id)
         //{
-        //    return "value";
+        //    if (await _conversationsService.IsExistsAsync(id))
+        //    {
+        //        var queryResult = (List<Conversation>)await _conversationsService.GetAsync(id, _ => _.Users);
+        //        var users = await _userService.FindByAsync(_ => queryResult..Select(__ => __.User).)
+        //        JObject o = JObject.FromObject(new
+        //        {
+        //            id,
+        //            queryResult.Name,
+        //        });
+        //        return o;
+        //    }
+        //    return ObjectNotExists(id);
         //}
 
-        //// POST api/values
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
 
-        //// PUT api/values/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
 
-        //// DELETE api/values/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
+        private JObject ObjectNotExists(Guid id)
+        {
+            return new JObject($"Object with id {id} Not Exists in database");
+        }
     }
 }

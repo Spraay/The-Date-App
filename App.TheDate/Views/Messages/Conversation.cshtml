@@ -10,14 +10,14 @@
 }
 <div class="hide-on-small-and-down">
     <br />
-</div>    
+</div>
 <div class="row">
     <div id="conversationMessagesWindow" class="section col s12 m8 l6 offset-m2 offset-l3 white z-depth-2 red">
         <div id="CMWHeader" class="row section">
             <div class="col s12">
                 <div class="col s12">
                     <div class="col s6 left">
-                        <h6 class="grey-text">@Model.Name</h6>
+                        <h6 class="grey-text" id="cName"></h6>
                     </div>
                     <div class="col s6 valign right ">
                         <h6><a class="grey-text pointer-cursor" asp-controller="Conversations" asp-action="Edit" asp-route-id="@Model.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><i class="material-icons right hover-opacity">settings</i></a></h6>
@@ -61,3 +61,52 @@
         </div>
     </div>
 </div>
+<a class="btn btn-large" onclick="displayConversationDetails()">GET DATA BTN</a>
+<script src="~/scripts/app.js"></script>
+<div id="message"></div>
+
+<div>
+    Compiler: <input id="compiler" value="TypeScript" onkeyup="document.getElementById('message').innerText = sayHello()" /><br />
+    Framework: <input id="framework" value="ASP.NET" onkeyup="document.getElementById('message').innerText = sayHello()" />
+</div>
+
+
+<script type="text/javascript">
+    function getMessagesApiData(link)
+    {
+        $.ajax({
+            url: '../../'+'api/messagesapi/'+link,
+            dataType: 'json',
+            success: function (data) {
+                alert('succes get api data');
+                alert(data['Id'] + " "+data['Name']);
+                return data;
+            },
+            error: function (e) {
+                console.log(e.message);
+            }
+        });
+    }
+
+    function displayConversationDetails()
+    {
+        data = getConversationDetails(@Model.Id);
+
+        $('#cName').text(data['Name']);
+
+    }
+
+    function getConversationMessages()
+    {
+        return getMessagesApiData('conversation/@Model.Id/messages');
+    }
+
+    function getConversationDetails(id)
+    {
+        return getMessagesApiData('conversation/@Model.Id');
+    }
+
+
+
+
+</script>

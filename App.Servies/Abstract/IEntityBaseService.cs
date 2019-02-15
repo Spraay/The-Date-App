@@ -1,4 +1,5 @@
 ﻿using App.Model.Entities.Abstract;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -24,6 +25,8 @@ namespace App.Service.Abstract
 
         Task<bool> IsExistsAsync(Guid id);
         Task<bool> IsExistsAsync(Expression<Func<EntityType, bool>> predicate);
+
+        object SelectNeededObjects(IEnumerable<EntityType> enties, params Expression<Func<EntityType, object>>[] selectedProperties);
 
     }
 }
