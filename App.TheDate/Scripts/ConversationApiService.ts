@@ -1,7 +1,5 @@
 ﻿import * as request from 'request';
 
-
-
 export interface IConversationInfo
 {
     Id: string;
@@ -16,7 +14,6 @@ export interface IConversationUser
     LastName: string;
     ProfileImgSrc: string;
 }
-
 
 export class ConversationApiService
 {

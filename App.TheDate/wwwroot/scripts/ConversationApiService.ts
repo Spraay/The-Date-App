@@ -1,5 +1,7 @@
 import * as request from 'request';
 
+
+
 export interface IConversationInfo
 {
     Id: string;

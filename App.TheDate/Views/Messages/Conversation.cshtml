@@ -61,52 +61,13 @@
         </div>
     </div>
 </div>
-<a class="btn btn-large" onclick="displayConversationDetails()">GET DATA BTN</a>
+
+
 <script src="~/scripts/app.js"></script>
-<div id="message"></div>
+
+<div id="message">asdasdasdasdasd</div>
 
 <div>
     Compiler: <input id="compiler" value="TypeScript" onkeyup="document.getElementById('message').innerText = sayHello()" /><br />
     Framework: <input id="framework" value="ASP.NET" onkeyup="document.getElementById('message').innerText = sayHello()" />
 </div>
-
-
-<script type="text/javascript">
-    function getMessagesApiData(link)
-    {
-        $.ajax({
-            url: '../../'+'api/messagesapi/'+link,
-            dataType: 'json',
-            success: function (data) {
-                alert('succes get api data');
-                alert(data['Id'] + " "+data['Name']);
-                return data;
-            },
-            error: function (e) {
-                console.log(e.message);
-            }
-        });
-    }
-
-    function displayConversationDetails()
-    {
-        data = getConversationDetails(@Model.Id);
-
-        $('#cName').text(data['Name']);
-
-    }
-
-    function getConversationMessages()
-    {
-        return getMessagesApiData('conversation/@Model.Id/messages');
-    }
-
-    function getConversationDetails(id)
-    {
-        return getMessagesApiData('conversation/@Model.Id');
-    }
-
-
-
-
-</script>
