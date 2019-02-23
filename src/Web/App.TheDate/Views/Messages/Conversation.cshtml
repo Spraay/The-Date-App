@@ -1,0 +1,67 @@
+﻿@model Conversation
+@{
+    ViewData["Title"] = "Conversation";
+    IEnumerable<User> conversationUsers = ViewBag.ConversationUsers;
+    IEnumerable<Message> messages = Model.Messages.OrderBy(_ => _.CreatedDate);
+    bool isOwner(Message msg)
+    {
+        return msg.Sender.UserName == User.Identity.Name;
+    }
+}
+<div class="hide-on-small-and-down">
+    <br />
+</div>
+<div class="row">
+    <div id="conversationMessagesWindow" class="section col s12 m8 l6 offset-m2 offset-l3 white z-depth-2 red">
+        <div id="CMWHeader" class="row section">
+            <div class="col s12">
+                <div class="col s12">
+                    <div class="col s6 left">
+                        <h6 class="grey-text" id="cName"></h6>
+                    </div>
+                    <div class="col s6 valign right ">
+                        <h6><a class="grey-text pointer-cursor" asp-controller="Conversations" asp-action="Edit" asp-route-id="@Model.Id" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><i class="material-icons right hover-opacity">settings</i></a></h6>
+                    </div>
+                </div>
+                <ul class="collapsible z-depth-0 no-border">
+                    <li>
+                        <h8 class="collapsible-header no-border z-depth-0 grey-text"><i class="material-icons">group</i>Conversation users...</h8>
+                        <div class="collapsible-body col s12">
+                            @await Html.PartialAsync("_UsersChips", conversationUsers)
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="CMWContent" class="row section" style="overflow-y:scroll; max-width: 100%; overflow-x: hidden; height:400px; padding: 10px;">
+            @for (int i = 0; i < messages.Count(); i++)
+            {
+                var current = messages.ElementAtOrDefault(i);
+                var next = messages.ElementAtOrDefault(i + 1);
+                var iO = isOwner(current);
+                <div id="@(current==messages.LastOrDefault()?"lastMessage":"message")" class="col s12" style="margin-left: 20px;">
+                    <div class="col s6 @(iO?"offset-s6":"")">
+                        <div style="display: inline-block; margin-top: 4px;" class="rounded @(iO?"right left-align blue white-text":"left left-align grey lighten-2")">
+                            <div style="padding: 4px;  margin-left: 10px; margin-right: 10px;">@current.Content</div>
+                            @if (!isOwner(current) && (next == null || next.SenderId != current.SenderId))
+                            {
+                                <div style="@(iO?"":"margin-top: -40px;")">
+                                    <img src="~/images/userimages/@current.Sender.ProfileImageSrc" alt="" class="circle" style='width: 40px; height: 40px; position: relative; left: -45px;' />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div id="CMWFooter" class="section">
+            <div class="valign-wrapper col s12">
+                @await Html.PartialAsync("_MessageForm", new Message() { ConversationId = Model.Id })
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/scripts/app.js"></script>
+
+

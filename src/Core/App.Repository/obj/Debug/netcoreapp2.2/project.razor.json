@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\Users\\Spray\\Desktop\\The-Date-App\\App.Repository\\App.Repository.csproj",
+  "TargetFramework": "netcoreapp2.2",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}

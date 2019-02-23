@@ -1,0 +1,85 @@
+@using Microsoft.AspNetCore.Identity
+@using Core.Services.Abstract
+@using Core.Repositories.Abstract
+@inject SignInManager<User> SignInManager
+@inject IUserService _userService
+@inject IUserRepository _userRepository
+
+@{
+    var user = await _userRepository.GetSingleAsync(_ => _.Id == _userService.CurrentUserId);
+}
+
+<ul class="sidenav blue white-text" id="mobile-demo">
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li>
+            <div class="user-view">
+                <div class="background">
+                    <img src="~/images/userimages/NoProfileBackground.png">
+                </div>
+                <a asp-controller="User" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><img class="circle" src="~/images/userimages/@user.ProfileImageSrc"></a>
+                <a asp-controller="User" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><span class="white-text name">@user.FirstName @user.LastName</span></a>
+                <a asp-controller="User" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><span class="white-text email">@user.Email</span></a>
+            </div>
+        </li>
+        <li class="" style="margin-left: -18px; margin-right: 18px;">
+            <a class="white-text" asp-controller="Explore" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><i class="material-icons white-text">search</i> Explore</a>
+        </li>
+        <li class="" style="margin-left: -18px; margin-right: 18px;">
+            <a class="white-text" asp-controller="User" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><i class="material-icons white-text">account_box</i> Your Profile</a>
+        </li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a class="collapsible-header white-text"><i class="material-icons left white-text">group</i> Friendship<i class="material-icons right white-text">arrow_drop_down</i></a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li class="no-padding">
+                                <a asp-controller="Friendships" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                    My Friends <i class="material-icons">group</i>
+                                </a>
+                            </li>
+                            <li class="divider" tabindex="-1"></li>
+                            <li><a asp-controller="Friendships" asp-action="InvitationsSent" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">Invites Sent<i class="material-icons">redo</i></a></li>
+                            <li><a asp-controller="Friendships" asp-action="InvitationsReceived" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">Invites Received<i class="material-icons">undo</i></a></li>
+                            <li class="divider" tabindex="-1"></li>
+                            <li><a asp-controller="Meet" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">Meets<i class="material-icons">how_to_reg</i></a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="" style="margin-left: -18px; margin-right: 18px;">
+            <a class="white-text" asp-controller="Conversations" asp-action="Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><i class="material-icons white-text">message</i> Conversations</a>
+        </li>
+        <li class="" style="margin-left: -18px;">
+            <a class="white-text" data-position="bottom"
+               asp-area="Identity"
+               asp-page="/Account/Manage/Index" asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)"><i class="material-icons white-text">settings</i>Settings</a>
+        </li>
+        <li class="pointer-cursor" style="margin-left: -18px; margin-right: 18px;">
+            <a class="white-text" onclick="$('#HeaderForm').submit()"><i class="material-icons white-text">power_settings_new</i> Logout</a>
+        </li>
+
+    }
+    else
+    {
+        <li class="center">
+            <ul>
+                <li class="" style="margin-left: -18px; margin-right: 18px;"><p class="white-text">Welcome Guest!</p></li>
+                <li class="" style="margin-left: -18px;"><a class="white-text" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                <li class="" style="margin-left: -18px;"><a class="white-text" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+            </ul>
+        </li>
+       
+
+    }
+</ul>
+
+<form asp-area="Identity"
+      asp-page="/Account/Logout"
+      asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"
+      method="post"
+      id="HeaderForm"
+      class="navbar-right"></form>

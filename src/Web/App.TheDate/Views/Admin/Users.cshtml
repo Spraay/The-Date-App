@@ -1,0 +1,257 @@
+﻿@using Core.Pagination;
+@model PaginatedList<ApplicationUserViewModel>
+
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+
+@*@using (Html.BeginForm("Users", "Admin", FormMethod.Get))
+    {
+        <p>
+            Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" />
+        </p>
+    }*@
+<div class="grey darken-3 z-depth-3" style="padding: 1vw; margin-top: -10px;">
+    <div class="center">
+        <p class="white-text" style="font-size: 3vw;">@ViewData["Title"]<i style="vertical-align: bottom; font-size: 4vw !important;" class="inline-icon material-icons">edit</i></p>
+    </div>
+</div>
+@*<div class="grey darken-3 z-depth-3" style="padding: 1vw; margin-top: -10px;">
+    <form asp-action="Users" method="get" class="col s12">
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">search</i>
+                <input id="search" type="text" name="SearchString" value="@ViewData["currentFilter"]">
+                <label for="search">Find by phrase</label>
+            </div>
+        </div>
+    </form>
+</div>*@
+<div class="container">
+    <ul class="collection z-depth-3">
+        @foreach (var item in Model)
+        {
+        <li class="collection-item avatar">
+            <div class="row">
+                <img src="~/images/userimages/@item.ProfileImageSrc" alt="" class="circle">
+                    <div class="col m6">
+                        <span class="title">
+                            <b class="hoverable">
+                                <a class="pointer-cursor hover-opacity"
+                                    asp-controller="User"
+                                    asp-action="Profile"
+                                    asp-route-id="@item.Id"
+                                    asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                    @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                                </a>
+                            </b>
+                        </span><br />
+                        Born: @Html.DisplayFor(modelItem => item.BirthDate)
+                    </div>
+                <div class="col m6">
+                    <div class="row right">
+                        <div class="col m12 right">
+                            <div class="col m12">
+                                <div class="col m1 right"><i class="material-icons">grade</i></div>
+                                <div class="col m1 right"><i class="material-icons">grade</i></div>
+                                <div class="col m1 right"><i class="material-icons orange-text">grade</i></div>
+                                <div class="col m1 right"><i class="material-icons orange-text">grade</i></div>
+                                <div class="col m1 right"><i class="material-icons orange-text">grade</i></div>
+                                <div class="col m2 right"><b class="orange-text">Rating</b></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+</li>
+        }
+        
+        <li>
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+            <div class="row col s12">
+                <div class="col s6 m6 l6 left-align">
+                    <ul class="pagination">
+                        <li><label>Items per Site</label></li>
+                        <li class="@(ViewData["PageSize"].ToString()=="1" ? "waves-effect active":"waves-effect")">
+                            <a asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                asp-route-pageSize="1"
+                                asp-route-currentFilter="@ViewData["CurrentFilter"]">1</a>
+                        </li>
+                        <li class="@(ViewData["PageSize"].ToString()=="5" ? "waves-effect active":"waves-effect")">
+                            <a asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                asp-route-pageSize="5"
+                                asp-route-currentFilter="@ViewData["CurrentFilter"]">5</a>
+                        </li>
+                        <li class="@(ViewData["PageSize"].ToString()=="10" ? "waves-effect active":"waves-effect")">
+                            <a asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                asp-route-pageSize="10"
+                                asp-route-currentFilter="@ViewData["CurrentFilter"]">10</a>
+                        </li>
+                        <li class="@(ViewData["PageSize"].ToString()=="20" ? "waves-effect active":"waves-effect")">
+                            <a asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                asp-route-pageSize="20"
+                                asp-route-currentFilter="@ViewData["CurrentFilter"]">20</a>
+                        </li>
+                        <li class="@(ViewData["PageSize"].ToString()=="40" ? "waves-effect active":"waves-effect")">
+                            <a asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                asp-route-pageSize="40"
+                                asp-route-currentFilter="@ViewData["CurrentFilter"]">40</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col s6 m6 l6 right-align">
+
+                    <ul class="pagination">
+                        <li><label>Site</label></li>
+                        <li class="@prevDisabled">
+                            <a asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                asp-route-page="@(Model.PageIndex - 1)"
+                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                asp-route-pageSize="@ViewData["PageSize"]">
+                                <i class="material-icons">chevron_left</i>
+                            </a>
+                        </li>
+                        @for (int i = 1; i <= Model.TotalPages; i++)
+                        {
+                            <li class="@(i==Model.PageIndex ? "waves-effect active":"waves-effect")">
+                                <a asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                    asp-route-page="@i"
+                                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                    asp-route-pageSize="@ViewData["PageSize"]">@i</a>
+                            </li>
+                        }
+
+                        <li class="@nextDisabled">
+                            <a asp-route-sortOrder="@ViewData["CurrentSort"]"
+                                asp-route-page="@(Model.PageIndex + 1)"
+                                asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                asp-route-pageSize="@ViewData["PageSize"]">
+                                <i class="material-icons">chevron_right</i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                <th>
+                    <h5>
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().FirstName)
+                        <a asp-action="Users"
+                           asp-route-sortOrder="@ViewData["FirstNameSortParm"]"
+                           asp-route-pageSize="@ViewData["PageSize"]"
+                           asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                            <i class="material-icons medium" style="@(ViewData["FirstNameSortParm"].ToString()!="first_name_desc")?'transform: rotate(180deg);'">sort</i>
+                        </a>
+                    </h5>
+                    @*<a asp-action="Users" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">First Name</a>*@
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().LastName)
+                    <a asp-action="Users"
+                       asp-route-sortOrder="@ViewData["LastNameSortParm"]"
+                       asp-route-pageSize="@ViewData["PageSize"]"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                        <i class="material-icons medium" style="@(ViewData["FirstNameSortParm"].ToString()!="last_name_desc")?'transform: rotate(180deg);'">sort</i>
+                    </a>
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Height)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Weight)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.BirthDate)
+                    </th>*@
+                <th>
+                    <a asp-action="Users"
+                       asp-route-sortOrder="@ViewData["DateSortParm"]"
+                       asp-route-pageSize="@ViewData["PageSize"]"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                        @Html.DisplayNameFor(model => model.FirstOrDefault().BirthDate)
+                    </a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().Eyes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().UserName)
+                </th>
+                
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/images/userimages/@item.ProfileImageSrc" alt="" class="circle left" style="height: 44px; width: 44px; margin-top: 10px; margin-right: 5px;">
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Height)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BirthDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Eyes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+
+                       
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    
+</div>
+<br /><br />
+<script>
+    $(document).ready(function () {
+        $("#cross").on("click", function (event) {
+            $("#input").val("");
+        });
+    });
+</script>

@@ -1,0 +1,234 @@
+﻿@using Core.Pagination;
+@model PaginatedList<ApplicationUserViewModel>
+
+@{
+    ViewData["Title"] = "Users";
+    
+}
+<div class="grey darken-3 z-depth-2" style="padding: 1vw; margin-top: -10px;">
+    <div class="center">
+        <p class="white-text" style="font-size: 3vw;">@ViewData["Title"]<i style="vertical-align: bottom; font-size: 4vw !important;" class="inline-icon material-icons">edit</i></p>
+    </div>
+    <div class="container">
+        <ul id="sortByDropDown" class="dropdown-content col s6 no-padding">
+            <li><a onclick="$('#sortByLabel').html('First Name'); $('#sortItem').val('first_name')">First Name</a></li>
+            <li><a onclick="$('#sortByLabel').html('Last Name'); $('#sortItem').val('last_name')">Last Name</a></li>
+            <li class="divider"></li>
+            <li><a onclick="$('#sortByLabel').html('Born Date');$('#sortItem').val('date');">Born Date</a></li>
+        </ul>
+        <ul id="orderByDropDown" class="dropdown-content ">
+            <li ><a onclick="$('#orderByLabel').html('Ascending');$('#sortOrder').val('asce')">Ascending</a></li>
+            <li><a onclick="$('#orderByLabel').html('Descending');$('#sortOrder').val('desc')">Descending</a></li>
+        </ul>
+        <div class="row col s12 no-padding">
+            <div class="col s12 m12 l4">
+                <nav class="grey darken-2 z-depth-0">
+                    <div class="nav-wrapper">
+                        <form asp-action="Users" id="Form">
+                            <div class="input-field col s12 no-padding grey-text">
+                                <input hidden id="page" name="page" value='@ViewData["Page"]'>
+                                <input hidden id="pageSize" name="pageSize" value='@ViewData["PageSize"]'>
+                                <input hidden id="sortItem" name="sortItem" value='@ViewData["SortItem"]'>
+                                <input hidden id="sortOrder" name="sortOrder" value='@ViewData["SortOrder"]'>
+                                <input hidden id="filtrFemale" name="filtrFemale" value="@ViewData["FiltrFemale"]">
+                                <input hidden id="filtrMale" name="filtrMale" value="@ViewData["FiltrMale"]">
+                                <input style="color: white"
+                                       onblur="$(this).css('color','white')" onfocus="$(this).css('color','grey')"
+                                       id="searchString" name="searchString" type="search" value='@ViewData["SearchString"]' required>
+                                <label class="label-icon" for="searchString"><i class="material-icons">search</i></label>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+            <div class="col s12 m10 l7">
+                <nav class="color grey darken-2 z-depth-0 no-padding col s12">
+                    <div class="nav-wrapper">
+                        <ul class="col s12 no-padding">
+                            <li class="col s6 no-padding">
+                                <a class="dropdown-trigger" href="#!" data-target="sortByDropDown">Sort By<i class="material-icons right">arrow_drop_down</i> <label id="sortByLabel"> @ViewData["SortItemName"]</label></a>
+                            </li>
+                            <li class="col s6 no-padding"><a class="dropdown-trigger" href="#!" data-target="orderByDropDown">Order By<i class="material-icons right">arrow_drop_down</i> <label id="orderByLabel"> @ViewData["SortOrderName"]</label></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="col s12 m2 l1">
+                <nav class="color grey darken-2 z-depth-0">
+                    <div class="nav-wrapper">
+                        <ul class="col s12 right no-padding text-center">
+                            
+                            <li class="center col s12 no-padding">
+                                <a id="FormSubmitButton">
+                                    <i class="material-icons">send</i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="col s6">
+                <blockquote class="white-text">
+                    Filtr Male
+                    <div class="switch">
+                        <label>
+                            No
+                            <input type="checkbox" @((ViewData["FiltrMale"].ToString()=="true")?"checked":"")>
+                            <span class="lever" onclick="$('#filtrMale').val((($('#filtrMale').val()=='true')?false:true))"></span>
+                            Yes
+                        </label>
+                    </div>
+                </blockquote>
+            </div>
+            <div class="col s6">
+                <blockquote class="white-text">
+                    Filtr Female
+                    <div class="switch">
+                        <label>
+                            No
+                            <input type="checkbox" @((ViewData["FiltrFemale"].ToString()=="true")?"checked":"")/>
+                            <span class="lever" onclick="$('#filtrFemale').val((($('#filtrFemale').val()=='true')?false:true))"></span>
+                            Yes
+                        </label>
+                    </div>
+                    
+                </blockquote>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row col s12 m12 l12">
+        <div class="col s12 m12 l12">
+            <ul class="collection z-depth-3 white">
+                @foreach (var item in Model)
+                {
+                    <li class="collection-item avatar">
+                        <div class="row">
+                            <img src="~/images/userimages/@item.ProfileImageSrc" alt="" class="circle">
+                            <div class="col m6">
+                                <span class="title">
+                                    <b class="hoverable">
+                                        <a class="pointer-cursor hover-opacity"
+                                           asp-controller="User"
+                                           asp-action="Profile"
+                                           asp-route-id="@item.Id"
+                                           asp-route-returnURL="@Url.RouteUrl(ViewContext.RouteData.Values)">
+                                            @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+                                        </a>
+                                    </b>
+                                </span><br />
+                                Born: @Html.DisplayFor(modelItem => item.BirthDate)
+                            </div>
+                        </div>
+                    </li>
+                }
+
+                <li class="">
+                    <br />
+                    @{
+                        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+                    }
+                    <div class="row col s12">
+                        <div class="col s12 m6 l6 left-align">
+                            <ul class="pagination">
+                                
+                                <li><label>Items per Site</label></li>
+                                <li class="@(ViewData["PageSize"].ToString() == "1" ? "waves-effect active" : "waves-effect")">
+                                    <a asp-route-sortOrder="@ViewData["SortOrder"]"
+                                       asp-route-pageSize="1"
+                                       asp-route-sortItem="@ViewData["SortItem"]"
+                                       asp-route-filtrFemale="@ViewData["FiltrFemale"]"
+                                       asp-route-filtrMale="@ViewData["FiltrMale"]"
+                                       asp-route-currentFilter="@ViewData["CurrentFilter"]">1</a>
+                                </li>
+                                <li class="@(ViewData["PageSize"].ToString() == "5" ? "waves-effect active" : "waves-effect")">
+                                    <a asp-route-sortOrder="@ViewData["SortOrder"]"
+                                       asp-route-pageSize="5"
+                                       asp-route-sortItem="@ViewData["SortItem"]"
+                                       asp-route-filtrFemale="@ViewData["FiltrFemale"]"
+                                       asp-route-filtrMale="@ViewData["FiltrMale"]"
+                                       asp-route-currentFilter="@ViewData["CurrentFilter"]">5</a>
+                                </li>
+                                <li class="@(ViewData["PageSize"].ToString() == "10" ? "waves-effect active" : "waves-effect")">
+                                    <a asp-route-sortOrder="@ViewData["SortOrder"]"
+                                       asp-route-pageSize="10"
+                                       asp-route-sortItem="@ViewData["SortItem"]"
+                                       asp-route-filtrFemale="@ViewData["FiltrFemale"]"
+                                       asp-route-filtrMale="@ViewData["FiltrMale"]"
+                                       asp-route-currentFilter="@ViewData["CurrentFilter"]">10</a>
+                                </li>
+                                <li class="@(ViewData["PageSize"].ToString() == "20" ? "waves-effect active" : "waves-effect")">
+                                    <a asp-route-sortOrder="@ViewData["SortOrder"]"
+                                       asp-route-pageSize="20"
+                                       asp-route-sortItem="@ViewData["SortItem"]"
+                                       asp-route-filtrFemale="@ViewData["FiltrFemale"]"
+                                       asp-route-filtrMale="@ViewData["FiltrMale"]"
+                                       asp-route-currentFilter="@ViewData["CurrentFilter"]">20</a>
+                                </li>
+                                <li class="@(ViewData["PageSize"].ToString() == "40" ? "waves-effect active" : "waves-effect")">
+                                    <a asp-route-sortOrder="@ViewData["SortOrder"]"
+                                       asp-route-pageSize="40"
+                                       asp-route-sortItem="@ViewData["SortItem"]"
+                                       asp-route-filtrFemale="@ViewData["FiltrFemale"]"
+                                       asp-route-filtrMale="@ViewData["FiltrMale"]"
+                                       asp-route-currentFilter="@ViewData["CurrentFilter"]">40</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col s12 m6 l6 right-align white">
+
+                            <ul class="pagination">
+                                <li><label>Site</label></li>
+                                <li class="@prevDisabled">
+                                    <a 
+                                       asp-route-pageSize="1"
+                                       asp-route-sortItem="@ViewData["SortItem"]"
+                                       asp-route-filtrFemale="@ViewData["FiltrFemale"]"
+                                       asp-route-filtrMale="@ViewData["FiltrMale"]"
+                                       asp-route-sortOrder="@ViewData["SortOrder"]"
+                                       asp-route-page="@(Model.PageIndex - 1)"
+                                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                    >
+                                        <i class="material-icons">chevron_left</i>
+                                    </a>
+                                </li>
+                                @for (int i = 1; i <= Model.TotalPages; i++)
+                                {
+                                    <li class="@(i == Model.PageIndex ? "waves-effect active" : "waves-effect")">
+                                        <a
+                                           asp-route-page="@i"
+                                           asp-route-sortItem="@ViewData["SortItem"]"
+                                           asp-route-filtrFemale="@ViewData["FiltrFemale"]"
+                                           asp-route-filtrMale="@ViewData["FiltrMale"]"
+                                           asp-route-sortOrder="@ViewData["SortOrder"]"
+                                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                                           asp-route-pageSize="@ViewData["PageSize"]">@i</a>
+                                    </li>
+                                }
+
+                                <li class="@nextDisabled">
+                                    <a asp-route-pageSize="1"
+                                       asp-route-sortItem="@ViewData["SortItem"]"
+                                       asp-route-filtrFemale="@ViewData["FiltrFemale"]"
+                                       asp-route-filtrMale="@ViewData["FiltrMale"]"
+                                       asp-route-sortOrder="@ViewData["SortOrder"]"
+                                       asp-route-page="@(Model.PageIndex + 1)"
+                                       asp-route-currentFilter="@ViewData["CurrentFilter"]">
+                                        <i class="material-icons">chevron_right</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col s12 m3">
+        </div>
+    </div>
+</div>
+<br /><br />

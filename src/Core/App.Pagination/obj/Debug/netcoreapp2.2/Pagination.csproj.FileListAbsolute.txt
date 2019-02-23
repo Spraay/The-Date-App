@@ -1,0 +1,9 @@
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Pagination\obj\Debug\netcoreapp2.2\Pagination.csproj.CoreCompileInputs.cache
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Pagination\obj\Debug\netcoreapp2.2\Pagination.AssemblyInfoInputs.cache
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Pagination\obj\Debug\netcoreapp2.2\Pagination.AssemblyInfo.cs
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Pagination\bin\Debug\netcoreapp2.2\Pagination.deps.json
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Pagination\bin\Debug\netcoreapp2.2\Pagination.dll
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Pagination\bin\Debug\netcoreapp2.2\Pagination.pdb
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Pagination\obj\Debug\netcoreapp2.2\Pagination.dll
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Pagination\obj\Debug\netcoreapp2.2\Pagination.pdb
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Pagination\obj\Debug\netcoreapp2.2\Pagination.csprojAssemblyReference.cache

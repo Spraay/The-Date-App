@@ -1,0 +1,8 @@
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Model\bin\Debug\netcoreapp2.2\Models.deps.json
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Model\bin\Debug\netcoreapp2.2\Models.dll
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Model\bin\Debug\netcoreapp2.2\Models.pdb
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Model\obj\Debug\netcoreapp2.2\Models.csproj.CoreCompileInputs.cache
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Model\obj\Debug\netcoreapp2.2\Models.AssemblyInfoInputs.cache
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Model\obj\Debug\netcoreapp2.2\Models.AssemblyInfo.cs
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Model\obj\Debug\netcoreapp2.2\Models.dll
+C:\Users\Spray\Desktop\The-Date-App\src\Core\App.Model\obj\Debug\netcoreapp2.2\Models.pdb

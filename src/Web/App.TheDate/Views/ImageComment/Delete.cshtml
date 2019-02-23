@@ -1,0 +1,35 @@
+﻿@model ImageComment
+
+@{
+    ViewData["Title"] = "Delete Comment";
+}
+
+<div class="row grey darken-4 z-depth-2" style="height: 200px">
+    <div class="section no-pad-bot">
+        <div class="container">
+            <h1 class="header red-text center"><i class="material-icons left large">delete</i>Comment Delete</h1>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container">
+    <div class="center">
+        <h5 class="orange-text">Are you sure you want to delete...</h5>
+        <h5 class="orange-text">this comment <i>'@Model.Content'</i> under image below?</h5>
+        <img style="width: 450px;" src="~/images/userimages/@Model.CommentedItem.Src" class="z-depth-1" />
+        <form id="Form" asp-action="Delete">
+            <input type="hidden" name="imgId" value="@Model.CommentedItemId" />
+            <input type="hidden" asp-for="CreatorId" />
+            <input type="hidden" asp-for="CommentedItemId" />
+
+            <a asp-action="Index" class="btn rounded btn-large waves-effect blue pulse">
+                <i class="material-icons">replay</i>
+            </a>
+            <a id="FormSubmitButton" value="Delete" class="btn rounded btn-large waves-effect red pulse">
+                <i class="material-icons">delete_forever</i>
+            </a>
+        </form>
+    </div>
+</div>
+<br /><br />
+

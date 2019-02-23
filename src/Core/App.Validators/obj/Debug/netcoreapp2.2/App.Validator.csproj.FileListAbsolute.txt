@@ -1,0 +1,12 @@
+C:\Users\Spray\Desktop\The-Date-App\App.Validators\bin\Debug\netcoreapp2.2\App.Validator.deps.json
+C:\Users\Spray\Desktop\The-Date-App\App.Validators\bin\Debug\netcoreapp2.2\App.Validator.dll
+C:\Users\Spray\Desktop\The-Date-App\App.Validators\bin\Debug\netcoreapp2.2\App.Validator.pdb
+C:\Users\Spray\Desktop\The-Date-App\App.Validators\bin\Debug\netcoreapp2.2\App.Model.dll
+C:\Users\Spray\Desktop\The-Date-App\App.Validators\bin\Debug\netcoreapp2.2\App.Model.pdb
+C:\Users\Spray\Desktop\The-Date-App\App.Validators\obj\Debug\netcoreapp2.2\App.Validator.csprojAssemblyReference.cache
+C:\Users\Spray\Desktop\The-Date-App\App.Validators\obj\Debug\netcoreapp2.2\App.Validator.csproj.CoreCompileInputs.cache
+C:\Users\Spray\Desktop\The-Date-App\App.Validators\obj\Debug\netcoreapp2.2\App.Validator.AssemblyInfoInputs.cache
+C:\Users\Spray\Desktop\The-Date-App\App.Validators\obj\Debug\netcoreapp2.2\App.Validator.AssemblyInfo.cs
+C:\Users\Spray\Desktop\The-Date-App\App.Validators\obj\Debug\netcoreapp2.2\App.Validator.csproj.CopyComplete
+C:\Users\Spray\Desktop\The-Date-App\App.Validators\obj\Debug\netcoreapp2.2\App.Validator.dll
+C:\Users\Spray\Desktop\The-Date-App\App.Validators\obj\Debug\netcoreapp2.2\App.Validator.pdb

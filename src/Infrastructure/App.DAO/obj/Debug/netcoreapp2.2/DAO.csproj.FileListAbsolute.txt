@@ -1,0 +1,12 @@
+C:\Users\Spray\Desktop\The-Date-App\src\Infrastructure\App.DAO\bin\Debug\netcoreapp2.2\DAO.deps.json
+C:\Users\Spray\Desktop\The-Date-App\src\Infrastructure\App.DAO\bin\Debug\netcoreapp2.2\DAO.dll
+C:\Users\Spray\Desktop\The-Date-App\src\Infrastructure\App.DAO\bin\Debug\netcoreapp2.2\DAO.pdb
+C:\Users\Spray\Desktop\The-Date-App\src\Infrastructure\App.DAO\bin\Debug\netcoreapp2.2\Models.dll
+C:\Users\Spray\Desktop\The-Date-App\src\Infrastructure\App.DAO\bin\Debug\netcoreapp2.2\Models.pdb
+C:\Users\Spray\Desktop\The-Date-App\src\Infrastructure\App.DAO\obj\Debug\netcoreapp2.2\DAO.csprojAssemblyReference.cache
+C:\Users\Spray\Desktop\The-Date-App\src\Infrastructure\App.DAO\obj\Debug\netcoreapp2.2\DAO.csproj.CoreCompileInputs.cache
+C:\Users\Spray\Desktop\The-Date-App\src\Infrastructure\App.DAO\obj\Debug\netcoreapp2.2\DAO.AssemblyInfoInputs.cache
+C:\Users\Spray\Desktop\The-Date-App\src\Infrastructure\App.DAO\obj\Debug\netcoreapp2.2\DAO.AssemblyInfo.cs
+C:\Users\Spray\Desktop\The-Date-App\src\Infrastructure\App.DAO\obj\Debug\netcoreapp2.2\DAO.csproj.CopyComplete
+C:\Users\Spray\Desktop\The-Date-App\src\Infrastructure\App.DAO\obj\Debug\netcoreapp2.2\DAO.dll
+C:\Users\Spray\Desktop\The-Date-App\src\Infrastructure\App.DAO\obj\Debug\netcoreapp2.2\DAO.pdb

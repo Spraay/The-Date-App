@@ -1,0 +1,137 @@
+﻿@model ApplicationUserViewModel
+@using Core.Services.Abstract
+@using Core.Models.Enumerations
+@inject IUserService _userService
+@inject UserManager<User> UserManager
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="" style="margin-top: -8px;">
+    <div class="col s12 card grey darken-2">
+        <div class="row teal darken card-panel">
+            <div class="col s2">
+                <img src="~/images/NoProfileImage.png" alt="You have no profile photo" class="circle responsive-img">
+                <!-- notice the "circle" class -->
+            </div>
+            <div class="col s10">
+                <span class="black-text">
+                    @if (await _userService.IsFilledAsync(Guid.Parse(UserManager.GetUserId(User))))
+                    {
+                        <h1 class="white-text">Hello @Html.DisplayFor(model => model.FirstName)</h1>
+                    }
+                    else
+                    {
+                        <h1 class="white-text">Hello My Friend</h1>
+                        <p>@ViewBag.Error</p>
+                    }
+                </span>
+            </div>
+        </div>
+        <div class="row card-content">
+            <div class="col s12 m12 l6">
+                <ul class="collection with-header collapsible">
+                    <li class="collection-header blue darken-1"><h4 class="white-text text-accent-3">Details</h4></li>
+                    @if (await _userService.IsFilledAsync(Guid.Parse(UserManager.GetUserId(User))))
+                    {
+                        <li class="collection-item">
+                            <div class="row">
+                                <b class="col s2">@Html.DisplayNameFor(model => model.UserName)</b>
+                                <p class="col s10">@Html.DisplayFor(model => model.UserName)</p>
+                            </div>
+                        </li>
+                        <li class="collection-item grey lighten-1">
+                            <div class="row">
+                                <b class="col s2"> @Html.DisplayNameFor(model => model.Email)</b>
+                                <p class="col s10">@Html.DisplayFor(model => model.Email)</p>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <b class="col s2"> @Html.DisplayNameFor(model => model.FirstName)</b>
+                                <p class="col s10">@Html.DisplayFor(model => model.FirstName)</p>
+                            </div>
+                        </li>
+                        <li class="collection-item grey lighten-1">
+                            <div class="row">
+                                <b class="col s2"> @Html.DisplayNameFor(model => model.LastName)</b>
+                                <p class="col s10">@Html.DisplayFor(model => model.LastName)</p>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <b class="col s2"> @Html.DisplayNameFor(model => model.Eyes)</b>
+                                <p class="col s10">@Html.DisplayFor(model => model.Eyes)</p>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <b class="col s2"> @Html.DisplayNameFor(model => model.Hair)</b>
+                                <p class="col s10">@Html.DisplayFor(model => model.Hair)</p>
+                            </div>
+                        </li>
+                        <li class="collection-item grey lighten-1">
+                            <div class="row">
+                                <b class="col s2"> @Html.DisplayNameFor(model => model.Gender)</b>
+                                <p class="col s10">@Html.DisplayFor(model => model.Gender)</p>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <b class="col s2"> @Html.DisplayNameFor(model => model.Description)</b>
+                                <p class="col s10">@Html.DisplayFor(model => model.Description)</p>
+                            </div>
+                        </li>
+                        <li class="collection-item grey lighten-1">
+                            <div class="row">
+                                <b class="col s2"> @Html.DisplayNameFor(model => model.Height)</b>
+                                <p class="col s10">@Html.DisplayFor(model => model.Height)</p>
+                            </div>
+                        </li>
+                        <li class="collection-item">
+                            <div class="row">
+                                <b class="col s2"> @Html.DisplayNameFor(model => model.Weight)</b>
+                                <p class="col s10">@Html.DisplayFor(model => model.Weight)</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="collapsible-header collection-item grey lighten-1">
+                                <div class="row">
+                                    <b class="col s2">Interests</b>
+                                    <p class="col s10 push-s5 teal-text">
+                                        <i class="material-icons left">more_horiz</i>
+                                        click here to expand the list
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="collapsible-body collection-item">
+                                <div class="row">
+                                    <ul>
+                                        @foreach (var x in Model.Interests.Select(_ => _.Interest.Name))
+                                        {
+                                            <li>@x</li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="collection-item red lighten-5">
+                            <h4 class="pulse orange-text darken-4">Your profile is no filled yet. If you wish to use all functions, you must fill up your profile. You can do this by clicking on floating button.</h4>
+                        </li>
+                    }
+                </ul>
+                <a asp-action="Edit" asp-controller="User" style="position: relative; left: 80%; top: -45px;" class="btn-floating btn-large waves-effect orange pulse"><i class="material-icons">edit</i></a>
+            </div>
+            <div class="col s12 m12 l6">
+                <ul class="collection with-header collapsible">
+                    <li class="collection-header blue darken-1"><h4 class="white-text text-accent-3">Gallery</h4></li>
+                    <li class="collection-body blue darken-1"><h4 class="white-text text-accent-3">To do: gallery</h4></li>
+                </ul>
+                <a asp-action="Edit" asp-controller="User" style="position: relative; left: 80%; top: -45px;" class="btn-floating btn-large waves-effect orange pulse"><i class="material-icons">edit</i></a>
+            </div>
+        </div>
+    </div>
+</div>
